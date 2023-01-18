@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 Route::prefix('/admin')->group(function (){
-    Route::middleware(['checkadmin'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/driver-list', [App\Http\Controllers\HomeController::class, 'driver'])->name('driver.list');
 Route::get('create/driver', [App\Http\Controllers\HomeController::class, 'create'])->name('driver.create');
