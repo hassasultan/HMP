@@ -29,36 +29,21 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div class="form-group col-12">
-                        <label>Customer Name</label>
-                        <input type="text" class="form-control border-bottom" placeholder="Enter Customer Name..." name="customer_name" value="{{ old('customer_name') }}" required/>
-
-                    </div>
+                        <label>Vehicle Type</label>
+                    <select name="customer_id"
+                        class="select2-multiple form-control fs-14  h-50px" required>
+                        @foreach ($customer as $col)
+                            <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->address }} {{ $col->street }}</option>
+                            {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
+                        @endforeach
+                    </select>
+                </div>
                     <div class="form-group col-12">
-                        <label>Customer Phone</label>
-                        <input type="tel" class="form-control border-bottom" placeholder="Enter driver Phone Number..." name="contact_num" value="{{ old('contact_num') }}" required/>
+                        <label>Customer Alternate Phone</label>
+                        <input type="tel" class="form-control border-bottom" placeholder="Enter driver Phone Number..." name="contact_num" value="{{ old('contact_num') }}"/>
                     </div>
-                    <div class="form-group col-12">
-                        <label>Area</label>
-                        <input type="text" class="form-control border-bottom" placeholder="Enter Area..." name="address" value="{{ old('address') }}" required/>
 
-                    </div>
-                    <div class="form-group col-12">
-                        <label>Street</label>
-                        <input type="text" class="form-control border-bottom" placeholder="Enter Street..." name="street" value="{{ old('street') }}" required/>
-
-                    </div>
-                    <div class="form-group col-12">
-                        <label>Location</label>
-                        <input type="text" class="form-control border-bottom" placeholder="Enter Location Name..." name="location" value="{{ old('location') }}" required/>
-
-                    </div>
-                    <div class="form-group col-12">
-                       <label>Gps</label>
-                        <input type="text" class="form-control border-bottom" placeholder="Enter Gps (lat,lng)..." name="gps" value="{{ old('gps') }}" required/>
-
-                    </div>
 
 
                     <div class="text-center">

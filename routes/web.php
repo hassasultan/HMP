@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,7 @@ Route::prefix('/admin')->group(function () {
         //users
 
         Route::resource('/user-management', UserController::class);
+        Route::resource('/customer-management', CustomerController::class);
 
 
         Route::get('/truck-list', [App\Http\Controllers\HomeController::class, 'truck'])->name('truck.list');

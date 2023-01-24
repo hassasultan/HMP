@@ -24,9 +24,10 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Number</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer Details </th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer Alternate Number </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle Type </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th>
-                  <th class="text-secondary opacity-7"></th>
+                  {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th> --}}
+                  {{-- <th class="text-secondary opacity-7"></th> --}}
                 </tr>
               </thead>
               <tbody>
@@ -45,22 +46,25 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $row->customer_name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->customer->name }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->customer->contact_num }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->customer->address }}</p>
+                            </td>
+                            <td>
                                 <p class="text-xs text-secondary mb-0">{{ $row->contact_num }}</p>
-                                <p class="text-xs text-secondary mb-0">{{ $row->address }}</p>
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->truck_type_fun->name }}</p>
                             </td>
 
-                            <td class="align-middle text-center">
-                                {{-- <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span> --}}
-                            </td>
-                            <td class="align-middle">
+                            {{-- <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>
+                            </td> --}}
+                            {{-- <td class="align-middle">
                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                 Edit
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 @else

@@ -11,6 +11,7 @@ class Orders extends Model
     protected $tabel = "orders";
     protected $fillable = [
         'customer_name',
+        'customer_id',
         'address',
         'street',
         'location',
@@ -22,5 +23,9 @@ class Orders extends Model
     public function truck_type_fun()
     {
         return $this->belongsTo(Truck_type::class,'truck_type');
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class,'customer_id');
     }
 }
