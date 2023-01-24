@@ -6,6 +6,7 @@ use App\Models\Billings;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\Truck_type;
+use App\Models\Customer;
 use App\Models\Truck;
 use App\Models\Driver;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -22,20 +23,23 @@ class OrderController extends Controller
     {
         # code...
         $truck_type = Truck_type::all();
-        return view('pages.order.create',compact('truck_type'));
+        $customer = Customer::all();
+        return view('pages.order.create',compact('truck_type','customer'));
     }
 
     public  function store(Request $request)
     {
         # code...
-        $letter = str_split($request->address);
+        $cust = Customer::find($request->customer_id);
+        $letter = str_split($cust->address);
         $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 7, 'prefix' => strtoupper($letter[0]).'-']);
-        
+
         $request['Order_Number'] = $id;
         // dd($request->all());
         //output: INV-000001
         $truck_type = Orders::create($request->all());
         $truck_type->Order_Number = $id;
+        $truck_type->customer_id = $request->customer_id;
         $truck_type->save();
         return redirect()->route('order.list');
 
@@ -65,11 +69,11 @@ class OrderController extends Controller
         return redirect()->route('billing.list');
 
     }
-    
+
     public  function billingReciept($id)
     {
         # code...
-        $billing = Billings::with('order','truck','driver','truck.hydrant')->find($id);
+        $billing = Billings::with('order','order.customer','truck','driver','truck.hydrant')->find($id);
         // dd($billing->toArray());
         return view('pages.billing.print',compact('billing'));
     }
