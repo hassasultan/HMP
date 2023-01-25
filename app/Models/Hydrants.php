@@ -26,4 +26,8 @@ class Hydrants extends Model
     {
         return $this->hasMany(Truck::class,'hydrant_id','id');
     }
+    public function orders()
+    {
+        return $this->hasMany(Orders::class,'hydrant_id','id');
+    }
 }

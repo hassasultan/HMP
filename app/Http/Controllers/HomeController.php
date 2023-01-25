@@ -8,6 +8,7 @@ use App\Models\Truck;
 use App\Models\Truck_type;
 use App\Traits\SaveImage;
 use App\Models\Hydrants;
+use App\Models\Orders;
 use Illuminate\Support\Carbon;
 use QrCode;
 use Exception;
@@ -40,6 +41,7 @@ class HomeController extends Controller
             $vehicle = Truck::count();
             $driver = Driver::count();
             $hydCount = Hydrants::count();
+            $order = Orders::count();
             $hydrants = Hydrants::with('vehicles')->get();
 
         }
@@ -48,11 +50,16 @@ class HomeController extends Controller
             // dd(auth()->user()->hydrant->vehicles->toArray());
             $vehicle = Truck::where('hydrant_id',auth()->user()->hydrant->id)->count();
             // $driver = Driver::where('truck_id',auth()->user()->hydrant->vehicles->id)->count();
+            $order = Orders::where('hydrant_id',auth()->user()->hydrant->id)->count();
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
         }
-        // dd($hydrants->toArray());
-        return view('home',compact('vehicle','driver','hydCount','hydrants'));
+        $result[] = ['Clicks','Viewers'];
+        foreach ($hydrants as $key => $value) {
+            $result[++$key] = [$value->name, (int)count($value->orders)];
+        }
+        // dd($result);
+        return view('home',compact('vehicle','driver','hydCount','hydrants','result','order'));
     }
     public function driver()
     {
