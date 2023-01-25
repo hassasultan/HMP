@@ -11,11 +11,8 @@ class Orders extends Model
     protected $tabel = "orders";
     protected $fillable = [
         'customer_name',
+        'hydrant_id',
         'customer_id',
-        'address',
-        'street',
-        'location',
-        'gps',
         'contact_num',
         'truck_type',
         'status',

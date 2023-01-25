@@ -33,4 +33,10 @@ class Driver extends Model
         'status',
         'expiry',
     ];
+
+    public function truck()
+    {
+        return $this->belongsTo(Truck::class,'truck_id','id');
+    }
+
 }

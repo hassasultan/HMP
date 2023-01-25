@@ -180,8 +180,14 @@ class HomeController extends Controller
     }
     public function truck()
     {
-        $truck = Truck::all();
-
+        if(auth()->user()->role != 1)
+        {
+            $truck = Truck::all()->where('hydrant_id',auth()->user()->hydrant->id);
+        }
+        else
+        {
+            $truck = Truck::all();
+        }
         return view('pages.truck.index',compact('truck'));
     }
     public function TruckCreate()
@@ -204,7 +210,14 @@ class HomeController extends Controller
         {
             $truck = new Truck();
             $truck->truck_type = $request->truck_type;
-            $truck->hydrant_id = $request->hydrant_id;
+            if(auth()->user()->role == 1)
+            {
+                $truck->hydrant_id = $request->hydrant_id;
+            }
+            else
+            {
+                $truck->hydrant_id = auth()->user()->hydrant->id;
+            }
             $truck->name = $request->name;
             $truck->company_name = $request->company_name;
             $truck->truck_num = $request->truck_num;
@@ -218,7 +231,16 @@ class HomeController extends Controller
             $truck->vehicle_fitness = $this->fitness($request->vehicle_fitness);
             $truck->model = $request->model;
             $truck->save();
-            return redirect()->route('truck.list');
+            if(auth()->user()->role != 1)
+            {
+                return redirect()->route('hydrant.truck.list');
+            }
+            else
+            {
+                return redirect()->route('truck.list');
+
+
+            }
         }
         catch(Exception $ex)
         {
@@ -247,7 +269,14 @@ class HomeController extends Controller
         {
             $truck = Truck::find($id);
             $truck->truck_type = $request->truck_type;
-            $truck->hydrant_id = $request->hydrant_id;
+            if(auth()->user()->role == 1)
+            {
+                $truck->hydrant_id = $request->hydrant_id;
+            }
+            else
+            {
+                $truck->hydrant_id = auth()->user()->hydrant->id;
+            }
             $truck->name = $request->name;
             $truck->company_name = $request->company_name;
             $truck->truck_num = $request->truck_num;
@@ -270,7 +299,16 @@ class HomeController extends Controller
             }
             $truck->model = $request->model;
             $truck->save();
-            return redirect()->route('truck.list')->with('success', 'Record Updated successfully.');
+            if(auth()->user()->role != 1)
+            {
+                return redirect()->route('hydrant.truck.list')->with('success', 'Record Updated successfully.');
+            }
+            else
+            {
+                return redirect()->route('truck.list')->with('success', 'Record Updated successfully.');
+
+
+            }
         }
         catch(Exception $ex)
         {

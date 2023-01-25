@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white @if (Route::is('home')) active @endif bg-gradient-primary"
+                <a class="nav-link text-white @if (Route::is('home') || Route::is('hydrant.home')) active  bg-gradient-primary @endif"
                     href=" {{ route('home') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -24,7 +24,7 @@
             </li>
             @if (auth()->user()->role == 1)
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('user-management.index')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('user-management.index')) active bg-gradient-primary @endif"
                         href="{{ route('user-management.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('truck_type.list')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('truck_type.list')) active  bg-gradient-primary @endif"
                         href="{{ route('truck_type.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
@@ -44,7 +44,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('truck.list')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('truck.list')) active bg-gradient-primary @endif"
                         href="{{ route('truck.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('driver.list')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('driver.list')) active bg-gradient-primary @endif"
                         href="{{ route('driver.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('customer-management.index')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('customer-management.index')) active bg-gradient-primary @endif"
                         href="{{ route('customer-management.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('order.list')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('order.list')) active bg-gradient-primary @endif"
                         href="{{ route('order.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
@@ -80,7 +80,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('billing.list')) active @endif "
+                    <a class="nav-link text-white @if (Route::is('billing.list')) active bg-gradient-primary @endif "
                         href="{{ route('billing.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
@@ -89,12 +89,50 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('hydrant.list')) active @endif"
+                    <a class="nav-link text-white @if (Route::is('hydrant.list')) active bg-gradient-primary @endif"
                         href="{{ route('hydrant.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
                         <span class="nav-link-text ms-1">Hydrants List</span>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->role != 1)
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('customer-management.index')) active bg-gradient-primary @endif"
+                        href="{{ route('customer-management.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Customer Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('hydrant.truck.list')) bg-gradient-primary active  @endif"
+                        href="{{ route('hydrant.truck.list') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Vehicle</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('hydrant.order.list')) active bg-gradient-primary @endif"
+                        href="{{ route('hydrant.order.list') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('hydrant.billing.list')) active bg-gradient-primary @endif "
+                        href="{{ route('hydrant.billing.list') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Billing</span>
                     </a>
                 </li>
             @endif

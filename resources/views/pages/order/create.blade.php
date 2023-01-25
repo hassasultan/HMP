@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="form-group col-12">
-                        <label>Vehicle Type</label>
+                        <label>Customers</label>
                     <select name="customer_id"
                         class="select2-multiple form-control fs-14  h-50px" required>
                         @foreach ($customer as $col)
@@ -39,6 +39,18 @@
                         @endforeach
                     </select>
                 </div>
+                @if (auth()->user()->role == 1)
+                    <div class="form-group col-12">
+                        <label>Hydrants</label>
+                        <select name="hydrant_id"
+                            class="select2-multiple form-control fs-14  h-50px" required>
+                            @foreach ($hydrants as $col)
+                                <option value="{{ $col->id }}">{{ $col->name }}</option>
+                                {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                     <div class="form-group col-12">
                         <label>Customer Alternate Phone</label>
                         <input type="tel" class="form-control border-bottom" placeholder="Enter driver Phone Number..." name="contact_num" value="{{ old('contact_num') }}"/>

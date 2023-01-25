@@ -4,22 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\User;
+
 
 class CustomerController extends Controller
 {
     //
     public function index()
     {
-        $customer = Customer::all();
+        if(auth()->user()->role != 1)
+        {
+            $customer = Customer::where('user_id',auth()->user()->id)->get();
+        }
+        else
+        {
+            $customer = Customer::all();
+        }
         return view('pages.customer.index',compact('customer'));
     }
     public function create()
     {
-        return view('pages.customer.create');
+        $user = User::all()->where('id','!=', auth()->user()->id);
+        return view('pages.customer.create',compact('user'));
     }
     public function store(Request $request)
     {
         $customer = Customer::create($request->all());
+        if(auth()->user()->role != 1)
+        {
+            $customer->user_id = auth()->user()->id;
+        }
         return redirect()->route('customer-management.index');
     }
     public function edit($id)

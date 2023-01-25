@@ -47,4 +47,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Hydrants::class,'id','user_id');
     }
+    public function cutomer()
+    {
+        return $this->hasMany(Customer::class,'user_id','id');
+    }
 }

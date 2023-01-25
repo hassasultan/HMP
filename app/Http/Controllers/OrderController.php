@@ -9,6 +9,8 @@ use App\Models\Truck_type;
 use App\Models\Customer;
 use App\Models\Truck;
 use App\Models\Driver;
+use App\Models\Hydrants;
+
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 class OrderController extends Controller
 {
@@ -16,15 +18,31 @@ class OrderController extends Controller
     public  function index()
     {
         # code...
-        $order = Orders::all();
+        if(auth()->user()->role != 1)
+        {
+            $order = Orders::all()->where('hydrant_id',auth()->user()->hydrant->id);
+        }
+        else
+        {
+            $order = Orders::all();
+
+        }
         return view('pages.order.index',compact('order'));
     }
     public  function create()
     {
         # code...
         $truck_type = Truck_type::all();
-        $customer = Customer::all();
-        return view('pages.order.create',compact('truck_type','customer'));
+        if(auth()->user()->role != 1)
+        {
+            $customer = Customer::all()->where('user_id',auth()->user()->id);
+        }
+        else
+        {
+            $customer = Customer::all();
+        }
+        $hydrants = Hydrants::get();
+        return view('pages.order.create',compact('truck_type','customer','hydrants'));
     }
 
     public  function store(Request $request)
@@ -38,10 +56,27 @@ class OrderController extends Controller
         // dd($request->all());
         //output: INV-000001
         $truck_type = Orders::create($request->all());
+        if(auth()->user()->role != 1)
+        {
+            $truck_type->hydrant_id = auth()->user()->hydrant->id;
+        }
+        else
+        {
+            $truck_type->hydrant_id = $request->hydrant_id;
+        }
         $truck_type->Order_Number = $id;
         $truck_type->customer_id = $request->customer_id;
         $truck_type->save();
-        return redirect()->route('order.list');
+        if(auth()->user()->role != 1)
+        {
+            return redirect()->route('hydrant.order.list');
+        }
+        else
+        {
+            return redirect()->route('order.list');
+
+
+        }
 
     }
 
@@ -50,15 +85,50 @@ class OrderController extends Controller
     public  function billingindex()
     {
         # code...
-        $billing = Billings::all();
+        if(auth()->user()->role != 1)
+        {
+            $billing = Billings::with('order')->whereHas('order',function($query){
+                $query->where('hydrant_id',auth()->user()->hydrant->id);
+            })->get();
+        }
+        else
+        {
+            $billing = Billings::all();
+        }
         return view('pages.billing.index',compact('billing'));
     }
     public  function billingcreate()
     {
         # code...
-        $order = Orders::all();
-        $truck = Truck::all();
-        $driver = Driver::all();
+        if(auth()->user()->role != 1)
+        {
+            $order = Orders::all()->where('hydrant_id',auth()->user()->hydrant->id);
+        }
+        else
+        {
+            $order = Orders::all();
+
+        }
+        if(auth()->user()->role != 1)
+        {
+            $truck = Truck::all()->where('hydrant_id',auth()->user()->hydrant->id);
+        }
+        else
+        {
+            $truck = Truck::all();
+        }
+        if(auth()->user()->role != 1)
+        {
+            $driver = Driver::with('truck')->whereHas('truck',function($query){
+                $query->where('hydrant_id',auth()->user()->hydrant->id);
+            })->get();
+        }
+        else
+        {
+            $driver = Driver::all();
+
+        }
+
         return view('pages.billing.create',compact('order','truck','driver'));
     }
 
@@ -66,7 +136,16 @@ class OrderController extends Controller
     {
         # code...
         $truck_type = Billings::create($request->all());
-        return redirect()->route('billing.list');
+        if(auth()->user()->role != 1)
+        {
+            return redirect()->route('hydrant.billing.list');
+        }
+        else
+        {
+            return redirect()->route('billing.list');
+
+
+        }
 
     }
 
