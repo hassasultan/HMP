@@ -41,7 +41,7 @@
     .form-control-sm
     {
         border:1px solid #000 !important;
-        
+
     }
     #example1_filter{
         position: relative;
