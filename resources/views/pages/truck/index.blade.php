@@ -9,7 +9,7 @@
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
             <div class="row">
                 <div class="col-6">
-                    <h6 class="text-white text-capitalize ps-3">Vehicle List</h6>
+                    <h6 class="text-white text-capitalize ps-3">Water Tanker List</h6>
                 </div>
                 <div class="col-6 text-end">
                     <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('truck.create') }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
@@ -24,7 +24,7 @@
                 <tr>
                   <!--<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle</th>-->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Model/Number </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle Document Copy</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Water Tanker Document Copy</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrant</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th>
                   <th class="text-secondary opacity-7">Form View</th>

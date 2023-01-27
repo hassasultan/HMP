@@ -9,13 +9,13 @@
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
             <div class="row">
                 <div class="col-6">
-                    <h6 class="text-white text-capitalize ps-3">Add Vehicle</h6>
+                    <h6 class="text-white text-capitalize ps-3">Add Water Tanker</h6>
                 </div>
             </div>
           </div>
         </div>
         <div class="card-body px-4 pb-2">
-            <h5>Give Vehicle Informarion...</h5>
+            <h5>Give Water Tanker Informarion...</h5>
             <form role="form" method="POST" action="{{ route('truck.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="form-group col-12 p-3">
-                            <label>Vehicle/Tanker Capacity</label>
+                            <label>Water Tanker Capacity</label>
                         <select name="truck_type"
                             class="select2-multiple form-control fs-14  h-50px" required>
                             @foreach ($driver as $col)
