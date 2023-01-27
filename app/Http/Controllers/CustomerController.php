@@ -33,6 +33,7 @@ class CustomerController extends Controller
         if(auth()->user()->role != 1)
         {
             $customer->user_id = auth()->user()->id;
+            $customer->save();
         }
         return redirect()->route('customer-management.index');
     }
