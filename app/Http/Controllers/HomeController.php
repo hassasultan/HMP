@@ -32,7 +32,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         // dd("check");
         $driver = 0;
@@ -80,6 +80,12 @@ class HomeController extends Controller
             $result2[++$key] = [$value->name, (int)count($value->vehicles)];
         }
         // dd($result);
+        if($request->has('status') && $request->status == "api")
+        {
+            $data['result'] = $result;
+            $data['newresult'] = $result2;
+            return $data;
+        }
         return view('home',compact('vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
     }
     public function driver()

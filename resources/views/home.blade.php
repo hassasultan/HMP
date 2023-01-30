@@ -2,47 +2,153 @@
 
 @section('content')
 <style>
-    .dash-count
+    /* .dash-count
     {
         height: 300px;
         overflow-y: scroll;
         padding-top: 15px;
-    }
+    } */
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  google.charts.load("current", {packages:["corechart"]});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
+setInterval(function () {
 
-    var data = google.visualization.arrayToDataTable({{ Js::from($result) }});
+    $.ajax({
+            url: "{{ route('home') }}",
+            type: "Get",
+            data: {
+                status:"api",
+            },
+        }).done(function(data) {
+            console.log(data);
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            let result = data['result'];
+            function drawChart() {
 
-    var options = {
-      title: '',
-      is3D: false,
-    };
+                var data = google.visualization.arrayToDataTable(result);
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
-  }
+                var options = {
+                title: '',
+                is3D: false,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                chart.draw(data, options);
+            }
+        })
+        .fail(function(error) {
+            console.log(error);
+            errorModal(error);
+
+        });
+
+}, 3000);
 </script>
 <script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
+setInterval(function () {
 
-      var data = google.visualization.arrayToDataTable({{ Js::from($result2) }});
+$.ajax({
+        url: "{{ route('home') }}",
+        type: "Get",
+        data: {
+            status:"api",
+        },
+    }).done(function(data) {
+        console.log(data);
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart2);
+        let result2 = data['newresult'];
+        function drawChart2() {
 
-      var options = {
-        title: '',
-        is3D: true,
-      };
+            var data = google.visualization.arrayToDataTable(result2);
 
-      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
-      chart.draw(data, options);
-    }
+            var options = {
+            title: '',
+            is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+            chart.draw(data, options);
+        }
+    })
+    .fail(function(error) {
+        console.log(error);
+        errorModal(error);
+
+    });
+
+}, 3000);
+
   </script>
   @if (auth()->user()->role == 1)
+  <div class="row dash-count">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+        <div class="card-header p-3 pt-2">
+            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            <i class="fa fa-truck" aria-hidden="true"></i>
+            </div>
+            <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Total Vehicles</p>
+            <h4 class="mb-0">{{$vehicle}}</h4>
+            </div>
+        </div>
+        <!--<hr class="dark horizontal my-0">-->
+        <!--<div class="card-footer p-3">-->
+        <!--  <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>-->
+        <!--</div>-->
+        </div>
+    </div>
+    @if (auth()->user()->role == 1)
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+            <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                <i class="fa fa-user-circle"></i>
+            </div>
+            <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Total Drirvers</p>
+                <h4 class="mb-0">{{$driver}}</h4>
+            </div>
+            </div>
+
+        </div>
+        </div>
+    @endif
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+        <div class="card-header p-3 pt-2">
+            <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="fa fa-building" aria-hidden="true"></i>
+            </div>
+            <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Total Hydrants</p>
+            <h4 class="mb-0">{{$hydCount}}</h4>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    {{-- @foreach($hydrants as $key => $row)
+    <div class="col-xl-3 col-sm-6 @if($key % 4) mt-4 @endif">
+        <div class="card">
+        <div class="card-header p-3 pt-2">
+            <div class="icon icon-lg icon-shape shadow-info text-center border-radius-xl mt-n4 position-absolute" style="background-color:{{ $row->color }} ">
+            <i class="fa fa-building" aria-hidden="true"></i>
+            </div>
+            <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{$row->name}}</p>
+            <p class="text-sm mb-0 text-capitalize">Total Vehicles</p>
+            <h4 class="mb-0">{{count($row->vehicles)}}</h4>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    @endforeach --}}
+</div>
+<hr/>
     <div class="row p-4">
         {{-- <div class="col-12 bg-gradient-primary  text-center p-2">
             <h5 class="text-white">Total Orders</h5>
