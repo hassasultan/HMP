@@ -73,7 +73,7 @@
                 <div class="col-md-3">
                     <div class="card text-center p-3">
                         <img src="{{ asset('assets/img/driver2.JPG') }}" class="img-fluid" style="height: 80px"/>
-                        <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (contractor)</h6>
+                        <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (Third Party)</h6>
                         <b id="third-driver">{{ $third_driver }}</b>
                     </div>
                 </div>
