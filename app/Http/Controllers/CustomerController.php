@@ -48,4 +48,12 @@ class CustomerController extends Controller
         return redirect()->route('customer-management.index');
     }
 
+    public function changeStatus(Request $request)
+    {
+        $customer = Customer::find($request->id);
+        $customer->black_list = $request->status;
+        $customer->save();
+        return 1;
+    }
+
 }

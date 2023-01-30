@@ -224,7 +224,101 @@
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- select2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    function errorModal(error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error,
+            footer: ''
+        })
+    }
+
+    function successModal(message) {
+        Swal.fire(
+            'Thank You!',
+            message,
+            'success'
+        )
+    }
+
+function adminstatus(id) {
+
+
+    var id = id;
+    var status = $('#FormControlAdminSelect-'+id).val();
+    console.log(status);
+    $.ajax({
+            url: "{{ route('change.tanker.status') }}",
+            type: "Get",
+            data: {
+                id:id,
+                status:status,
+            },
+        }).done(function(data) {
+            console.log(data);
+            successModal("Status Has been Changed Successfully...");
+        })
+        .fail(function(error) {
+            console.log(error);
+            errorModal(error);
+
+        });
+
+
+}
+
+function adminstatuscustomer(id) {
+
+    var id = id;
+    var status = $('#FormControlAdminSelect-'+id).val();
+    console.log(status);
+    $.ajax({
+            url: "{{ route('change.customer.status') }}",
+            type: "Get",
+            data: {
+                id:id,
+                status:status,
+            },
+        }).done(function(data) {
+            console.log(data);
+            successModal("Status Has been Changed Successfully...");
+        })
+        .fail(function(error) {
+            console.log(error);
+            errorModal(error);
+
+        });
+
+
+}
+
+function adminstatusdriver(id) {
+
+var id = id;
+var status = $('#FormControlAdminSelect-'+id).val();
+console.log(status);
+$.ajax({
+        url: "{{ route('change.driver.status') }}",
+        type: "Get",
+        data: {
+            id:id,
+            status:status,
+        },
+    }).done(function(data) {
+        console.log(data);
+        successModal("Status Has been Changed Successfully...");
+    })
+    .fail(function(error) {
+        console.log(error);
+        errorModal(error);
+
+    });
+
+
+}
+
     $(document).ready(function() {
     // Select2 Multiple
         $('.select2-multiple').select2({

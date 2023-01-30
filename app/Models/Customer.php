@@ -16,6 +16,7 @@ class Customer extends Model
         'gps',
         'contact_num',
         'status',
+        'black_list',
     ];
     public function user()
     {

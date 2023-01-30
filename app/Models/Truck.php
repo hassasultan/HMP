@@ -23,6 +23,7 @@ class Truck extends Model
         'paper_image',
         'model',
         'status',
+        'black_list',
     ];
     public function truckCap()
     {
@@ -36,5 +37,5 @@ class Truck extends Model
     {
         return $this->hasMany(Driver::class,'truck_id','id');
     }
-    
+
 }

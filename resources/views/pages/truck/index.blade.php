@@ -27,6 +27,7 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Water Tanker Document Copy</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrant</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th>
+                  <th class="text-secondary opacity-7">Black Listed</th>
                   <th class="text-secondary opacity-7">Form View</th>
                   <th class="text-secondary opacity-7">Action</th>
                 </tr>
@@ -81,6 +82,18 @@
                             <td class="align-middle text-center">
                                 <a href="{{ route('generate.qr',$row->id) }}"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a>
                                 <!--<span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>-->
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control border border-dark border-1 p-2"
+                                        id="FormControlAdminSelect-{{ $row->id }}"
+                                        onchange="adminstatus({{ $row->id }});">
+                                        <option @if ($row->black_list == 1) selected @endif value='1'>
+                                            Yes</option>
+                                        <option @if ($row->black_list == 0) selected @endif value='0'>
+                                            No</option>
+                                    </select>
+                                </div>
                             </td>
                             <td class="align-middle">
                                 <a href="{{route('vehicle.details',$row->id)}}" class="text-secondary m-2 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Info Vehicle" target="_blank">

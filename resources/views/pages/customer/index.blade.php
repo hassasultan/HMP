@@ -25,6 +25,8 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Adress</th>
                   <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contact Number</th>
+                  <th class="text-secondary opacity-7">Black Listed</th>
+
                   <th class="text-secondary opacity-7"></th>
                 </tr>
               </thead>
@@ -48,7 +50,18 @@
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->contact_num }}</p>
                             </td>
-
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control border border-dark border-1 p-2"
+                                        id="FormControlAdminSelect-{{ $row->id }}"
+                                        onchange="adminstatuscustomer({{ $row->id }});">
+                                        <option @if ($row->black_list == 1) selected @endif value='1'>
+                                            Yes</option>
+                                        <option @if ($row->black_list == 0) selected @endif value='0'>
+                                            No</option>
+                                    </select>
+                                </div>
+                            </td>
                             <td class="align-middle">
                                 <a href="{{ route('customer-management.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                 Edit

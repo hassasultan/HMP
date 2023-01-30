@@ -32,6 +32,7 @@ class Driver extends Model
         'license_image',
         'status',
         'expiry',
+        'black_list',
     ];
 
     public function truck()

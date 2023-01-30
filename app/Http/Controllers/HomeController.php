@@ -158,6 +158,13 @@ class HomeController extends Controller
         $driver->save();
         return redirect()->route('driver.list');
     }
+    public function changeDriverStatus(Request $request)
+    {
+        $driver = Driver::find($request->id);
+        $driver->black_list = $request->status;
+        $driver->save();
+        return 1;
+    }
     public function truckTypeIndex()
     {
         $truck_type = Truck_type::all();
@@ -336,5 +343,13 @@ class HomeController extends Controller
         $driver = Truck::with('truckCap','hydrant','drivers')->find($id);
         // dd($driver->toArray());
         return view('pages.truck.print',compact('driver'));
+    }
+    public function changeVehicleStatus(Request $request)
+    {
+        // dd($request->all());
+        $truck = Truck::find($request->id);
+        $truck->black_list = $request->status;
+        $truck->save();
+        return 1;
     }
 }
