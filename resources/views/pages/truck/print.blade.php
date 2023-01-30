@@ -31,7 +31,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
 </head>
 <body style="background-color:rgb(158, 158, 158) !important;">
@@ -53,7 +53,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
-                                            Hydrant: {{$driver->hydrant->name}} 
+                                            Hydrant: {{$driver->hydrant->name}}
                                         </div>
                                         <div class="col-md-6"style="border-left:1px solid #000;">
                                             Contractor: {{$driver->hydrant          ->contractor_name}}
@@ -65,7 +65,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
-                                            Focal Person: {{$driver->hydrant->person}} 
+                                            Focal Person: {{$driver->hydrant->person}}
                                         </div>
                                         <div class="col-md-6" style="border-left:1px solid #000;">
                                             Contact#: {{$driver->hydrant->contact}}
@@ -83,7 +83,7 @@
                                             <input type="checkbox" @if($driver->hydrant->owned == 0) checked @endif disabled /> vehicle owned by third party
                                         </div>
                                         <div class="col-md-4">
-                                            
+
                                         </div>
                                     </div>
                                 </td>
@@ -122,7 +122,7 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
-                                            Vehicle Reg#: {{$driver->truck_num}} 
+                                            Vehicle Reg#: {{$driver->truck_num}}
                                         </div>
                                         <div class="col-md-6" style="border-left:1px solid #000;">
                                             Model: {{$driver->model}}
@@ -144,7 +144,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                     @foreach($driver->drivers as $key => $row)
                         <table class="table table-bordered">
                             <thead class="table-dark">
@@ -159,7 +159,7 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-md-6" style="border-right:1px solid #000;">
-                                                Name: {{$row->name}} 
+                                                Name: {{$row->name}}
                                             </div>
                                             <div class="col-md-6"style="border-left:1px solid #000;">
                                                 Phone#: {{$row->phone}}
@@ -171,7 +171,7 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-md-6" style="border-right:1px solid #000;">
-                                                Nic#: {{$row->nic}} 
+                                                Nic#: {{$row->nic}}
                                             </div>
                                             <div class="col-md-6" style="border-left:1px solid #000;">
                                                 Nic Image#: <img class="w-50" src="{{ asset('public/storage/'.$row->nic_image) }}"/>

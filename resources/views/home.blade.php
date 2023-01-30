@@ -53,28 +53,28 @@
                     <div class="card text-center p-3">
                         <img src="{{ asset('assets/img/truck1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6 style="font-size: 0.7rem">Total Registered Water Tanker (contractor)</h6>
-                        <b id="cont">{{ $order }}</b>
+                        <b id="cont">{{ $contractor }}</b>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-3">
                         <img src="{{ asset('assets/img/truck2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Registered Water Tanker (Third Party)</h6>
-                        <b id="third">{{ $order }}</b>
+                        <b id="third">{{ $third }}</b>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-3">
                         <img src="{{ asset('assets/img/driver1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (contractor)</h6>
-                        <b id="cont-driver">{{ $order }}</b>
+                        <b id="cont-driver">{{ $contractor_driver }}</b>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-3">
                         <img src="{{ asset('assets/img/driver2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (contractor)</h6>
-                        <b id="third-driver">{{ $order }}</b>
+                        <b id="third-driver">{{ $third_driver }}</b>
                     </div>
                 </div>
             </div>

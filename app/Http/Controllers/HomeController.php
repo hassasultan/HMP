@@ -40,6 +40,14 @@ class HomeController extends Controller
         {
             $vehicle = Truck::count();
             $driver = Driver::count();
+            $contractor_driver = Driver::with('truck')->whereHas('truck',function($query){
+                $query->where('owned_by',1);
+            })->count();
+            $third_driver = Driver::with('truck')->whereHas('truck',function($query){
+                $query->where('owned_by',0);
+            })->count();
+            $contractor = Truck::where('owned_by',1)->count();
+            $third = Truck::where('owned_by',0)->count();
             $hydCount = Hydrants::count();
             $order = Orders::count();
             $hydrants = Hydrants::with('vehicles')->get();
@@ -50,6 +58,14 @@ class HomeController extends Controller
             // dd(auth()->user()->hydrant->vehicles->toArray());
             $vehicle = Truck::where('hydrant_id',auth()->user()->hydrant->id)->count();
             // $driver = Driver::where('truck_id',auth()->user()->hydrant->vehicles->id)->count();
+            $contractor_driver = Driver::with('truck')->whereHas('truck',function($query){
+                $query->where('owned_by',1);
+            })->count();
+            $third_driver = Driver::with('truck')->whereHas('truck',function($query){
+                $query->where('owned_by',0);
+            })->count();
+            $contractor = Truck::where('owned_by',1)->count();
+            $third = Truck::where('owned_by',0)->count();
             $order = Orders::where('hydrant_id',auth()->user()->hydrant->id)->count();
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
@@ -64,7 +80,7 @@ class HomeController extends Controller
             $result2[++$key] = [$value->name, (int)count($value->vehicles)];
         }
         // dd($result);
-        return view('home',compact('vehicle','driver','hydCount','hydrants','result','result2','order'));
+        return view('home',compact('vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
     }
     public function driver()
     {
