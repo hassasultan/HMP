@@ -58,8 +58,13 @@ class HomeController extends Controller
         foreach ($hydrants as $key => $value) {
             $result[++$key] = [$value->name, (int)count($value->orders)];
         }
+
+        $result2[] = ['Clicks','Viewers'];
+        foreach ($hydrants as $key => $value) {
+            $result2[++$key] = [$value->name, (int)count($value->vehicles)];
+        }
         // dd($result);
-        return view('home',compact('vehicle','driver','hydCount','hydrants','result','order'));
+        return view('home',compact('vehicle','driver','hydCount','hydrants','result','result2','order'));
     }
     public function driver()
     {
