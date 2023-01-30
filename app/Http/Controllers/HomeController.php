@@ -185,6 +185,13 @@ class HomeController extends Controller
         $driver->save();
         return redirect()->route('driver.list');
     }
+    public function changeDriverActiveStatus(Request $request)
+    {
+        $driver = Driver::find($request->id);
+        $driver->status = $request->status;
+        $driver->save();
+        return 1;
+    }
     public function changeDriverStatus(Request $request)
     {
         $driver = Driver::find($request->id);

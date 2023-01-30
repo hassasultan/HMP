@@ -55,11 +55,21 @@
                                 </div>
                             </td>
                             <td class="align-middle text-center text-sm">
-                                @if ($row->status == 1)
+                                <div class="form-group">
+                                    <select class="form-control border border-dark border-1 p-2"
+                                        id="FormControlDriverSelect-{{ $row->id }}"
+                                        onchange="driverActivatedStatus({{ $row->id }});">
+                                        <option @if ($row->status == 1) selected @endif value='1'>
+                                            In-Active</option>
+                                        <option @if ($row->status == 0) selected @endif value='0'>
+                                            De-Active</option>
+                                    </select>
+                                </div>
+                                {{-- @if ($row->status == 1)
                                     <span class="badge badge-sm bg-gradient-success">Active</span>
                                 @else
                                     <span class="badge badge-sm bg-gradient-danger">De-Active</span>
-                                @endif
+                                @endif --}}
                             </td>
                             <td>
                                 <div class="form-group">

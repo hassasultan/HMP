@@ -29,6 +29,9 @@ Route::prefix('/admin')->group(function () {
         Route::get('edit/driver/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('driver.edit');
         Route::post('update/driver/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('driver.update');
 
+        Route::get('change/driver/active/status', [App\Http\Controllers\HomeController::class, 'changeDriverActiveStatus'])->name('change.driver.active.status');
+
+
         //users
 
         Route::resource('/user-management', UserController::class);
