@@ -56,6 +56,19 @@ $.ajax({
         },
     }).done(function(data) {
         console.log(data);
+        $("#cont").html(data['contractor']);
+        $("#third").html(data['third']);
+        $("#cont-driver").html(data['contractor_driver']);
+        $("#third-driver").html(data['third_driver']);
+        var html = "";
+        $.each(data['hydrants'],function(index,value){
+            if(value['vehicles'].length > 0)
+            {
+                html += "<div class='col-8' style='color:"+value['color']+"'><i class='fas fa-check-square me-2'></i>"+value['name']+"</div>";
+                html += "<div class='col-4 text-end' style='color:"+value['color']+"'>"+value['vehicles'].length+"</div>";
+                $("#total-tanker").html(html);
+            }
+        });
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart2);
         let result2 = data['newresult'];
@@ -188,8 +201,8 @@ $.ajax({
         <div class="col-6">
             <div class="row p-4">
                 <div class="col-4">
-                    <div class="row">
-                        <h6>Total Water Tanker</h6>
+                    <h6>Total Water Tanker</h6>
+                    <div class="row" id="total-tanker">
                         @foreach($hydrants as $row)
                             @if(count($row->vehicles) != 0)
                                 <div class="col-8" style="color:{{ $row->color }}"><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>

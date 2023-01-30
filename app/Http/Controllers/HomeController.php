@@ -84,6 +84,14 @@ class HomeController extends Controller
         {
             $data['result'] = $result;
             $data['newresult'] = $result2;
+
+            $data['contractor_driver'] = $contractor_driver;
+            $data['third_driver'] = $third_driver;
+
+            $data['contractor'] = $contractor;
+            $data['third'] = $third;
+
+            $data['hydrants'] = $hydrants;
             return $data;
         }
         return view('home',compact('vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
