@@ -48,9 +48,17 @@
                        <label>Gps</label>
                         <input type="text" class="form-control border-bottom" placeholder="Enter Gps (lat,lng)..." name="gps" value="{{ old('gps') }}" required/>
                     </div>
-                    @if (auth()->user()->role == 1)
                     <div class="form-group col-12">
-                        <label>Hydrant Users</label>
+                        <label>Standard</label>
+                        <select name="standard"
+                            class="select2-multiple form-control fs-14  h-50px" required>
+                            <option value="Commercial">Commercial</option>
+                            <option value="GPS">GPS</option>
+                        </select>
+                    </div>
+                    @if (auth()->user()->role == 1)
+                        <div class="form-group col-12">
+                            <label>Hydrant Users</label>
                             <select name="user_id"
                                 class="select2-multiple form-control fs-14  h-50px" required>
                                 @foreach ($user as $col)

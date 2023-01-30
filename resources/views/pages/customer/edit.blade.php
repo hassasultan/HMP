@@ -50,6 +50,14 @@
                         <input type="text" class="form-control border-bottom" placeholder="Enter Gps (lat,lng)..." name="gps" value="{{ old('gps',$customer->gps) }}" required/>
 
                     </div>
+                    <div class="form-group col-12">
+                        <label>Standard</label>
+                        <select name="standard"
+                            class="select2-multiple form-control fs-14  h-50px" required>
+                            <option value="Commercial" @if($customer->standard == "Commercial") selected @endif>Commercial</option>
+                            <option value="GPS"  @if($customer->standard == "GPS") selected @endif>GPS</option>
+                        </select>
+                    </div>
 
 
                     <div class="text-center">

@@ -25,6 +25,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Adress</th>
                   <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contact Number</th>
+                  <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Standard</th>
                   <th class="text-secondary opacity-7">Black Listed</th>
 
                   <th class="text-secondary opacity-7"></th>
@@ -49,6 +50,9 @@
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->contact_num }}</p>
+                            </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->standard }}</p>
                             </td>
                             <td>
                                 <div class="form-group">

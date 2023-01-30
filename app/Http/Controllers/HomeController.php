@@ -50,6 +50,14 @@ class HomeController extends Controller
             $third = Truck::where('owned_by',0)->count();
             $hydCount = Hydrants::count();
             $order = Orders::count();
+            $comm = Orders::with('customer')->whereHas('customer',function($query)
+            {
+                $query->where('standard',"Commercial");
+            })->count();
+            $gps = Orders::with('customer')->whereHas('customer',function($query)
+            {
+                $query->where('standard',"GPS");
+            })->count();
             $hydrants = Hydrants::with('vehicles')->get();
 
         }
@@ -94,7 +102,7 @@ class HomeController extends Controller
             $data['hydrants'] = $hydrants;
             return $data;
         }
-        return view('home',compact('vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
+        return view('home',compact('comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
     }
     public function driver()
     {
