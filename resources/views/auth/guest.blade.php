@@ -79,7 +79,10 @@
     </div>
   </div>
   <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-color:#FFF; ');">
+    <div class="page-header align-items-start min-vh-100"
+    style="background-image: url('{{ asset('assets/img/hmp-main-screen-back.webp') }}');background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;">
       <span class="mask  opacity-6"></span>
       <div class="container my-auto">
         @yield('content')
