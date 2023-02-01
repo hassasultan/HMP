@@ -26,6 +26,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Model/Number </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Water Tanker Document Copy</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrant</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owned By</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th>
                   <th class="text-secondary opacity-7">Black Listed</th>
                   <th class="text-secondary opacity-7">Form View</th>
@@ -78,6 +79,13 @@
                                         <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                                     </div>
                                 </div> --}}
+                            </td>
+                            <td>
+                                @if ($row->owned_by == 1)
+                                    <p class="text-center font-weight-bold mb-0">Contractor</p>
+                                @else
+                                    <p class="text-center font-weight-bold mb-0">Third Party</p>
+                                @endif
                             </td>
                             <td class="align-middle text-center">
                                 <a href="{{ route('generate.qr',$row->id) }}"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a>

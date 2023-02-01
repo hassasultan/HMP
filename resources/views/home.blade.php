@@ -169,31 +169,31 @@ $.ajax({
         <div class="col-6 border border-top-0 border-3 border-bottom-0 border-start-0 border-light mt-2 p-4">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card text-center p-3">
+                    <div class="card text-center px-3 pt-3">
                         <img src="{{ asset('assets/img/truck1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6 style="font-size: 0.7rem">Total Registered Water Tanker (contractor)</h6>
-                        <b id="cont">{{ $contractor }}</b>
+                        <b id="cont" class="fs-5">{{ $contractor }}</b>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card text-center p-3">
+                    <div class="card text-center px-3 pt-3">
                         <img src="{{ asset('assets/img/truck2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Registered Water Tanker (Third Party)</h6>
-                        <b id="third">{{ $third }}</b>
+                        <b id="third" class="fs-5">{{ $third }}</b>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card text-center p-3">
+                    <div class="card text-center p-2">
                         <img src="{{ asset('assets/img/driver1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (contractor)</h6>
-                        <b id="cont-driver">{{ $contractor_driver }}</b>
+                        <b id="cont-driver" class="fs-5">{{ $contractor_driver }}</b>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card text-center p-3">
+                    <div class="card text-center p-2">
                         <img src="{{ asset('assets/img/driver2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (Third Party)</h6>
-                        <b id="third-driver">{{ $third_driver }}</b>
+                        <b id="third-driver" class="fs-5">{{ $third_driver }}</b>
                     </div>
                 </div>
             </div>
@@ -296,17 +296,17 @@ $.ajax({
             <div class="col-md-5">
                 <div class="card text-center p-3">
                     <h6>GPS Today</h6>
-                    <b>{{ $gps }}</b>
+                    <b class="fs-5">{{ $gps }}</b>
                 </div>
                 <div class="card text-center p-3 mt-2">
                     <h6>COMM Today</h6>
-                    <b>{{ $comm }}</b>
+                    <b class="fs-5">{{ $comm }}</b>
                 </div>
             </div>
             <div class="col-md-7 p-2 mt-3">
                 <div class="card text-center p-5">
                     <h6>Total Orders</h6>
-                    <b>{{ $order }}</b>
+                    <b class="fs-5">{{ $order }}</b>
                 </div>
             </div>
         </div>

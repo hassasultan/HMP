@@ -50,10 +50,13 @@ class OrderController extends Controller
         # code...
         $cust = Customer::find($request->customer_id);
         $letter = str_split($cust->address);
-        $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 7, 'prefix' => strtoupper($letter[0]).'-']);
+        $NEW_ORDER = Orders::latest()->first();
+        $expNum = explode('-', $NEW_ORDER->Order_Number);
+        $id = strtoupper($letter[0]).'-0000'. $expNum[1]+1;
+        // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
+        // dd($id);
         $request['Order_Number'] = $id;
-        // dd($request->all());
         //output: INV-000001
         $truck_type = Orders::create($request->all());
         if(auth()->user()->role != 1)

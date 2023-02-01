@@ -24,6 +24,7 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Number</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer Details </th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Standard</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer Alternate Number </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle Type </th>
                   {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th> --}}
@@ -49,6 +50,9 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->customer->name }}</p>
                                 <p class="text-xs text-secondary mb-0">{{ $row->customer->contact_num }}</p>
                                 <p class="text-xs text-secondary mb-0">{{ $row->customer->address }}</p>
+                            </td>
+                            <td>
+                                <p class="text-center font-weight-bold mb-0">{{ $row->customer->standard }}</p>
                             </td>
                             <td>
                                 <p class="text-xs text-secondary mb-0">{{ $row->contact_num }}</p>

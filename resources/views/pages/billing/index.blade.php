@@ -25,6 +25,8 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vehicle </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Driver</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Details</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Standard</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">amount</th>
                   <th class="text-secondary opacity-7"></th>
                 </tr>
@@ -45,7 +47,8 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $row->truck->name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->truck->name }}({{ $row->truck->company_name }})</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->truck->truck_num }}</p>
                                 <p class="text-xs text-secondary mb-0">{{ $row->truck->truckCap->name }}</p>
                                 {{-- <div class="d-flex px-2 py-1">
                                     <div>
@@ -62,14 +65,29 @@
                                     </div>
                                 </div> --}}
                             </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->order->customer->name }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->order->customer->location }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->order->customer->street }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->order->customer->address }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->order->customer->contact_num }}</p>
+                                {{-- <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                    </div>
+                                </div> --}}
+                            </td>
+                            <td>
+                                <p class="text-center font-weight-bold mb-0">{{ $row->order->customer->standard }}</p>
+                            </td>
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('billing.details',$row->id) }}"><span class="badge badge-sm bg-gradient-primary">Generate Reciept</span></a>
-                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                {{-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                 Edit
-                                </a>
+                                </a> --}}
                             </td>
                         </tr>
                     @endforeach

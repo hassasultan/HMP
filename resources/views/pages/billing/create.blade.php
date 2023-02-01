@@ -45,7 +45,7 @@
                         <select name="truck_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
                             @foreach ($truck as $col)
-                                <option value="{{ $col->id }}">{{ $col->name }}</option>
+                                <option value="{{ $col->id }}">{{ $col->hydrant->name }} - {{ $col->truckCap->name }} - {{ $col->name }} : {{ $col->truck_num }} ({{ $col->company_name }})</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                             @endforeach
                         </select>

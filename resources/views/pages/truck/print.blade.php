@@ -142,6 +142,14 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <div class="row text-center">
+                                        <h6>Vehicle Image</h6>
+                                        <img class="m-auto img-fluid" src="{{ asset('public/storage/'.$driver->vehicle_image) }}"/>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 

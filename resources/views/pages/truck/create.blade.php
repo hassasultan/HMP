@@ -23,8 +23,8 @@
                             <label>Vehicle Owned By Contractor</label>
                         <select name="owned_by"
                             class="form-control border border-dark border-1 p-2" required>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
+                                <option value="1">Contractor</option>
+                                <option value="0">Third Party</option>
                         </select>
                     </div>
                     <div class="form-group col-12 p-3">
