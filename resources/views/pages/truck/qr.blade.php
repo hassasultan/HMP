@@ -39,7 +39,7 @@
         <div class="container p-4 bg-white w-100 text-center" id="getPrint">
             <div class="bg-white m-auto">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6" style="padding-top:6.4rem;">
                         <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                     </div>
                     <div class="col-4" style="text-align:left !important; padding-top:6.4rem;">
