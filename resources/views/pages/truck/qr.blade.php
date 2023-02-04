@@ -47,7 +47,7 @@
                         <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">Contractor</span></p>
                         <h5  style="font-size: 3.7rem;">Vehicle</h5>
                     </div>
-                    <div class="col-12 mt-5">
+                    <div class="col-12 mt-2">
                         {!! \QrCode::size(600)->generate($url); !!}
                     </div>
                 </div>
