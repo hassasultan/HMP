@@ -34,24 +34,28 @@
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
 </head>
-<body style="background-color:rgb(158, 158, 158) !important;">
+<body>
     <div id="app">
-        <div class="container pt-4 bg-white w-100 text-center" id="getPrint">
-            <div class="w-100 m-auto">
+        <div class="container p-4 bg-white w-100 text-center" id="getPrint">
+            <div class="bg-white m-auto">
                 <div class="row">
                     <div class="col-6">
-                        <img src="{{ asset('assets/img/unnamed.png') }}" class=" img-fluid" width="350px" alt="main_logo">
+                        <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                     </div>
                     <div class="col-4" style="text-align:left !important; padding-top:6.4rem;">
-                        <h5 style="font-size:55px;">Authorized</h5>
-                        <p  style="font-size:55px;"><span class="bg-dark text-white">Contractor</span></p>
-                        <h5  style="font-size:55px;">Vehicle</h5>
+                        <h5 class="fs-1">Authorized</h5>
+                        <p  class="fs-1"><span class="bg-dark text-white">Contractor</span></p>
+                        <h5  class="fs-1">Vehicle</h5>
+                    </div>
+                    <div class="col-12">
+                        {!! \QrCode::size(500)->generate($url); !!}
                     </div>
                 </div>
-                {!! \QrCode::size(900)->generate($url); !!}
             </div>
         </div>
     </div>
+       {{-- <button type="button"onclick="getPrint()" class="btn btn-primary">print</button> --}}
+
 <!--   Core JS Files   -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/js/core/popper.min.js')}}"></script>
