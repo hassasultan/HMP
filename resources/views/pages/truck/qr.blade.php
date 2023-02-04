@@ -36,7 +36,7 @@
 </head>
 <body style="background-color:rgb(158, 158, 158) !important;">
     <div id="app">
-        <div class="container pt-4 bg-white w-100 text-center">
+        <div class="container pt-4 bg-white w-100 text-center" id="getPrint">
             <div class="w-100 m-auto">
                 <div class="row">
                     <div class="col-6">
@@ -77,6 +77,19 @@
         });
 
     });
+    function getPrint()
+    {
+        var elem = document.getElementById('getPrint');
+        var print_area = window.open();
+        print_area.document.write('<html>');
+        print_area.document.write('<link rel="dns-prefetch" href="//fonts.gstatic.com"><link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /><link href="{{ asset("assets/css/nucleo-icons.css") }}" rel="stylesheet" /><link href="{{ asset("assets/css/nucleo-svg.css") }}" rel="stylesheet" /><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link id="pagestyle" href="{{ asset("assets/css/material-dashboard.css?v=3.0.0")}}" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />');
+        print_area.document.write('<body>');
+        print_area.document.write(elem.innerHTML);
+        print_area.document.write('</body></html>');
+        // print_area.focus();
+        print_area.print();
+        // print_area.close();
+    }
   var ctx = document.getElementById("chart-bars").getContext("2d");
 
   new Chart(ctx, {
