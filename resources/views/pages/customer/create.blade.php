@@ -49,7 +49,7 @@
                         <input type="text" class="form-control border-bottom" placeholder="Enter Gps (lat,lng)..." name="gps" value="{{ old('gps') }}" required/>
                     </div>
                     <div class="form-group col-12">
-                        <label>Standard</label>
+                        <label>Consumer Type</label>
                         <select name="standard"
                             class="select2-multiple form-control fs-14  h-50px" required>
                             <option value="Commercial">Commercial</option>

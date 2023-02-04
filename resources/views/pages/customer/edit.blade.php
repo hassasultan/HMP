@@ -51,7 +51,7 @@
 
                     </div>
                     <div class="form-group col-12">
-                        <label>Standard</label>
+                        <label>Consumer Type</label>
                         <select name="standard"
                             class="select2-multiple form-control fs-14  h-50px" required>
                             <option value="Commercial" @if($customer->standard == "Commercial") selected @endif>Commercial</option>

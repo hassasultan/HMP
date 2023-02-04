@@ -77,10 +77,10 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-4 " style="border-right:1px solid #000;">
-                                            <input type="checkbox" @if($driver->hydrant->owned == 1) checked @endif disabled /> Vehicle owner by contractor
+                                            <input type="checkbox" @if($driver->owned_by == 0) checked @endif disabled /> Vehicle owner by contractor
                                         </div>
                                         <div class="col-md-4" style="border-right:1px solid #000;">
-                                            <input type="checkbox" @if($driver->hydrant->owned == 0) checked @endif disabled /> vehicle owned by third party
+                                            <input type="checkbox" @if($driver->owned_by == 1) checked @endif disabled /> vehicle owned by third party
                                         </div>
                                         <div class="col-md-4">
 
