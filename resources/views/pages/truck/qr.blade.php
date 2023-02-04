@@ -39,10 +39,10 @@
         <div class="container p-4 bg-white w-100 text-center" id="getPrint">
             <div class="bg-white m-auto">
                 <div class="row">
-                    <div class="col-6" style="padding-top:6.4rem;">
+                    <div class="col-6">
                         <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                     </div>
-                    <div class="col-4" style="text-align:left !important; padding-top:6.4rem;">
+                    <div class="col-4" style="text-align:left !important; padding-top:2.4rem;">
                         <h5 style="font-size: 3.7rem;">Authorized</h5>
                         <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">Contractor</span></p>
                         <h5  style="font-size: 3.7rem;">Vehicle</h5>
