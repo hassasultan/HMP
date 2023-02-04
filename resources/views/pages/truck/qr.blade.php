@@ -43,9 +43,9 @@
                         <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                     </div>
                     <div class="col-4" style="text-align:left !important; padding-top:6.4rem;">
-                        <h5 style="font-size: 4rem;">Authorized</h5>
-                        <p  style="font-size: 4rem;"><span class="bg-dark text-white">Contractor</span></p>
-                        <h5  style="font-size: 4rem;">Vehicle</h5>
+                        <h5 style="font-size: 3.7rem;">Authorized</h5>
+                        <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">Contractor</span></p>
+                        <h5  style="font-size: 3.7rem;">Vehicle</h5>
                     </div>
                     <div class="col-12 mt-5">
                         {!! \QrCode::size(600)->generate($url); !!}
