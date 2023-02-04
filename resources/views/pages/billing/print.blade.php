@@ -47,8 +47,8 @@
 <body style="background-color:rgb(158, 158, 158) !important;">
     <div id="app">
         <div class="container p-4 bg-white w-100" id="getPrint">
-                <div class="bg-white border border-dark border-4  m-auto" style="color: #000 !important">
-                    <h2 class=" text-center">Ticket</h2>
+                <div class="bg-white border border-dark border-3  m-auto" style="color: #000 !important; background-image: url('{{ asset('asset/img/unnamed.png') }}');">
+                    <h2 class=" text-center">E-INVOICE</h2>
                     <div class="row text-left p-4">
                         <div class="col-6"><p class="font-weight-bold">Order#</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->Order_Number}}</p></div>
