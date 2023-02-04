@@ -47,7 +47,7 @@
 <body style="background-color:rgb(158, 158, 158) !important;">
     <div id="app">
         <div class="container p-4 bg-white w-100" id="getPrint">
-                <div class="bg-white border border-dark border-3  m-auto" style="color: #000 !important; background-image: url('{{ asset('assets/img/unnamed.png') }}');">
+                <div class="bg-white border border-dark border-3  m-auto" style="color: #000 !important; background-image: url('{{ asset('assets/img/watermark.png') }}'); background-repeat: no-repeat;background-position: center;">
                     <h2 class=" text-center">E-INVOICE</h2>
                     <div class="row text-left p-4">
                         <div class="col-6"><p class="font-weight-bold">Order#</p></div>
