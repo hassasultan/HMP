@@ -50,57 +50,57 @@
                 <div class="bg-white border border-dark border-4  m-auto" style="color: #000 !important">
                     <h2 class=" text-center">Ticket</h2>
                     <div class="row text-left p-4">
-                        <div class="col-6"><p class="fs-5">Order#</p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->order->Order_Number}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Order#</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->order->Order_Number}}</p></div>
                         @php
                             $date = \Carbon\Carbon::parse($billing->order->created_at);
                             $date->toDateString();
                             $url =  route('vehicle.details',$billing->truck->id);
                         @endphp
-                        <div class="col-6"><p class="fs-5">Customer Name:</p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->order->customer->name}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Customer Name:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->name}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Customer Contact:</p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->order->customer->contact_num}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Customer Contact:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->contact_num}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Area: </p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->order->customer->address}} {{$billing->order->customer->street}} {{$billing->order->customer->location}}, gps : {{$billing->order->customer->gps}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Area: </p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->address}} {{$billing->order->customer->street}} {{$billing->order->customer->location}}, gps : {{$billing->order->customer->gps}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Filling Station: </p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->truck->hydrant->name}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Filling Station: </p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->truck->hydrant->name}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Filling time:</p></div>
-                        <div class="col-6"><p class="fs-5">{{$date->format('g:i a')}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Filling time:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$date->format('g:i a')}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Filling date: </p></div>
-                        <div class="col-6"><p class="fs-5">{{$date->toFormattedDateString()}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Filling date: </p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$date->toFormattedDateString()}}</p></div>
 
-                        <div class="col-6"><p class="fs-5"><b>Order expiry date:</b></p></div>
-                        <div class="col-6"><p class="fs-5"><b>{{$date->toFormattedDateString()}}</b></p></div>
+                        <div class="col-6"><p class="font-weight-bold"><b>Order expiry date:</b></p></div>
+                        <div class="col-6"><p class="font-weight-bold"><b>{{$date->toFormattedDateString()}}</b></p></div>
 
-                        <div class="col-6"><p class="fs-5">Vehicle#</p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->truck->truck_num}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Vehicle#</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->truck->truck_num}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Capacity: </p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->truck->truckCap->name}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Capacity: </p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->truck->truckCap->name}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Driver Name: </p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->driver->name}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Driver Name: </p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->driver->name}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Driver Contact:</p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->driver->phone}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Driver Contact:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->driver->phone}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Invoice amount:</p></div>
-                        <div class="col-6"><p class="fs-5"> Rs. {{number_format($billing->amount)}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Invoice amount:</p></div>
+                        <div class="col-6"><p class="font-weight-bold"> Rs. {{number_format($billing->amount)}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Paid:</p></div>
-                        <div class="col-6"><p class="fs-5">Rs.0</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Paid:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Rs.0</p></div>
 
-                        <div class="col-6"><p class="fs-5">Balance:</p></div>
-                        <div class="col-6"><p class="fs-5">{{$billing->amount}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Balance:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->amount}}</p></div>
 
-                        <div class="col-6"><p class="fs-5">Payment mode:</p></div>
-                        <div class="col-6"><p class="fs-5">COD</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Payment mode:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">COD</p></div>
                         {!! \QrCode::size(150)->generate($url); !!}
 
                     </div>
