@@ -47,7 +47,7 @@
 <body style="background-color:rgb(158, 158, 158) !important;">
     <div id="app">
         <div class="container p-4 bg-white w-100" id="getPrint">
-                <div class="bg-white border border-dark border-4  m-auto text-dark">
+                <div class="bg-white border border-dark border-4  m-auto" style="color: #000 !important">
                     <h2 class=" text-center">Ticket</h2>
                     <div class="row text-left p-4">
                         <div class="col-6"><p class="fs-5">Order#</p></div>
