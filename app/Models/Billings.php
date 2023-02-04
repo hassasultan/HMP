@@ -14,6 +14,7 @@ class Billings extends Model
         'truck_id',
         'driver_id',
         'amount',
+        'km_amount',
         'status',
     ];
     public function order()

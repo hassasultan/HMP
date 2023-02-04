@@ -51,7 +51,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <div class="row">
+                                    <div class="row text-start">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
                                             Hydrant: {{$driver->hydrant->name}}
                                         </div>
@@ -63,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="row">
+                                    <div class="row text-start">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
                                             Focal Person: {{$driver->hydrant->person}}
                                         </div>
@@ -75,7 +75,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="row">
+                                    <div class="row text-start">
                                         <div class="col-md-4 " style="border-right:1px solid #000;">
                                             <input type="checkbox" @if($driver->owned_by == 1) checked @endif disabled /> Vehicle owner by contractor
                                         </div>
@@ -90,15 +90,15 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 text-start">
                                         Alternate Hydrant:{{$driver->hydrant->alternate}}
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-bordered">
-                        <thead class="table-dark">
+                    <table class="table table-bordered border-2">
+                        <thead class="table-dark border-2">
                             <!--<tr class="p-0">-->
                                 <th class="w-100 pl-0 pr-0 mr-0">
                                     Vehicle's Details
@@ -106,25 +106,28 @@
                             <!--</tr>-->
                         </thead>
                         <tbody>
-                            <!--<tr>-->
-                            <!--    <td>-->
-                            <!--        <div class="row">-->
-                            <!--            <div class="col-md-6" style="border-right:1px solid #000;">-->
-                            <!--                Name: {{$driver->name}} -->
-                            <!--            </div>-->
-                            <!--            <div class="col-md-6"style="border-left:1px solid #000;">-->
-                            <!--                Company Name: {{$driver->company_name}}-->
-                            <!--            </div>-->
-                            <!--        </div>-->
-                            <!--    </td>-->
-                            <!--</tr>-->
                             <tr>
                                 <td>
-                                    <div class="row">
-                                        <div class="col-md-6" style="border-right:1px solid #000;">
+                                    <div class="row text-start">
+                                        <div class="col-md-6 text-start" style="border-right:1px solid #000;">
                                             Vehicle Reg#: {{$driver->truck_num}}
                                         </div>
-                                        <div class="col-md-6" style="border-left:1px solid #000;">
+                                        <div class="col-md-3 text-start" style="border-left:1px solid #000;">
+                                            Chassis#: {{$driver->chassis_num}}
+                                        </div>
+                                        <div class="col-md-3 text-start" style="border-left:1px solid #000;">
+                                            Engine#: {{$driver->engine_num}}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row text-start">
+                                        <div class="col-md-9" style="border-right:1px solid #000;">
+                                            Make: {{$driver->company_name}}
+                                        </div>
+                                        <div class="col-md-3" style="border-left:1px solid #000;">
                                             Model: {{$driver->model}}
                                         </div>
                                     </div>
@@ -132,7 +135,25 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="row">
+                                    <div class="row text-start">
+                                        <div class="col-md-6" style="border-right:1px solid #000;">
+                                            Tanker Capacity: {{$driver->truckCap->name}}
+                                        </div>
+                                        <div class="col-md-3" style="border-left:1px solid #000;">
+                                            Cabin Color: {{$driver->cabin_color}}
+                                        </div>
+                                        <div class="col-md-3" style="border-left:1px solid #000;">
+                                            Tank color: {{$driver->tanker_color}}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-4"></td>
+                            </tr>
+                            {{-- <tr>
+                                <td>
+                                    <div class="row text-start">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
                                             Reg Paper Image: <img class="w-50" src="{{ asset('public/storage/'.$driver->paper_image) }}"/>
                                         </div>
@@ -141,15 +162,15 @@
                                         </div>
                                     </div>
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr> --}}
+                            {{-- <tr>
                                 <td>
                                     <div class="row text-center">
                                         <h6>Vehicle Image</h6>
                                         <img class="m-auto img-fluid" src="{{ asset('public/storage/'.$driver->vehicle_image) }}"/>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
 
@@ -165,7 +186,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div class="row">
+                                        <div class="row  text-start">
                                             <div class="col-md-6" style="border-right:1px solid #000;">
                                                 Name: {{$row->name}}
                                             </div>
@@ -177,7 +198,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="row">
+                                        <div class="row text-start">
                                             <div class="col-md-6" style="border-right:1px solid #000;">
                                                 Nic#: {{$row->nic}}
                                             </div>
@@ -189,7 +210,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="row">
+                                        <div class="row text-start">
                                             <div class="col-md-6" style="border-right:1px solid #000;">
                                                 Profile Image#: <img class="w-50" src="{{ asset('public/storage/'.$row->image) }}"/>
                                             </div>

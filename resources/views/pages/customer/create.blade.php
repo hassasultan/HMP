@@ -45,7 +45,7 @@
 
                     </div>
                     <div class="form-group col-12">
-                       <label>Gps</label>
+                       <label>Gps (Geo Location)</label>
                         <input type="text" class="form-control border-bottom" placeholder="Enter Gps (lat,lng)..." name="gps" value="{{ old('gps') }}" required/>
                     </div>
                     <div class="form-group col-12">

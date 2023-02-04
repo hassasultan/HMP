@@ -337,6 +337,31 @@
 
         }
 
+        function adminstatusbilling(id) {
+
+            var id = id;
+            var status = $('#FormControlAdminSelect-' + id).val();
+            console.log(status);
+            $.ajax({
+                    url: "{{ route('billing.change.status') }}",
+                    type: "Get",
+                    data: {
+                        id: id,
+                        status: status,
+                    },
+                }).done(function(data) {
+                    console.log(data);
+                    successModal("Status Has been Changed Successfully...");
+                })
+                .fail(function(error) {
+                    console.log(error);
+                    errorModal(error);
+
+                });
+
+
+        }
+
         function adminstatusdriver(id) {
 
             var id = id;

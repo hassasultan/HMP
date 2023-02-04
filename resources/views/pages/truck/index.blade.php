@@ -28,7 +28,7 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrant</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owned By</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th>
-                  <th class="text-secondary opacity-7">Black Listed</th>
+                  <th class="text-secondary opacity-7">Active</th>
                   <th class="text-secondary opacity-7">Form View</th>
                   <th class="text-secondary opacity-7">Action</th>
                 </tr>
@@ -74,6 +74,9 @@
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->hydrant->name }}</p>
                                 <p class="text-xs text-secondary mb-0">{{ $row->hydrant->contact }}</p>
+                                <p class=" mt-2">
+                                    <span class="p-2" style="background-color: {{ $row->hydrant->color }};"></span>
+                                </p>
                                 {{-- <div class="d-flex px-2 py-1">
                                     <div>
                                         <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">

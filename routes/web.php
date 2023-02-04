@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
     Route::get('create/billing', [App\Http\Controllers\OrderController::class, 'billingcreate'])->name('billing.create');
     Route::post('store/billing', [App\Http\Controllers\OrderController::class, 'billingstore'])->name('billing.store');
+    Route::get('change/status/billing', [App\Http\Controllers\OrderController::class, 'changeBlillingStatus'])->name('billing.change.status');
     Route::resource('/customer-management', CustomerController::class);
 
     Route::get('change/driver/status', [App\Http\Controllers\HomeController::class, 'changeDriverStatus'])->name('change.driver.status');

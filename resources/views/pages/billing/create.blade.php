@@ -51,11 +51,15 @@
                         </select>
                     </div>
                     <div class="form-group col-12">
-                        <label>Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Truck Number..." name="amount" value="{{ old('amount') }}" required/>
+                        <label>Tanker Amount</label>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="{{ old('amount') }}" required/>
 
                     </div>
+                    <div class="form-group col-12">
+                        <label>Extra Per KM Amount</label>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Extra Per KM Amount..." name="km_amount" value="{{ old('km_amount') }}" required/>
 
+                    </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-20 mt-4 mb-0">Create</button>
                       </div>

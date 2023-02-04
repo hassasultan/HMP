@@ -27,6 +27,7 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Driver</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Details</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Standard</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">amount</th>
                   <th class="text-secondary opacity-7"></th>
                 </tr>
@@ -79,6 +80,18 @@
                             </td>
                             <td>
                                 <p class="text-center font-weight-bold mb-0">{{ $row->order->customer->standard }}</p>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control border border-dark border-1 p-2"
+                                        id="FormControlAdminSelect-{{ $row->id }}"
+                                        onchange="adminstatusbilling({{ $row->id }});">
+                                        <option @if ($row->status == 1) selected @endif value='1'  class="bg-success">
+                                            Completed</option>
+                                        <option @if ($row->status == 0) selected @endif value='0' class="bg-danger">
+                                            Pending</option>
+                                    </select>
+                                </div>
                             </td>
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>

@@ -152,6 +152,14 @@ class OrderController extends Controller
 
     }
 
+    public function changeBlillingStatus(Request $request)
+    {
+        $driver = Billings::find($request->id);
+        $driver->status = $request->status;
+        $driver->save();
+        return 1;
+    }
+
     public  function billingReciept($id)
     {
         # code...

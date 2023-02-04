@@ -90,14 +90,17 @@
                         <div class="col-6"><p class="font-weight-bold">Driver Contact:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->driver->phone}}</p></div>
 
+                        <div class="col-6"><p class="font-weight-bold">Extra Per KM amount:</p></div>
+                        <div class="col-6"><p class="font-weight-bold"> Rs. {{number_format($billing->km_amount )}}</p></div>
+
                         <div class="col-6"><p class="font-weight-bold">Invoice amount:</p></div>
-                        <div class="col-6"><p class="font-weight-bold"> Rs. {{number_format($billing->amount)}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold"> Rs. {{number_format((int)$billing->amount + (int)$billing->km_amount )}}</p></div>
 
                         <div class="col-6"><p class="font-weight-bold">Paid:</p></div>
                         <div class="col-6"><p class="font-weight-bold">Rs.0</p></div>
 
                         <div class="col-6"><p class="font-weight-bold">Balance:</p></div>
-                        <div class="col-6"><p class="font-weight-bold">{{$billing->amount}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{number_format((int)$billing->amount + (int)$billing->km_amount )}}</p></div>
 
                         <div class="col-6"><p class="font-weight-bold">Payment mode:</p></div>
                         <div class="col-6"><p class="font-weight-bold">COD</p></div>

@@ -24,9 +24,10 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Driver</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NIC</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Water Tanker</th>
+                  {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th> --}}
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th>
-                  <th class="text-secondary opacity-7">Black Listed</th>
+                  <th class="text-secondary opacity-7">Active</th>
 
                   <th class="text-secondary opacity-7"></th>
                 </tr>
@@ -54,7 +55,15 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle text-center text-sm">
+                            <td>
+                                <a href="{{route('vehicle.details',$row->truck->id)}}" target="_blank">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $row->truck->truck_num }}</p>
+                                    <p class=" mt-2">
+                                        <span class="p-2" style="background-color: {{ $row->truck->hydrant->color }};"></span>
+                                    </p>
+                                </a>
+                            </td>
+                            {{-- <td class="align-middle text-center text-sm">
                                 <div class="form-group">
                                     <select class="form-control border border-dark border-1 p-2"
                                         id="FormControlDriverSelect-{{ $row->id }}"
@@ -65,11 +74,10 @@
                                             De-Active</option>
                                     </select>
                                 </div>
-                                {{-- @if ($row->status == 1)
-                                    <span class="badge badge-sm bg-gradient-success">Active</span>
-                                @else
-                                    <span class="badge badge-sm bg-gradient-danger">De-Active</span>
-                                @endif --}}
+
+                            </td> --}}
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>
                             </td>
                             <td>
                                 <div class="form-group">
@@ -83,9 +91,7 @@
                                     </select>
                                 </div>
                             </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>
-                            </td>
+
                             <td class="align-middle">
 
                                 {{-- {!! \QrCode::size(250)->generate('www.google.com'); !!} --}}
