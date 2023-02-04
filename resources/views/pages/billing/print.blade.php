@@ -55,7 +55,7 @@
                         @php
                             $date = \Carbon\Carbon::parse($billing->order->created_at);
                             $date->toDateString();
-                            $url =  route('vehicle.details',$billing->truck->id);
+                            $url =  route('vehicle.details',$billing->id);
                         @endphp
                         <div class="col-6"><p class="font-weight-bold">Customer Name:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->name}}</p></div>
