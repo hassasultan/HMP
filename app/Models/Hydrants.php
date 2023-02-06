@@ -30,4 +30,9 @@ class Hydrants extends Model
     {
         return $this->hasMany(Orders::class,'hydrant_id','id');
     }
+
+    public function todayorders()
+    {
+        return $this->hasMany(Orders::class,'hydrant_id','id')->whereDay('created_at', '=', date('d'));
+    }
 }

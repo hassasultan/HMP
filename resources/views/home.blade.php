@@ -2,12 +2,13 @@
 
 @section('content')
 <style>
-    /* .dash-count
+    #total-tanker
     {
-        height: 300px;
+        height: 180px;
         overflow-y: scroll;
-        padding-top: 15px;
-    } */
+
+        /* padding-top: 15px; */
+    }
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -24,9 +25,12 @@ setInterval(function () {
             google.charts.load("current", {packages:["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             let result = data['result'];
+            let today_result = data['result_today'];
+            console.log(today_result);
             function drawChart() {
 
                 var data = google.visualization.arrayToDataTable(result);
+                var data2 = google.visualization.arrayToDataTable(today_result);
 
                 var options = {
                 title: '',
@@ -34,7 +38,9 @@ setInterval(function () {
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                var chart2 = new google.visualization.PieChart(document.getElementById('piechart_3dToday'));
                 chart.draw(data, options);
+                chart2.draw(data2, options);
             }
         })
         .fail(function(error) {
@@ -287,9 +293,9 @@ $.ajax({
     </div>
 
   @endif
-<div class="row p-4">
+  <div class="row p-4">
     <div class="col-12 bg-gradient-primary  text-center p-2">
-        <h5 class="text-white">Total Orders</h5>
+        <h5 class="text-white">Today Orders</h5>
     </div>
     <div class="col-4 border border-top-0 border-3 border-bottom-0 border-start-0 border-light mt-2 p-4">
         <div class="row">
@@ -300,6 +306,48 @@ $.ajax({
                 </div>
                 <div class="card text-center p-3 mt-2">
                     <h6>COMM Today</h6>
+                    <b class="fs-5">{{ $comm }}</b>
+                </div>
+            </div>
+            <div class="col-md-7 p-2 mt-3">
+                <div class="card text-center p-5">
+                    <h6>Total Today Orders</h6>
+                    <b class="fs-5">{{ $order }}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="row p-4">
+            <div class="col-4">
+                <div class="row">
+                    @foreach($hydrants as $row)
+                        @if(count($row->orders) != 0)
+                            <div class="col-8" style="color:{{ $row->color }}"><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>
+                            <div class="col-4 text-end" style="color:{{ $row->color }}">{{count($row->orders)}}</div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-8">
+                <div id="piechart_3dToday"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row p-4">
+    <div class="col-12 bg-gradient-primary  text-center p-2">
+        <h5 class="text-white">Total Orders</h5>
+    </div>
+    <div class="col-4 border border-top-0 border-3 border-bottom-0 border-start-0 border-light mt-2 p-4">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card text-center p-3">
+                    <h6>GPS Total</h6>
+                    <b class="fs-5">{{ $gps }}</b>
+                </div>
+                <div class="card text-center p-3 mt-2">
+                    <h6>COMM Total</h6>
                     <b class="fs-5">{{ $comm }}</b>
                 </div>
             </div>
@@ -329,5 +377,7 @@ $.ajax({
         </div>
     </div>
 </div>
+
+
 
 @endsection

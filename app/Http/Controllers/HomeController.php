@@ -9,6 +9,7 @@ use App\Models\Truck_type;
 use App\Traits\SaveImage;
 use App\Models\Hydrants;
 use App\Models\Orders;
+use App\Models\Billings;
 use Illuminate\Support\Carbon;
 use QrCode;
 use Exception;
@@ -59,6 +60,7 @@ class HomeController extends Controller
                 $query->where('standard',"GPS");
             })->count();
             $hydrants = Hydrants::with('vehicles')->get();
+            $today = Hydrants::with('vehicles','todayorders')->get();
 
         }
         else
@@ -75,12 +77,32 @@ class HomeController extends Controller
             $contractor = Truck::where('owned_by',1)->count();
             $third = Truck::where('owned_by',0)->count();
             $order = Orders::where('hydrant_id',auth()->user()->hydrant->id)->count();
+            $comm = Orders::with('customer')->whereHas('customer',function($query)
+            {
+                $query->where('standard',"Commercial");
+            })->where('hydrant_id',auth()->user()->hydrant->id)->count();
+            $gps = Orders::with('customer')->whereHas('customer',function($query)
+            {
+                $query->where('standard',"GPS");
+            })->where('hydrant_id',auth()->user()->hydrant->id)->count();
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
+            // $today = Orders::where('hydrant_id',auth()->user()->hydrant->id)->whereDay('created_at', now()->day)->get();
+            $today = Hydrants::with('vehicles','todayorders')->where('user_id',auth()->user()->id)->get();
+
         }
+        // dd($today->toArray());
         $result[] = ['Clicks','Viewers'];
         foreach ($hydrants as $key => $value) {
             $result[++$key] = [$value->name, (int)count($value->orders)];
+        }
+
+        $result_today[] = ['Clicks','Viewers'];
+        foreach ($today as $key => $value) {
+            // if((int)count($value->todayorders) != 0)
+            // {
+                $result_today[++$key] = [$value->name, (int)count($value->todayorders)];
+            // }
         }
 
         $result2[] = ['Clicks','Viewers'];
@@ -100,6 +122,7 @@ class HomeController extends Controller
             $data['third'] = $third;
 
             $data['hydrants'] = $hydrants;
+            $data['result_today'] = $result_today;
             return $data;
         }
         return view('home',compact('comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));

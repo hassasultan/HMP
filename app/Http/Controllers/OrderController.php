@@ -29,6 +29,10 @@ class OrderController extends Controller
         }
         return view('pages.order.index',compact('order'));
     }
+    public function reports()
+    {
+        return "UNDER CONSTRUCTION";
+    }
     public  function create()
     {
         # code...

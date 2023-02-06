@@ -75,6 +75,7 @@ Route::get('vehicle/details/{id}', [App\Http\Controllers\HomeController::class, 
 Route::get('billing/details/{id}', [App\Http\Controllers\OrderController::class, 'billingReciept'])->name('billing.details');
 
 Route::middleware('auth')->group(function () {
+    Route::get('reports', [App\Http\Controllers\OrderController::class, 'reports'])->name('reports');
     Route::get('create/truck', [App\Http\Controllers\HomeController::class, 'TruckCreate'])->name('truck.create');
     Route::post('store/truck', [App\Http\Controllers\HomeController::class, 'truckStore'])->name('truck.store');
     Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
