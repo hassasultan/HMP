@@ -9,6 +9,10 @@
 
         /* padding-top: 15px; */
     }
+    .icon-lg {
+        width: 40px !important;
+        height: 40px !important;
+    }
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -107,40 +111,40 @@ $.ajax({
   </script>
   @if (auth()->user()->role == 1)
   <div class="row dash-count">
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
         <div class="card">
-        <div class="card-header p-3 pt-2">
-            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-            <i class="fa fa-truck" aria-hidden="true"></i>
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="fa fa-truck" aria-hidden="true"></i>
+                </div>
+                <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Total Vehicles</p>
+                <h3 class="mb-0">{{$vehicle}}</h3>
+                </div>
             </div>
-            <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Total Vehicles</p>
-            <h4 class="mb-0">{{$vehicle}}</h4>
-            </div>
-        </div>
-        <!--<hr class="dark horizontal my-0">-->
-        <!--<div class="card-footer p-3">-->
-        <!--  <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>-->
-        <!--</div>-->
+            <!--<hr class="dark horizontal my-0">-->
+            <!--<div class="card-footer p-3">-->
+            <!--  <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>-->
+            <!--</div>-->
         </div>
     </div>
     @if (auth()->user()->role == 1)
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-            <div class="card-header p-3 pt-2">
-            <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                <i class="fa fa-user-circle"></i>
-            </div>
-            <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Total Drirvers</p>
-                <h4 class="mb-0">{{$driver}}</h4>
-            </div>
-            </div>
+        <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                    <i class="fa fa-user-circle"></i>
+                </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Total Drirvers</p>
+                    <h3 class="mb-0">{{$driver}}</h3>
+                </div>
+                </div>
 
-        </div>
+            </div>
         </div>
     @endif
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
         <div class="card">
         <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
@@ -148,21 +152,21 @@ $.ajax({
             </div>
             <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">Total Hydrants</p>
-            <h4 class="mb-0">{{$hydCount}}</h4>
+            <h3 class="mb-0">{{$hydCount}}</h3>
             </div>
         </div>
 
         </div>
     </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
         <div class="card">
         <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-            <i class="fa fa-building" aria-hidden="true"></i>
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
             </div>
             <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">Total Customers</p>
-            <h4 class="mb-0">{{$customer_count}}</h4>
+            <h3 class="mb-0">{{$customer_count}}</h3>
             </div>
         </div>
 
@@ -197,28 +201,28 @@ $.ajax({
                     <div class="card text-center px-3 pt-3">
                         <img src="{{ asset('assets/img/truck1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6 style="font-size: 0.7rem">Total Registered Water Tanker (contractor)</h6>
-                        <b id="cont" class="fs-5">{{ $contractor }}</b>
+                        <h3 id="cont" >{{ $contractor }}</h3>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center px-3 pt-3">
                         <img src="{{ asset('assets/img/truck2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Registered Water Tanker (Third Party)</h6>
-                        <b id="third" class="fs-5">{{ $third }}</b>
+                        <h3 id="third" >{{ $third }}</h3>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-2">
                         <img src="{{ asset('assets/img/driver1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (contractor)</h6>
-                        <b id="cont-driver" class="fs-5">{{ $contractor_driver }}</b>
+                        <h3 id="cont-driver" >{{ $contractor_driver }}</h3>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-2">
                         <img src="{{ asset('assets/img/driver2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (Third Party)</h6>
-                        <b id="third-driver" class="fs-5">{{ $third_driver }}</b>
+                        <h3 id="third-driver" >{{ $third_driver }}</h3>
                     </div>
                 </div>
             </div>
