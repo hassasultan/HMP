@@ -13,6 +13,7 @@
         width: 40px !important;
         height: 40px !important;
     }
+
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -332,7 +333,11 @@ $.ajax({
                     <b class="fs-5" id="today-gps">{{ $today_gps }}</b>
                 </div>
             </div>
-            <div class="col-md-7 p-2 mt-3">
+            <div class="col-md-7 p-2 ">
+                <div class="card text-center p-3 m-3">
+                    <h6>Qouta Today</h6>
+                    <b class="fs-5" id="today-comm">0</b>
+                </div>
                 <div class="card text-center p-5">
                     <h6>Total Today Orders</h6>
                     <b class="fs-5" id="today-order">{{ $today_order }}</b>
@@ -372,7 +377,11 @@ $.ajax({
                     <b class="fs-5">{{ $comm }}</b>
                 </div>
             </div>
-            <div class="col-md-7 p-2 mt-3">
+            <div class="col-md-7 p-2">
+                <div class="card text-center p-3 m-3">
+                    <h6>Qouta Total</h6>
+                    <b class="fs-5" id="today-comm">0</b>
+                </div>
                 <div class="card text-center p-5">
                     <h6>Total Orders</h6>
                     <b class="fs-5">{{ $order }}</b>
