@@ -10,6 +10,7 @@ use App\Traits\SaveImage;
 use App\Models\Hydrants;
 use App\Models\Orders;
 use App\Models\Billings;
+use App\Models\Customer;
 use Illuminate\Support\Carbon;
 use QrCode;
 use Exception;
@@ -37,6 +38,8 @@ class HomeController extends Controller
     {
         // dd("check");
         $driver = 0;
+        $today_gallon_count = 0;
+
         if(auth()->user()->role == 1)
         {
             $vehicle = Truck::count();
@@ -52,6 +55,13 @@ class HomeController extends Controller
             $hydCount = Hydrants::count();
             $order = Orders::count();
             $today_order = Orders::whereDay('created_at', '=', date('d'))->count();
+            $today_gallon = Orders::with('truck_type_fun')->whereDay('created_at', '=', date('d'))->get();
+            $customer_count = Customer::count();
+            foreach($today_gallon as $row)
+            {
+                $expNum = explode(' ', $row->truck_type_fun->name);
+                $today_gallon_count = $today_gallon_count + (int)$expNum[0];
+            }
             $comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
@@ -85,8 +95,15 @@ class HomeController extends Controller
             })->count();
             $contractor = Truck::where('owned_by',1)->count();
             $third = Truck::where('owned_by',0)->count();
+            $customer_count = Customer::where('user_id',auth()->user()->id)->count();
             $order = Orders::where('hydrant_id',auth()->user()->hydrant->id)->count();
             $today_order = Orders::where('hydrant_id',auth()->user()->hydrant->id)->whereDay('created_at', '=', date('d'))->count();
+            $today_gallon = Orders::with('truck_type_fun')->where('hydrant_id',auth()->user()->hydrant->id)->whereDay('created_at', '=', date('d'))->get();
+            foreach($today_gallon as $row)
+            {
+                $expNum = explode(' ', $row->truck_type_fun->name);
+                $today_gallon_count = $today_gallon_count + (int)$expNum[0];
+            }
             $comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
@@ -141,9 +158,13 @@ class HomeController extends Controller
 
             $data['hydrants'] = $hydrants;
             $data['result_today'] = $result_today;
+            $data['today_order'] = $today_order;
+            $data['today_gallon_count'] = $today_gallon_count;
+            $data['today_comm'] = $today_comm;
+            $data['today_gps'] = $today_gps;
             return $data;
         }
-        return view('home',compact('today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
+        return view('home',compact('customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
     }
     public function driver()
     {

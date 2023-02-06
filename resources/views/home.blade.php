@@ -66,6 +66,11 @@ $.ajax({
         $("#third").html(data['third']);
         $("#cont-driver").html(data['contractor_driver']);
         $("#third-driver").html(data['third_driver']);
+
+        $("#today-comm").html(data['today_comm']);
+        $("#today-gps").html(data['today_gps']);
+        $("#today-order").html(data['today_order']);
+        $("#total-gallon").html(data['today_gallon_count']);
         var html = "";
         $.each(data['hydrants'],function(index,value){
             if(value['vehicles'].length > 0)
@@ -144,6 +149,20 @@ $.ajax({
             <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">Total Hydrants</p>
             <h4 class="mb-0">{{$hydCount}}</h4>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+        <div class="card-header p-3 pt-2">
+            <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="fa fa-building" aria-hidden="true"></i>
+            </div>
+            <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Total Customers</p>
+            <h4 class="mb-0">{{$customer_count}}</h4>
             </div>
         </div>
 
@@ -302,34 +321,32 @@ $.ajax({
             <div class="col-md-5">
                 <div class="card text-center p-3">
                     <h6>GPS Today</h6>
-                    <b class="fs-5">{{ $today_comm }}</b>
+                    <b class="fs-5" id="today-comm">{{ $today_comm }}</b>
                 </div>
                 <div class="card text-center p-3 mt-2">
                     <h6>COMM Today</h6>
-                    <b class="fs-5">{{ $today_gps }}</b>
+                    <b class="fs-5" id="today-gps">{{ $today_gps }}</b>
                 </div>
             </div>
             <div class="col-md-7 p-2 mt-3">
                 <div class="card text-center p-5">
                     <h6>Total Today Orders</h6>
-                    <b class="fs-5">{{ $today_order }}</b>
+                    <b class="fs-5" id="today-order">{{ $today_order }}</b>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-8">
         <div class="row p-4">
-            {{-- <div class="col-4">
+            <div class="col-4">
                 <div class="row">
-                    @foreach($hydrants as $row)
-                        @if(count($row->orders) != 0)
-                            <div class="col-8" style="color:{{ $row->color }}"><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>
-                            <div class="col-4 text-end" style="color:{{ $row->color }}">{{count($row->orders)}}</div>
-                        @endif
-                    @endforeach
+                    <div class="card text-center p-5">
+                        <h6>Orders in Gallons Today</h6>
+                        <b class="fs-5" id="total-gallon">{{ $today_gallon_count }}</b>
+                    </div>
                 </div>
-            </div> --}}
-            <div class="col-12">
+            </div>
+            <div class="col-8">
                 <div id="piechart_3dToday"></div>
             </div>
         </div>

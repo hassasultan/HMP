@@ -18,6 +18,7 @@ class Customer extends Model
         'status',
         'black_list',
         'standard',
+        'user_id',
     ];
     public function user()
     {
