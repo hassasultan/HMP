@@ -335,7 +335,7 @@ $.ajax({
             </div>
             <div class="col-md-7 p-2 ">
                 <div class="card text-center p-3 m-3">
-                    <h6>Qouta Today</h6>
+                    <h6>DC Qouta Today</h6>
                     <b class="fs-5" id="today-comm">0</b>
                 </div>
                 <div class="card text-center p-5">
@@ -379,7 +379,7 @@ $.ajax({
             </div>
             <div class="col-md-7 p-2">
                 <div class="card text-center p-3 m-3">
-                    <h6>Qouta Total</h6>
+                    <h6>DC Qouta Total</h6>
                     <b class="fs-5" id="today-comm">0</b>
                 </div>
                 <div class="card text-center p-5">
