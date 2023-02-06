@@ -319,7 +319,7 @@ $.ajax({
     </div>
     <div class="col-8">
         <div class="row p-4">
-            <div class="col-4">
+            {{-- <div class="col-4">
                 <div class="row">
                     @foreach($hydrants as $row)
                         @if(count($row->orders) != 0)
@@ -328,8 +328,8 @@ $.ajax({
                         @endif
                     @endforeach
                 </div>
-            </div>
-            <div class="col-8">
+            </div> --}}
+            <div class="col-12">
                 <div id="piechart_3dToday"></div>
             </div>
         </div>
