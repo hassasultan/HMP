@@ -302,17 +302,17 @@ $.ajax({
             <div class="col-md-5">
                 <div class="card text-center p-3">
                     <h6>GPS Today</h6>
-                    <b class="fs-5">{{ $gps }}</b>
+                    <b class="fs-5">{{ $today_comm }}</b>
                 </div>
                 <div class="card text-center p-3 mt-2">
                     <h6>COMM Today</h6>
-                    <b class="fs-5">{{ $comm }}</b>
+                    <b class="fs-5">{{ $today_gps }}</b>
                 </div>
             </div>
             <div class="col-md-7 p-2 mt-3">
                 <div class="card text-center p-5">
                     <h6>Total Today Orders</h6>
-                    <b class="fs-5">{{ $order }}</b>
+                    <b class="fs-5">{{ $today_order }}</b>
                 </div>
             </div>
         </div>
