@@ -33,6 +33,15 @@ class Driver extends Model
         'status',
         'expiry',
         'black_list',
+        //new
+        'lic_father_name',
+        'lic_address',
+        'lic_region',
+        'lic_identity_mark',
+        'cc_issue_date',
+        'cc_police_station',
+        'hc_issue_date',
+        'hc_hospital_name',
     ];
 
     public function truck()

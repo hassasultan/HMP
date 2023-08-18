@@ -20,6 +20,7 @@ class Is_Admin
     {
         if(Auth::check())
         {
+            // dd(auth()->user()->toArray());
             if(Auth::user()->role == 1){
                 return $next($request);
             }else{

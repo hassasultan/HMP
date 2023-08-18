@@ -36,7 +36,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd("check");
         $driver = 0;
         $today_gallon_count = 0;
 
@@ -79,7 +78,8 @@ class HomeController extends Controller
                 $query->where('standard',"GPS");
             })->whereDay('created_at', '=', date('d'))->count();
             $hydrants = Hydrants::with('vehicles')->get();
-            $today = Hydrants::with('vehicles','todayorders')->get();
+            $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->get();
+            // dd($today->toArray());
 
         }
         else
@@ -123,7 +123,7 @@ class HomeController extends Controller
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
             // $today = Orders::where('hydrant_id',auth()->user()->hydrant->id)->whereDay('created_at', now()->day)->get();
-            $today = Hydrants::with('vehicles','todayorders')->where('user_id',auth()->user()->id)->get();
+            $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->where('user_id',auth()->user()->id)->get();
 
         }
         // dd($today->toArray());
@@ -206,6 +206,17 @@ class HomeController extends Controller
         $driver->lic_issue_date = $request->lic_issue_date;
         $driver->lic_expiry_date = $request->lic_expiry_date;
         $driver->blood_group = $request->blood_group;
+        //new
+        $driver->lic_father_name = $request->lic_father_name;
+        $driver->lic_address = $request->lic_address;
+        $driver->lic_region = $request->lic_region;
+        $driver->lic_identity_mark = $request->lic_identity_mark;
+        $driver->cc_issue_date = $request->cc_issue_date;
+        $driver->cc_police_station = $request->cc_police_station;
+        $driver->hc_issue_date = $request->hc_issue_date;
+        $driver->hc_hospital_name = $request->hc_hospital_name;
+
+        //End
         if($request->has('image'))
         {
             $driver->image = $this->ProfileImage($request->image);
@@ -258,6 +269,16 @@ class HomeController extends Controller
         $driver->lic_issue_date = $request->lic_issue_date;
         $driver->lic_expiry_date = $request->lic_expiry_date;
         $driver->blood_group = $request->blood_group;
+        //new
+        $driver->lic_father_name = $request->lic_father_name;
+        $driver->lic_address = $request->lic_address;
+        $driver->lic_region = $request->lic_region;
+        $driver->lic_identity_mark = $request->lic_identity_mark;
+        $driver->cc_police_station = $request->cc_police_station;
+        $driver->hc_issue_date = $request->hc_issue_date;
+        $driver->hc_hospital_name = $request->hc_hospital_name;
+
+        //End
         $driver->nic_image = $this->NicImage($request->nic_image);
         $driver->expiry = $today;
         $driver->save();
@@ -328,7 +349,29 @@ class HomeController extends Controller
             'truck_num'   		=>  'required|string|unique:trucks,truck_num',
             'truck_type' 		=>  'required|numeric|exists:truck_types,id',
 			'owned_by'          =>  'required|numeric|in:0,1',
-			'vehicle_fitness'   =>  'required|image|max:2048',
+            'reg_region'        => 'required',
+            'book_num'          => 'required',
+            'father_name'       => 'required',
+            'owner_address'     => 'required',
+            'owner_cnic'        => 'required',
+            'reg_date'          => 'required',
+            'class_of_type'     => 'required',
+            'cylinders_count'   => 'required',
+            'body_type'         => 'required',
+            'horse_power'       => 'required',
+            'seating_capacity'  => 'required',
+            'num_description'   => 'required',
+            'front_excel'       => 'required',
+            'rear_excel'        => 'required',
+            'any_other'         => 'required',
+            'cfra_no'           => 'required',
+            'issue_date'        => 'required',
+            'expiry_date'        => 'required',
+			'commercial_license'   =>  'required|image|max:2048',
+            'road_permit'     	=>  'required|image|max:2048',
+            'doc_running_part'     =>  'required|image|max:2048',
+            'cabin_picture'     =>  'required|image|max:2048',
+            'vehicle_fitness'   =>  'required|image|max:2048',
             'paper_image'     	=>  'required|image|max:2048',
             'vehicle_image'     =>  'required|image|max:2048',
         ]);
@@ -352,6 +395,50 @@ class HomeController extends Controller
             $truck->cabin_color = $request->cabin_color;
             $truck->tanker_color = $request->tanker_color;
             $truck->owned_by = $request->owned_by;
+            //Addition Start
+            $truck->reg_region = $request->reg_region;
+            $truck->book_num = $request->book_num;
+            $truck->father_name = $request->father_name;
+            $truck->owner_address = $request->owner_address;
+            $truck->owner_cnic = $request->owner_cnic;
+            $truck->reg_date = $request->reg_date;
+            $truck->class_of_type = $request->class_of_type;
+            $truck->cylinders_count = $request->cylinders_count;
+            $truck->body_type = $request->body_type;
+            $truck->horse_power = $request->horse_power;
+            $truck->seating_capacity = $request->seating_capacity;
+            $truck->num_description = $request->num_description;
+            $truck->front_excel = $request->front_excel;
+            $truck->rear_excel = $request->rear_excel;
+            $truck->any_other = $request->any_other;
+            $truck->cfra_no = $request->cfra_no;
+            $truck->issue_date = $request->issue_date;
+            $truck->expiry_date = $request->expiry_date;
+
+            //Addition End
+
+            //Addition Start
+            if($request->has('paper_image'))
+            {
+                $loc = 'image'.'/'.'commercial_license/';
+                $truck->commercial_license = $this->vehicle_docs($request->commercial_license,$loc);
+            }
+            if($request->has('vehicle_image'))
+            {
+                $loc = 'image'.'/'.'road_permit/';
+                $truck->road_permit = $this->vehicle_docs($request->road_permit,$loc);
+            }
+            if($request->has('vehicle_fitness'))
+            {
+                $loc = 'image'.'/'.'doc_running_part/';
+                $truck->doc_running_part = $this->vehicle_docs($request->doc_running_part,$loc);
+            }
+            if($request->has('vehicle_fitness'))
+            {
+                $loc = 'image'.'/'.'cabin_picture/';
+                $truck->cabin_picture = $this->vehicle_docs($request->cabin_picture,$loc);
+            }
+            //Addition End
             $truck->paper_image = $this->Licence($request->paper_image);
             $truck->vehicle_image = $this->vehicle($request->vehicle_image);
             $truck->vehicle_fitness = $this->fitness($request->vehicle_fitness);
@@ -387,6 +474,24 @@ class HomeController extends Controller
             'truck_num'   		=>  'required|string|unique:trucks,truck_num,'.$id,
             'truck_type' 		=>  'required|numeric|exists:truck_types,id',
 			'owned_by'          =>  'required|numeric|in:0,1',
+            'reg_region'        => 'required',
+            'book_num'          => 'required',
+            'father_name'       => 'required',
+            'owner_address'     => 'required',
+            'owner_cnic'        => 'required',
+            'reg_date'          => 'required',
+            'class_of_type'     => 'required',
+            'cylinders_count'   => 'required',
+            'body_type'         => 'required',
+            'horse_power'       => 'required',
+            'seating_capacity'  => 'required',
+            'num_description'   => 'required',
+            'front_excel'       => 'required',
+            'rear_excel'        => 'required',
+            'any_other'         => 'required',
+            'cfra_no'           => 'required',
+            'issue_date'        => 'required',
+            'expiry_date'        => 'required',
 			'vehicle_fitness'   =>  'image|max:2048',
             'paper_image'     	=>  'image|max:2048',
             'vehicle_image'     =>  'image|max:2048',
@@ -411,6 +516,27 @@ class HomeController extends Controller
             $truck->cabin_color = $request->cabin_color;
             $truck->tanker_color = $request->tanker_color;
             $truck->owned_by = $request->owned_by;
+            //Addition Start
+            $truck->reg_region = $request->reg_region;
+            $truck->book_num = $request->book_num;
+            $truck->father_name = $request->father_name;
+            $truck->owner_address = $request->owner_address;
+            $truck->owner_cnic = $request->owner_cnic;
+            $truck->reg_date = $request->reg_date;
+            $truck->class_of_type = $request->class_of_type;
+            $truck->cylinders_count = $request->cylinders_count;
+            $truck->body_type = $request->body_type;
+            $truck->horse_power = $request->horse_power;
+            $truck->seating_capacity = $request->seating_capacity;
+            $truck->num_description = $request->num_description;
+            $truck->front_excel = $request->front_excel;
+            $truck->rear_excel = $request->rear_excel;
+            $truck->any_other = $request->any_other;
+            $truck->cfra_no = $request->cfra_no;
+            $truck->issue_date = $request->issue_date;
+            $truck->expiry_date = $request->expiry_date;
+
+            //Addition End
             if($request->has('paper_image'))
             {
                 $truck->paper_image = $this->Licence($request->paper_image);
@@ -423,6 +549,28 @@ class HomeController extends Controller
             {
                 $truck->vehicle_fitness = $this->fitness($request->vehicle_fitness);
             }
+            //Addition Start
+            if($request->has('paper_image'))
+            {
+                $loc = 'image'.'/'.'commercial_license/';
+                $truck->commercial_license = $this->vehicle_docs($request->commercial_license,$loc);
+            }
+            if($request->has('vehicle_image'))
+            {
+                $loc = 'image'.'/'.'road_permit/';
+                $truck->road_permit = $this->vehicle_docs($request->road_permit,$loc);
+            }
+            if($request->has('vehicle_fitness'))
+            {
+                $loc = 'image'.'/'.'doc_running_part/';
+                $truck->doc_running_part = $this->vehicle_docs($request->doc_running_part,$loc);
+            }
+            if($request->has('vehicle_fitness'))
+            {
+                $loc = 'image'.'/'.'cabin_picture/';
+                $truck->cabin_picture = $this->vehicle_docs($request->cabin_picture,$loc);
+            }
+            //Addition End
             $truck->model = $request->model;
             $truck->save();
             if(auth()->user()->role != 1)
