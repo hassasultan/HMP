@@ -206,21 +206,21 @@
                     {{-- Addtion --}}
                     <div class="form-group form-file-upload form-file-simple col-12 p-3">
                         <label>Commercial License Certificate</label>
-                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="commercial_license" required>
+                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="commercial_license" >
                         <img src="{{ asset('public/storage/'.$truck->commercial_license) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
 
                     </div>
 
                     <div class="form-group form-file-upload form-file-simple col-12 p-3">
                         <label>Road Permit Document</label>
-                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="road_permit" required>
+                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="road_permit" >
                         <img src="{{ asset('public/storage/'.$truck->road_permit) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
 
                     </div>
 
                     <div class="form-group form-file-upload form-file-simple col-12 p-3">
                         <label>Running paper Image</label>
-                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="doc_running_part" required>
+                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="doc_running_part" >
                         <img src="{{ asset('public/storage/'.$truck->doc_running_part) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
 
                     </div>
