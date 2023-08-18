@@ -96,7 +96,7 @@ trait SaveImage
         $filename       = $img->move(public_path('storage/image'.'/'.'fitness'),$filenamenew);
         return $filenamepath;
     }
-    public function vehicle_decs($image,$loc)
+    public function vehicle_docs($image,$loc)
     {
         // $this->attributes['slug'] = Str::slug($image, config('roles.separator'));
         $img = $image;
