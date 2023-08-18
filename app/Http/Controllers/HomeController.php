@@ -471,7 +471,7 @@ class HomeController extends Controller
     public function TruckUpdate($id,Request $request)
     {
         $valid = $this->validate($request, [
-            'truck_num'   		=>  'required|string|unique:trucks,truck_num,'.$$request->truck_num,
+            'truck_num'   		=>  'required|string|unique:trucks,truck_num,'.$request->truck_num,
             'truck_type' 		=>  'required|numeric|exists:truck_types,id',
 			'owned_by'          =>  'required|numeric|in:0,1',
             'reg_region'        => 'required',
