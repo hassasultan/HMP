@@ -109,11 +109,11 @@ class OrderController extends Controller
         # code...
         if(auth()->user()->role != 1)
         {
-            $order = Orders::all()->where('hydrant_id',auth()->user()->hydrant->id);
+            $order = Orders::doesntHave('billing')->where('hydrant_id',auth()->user()->hydrant->id)->get();
         }
         else
         {
-            $order = Orders::all();
+            $order = Orders::doesntHave('billing')->get();
 
         }
         if(auth()->user()->role != 1)
