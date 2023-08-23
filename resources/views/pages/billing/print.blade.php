@@ -48,10 +48,12 @@
     <div id="app">
         <div class="container p-4 bg-white w-100" id="getPrint">
                 <div class="bg-white border border-dark border-3  m-auto" style="color: #000 !important; background-image: url('{{ asset('assets/img/watermark.png') }}'); background-repeat: no-repeat;background-position: center;">
-                    <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo" style="width: 200px;">
-                    <h1 class="text-center" style="color:#000;">E-SLIP</h1>
-                    <p><b>Hydrant Management Portal</b></p>
-                    <h5>CONSUMER COPY</h5>
+                    <div class="col-12 text-center">
+                        <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo" style="width: 200px;">
+                        <h1 class="text-center" style="color:#000;">E-SLIP</h1>
+                        <p><b>Hydrant Management Portal</b></p>
+                        <h5>CONSUMER COPY</h5>
+                    </div>
                     <div class="row text-left p-4">
                         <div class="col-6"><p class="font-weight-bold">Order#</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->Order_Number}}</p></div>
