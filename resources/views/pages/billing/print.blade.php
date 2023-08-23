@@ -52,7 +52,7 @@
                         <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo" style="width: 200px;">
                         <h1 class="text-center" style="color:#000;">E-SLIP</h1>
                         <p><b>Hydrant Management Portal</b></p>
-                        <h5>CONSUMER COPY</h5>
+                        <h5><b>CONSUMER COPY</b></h5>
                     </div>
                     <div class="row text-left p-4">
                         <div class="col-6"><p class="font-weight-bold">Order#</p></div>
