@@ -97,7 +97,7 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('billing.details',$row->id) }}"><span class="badge badge-sm bg-gradient-primary">Generate Reciept</span></a>
+                                <a href="{{ route('billing.details',$row->id) }}" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate Reciept</span></a>
                                 {{-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                 Edit
                                 </a> --}}

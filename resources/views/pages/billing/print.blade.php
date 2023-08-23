@@ -65,6 +65,9 @@
                         <div class="col-6"><p class="font-weight-bold">Customer Name:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->name}}</p></div>
 
+                        <div class="col-6"><p class="font-weight-bold">Customer Type:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->standard}}</p></div>
+
                         <div class="col-6"><p class="font-weight-bold">Customer Contact:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->contact_num}}</p></div>
 
