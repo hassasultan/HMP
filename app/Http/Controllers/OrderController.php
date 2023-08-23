@@ -55,7 +55,14 @@ class OrderController extends Controller
         $cust = Customer::find($request->customer_id);
         $letter = str_split($cust->address);
         $NEW_ORDER = Orders::latest()->first();
-        $expNum = explode('-', $NEW_ORDER->Order_Number);
+        if(empty($NEW_ORDER))
+        {
+            $expNum[1] = 0;
+        }
+        else
+        {
+            $expNum = explode('-', $NEW_ORDER->Order_Number);
+        }
         $id = strtoupper($letter[0]).'-0000'. $expNum[1]+1;
         // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
