@@ -15,8 +15,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('public/img/unnamed.jpg')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/img/unnamed.jpg')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/unnamed.jpg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/unnamed.jpg')}}">
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
