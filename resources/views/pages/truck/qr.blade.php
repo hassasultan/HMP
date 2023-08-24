@@ -40,7 +40,7 @@
             <div class="bg-white m-auto">
                 <div class="row">
                     <div class="col-6">
-                        <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
+                        <img src="{{ asset('assets/img/unnamed.jpg') }}" class="img-fluid" alt="main_logo">
                     </div>
                     <div class="col-4" style="text-align:left !important; padding-top:2.4rem;">
                         <h5 style="font-size: 3.7rem;">Authorized</h5>

@@ -49,7 +49,7 @@
         <div class="container p-4 bg-white w-100" id="getPrint">
                 <div class="bg-white border border-dark border-3  m-auto" style="color: #000 !important; background-image: url('{{ asset('assets/img/watermark.png') }}'); background-repeat: no-repeat;background-position: center;">
                     <div class="col-12 text-center">
-                        <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo" style="width: 200px;">
+                        <img src="{{ asset('assets/img/unnamed.jpg') }}" class="img-fluid" alt="main_logo" style="width: 200px;">
                         <h1 class="text-center" style="color:#000;">E-SLIP</h1>
                         <p><b>Hydrant Management Portal</b></p>
                         <h5><b>CONSUMER COPY</b></h5>
@@ -65,7 +65,7 @@
                         <div class="col-6"><p class="font-weight-bold">Customer Name:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->name}}</p></div>
 
-                        <div class="col-6"><p class="font-weight-bold">Customer Type:</p></div>
+                        <div class="col-6"><p class="font-weight-bold">Order Type:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->standard}}</p></div>
 
                         <div class="col-6"><p class="font-weight-bold">Customer Contact:</p></div>
