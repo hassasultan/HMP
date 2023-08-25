@@ -251,10 +251,24 @@ class HomeController extends Controller
         $driver->truck_id = $request->truck_id;
         $driver->name = $request->name;
         $driver->phone = $request->phone;
-        $driver->image = $this->ProfileImage($request->image);
-        $driver->license_image = $this->Licence($request->license_image);
-        $driver->health_certificate = $this->HealthCertificate($request->health_certificate);
-        $driver->character_certificate = $this->CharacterCertificate($request->character_certificate);
+        if($request->has('image'))
+        {
+            $driver->image = $this->ProfileImage($request->image);
+        }
+        if($request->has('license_image'))
+        {
+            $driver->license_image = $this->Licence($request->license_image);
+        }
+        if($request->has('health_certificate'))
+        {
+            $driver->health_certificate = $this->HealthCertificate($request->health_certificate);
+        }
+        if($request->has('character_certificate'))
+        {
+            $driver->character_certificate = $this->CharacterCertificate($request->character_certificate);
+
+        }
+
         $driver->nic = $request->nic;
         $driver->nic_name = $request->name;
         $driver->nic_gender = $request->nic_gender;
@@ -279,7 +293,10 @@ class HomeController extends Controller
         $driver->hc_hospital_name = $request->hc_hospital_name;
 
         //End
-        $driver->nic_image = $this->NicImage($request->nic_image);
+        if($request->has('image'))
+        {
+            $driver->nic_image = $this->NicImage($request->image);
+        }
         $driver->expiry = $today;
         $driver->save();
         return redirect()->route('driver.list');
@@ -418,30 +435,39 @@ class HomeController extends Controller
             //Addition End
 
             //Addition Start
-            if($request->has('paper_image'))
+            if($request->has('commercial_license'))
             {
                 $loc = 'image'.'/'.'commercial_license/';
                 $truck->commercial_license = $this->vehicle_docs($request->commercial_license,$loc);
             }
-            if($request->has('vehicle_image'))
+            if($request->has('road_permit'))
             {
                 $loc = 'image'.'/'.'road_permit/';
                 $truck->road_permit = $this->vehicle_docs($request->road_permit,$loc);
             }
-            if($request->has('vehicle_fitness'))
+            if($request->has('doc_running_part'))
             {
                 $loc = 'image'.'/'.'doc_running_part/';
                 $truck->doc_running_part = $this->vehicle_docs($request->doc_running_part,$loc);
             }
-            if($request->has('vehicle_fitness'))
+            if($request->has('cabin_picture'))
             {
                 $loc = 'image'.'/'.'cabin_picture/';
                 $truck->cabin_picture = $this->vehicle_docs($request->cabin_picture,$loc);
             }
             //Addition End
-            $truck->paper_image = $this->Licence($request->paper_image);
-            $truck->vehicle_image = $this->vehicle($request->vehicle_image);
-            $truck->vehicle_fitness = $this->fitness($request->vehicle_fitness);
+            if($request->has('paper_image'))
+            {
+                $truck->paper_image = $this->Licence($request->paper_image);
+            }
+            if($request->has('vehicle_image'))
+            {
+                $truck->vehicle_image = $this->vehicle($request->vehicle_image);
+            }
+            if($request->has('vehicle_fitness'))
+            {
+                $truck->vehicle_fitness = $this->fitness($request->vehicle_fitness);
+            }
             $truck->model = $request->model;
             $truck->save();
             if(auth()->user()->role != 1)
@@ -550,22 +576,22 @@ class HomeController extends Controller
                 $truck->vehicle_fitness = $this->fitness($request->vehicle_fitness);
             }
             //Addition Start
-            if($request->has('paper_image'))
+            if($request->has('commercial_license'))
             {
                 $loc = 'image'.'/'.'commercial_license/';
                 $truck->commercial_license = $this->vehicle_docs($request->commercial_license,$loc);
             }
-            if($request->has('vehicle_image'))
+            if($request->has('road_permit'))
             {
                 $loc = 'image'.'/'.'road_permit/';
                 $truck->road_permit = $this->vehicle_docs($request->road_permit,$loc);
             }
-            if($request->has('vehicle_fitness'))
+            if($request->has('doc_running_part'))
             {
                 $loc = 'image'.'/'.'doc_running_part/';
                 $truck->doc_running_part = $this->vehicle_docs($request->doc_running_part,$loc);
             }
-            if($request->has('vehicle_fitness'))
+            if($request->has('cabin_picture'))
             {
                 $loc = 'image'.'/'.'cabin_picture/';
                 $truck->cabin_picture = $this->vehicle_docs($request->cabin_picture,$loc);
