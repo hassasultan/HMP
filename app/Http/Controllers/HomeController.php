@@ -367,13 +367,13 @@ class HomeController extends Controller
             'cfra_no'           => 'required',
             'issue_date'        => 'required',
             'expiry_date'        => 'required',
-			'commercial_license'   =>  'required|image|max:2048',
-            'road_permit'     	=>  'required|image|max:2048',
-            'doc_running_part'     =>  'required|image|max:2048',
-            'cabin_picture'     =>  'required|image|max:2048',
-            'vehicle_fitness'   =>  'required|image|max:2048',
-            'paper_image'     	=>  'required|image|max:2048',
-            'vehicle_image'     =>  'required|image|max:2048',
+			'commercial_license'   =>  'image|max:2048',
+            'road_permit'     	=>  'image|max:2048',
+            'doc_running_part'     =>  'image|max:2048',
+            'cabin_picture'     =>  'image|max:2048',
+            'vehicle_fitness'   =>  'image|max:2048',
+            'paper_image'     	=>  'image|max:2048',
+            'vehicle_image'     =>  'image|max:2048',
         ]);
         try
         {

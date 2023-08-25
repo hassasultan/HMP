@@ -187,37 +187,37 @@
                         <h6 class="mt-3">All Attachments...</h6>
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Vehicle Document Copy</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="paper_image" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="paper_image" >
                         </div>
 
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Vehicle Image</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="vehicle_image" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="vehicle_image" >
                         </div>
 
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Vehicle Fitness Certificate</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="vehicle_fitness" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="vehicle_fitness" >
                         </div>
 
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Commercial License Certificate</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="commercial_license" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="commercial_license" >
                         </div>
 
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Road Permit Document</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="road_permit" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="road_permit" >
                         </div>
 
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Running paper Image</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="doc_running_part" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="doc_running_part">
                         </div>
 
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <label>Cabin Picture</label>
-                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="cabin_picture" required>
+                            <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="cabin_picture" >
                         </div>
                         <div class="form-group form-file-upload form-file-simple col-6 p-3">
                             <div class="text-center">

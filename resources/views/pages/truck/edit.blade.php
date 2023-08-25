@@ -227,7 +227,7 @@
 
                     <div class="form-group form-file-upload form-file-simple col-12 p-3">
                         <label>Cabin Picture</label>
-                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="cabin_picture" required>
+                        <input type="file" class="form-control border-bottom inputFileHidden border-1 border-dark" name="cabin_picture" >
                         <img src="{{ asset('public/storage/'.$truck->cabin_picture) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
 
                     </div>

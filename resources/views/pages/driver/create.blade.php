@@ -99,12 +99,12 @@
                             </div>
                             <div class="form-group form-file-upload form-file-simple col-6">
                                 <label>CNIC Picture</label>
-                                <input type="file" class="form-control border-bottom inputFileHidden" name="nic_image" required>
+                                <input type="file" class="form-control border-bottom inputFileHidden" name="nic_image" >
                             </div>
 
                             <div class="form-group form-file-upload form-file-simple col-6">
                                 <label>Driver Picture</label>
-                                <input type="file" class="form-control border-bottom inputFileHidden" name="image" required>
+                                <input type="file" class="form-control border-bottom inputFileHidden" name="image" >
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             </div>
                             <div class="form-group form-file-upload form-file-simple col-6">
                                 <label>Driver License Picture</label>
-                                <input type="file" class="form-control border-bottom inputFileHidden" name="license_image" required>
+                                <input type="file" class="form-control border-bottom inputFileHidden" name="license_image" >
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                             </div>
                             <div class="form-group form-file-upload form-file-simple col-12">
                                 <label>Driver Character Certificate Picture</label>
-                                <input type="file" class="form-control border-bottom inputFileHidden" name="character_certificate" required>
+                                <input type="file" class="form-control border-bottom inputFileHidden" name="character_certificate" >
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                             </div>
                             <div class="form-group form-file-upload form-file-simple col-12">
                                 <label>Driver Health Certificate Picture</label>
-                                <input type="file" class="form-control border-bottom inputFileHidden" name="health_certificate" required>
+                                <input type="file" class="form-control border-bottom inputFileHidden" name="health_certificate" >
                             </div>
 
                         </div>
