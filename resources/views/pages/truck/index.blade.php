@@ -11,9 +11,11 @@
                 <div class="col-6">
                     <h6 class="text-white text-capitalize ps-3">Water Tanker List</h6>
                 </div>
-                <div class="col-6 text-end">
-                    <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('truck.create') }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
-                </div>
+                @if (auth()->user()->role == 1)
+                    <div class="col-6 text-end">
+                        <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('truck.create') }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
+                    </div>
+                @endif
             </div>
           </div>
         </div>
