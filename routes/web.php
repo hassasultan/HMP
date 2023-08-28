@@ -69,6 +69,11 @@ Route::prefix('/admin')->group(function () {
         Route::get('edit/hydrant/{id}', [App\Http\Controllers\HydrantsController::class, 'edit'])->name('hydrant.edit');
         Route::POST('update/hydrant/{id}', [App\Http\Controllers\HydrantsController::class, 'update'])->name('hydrant.update');
         Route::post('store/hydrant', [App\Http\Controllers\HydrantsController::class, 'store'])->name('hydrant.store');
+
+        Route::get('create/truck', [App\Http\Controllers\HomeController::class, 'TruckCreate'])->name('truck.create');
+        Route::post('store/truck', [App\Http\Controllers\HomeController::class, 'truckStore'])->name('truck.store');
+        Route::get('edit/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckEdit'])->name('truck.edit');
+        Route::post('update/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckUpdate'])->name('truck.update');
     });
 });
 Route::get('vehicle/details/{id}', [App\Http\Controllers\HomeController::class, 'vehicleDetails'])->name('vehicle.details');
@@ -76,11 +81,7 @@ Route::get('billing/details/{id}', [App\Http\Controllers\OrderController::class,
 
 Route::middleware('auth')->group(function () {
     Route::get('reports', [App\Http\Controllers\OrderController::class, 'reports'])->name('reports');
-    Route::get('create/truck', [App\Http\Controllers\HomeController::class, 'TruckCreate'])->name('truck.create');
-    Route::post('store/truck', [App\Http\Controllers\HomeController::class, 'truckStore'])->name('truck.store');
     Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
-    Route::get('edit/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckEdit'])->name('truck.edit');
-    Route::post('update/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckUpdate'])->name('truck.update');
     Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
     Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
     Route::get('create/billing', [App\Http\Controllers\OrderController::class, 'billingcreate'])->name('billing.create');
