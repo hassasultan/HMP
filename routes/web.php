@@ -92,6 +92,10 @@ Route::middleware('auth')->group(function () {
     Route::get('change/driver/status', [App\Http\Controllers\HomeController::class, 'changeDriverStatus'])->name('change.driver.status');
     Route::get('change/tanker/status', [App\Http\Controllers\HomeController::class, 'changeVehicleStatus'])->name('change.tanker.status');
     Route::get('change/customer/status', [App\Http\Controllers\CustomerController::class, 'changeStatus'])->name('change.customer.status');
+    Route::post('/profile/update/password',[UserController::class,'updatePassword'])->name('user.profile.update');
+    Route::get('/edit/profile', function () {
+        return view('pages.profile');
+    })->name('profile.update');
 
 
 });

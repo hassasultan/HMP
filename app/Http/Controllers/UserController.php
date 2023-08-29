@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Hydrants;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -98,6 +99,39 @@ class UserController extends Controller
         catch(Exception $ex)
         {
             return back()->with('error', $ex->getMessage());
+        }
+    }
+    public function updatePassword(Request $request)
+    {
+        $valid =  Validator::make($request->all(), [
+            'old_password' => ['required', 'string',],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        if(!$valid->fails())
+        {
+            try
+            {
+                if(Hash::check($request->old_password, auth()->user()->password))
+                {
+                    $user = User::find(auth()->user()->id);
+                    $user->password = Hash::make($request->password);
+                    $user->save();
+                    return redirect()->back()->with('success',"Password has been successfully updated...");
+                }
+                else
+                {
+                    $message = "Your Entered Old Password is wrong...";
+                    return redirect()->back()->with('error', $message);
+                }
+            }
+            catch(Exception $ex)
+            {
+                return redirect()->back()->with('error', $ex->getMessage());
+            }
+        }
+        else
+        {
+            return redirect()->back()->with('error', $valid->errors());
         }
     }
 }
