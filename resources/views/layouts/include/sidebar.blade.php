@@ -103,7 +103,7 @@
                     <a class="nav-link text-white @if (Route::is('customer-management.index')) active bg-gradient-primary @endif"
                         href="{{ route('customer-management.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
                         <span class="nav-link-text ms-1">Customer Management</span>
                     </a>
@@ -112,7 +112,7 @@
                     <a class="nav-link text-white @if (Route::is('hydrant.truck.list')) bg-gradient-primary active  @endif"
                         href="{{ route('hydrant.truck.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-truck"></i>
                         </div>
                         <span class="nav-link-text ms-1">Water Tanker</span>
                     </a>
@@ -121,7 +121,7 @@
                     <a class="nav-link text-white @if (Route::is('hydrant.order.list')) active bg-gradient-primary @endif"
                         href="{{ route('hydrant.order.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fa-brands fa-first-order"></i>
                         </div>
                         <span class="nav-link-text ms-1">Order</span>
                     </a>
@@ -130,7 +130,7 @@
                     <a class="nav-link text-white @if (Route::is('hydrant.billing.list')) active bg-gradient-primary @endif "
                         href="{{ route('hydrant.billing.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-file-invoice"></i>
                         </div>
                         <span class="nav-link-text ms-1">Billing</span>
                     </a>
