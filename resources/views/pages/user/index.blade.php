@@ -44,7 +44,13 @@
                                 <p class="text-xs text-secondary mb-0">{{ $row->hydrant->contact ?? 'Hydrant is not assigned yet ..' }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
-                                <p class="text-xs text-secondary mb-0">{{ count($row->hydrant->vehicles ?? 'Hydrant is not assigned yet ..') }}</p>
+                                <p class="text-xs text-secondary mb-0">
+                                    @if(empty($row->hydrant))
+                                        Hydrant is not assigned yet
+                                    @else
+                                        {{ count($row->hydrant->vehicles) }}
+                                    @endif
+                                </p>
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('user-management.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
