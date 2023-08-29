@@ -56,7 +56,7 @@
                     <a class="nav-link text-white @if (Route::is('driver.list')) active bg-gradient-primary @endif"
                         href="{{ route('driver.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-user-pilot"></i>
+                            <i class="fas fa-truck me-2"></i><i class="fas fa-user" aria-hidden="true"></i>
                         </div>
                         <span class="nav-link-text ms-1">Drivers</span>
                     </a>
