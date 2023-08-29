@@ -40,11 +40,11 @@
                                 <p class="text-xs text-secondary mb-0">{{ $row->email }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $row->hydrant->name }}</p>
-                                <p class="text-xs text-secondary mb-0">{{ $row->hydrant->contact }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->hydrant->name ?? 'Hydrant is not assigned yet ..' }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->hydrant->contact ?? 'Hydrant is not assigned yet ..' }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
-                                <p class="text-xs text-secondary mb-0">{{ count($row->hydrant->vehicles) }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ count($row->hydrant->vehicles ?? 'Hydrant is not assigned yet ..') }}</p>
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('user-management.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

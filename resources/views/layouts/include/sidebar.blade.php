@@ -27,7 +27,7 @@
                     <a class="nav-link text-white @if (Route::is('user-management.index')) active bg-gradient-primary @endif"
                         href="{{ route('user-management.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-user"></i>
                         </div>
                         <span class="nav-link-text ms-1">User Management</span>
                     </a>
@@ -37,7 +37,7 @@
                     <a class="nav-link text-white @if (Route::is('truck_type.list')) active  bg-gradient-primary @endif"
                         href="{{ route('truck_type.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-truck me-2"></i><i class="fas fa-bar-chart" aria-hidden="true"></i>
                         </div>
                         <span class="nav-link-text ms-1">Water Tanker Capacity</span>
                     </a>
@@ -47,7 +47,7 @@
                     <a class="nav-link text-white @if (Route::is('truck.list')) active bg-gradient-primary @endif"
                         href="{{ route('truck.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-truck"></i>
                         </div>
                         <span class="nav-link-text ms-1">Water Tanker</span>
                     </a>
@@ -56,7 +56,7 @@
                     <a class="nav-link text-white @if (Route::is('driver.list')) active bg-gradient-primary @endif"
                         href="{{ route('driver.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">table_view</i>
+                            <i class="fa-solid fa-user-pilot"></i>
                         </div>
                         <span class="nav-link-text ms-1">Drivers</span>
                     </a>
@@ -65,7 +65,7 @@
                     <a class="nav-link text-white @if (Route::is('customer-management.index')) active bg-gradient-primary @endif"
                         href="{{ route('customer-management.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
                         <span class="nav-link-text ms-1">Customer Management</span>
                     </a>
@@ -74,7 +74,7 @@
                     <a class="nav-link text-white @if (Route::is('order.list')) active bg-gradient-primary @endif"
                         href="{{ route('order.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fa-brands fa-first-order"></i>
                         </div>
                         <span class="nav-link-text ms-1">Order</span>
                     </a>
@@ -83,7 +83,7 @@
                     <a class="nav-link text-white @if (Route::is('billing.list')) active bg-gradient-primary @endif "
                         href="{{ route('billing.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fas fa-file-invoice"></i>
                         </div>
                         <span class="nav-link-text ms-1">Billing</span>
                     </a>
@@ -92,7 +92,7 @@
                     <a class="nav-link text-white @if (Route::is('hydrant.list')) active bg-gradient-primary @endif"
                         href="{{ route('hydrant.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fa-solid fa-list"></i>
                         </div>
                         <span class="nav-link-text ms-1">Hydrants List</span>
                     </a>
@@ -140,7 +140,7 @@
                 <a class="nav-link text-white @if (Route::is('reports')) active bg-gradient-primary @endif "
                     href="{{ route('reports') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
+                        <i class="fas fa-file"></i>
                     </div>
                     <span class="nav-link-text ms-1">Reports</span>
                 </a>
@@ -149,13 +149,15 @@
                 <a class="nav-link text-white @if (Route::is('profile.update')) active  bg-gradient-primary @endif"
                     href=" {{ route('profile.update') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">Profile</i>
+                        <i class="fas fa-user-circle"></i>
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
             <li class="nav-item"><a class="nav-link text-white" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Log Out</a>
                 <form sytle='display:none;' id="logout-form" action="{{ route('logout') }}" method="POST"
                     class="d-none">
                     @csrf
