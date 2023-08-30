@@ -54,8 +54,30 @@
                         <label>Consumer Type</label>
                         <select name="standard"
                             class="select2-multiple form-control fs-14  h-50px" required>
-                            <option value="Commercial" @if($customer->standard == "Commercial") selected @endif>Commercial</option>
-                            <option value="GPS"  @if($customer->standard == "GPS") selected @endif>GPS</option>
+                            @if(auth()->user()->role == 2)
+                                @if (auth()->user()->type == "commercial")
+                                    <option value="Commercial" @if($customer->standard == "Commercial") selected @endif>Commercial</option>
+                                @else
+                                    <option value="Online (GPS)" @if($customer->standard == "Online (GPS)") selected @endif>Online (GPS)</option>
+                                    <option value="Gps ( billing )" @if($customer->standard == "Gps ( billing )") selected @endif>Gps ( billing )</option>
+                                    <option value="Gps ( care off )" @if($customer->standard == "Gps ( care off )") selected @endif>Gps ( care off )</option>
+                                    <option value="GRATIS" @if($customer->standard == "GRATIS") selected @endif>GRATIS</option>
+                                    <option value="Pak rangers" @if($customer->standard == "Pak rangers") selected @endif>Pak rangers</option>
+                                    <option value="P.A.F korangi creek" @if($customer->standard == "P.A.F korangi creek") selected @endif>P.A.F korangi creek</option>
+                                    <option value="Dc quota" @if($customer->standard == "Dc quota") selected @endif>Dc quota</option>
+                                    <option value="Govt. vehicle" @if($customer->standard == "Govt. vehicle") selected @endif>Govt. vehicle</option>
+                                @endif
+                            @else
+                                <option value="Commercial" @if($customer->standard == "Commercial") selected @endif>Commercial</option>
+                                <option value="Online (GPS)" @if($customer->standard == "Online (GPS)") selected @endif>Online (GPS)</option>
+                                <option value="Gps ( billing )" @if($customer->standard == "Gps ( billing )") selected @endif>Gps ( billing )</option>
+                                <option value="Gps ( care off )" @if($customer->standard == "Gps ( care off )") selected @endif>Gps ( care off )</option>
+                                <option value="GRATIS" @if($customer->standard == "GRATIS") selected @endif>GRATIS</option>
+                                <option value="Pak rangers" @if($customer->standard == "Pak rangers") selected @endif>Pak rangers</option>
+                                <option value="P.A.F korangi creek" @if($customer->standard == "P.A.F korangi creek") selected @endif>P.A.F korangi creek</option>
+                                <option value="Dc quota" @if($customer->standard == "Dc quota") selected @endif>Dc quota</option>
+                                <option value="Govt. vehicle" @if($customer->standard == "Govt. vehicle") selected @endif>Govt. vehicle</option>
+                            @endif
                         </select>
                     </div>
 

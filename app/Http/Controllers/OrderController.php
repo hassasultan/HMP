@@ -20,7 +20,20 @@ class OrderController extends Controller
         # code...
         if(auth()->user()->role != 1)
         {
-            $order = Orders::all()->where('hydrant_id',auth()->user()->hydrant->id);
+            $order = Orders::with('customer')->where('hydrant_id',auth()->user()->hydrant->id);
+            if(auth()->user()->type == "commercial")
+            {
+                $order = $order->whereHas('customer', function($q){
+                    $q->where('standard','Commercial');
+                });
+            }
+            else
+            {
+                $order = $order->whereHas('customer', function($q){
+                    $q->where('standard','!=','Commercial');
+                });
+            }
+            $order = $order->get();
         }
         else
         {

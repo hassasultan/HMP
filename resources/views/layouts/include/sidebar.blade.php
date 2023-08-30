@@ -8,6 +8,10 @@
             <img src="{{ asset('assets/img/unnamed.jpg') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">HMP</span>
             <p class="text-white">Hydrant Management Portal</p>
+            <p>{{ auth()->user()->name }}</p>
+            @if (auth()->user()->role == 2)
+                <p>({{ auth()->user()->type }})</p>
+            @endif
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
