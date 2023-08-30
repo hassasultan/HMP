@@ -20,7 +20,7 @@ class OrderController extends Controller
         # code...
         if(auth()->user()->role != 1)
         {
-            $order = Orders::with('customer')->where('hydrant_id',auth()->user()->hydrant->id);
+            $order = Orders::with('customer')->where('hydrant_id',auth()->user()->hydrant_id);
             if(auth()->user()->type == "commercial")
             {
                 $order = $order->whereHas('customer', function($q){
@@ -115,7 +115,7 @@ class OrderController extends Controller
         if(auth()->user()->role != 1)
         {
             $billing = Billings::with('order')->whereHas('order',function($query){
-                $query->where('hydrant_id',auth()->user()->hydrant->id);
+                $query->where('hydrant_id',auth()->user()->hydrant_id);
             })->get();
         }
         else
