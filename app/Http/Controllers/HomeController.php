@@ -346,7 +346,7 @@ class HomeController extends Controller
     {
         if(auth()->user()->role != 1)
         {
-            $truck = Truck::all()->where('hydrant_id',auth()->user()->hydrant->id);
+            $truck = Truck::all()->where('hydrant_id',auth()->user()->hydrant_id);
         }
         else
         {
