@@ -40,6 +40,8 @@ class UserController extends Controller
             $user->email         = $request->email;
             $user->password         = Hash::make('12345678');
             $user->role        = 2;
+            $user->type        = $request->type;
+            $user->hydrant_id        = $request->hydrant_id;
             $user->save();
 
             $hydrant = Hydrants::find($request->hydrant_id);
