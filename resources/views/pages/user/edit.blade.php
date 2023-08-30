@@ -41,7 +41,14 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="form-group col-12 p-3">
+                        <label>Type</label>
+                        <select name="type"
+                            class="select2-multiple form-control fs-14  h-50px" required>
+                                <option @if($user->type == "commercial") selected @endif value="commercial">Commercial</option>
+                                <option @if($user->type == "gps") selected @endif value="gps">GPS</option>
+                        </select>
+                    </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-20 mt-4 mb-0">Update</button>
                     </div>

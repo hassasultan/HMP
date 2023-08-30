@@ -30,6 +30,7 @@ class UserController extends Controller
         $valid = $this->validate($request,[
             'email'         => 'required|string|unique:users,email',
             'name'          => 'required|string',
+            'type'          => 'required|string|In:commercial,gps',
             'hydrant_id'    => 'required|numeric|exists:hydrants,id',
         ]);
         try
@@ -69,6 +70,8 @@ class UserController extends Controller
             'email'          => 'required|string|unique:users,email,'.$id,
             'name'          => 'required|string',
             'hydrant_id'    => 'required|numeric|exists:hydrants,id',
+            'type'          => 'required|string|In:commercial,gps',
+
         ]);
         try
         {
@@ -86,9 +89,15 @@ class UserController extends Controller
             {
                 $user->password   = Hash::make($request->password);
             }
+            if($request->has('type'))
+            {
+                $user->type        = $request->type;
+            }
             $user->save();
             if($request->has('hydrant_id'))
             {
+                $user->hydrant_id        = $request->hydrant_id;
+                $user->save();
                 $hydrant = Hydrants::find($request->hydrant_id);
                 $hydrant->user_id = $user->id;
                 $hydrant->save();
