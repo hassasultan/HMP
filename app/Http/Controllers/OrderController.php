@@ -114,9 +114,22 @@ class OrderController extends Controller
         # code...
         if(auth()->user()->role != 1)
         {
-            $billing = Billings::with('order')->whereHas('order',function($query){
+            $billing = Billings::with('order','order.customer')->whereHas('order',function($query){
                 $query->where('hydrant_id',auth()->user()->hydrant_id);
-            })->get();
+            });
+            if(auth()->user()->type == "commercial")
+            {
+                $billing = $billing->whereHas('customer', function($q){
+                    $q->where('standard','Commercial');
+                });
+            }
+            else
+            {
+                $billing = $billing->whereHas('customer', function($q){
+                    $q->where('standard','!=','Commercial');
+                });
+            }
+            $billing = $billing->get();
         }
         else
         {
