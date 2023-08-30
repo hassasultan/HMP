@@ -119,13 +119,13 @@ class OrderController extends Controller
             });
             if(auth()->user()->type == "commercial")
             {
-                $billing = $billing->whereHas('customer', function($q){
+                $billing = $billing->whereHas('order.customer', function($q){
                     $q->where('standard','Commercial');
                 });
             }
             else
             {
-                $billing = $billing->whereHas('customer', function($q){
+                $billing = $billing->whereHas('order.customer', function($q){
                     $q->where('standard','!=','Commercial');
                 });
             }
