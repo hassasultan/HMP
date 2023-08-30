@@ -9,10 +9,7 @@
             <span class="ms-1 font-weight-bold text-white">HMP</span>
             <p class="text-white">Hydrant Management Portal</p>
         </a>
-        <p class="text-white">{{ auth()->user()->name }}</p>
-        @if (auth()->user()->role == 2)
-            <p class="text-white">({{ auth()->user()->type }})</p>
-        @endif
+
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
