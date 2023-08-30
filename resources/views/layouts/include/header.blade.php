@@ -9,9 +9,9 @@
                 <span class="ms-1 font-weight-bold text-dark">Hydrant Management Portal</span>
 
               </a>
-              <p class="text-white">{{ auth()->user()->name }}</p>
+              <p>{{ auth()->user()->name }}</p>
               @if (auth()->user()->role == 2)
-                  <p class="text-white">({{ auth()->user()->type }})</p>
+                  <p>({{ auth()->user()->type }})</p>
               @endif
           </li>
           <!--<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>-->
