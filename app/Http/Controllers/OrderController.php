@@ -52,7 +52,16 @@ class OrderController extends Controller
         $truck_type = Truck_type::all();
         if(auth()->user()->role != 1)
         {
-            $customer = Customer::all()->where('user_id',auth()->user()->id);
+            $customer = Customer::where('user_id',auth()->user()->id);
+            if(auth()->user()->type == "commercial")
+            {
+                $customer = $customer->where('standard','Commercial');
+            }
+            else
+            {
+                $customer = $customer->where('standard','!=','Commercial');
+            }
+            $customer = $customer->get();
         }
         else
         {
