@@ -24,7 +24,7 @@ class CustomerController extends Controller
     }
     public function create()
     {
-        $user = User::all()->where('id','!=', auth()->user()->id);
+        $user = User::where('id','!=', auth()->user()->id)->whereHas('hydrant')->get();
         return view('pages.customer.create',compact('user'));
     }
     public function store(Request $request)
