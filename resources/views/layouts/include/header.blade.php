@@ -8,11 +8,12 @@
                 <img src="{{ asset('assets/img/unnamed.jpg') }}" width="80px" class="img-fluid" alt="main_logo">
                 <span class="ms-1 font-weight-bold text-dark">Hydrant Management Portal</span>
 
+                <span>{{ auth()->user()->name }}</span>
+                @if (auth()->user()->role == 2)
+                    <span>({{ auth()->user()->type }})</span>
+                @endif
+
               </a>
-              <p>{{ auth()->user()->name }}</p>
-              @if (auth()->user()->role == 2)
-                  <p>({{ auth()->user()->type }})</p>
-              @endif
           </li>
           <!--<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>-->
         </ol>
