@@ -74,10 +74,10 @@
                                 @endif --}}
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $row->hydrant->name }}</p>
-                                <p class="text-xs text-secondary mb-0">{{ $row->hydrant->contact }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->hydrant->name ?? 'Hydrant has been deleted...' }}</p>
+                                <p class="text-xs text-secondary mb-0">{{ $row->hydrant->contact ?? 'Hydrant has been deleted...' }}</p>
                                 <p class=" mt-2">
-                                    <span class="p-2" style="background-color: {{ $row->hydrant->color }};"></span>
+                                    <span class="p-2" style="background-color: {{ $row->hydrant->color ?? 'Hydrant has been deleted...' }};"></span>
                                 </p>
                                 {{-- <div class="d-flex px-2 py-1">
                                     <div>
