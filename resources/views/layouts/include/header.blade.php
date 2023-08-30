@@ -7,7 +7,7 @@
               <a class="navbar-brand m-0" href=" {{route('home')}}" target="_blank">
                 <img src="{{ asset('assets/img/unnamed.jpg') }}" width="80px" class="img-fluid" alt="main_logo">
                 <span class="ms-1 font-weight-bold text-dark">Hydrant Management Portal</span>
-
+                <br/>
                 <span>{{ auth()->user()->name }}</span>
                 @if (auth()->user()->role == 2)
                     <span>({{ auth()->user()->type }})</span>
