@@ -35,7 +35,7 @@
 
 </head>
 <body>
-    <div id="app" style="background: {{ $driver->color }};">
+    <div id="app" style="background: {{ $driver->hydrant->color }};">
         <div class="container p-4 bg-white w-100 text-center" id="getPrint">
             <div class="bg-white m-auto">
                 <div class="row">
