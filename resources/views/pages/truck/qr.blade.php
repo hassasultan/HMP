@@ -39,10 +39,10 @@
         <div class="container p-4  w-100 text-center" id="getPrint" style="background: {{ $driver->hydrant->color }};">
             <div class=" m-auto">
                 <div class="row">
-                    <div class="col-6" style="border: 20px dotted #000;">
+                    <div class="col-6" style="border-bottom: 20px dashed #000;">
                         <img src="{{ asset('assets/img/unnamed.jpg') }}" class="img-fluid" alt="main_logo">
                     </div>
-                    <div class="col-4" style="text-align:left !important; padding-top:2.4rem; border: 20px dotted #000;">
+                    <div class="col-4" style="text-align:left !important; padding-top:2.4rem; border-bottom: 20px dashed #000;">
                         <h5 style="font-size: 3.7rem;">Authorized</h5>
                         <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">Contractor</span></p>
                         <h5  style="font-size: 3.7rem;">Vehicle</h5>
