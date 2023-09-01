@@ -620,9 +620,11 @@ class HomeController extends Controller
     {
 
         $url =  route('vehicle.details',$id);
-        // dd($url);
+        $driver = Truck::with('truckCap','hydrant','drivers')->find($id);
+
+        dd($driver->toArray());
         // return \QrCode::size(300)->generate($url);
-        return view('pages.truck.qr',compact('url'));
+        return view('pages.truck.qr',compact('url','driver'));
     }
     public function vehicleDetails($id)
     {
