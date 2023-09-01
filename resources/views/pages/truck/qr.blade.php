@@ -36,8 +36,8 @@
 </head>
 <body>
     <div id="app">
-        <div class="container p-4 bg-white w-100 text-center" id="getPrint" style="background: {{ $driver->hydrant->color }};">
-            <div class="bg-white m-auto">
+        <div class="container p-4  w-100 text-center" id="getPrint" style="background: {{ $driver->hydrant->color }};">
+            <div class=" m-auto">
                 <div class="row">
                     <div class="col-6">
                         <img src="{{ asset('assets/img/unnamed.jpg') }}" class="img-fluid" alt="main_logo">
