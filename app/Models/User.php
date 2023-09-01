@@ -45,7 +45,9 @@ class User extends Authenticatable
 
     public function hydrant()
     {
-        return $this->belongsTo(Hydrants::class,'id','user_id');
+        // return $this->belongsTo(Hydrants::class,'id','user_id');
+        return $this->belongsTo(Hydrants::class,'hydrant_id','id');
+
     }
     public function hydrant_user()
     {
