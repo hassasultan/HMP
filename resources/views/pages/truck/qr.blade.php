@@ -35,7 +35,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="background: {{ $driver->color }};">
         <div class="container p-4 bg-white w-100 text-center" id="getPrint">
             <div class="bg-white m-auto">
                 <div class="row">
