@@ -48,7 +48,7 @@
                         <h5  style="font-size: 3.7rem;">Vehicle</h5>
                     </div>
                     <div class="col-12 mt-2">
-                        {!! \QrCode::size(580)->backgroundColor(0,0,0,0)->generate($url); !!}
+                        {!! \QrCode::size(550)->backgroundColor(0,0,0,0)->generate($url); !!}
                     </div>
                 </div>
             </div>
