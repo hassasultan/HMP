@@ -93,7 +93,7 @@
                                 @endif
                             </td>
                             <td class="align-middle text-center">
-                                <a href="{{ route('generate.qr',$row->id) }}"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a>
+                                <a href="{{ route('generate.qr',$row->id) }}" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a>
                                 <!--<span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>-->
                             </td>
                             <td>
