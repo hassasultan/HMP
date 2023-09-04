@@ -40,17 +40,17 @@
             <div class=" m-auto">
                 <div class="row">
                     <div class="col-6" style="border-right: 2px dashed #000;">
-                        <div class="col-6 mb-2">
+                        <div class="col-6" style="text-align:left !important;">
                             <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                         </div>
-                        <div class="col-6  mb-2" style="text-align:left !important; padding-top:2.4rem; ">
+                        <div class="col-6 " style="text-align:left !important;">
                             <h5 style="font-size: 3.7rem;">Authorized</h5>
                             <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">Contractor</span></p>
                             <h5  style="font-size: 3.7rem;">Vehicle</h5>
                         </div>
                     </div>
                     <div class="col-6">
-                        {!! \QrCode::size(480)->backgroundColor(0,0,0,0)->generate($url); !!}
+                        {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url); !!}
                     </div>
                 </div>
             </div>
