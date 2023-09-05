@@ -40,10 +40,10 @@
             <div class=" m-auto">
                 <div class="row">
                     <div class="col-6" style="border-right: 2px dashed #000;">
-                        <div class="col-6" style="text-align:left !important;">
+                        <div class="col-12" style="text-align:left !important;">
                             <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                         </div>
-                        <div class="col-6 " style="text-align:left !important;">
+                        <div class="col-12" style="text-align:left !important;">
                             <h5 style="font-size: 3.7rem;">Authorized</h5>
                             <p  style="font-size: 2.9rem;"><span class="bg-dark text-white">@if($driver->owned_by != 1) Sub-Contractor @else Contractor @endif </span></p>
                             <h5  style="font-size: 3.7rem;">Vehicle</h5>
