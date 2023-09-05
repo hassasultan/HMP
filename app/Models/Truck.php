@@ -17,6 +17,7 @@ class Truck extends Model
         'company_name',
         'truck_num',
         'chassis_num',
+        'owned_by',
         // new Start
         'reg_region',
         'book_num',
