@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-6 " style="text-align:left !important;">
                             <h5 style="font-size: 3.7rem;">Authorized</h5>
-                            <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">Contractor</span></p>
+                            <p  style="font-size: 3.7rem;"><span class="bg-dark text-white">@if($driver->truck->owned_by != 1)Sub @endif Contractor</span></p>
                             <h5  style="font-size: 3.7rem;">Vehicle</h5>
                         </div>
                     </div>
