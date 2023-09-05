@@ -40,7 +40,7 @@
             <div class=" m-auto">
                 <div class="row">
                     <div class="col-6" style="border-right: 2px dashed #000;">
-                        <div class="col-12" style="text-align:left !important;">
+                        <div class="col-6" style="text-align:left !important;">
                             <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                         </div>
                         <div class="col-12" style="text-align:left !important;">
