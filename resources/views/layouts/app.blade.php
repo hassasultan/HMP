@@ -54,6 +54,16 @@
         float: right;
         margin-right: 10px;
     }
+    #example2_filter {
+        position: relative;
+        float: right;
+        margin-right: 10px;
+    }
+    #example3_filter {
+        position: relative;
+        float: right;
+        margin-right: 10px;
+    }
 </style>
 
 <body>
