@@ -166,10 +166,14 @@ class HomeController extends Controller
         }
         return view('home',compact('customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
     }
-    public function driver()
+    public function driver(Request $request)
     {
 
-        $driver = Driver::all();
+        $driver = Driver::with('truck','truck.hydrant')->get();
+        if($request->has('json'))
+        {
+            return $driver;
+        }
         // dd($driver);
         return view('pages.driver.index',compact('driver'));
     }
