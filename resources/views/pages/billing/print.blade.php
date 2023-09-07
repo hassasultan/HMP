@@ -36,10 +36,15 @@
 .bg-white {
        width:100%;
   }
+  p
+  {
+    line-height: 0.625 !important;
+  }
 @media only screen and (max-width: 600px) {
   .bg-white {
        width:100%;
   }
+
 }
 
 </style>
@@ -71,8 +76,8 @@
                         <div class="col-6"><p class="font-weight-bold">Customer Contact:</p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->contact_num}}</p></div>
 
-                        <div class="col-6"><p class="font-weight-bold">Area: </p></div>
-                        <div class="col-6"><p class="font-weight-bold">{{$billing->order->customer->address}} {{$billing->order->customer->street}} {{$billing->order->customer->location}}, gps : {{$billing->order->customer->gps}}</p></div>
+                        <div class="col-6"><p class="font-weight-bold" style="line-height: 1.02 !important;">Area: </p></div>
+                        <div class="col-6"><p class="font-weight-bold" style="line-height: 1.02 !important;">{{$billing->order->customer->address}} {{$billing->order->customer->street}} {{$billing->order->customer->location}}, gps : {{$billing->order->customer->gps}}</p></div>
 
                         <div class="col-6"><p class="font-weight-bold">Filling Station: </p></div>
                         <div class="col-6"><p class="font-weight-bold">{{$billing->truck->hydrant->name}}</p></div>
