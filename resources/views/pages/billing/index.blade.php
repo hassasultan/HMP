@@ -25,6 +25,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vehicle </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Driver</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrants</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Details</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Standard</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
@@ -60,6 +61,15 @@
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->driver->name }}</p>
                                 <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p>
+                                {{-- <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                    </div>
+                                </div> --}}
+                            </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $row->order->hydrant->name }}</p>
+                                {{-- <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p> --}}
                                 {{-- <div class="d-flex px-2 py-1">
                                     <div>
                                         <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">

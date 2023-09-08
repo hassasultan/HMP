@@ -87,7 +87,7 @@ class ReportsController extends Controller
                     // dd($order->billing->truck->truckCap->toArray());
                     if($order != "[]")
                     {
-                        $capacity = $order->billing->truck->truckCap->sum('name');
+                        $capacity = $order->truck_type_fun->sum('name');
                     }
                     else
                     {
