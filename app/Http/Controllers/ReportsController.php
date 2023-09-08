@@ -48,7 +48,7 @@ class ReportsController extends Controller
             $hydrants = Hydrants::get();
         }
         $reportData = Orders::with(['hydrant', 'billing.truck.truckCap'])
-        ->whereBetween('created_at', [$dateS,$dateE])
+        ->whereBetween('orders.created_at', [$dateS,$dateE])
         ->whereHas('billing')
             ->select('orders.*') // Select all columns from the orders table
             // ->groupBy('orders.id') // Group by the primary key of the orders table
@@ -74,27 +74,14 @@ class ReportsController extends Controller
                 //     ->leftJoin('truck', 'truck.id', '=', 'orders.truck_id')
                 //     ->sum('truck.capacity');
 
-                $orders = Orders::with(['hydrant', 'billing.truck.truckCap'])
-                ->whereHas('billing.truck.truckCap')
+                $capacity = Orders::with(['hydrant', 'billing','truck_type_fun'])
+                ->where('orders.created_at', $date)
+                ->whereHas('billing')
                 ->where('hydrant_id', $hydrant->id)
-
-                ->get();
+                ->join('truck_types', 'orders.truck_type', '=', 'truck_types.id')
+                ->sum('truck_types.name');
 
                 // print_r($order->toArray());
-
-            // dd($orders->toArray());
-                foreach ($orders as $order) {
-                    // dd($order->billing->truck->truckCap->toArray());
-                    if($order != "[]")
-                    {
-                        $capacity = $order->truck_type_fun->sum('name');
-                    }
-                    else
-                    {
-                        $capacity = 0;
-                    }
-                    // $sumOfTruckCapNames will contain the sum of truckCap names for each order
-                }
                 // Add the capacity to the array for this hydrant
                 $hydrantCapacities[$hydrant->name] = $capacity;
             }
