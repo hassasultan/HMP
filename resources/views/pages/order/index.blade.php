@@ -27,7 +27,7 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Standard</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer Alternate Number </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle Type </th>
-                  {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry</th> --}}
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created_at</th>
                   {{-- <th class="text-secondary opacity-7"></th> --}}
                 </tr>
               </thead>
@@ -61,9 +61,9 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $row->truck_type_fun->name }}</p>
                             </td>
 
-                            {{-- <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>
-                            </td> --}}
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
+                            </td>
                             {{-- <td class="align-middle">
                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                 Edit

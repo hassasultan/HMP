@@ -47,7 +47,9 @@ class ReportsController extends Controller
         } else {
             $hydrants = Hydrants::get();
         }
-        $reportData = Orders::with(['hydrant', 'billing.truck.truckCap'])->whereHas('billing')
+        $reportData = Orders::with(['hydrant', 'billing.truck.truckCap'])
+        ->whereBetween('created_at', [$dateS,$dateE])
+        ->whereHas('billing')
             ->select('orders.*') // Select all columns from the orders table
             // ->groupBy('orders.id') // Group by the primary key of the orders table
             ->orderBy('orders.created_at')
@@ -75,7 +77,7 @@ class ReportsController extends Controller
                 $orders = Orders::with(['hydrant', 'billing.truck.truckCap'])
                 ->whereHas('billing.truck.truckCap')
                 ->where('hydrant_id', $hydrant->id)
-                ->whereBetween('created_at', [$dateS,$dateE])
+
                 ->get();
 
                 // print_r($order->toArray());
