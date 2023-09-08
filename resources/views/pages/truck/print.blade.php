@@ -37,7 +37,7 @@
 <body style="background-color:rgb(158, 158, 158) !important;">
     <div id="app">
         <div class="container p-4 bg-white w-100 text-center">
-                <h2>KW&SB</h2>
+                <h2>KW&SC</h2>
                 <p class="border-bottom">VEHICLE REGISTRATION FORM 2022</p>
                 <div class="table">
                     <table class="table table-bordered">
