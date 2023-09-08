@@ -151,7 +151,7 @@
                             <tr>
                                 <td class="p-4"></td>
                             </tr>
-                            {{-- <tr>
+                            <tr>
                                 <td>
                                     <div class="row text-start">
                                         <div class="col-md-6" style="border-right:1px solid #000;">
@@ -162,15 +162,15 @@
                                         </div>
                                     </div>
                                 </td>
-                            </tr> --}}
-                            {{-- <tr>
+                            </tr>
+                            <tr>
                                 <td>
                                     <div class="row text-center">
                                         <h6>Vehicle Image</h6>
                                         <img class="m-auto img-fluid" src="{{ asset('public/storage/'.$driver->vehicle_image) }}"/>
                                     </div>
                                 </td>
-                            </tr> --}}
+                            </tr>
                         </tbody>
                     </table>
 
