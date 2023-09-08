@@ -49,7 +49,7 @@ class ReportsController extends Controller
         }
         $reportData = Orders::with(['hydrant', 'billing.truck.truckCap'])->whereHas('billing')
             ->select('orders.*') // Select all columns from the orders table
-            ->groupBy('orders.id') // Group by the primary key of the orders table
+            // ->groupBy('orders.id') // Group by the primary key of the orders table
             ->orderBy('orders.created_at')
             ->get();
         // dd($reportData->toArray());
