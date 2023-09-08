@@ -81,7 +81,7 @@
                                     <tr style="background-color:#5b9bd5; color: #FFF !important;">
                                         <th>Date</th>
                                         @foreach ($hydrants as $row)
-                                            <th>{{ $row->name }}</th>
+                                            <th width="10px">{{ $row->name }}</th>
                                         @endforeach
                                         {{-- @foreach (array_unique(array_column($complaints->toArray(), 'type_id')) as $complaintTypeId)
                                             <th>{{ $complaints->firstWhere('type_id', $complaintTypeId)->type->title }}</th>
@@ -91,13 +91,13 @@
                                 <tbody>
                                     @foreach ($report as $key => $row)
                                         <tr>
-                                            <td>{{ $row['Date'] }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($row['Date']));  }}</td>
                                             @foreach ($hydrants as $hydrant)
                                                 <td>{{ $row[0][$hydrant->name] }}</td>
                                             @endforeach
                                         </tr>
                                     @endforeach
-                                    
+
                                     {{-- @foreach ($complaints->groupBy('date') as $date => $complaintsByDate)
                                         <tr>
                                             <td>{{ $date }}</td>
