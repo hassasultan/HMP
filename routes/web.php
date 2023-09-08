@@ -31,6 +31,9 @@ Route::prefix('/admin')->group(function () {
 
         Route::get('change/driver/active/status', [App\Http\Controllers\HomeController::class, 'changeDriverActiveStatus'])->name('change.driver.active.status');
 
+        Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
+
+        Route::get('generate/reports', [App\Http\Controllers\ReportsController::class, 'generate_report'])->name('generate.reports');
 
         //users
 
@@ -80,7 +83,6 @@ Route::get('vehicle/details/{id}', [App\Http\Controllers\HomeController::class, 
 Route::get('billing/details/{id}', [App\Http\Controllers\OrderController::class, 'billingReciept'])->name('billing.details');
 
 Route::middleware('auth')->group(function () {
-    Route::get('reports', [App\Http\Controllers\OrderController::class, 'reports'])->name('reports');
     Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
     Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
     Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');

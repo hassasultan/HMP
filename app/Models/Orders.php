@@ -21,12 +21,16 @@ class Orders extends Model
     {
         return $this->belongsTo(Truck_type::class,'truck_type');
     }
+    public function hydrant()
+    {
+        return $this->belongsTo(Hydrants::class,'hydrant_id');
+    }
     public function customer()
     {
         return $this->belongsTo(Customer::class,'customer_id');
     }
     public function billing()
     {
-        return $this->hasMany(Billings::class,'order_id','id');
+        return $this->belongsTo(Billings::class,'id','order_id');
     }
 }

@@ -20,82 +20,92 @@ class ReportsController extends Controller
     //
     public function report()
     {
-        $town = Town::all();
-        $type = ComplaintType::get();
-        $prio = Priorities::get();
-        $source = Complaints::get()->groupBy('source');
-        return view('pages.reports.index',compact('town','type','prio','source'));
-
+        $truck = Truck::all();
+        $capacity = Truck_type::get();
+        $hydrants = Hydrants::get();
+        $order = Orders::with('truck_type_fun')->get();
+        $billing = Billings::get();
+        $customers = Customer::get();
+        return view('pages.reports.index', compact('truck', 'capacity', 'hydrants', 'order', 'billing', 'customers'));
     }
     public function generate_report(Request $request)
     {
         $dateS = $request->from_date;
         $dateE = $request->to_date;
+        if ($request->hydrant_id != "all") {
+            $hydrants_name = Hydrants::find($request->hydrant_id)->name;
+        } else {
+            $hydrants_name = "All";
+        }
         $town = null;
         $type = null;
         $prio = null;
         $source = null;
         $consumer = null;
-        // $comp = Complaints::with('type')->whereDate('created_at','>=',$dateS)->whereDate('created_at','<=',$dateE)->orderBy('created_at')
-        // ->get()->groupBy('type_id');
-        // $comp = Complaints::with('type')
-        //     ->whereDate('created_at','>=',$dateS)
-        //     ->whereDate('created_at','<=',$dateE)
-        //     ->orderBy('type_id','ASC')
-        //     ->get()
-        //     ->groupBy([ function ($post) {
-        //         return $post->created_at->format('Y-m-d');
-        //     },'type_id']);
-        $complaints = Complaints::with('type','customer')
-        ->select('type_id', DB::raw('date(created_at) as date'), DB::raw('count(*) as num_complaints'))
-        ->whereBetween('created_at', [$dateS, $dateE]);
-        if($request->has('town_id'))
-        {
-            $complaints = $complaints->where('town_id',$request->town_id);
-            $town = Town::find($request->town_id);
-            // dd($town->toArray());
+        if ($request->hydrant_id != "all") {
+            $hydrants = Hydrants::where('id',$request->hydrant_id)->get();
+        } else {
+            $hydrants = Hydrants::get();
         }
-        if($request->has('type_id'))
-        {
-            $complaints = $complaints->where('type_id',$request->type_id);
-            $type = ComplaintType::find($request->type_id);
-            // dd($town->toArray());
-        }
-        if($request->has('prio_id'))
-        {
-            $complaints = $complaints->where('prio_id',$request->prio_id);
-            $prio = Priorities::find($request->prio_id);
-            // dd($town->toArray());
-        }
-        if($request->has('customer_id'))
-        {
-            $cust = $request->customer_id;
-            $complaints = $complaints->WhereHas('customer',function($query)use($cust){
-                $query->where('customer_id',$cust);
-            })->orwhere('customer_num',$request->customer_id);
-            $consumer = $cust;
-            // dd($town->toArray());
-        }
-        if($request->has('source'))
-        {
-            if($request->source != "all")
-            {
-                $complaints = $complaints->where('source',$request->source);
+        $reportData = Orders::with(['hydrant', 'billing.truck.truckCap'])->whereHas('billing')
+            ->select('orders.*') // Select all columns from the orders table
+            ->groupBy('orders.id') // Group by the primary key of the orders table
+            ->orderBy('orders.created_at')
+            ->get();
+        // dd($reportData->toArray());
+        // Initialize an empty array to store the report data
+        $report = [];
+
+        // Loop through the results to populate the report array
+        foreach ($reportData as $order) {
+            // Extract the order date
+            $date = $order->created_at;
+
+            // Initialize an array for the capacities under each hydrant
+            $hydrantCapacities = [];
+
+            // Loop through each hydrant to calculate the capacity for that hydrant on the given date
+            foreach ($hydrants as $hydrant) {
+                // Calculate the total capacity for the hydrant on the given date
+                // $capacity = Orders::where('hydrant_id', $hydrant->id)
+                //     ->where('created_at', $date)
+                //     ->leftJoin('truck', 'truck.id', '=', 'orders.truck_id')
+                //     ->sum('truck.capacity');
+
+                $orders = Orders::with(['hydrant', 'billing.truck.truckCap'])
+                ->whereHas('billing.truck.truckCap')
+                ->where('hydrant_id', $hydrant->id)
+                ->whereBetween('created_at', [$dateS,$dateE])
+                ->get();
+
+                // print_r($order->toArray());
+
+            // dd($orders->toArray());
+                foreach ($orders as $order) {
+                    // dd($order->billing->truck->truckCap->toArray());
+                    if($order != "[]")
+                    {
+                        $capacity = $order->billing->truck->truckCap->sum('name');
+                    }
+                    else
+                    {
+                        $capacity = 0;
+                    }
+                    // $sumOfTruckCapNames will contain the sum of truckCap names for each order
+                }
+                // Add the capacity to the array for this hydrant
+                $hydrantCapacities[$hydrant->name] = $capacity;
             }
-            $source = $request->source;
-            // dd($town->toArray());
+            // dd($hydrantCapacities);
+            // Add the date and capacities to the report array
+            $report[] = [
+                'Date' => $date,
+                // Merge the calculated capacities with hydrant names
+                $hydrantCapacities,
+            ];
         }
-        $complaints = $complaints->groupBy('type_id', 'date')
-        ->orderBy('date','ASC')
-        ->get();
-
-        // $type = ComplaintType::get();
-        //     ->groupBy([function ($post) {
-        //         return $post->created_at->format('Y-m-d');
-        //     }, '']);
-
-        // dd($comp);
-        // dd($complaints->toArray());
-        return view('pages.reports.report',compact('complaints','type','dateS','dateE','town','consumer','source','prio'));
+        // dd($report);
+        return view('pages.reports.report', compact('dateS', 'dateE', 'hydrants_name', 'hydrants','report'));
+        // return view('pages.reports.report');
     }
 }
