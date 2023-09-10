@@ -106,7 +106,7 @@
                                             Vehicle's Details
                                         </div>
                                         <div class="col-md-6 text-end">
-                                            <a class="btn bg-gradient-primary"><i class="fas fa-map-marker-alt" style="font-size:0.8rem; "></i></a>
+                                            <a class="btn bg-gradient-primary" style="margin-bottom: 0rem !important; line-height:0.667 !important;"><i class="fas fa-map-marker-alt" style="font-size:0.8rem; "></i></a>
                                         </div>
                                     </div>
                                 </th>
