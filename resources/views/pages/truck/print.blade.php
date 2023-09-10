@@ -101,8 +101,14 @@
                         <thead class="table-dark border-2">
                             <!--<tr class="p-0">-->
                                 <th class="w-100 pl-0 pr-0 mr-0">
-                                    Vehicle's Details
-                                    <span class="text-right"><a class="btn bg-gradient-primary fs-2"><i class="fas fa-map-marker-alt"></i></a></span>
+                                    <div class="row">
+                                        <div class="col-md-6 text-right">
+                                            Vehicle's Details
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <a class="btn bg-gradient-primary fs-2"><i class="fas fa-map-marker-alt"></i></a>
+                                        </div>
+                                    </div>
                                 </th>
                             <!--</tr>-->
                         </thead>
