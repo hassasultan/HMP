@@ -79,6 +79,10 @@
                             <label>Class of Type</label>
                             <input type="text" class="form-control border-bottom border-dark" placeholder="Enter Vehicle Cabin Color..." name="class_of_type" value="{{ old('class_of_type') }}" required/>
                         </div>
+                        <div class="form-group col-6 p-3">
+                            <label>Tracker Link</label>
+                            <input type="url" class="form-control border-bottom border-dark" placeholder="Enter Vehicle Tracker Link..." name="link" value="{{ old('link') }}" required/>
+                        </div>
                     </div>
                 </div>
                 <div class="card border-3 p-3 m-2">

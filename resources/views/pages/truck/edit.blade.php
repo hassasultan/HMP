@@ -51,6 +51,10 @@
                         <input type="text" class="form-control border-bottom border-1 border-dark" placeholder="Enter Vehicle Engine Number..." name="engine_num" value="{{ $truck->engine_num }}" required/>
 
                     </div>
+                    <div class="form-group col-6 p-3">
+                        <label>Tracker Link</label>
+                        <input type="url" class="form-control border-bottom border-dark" placeholder="Enter Vehicle Tracker Link..." name="link" value="{{ old('link',$truck->link) }}" required/>
+                    </div>
                     {{-- Addition Start --}}
                     <div class="form-group col-12 p-3">
                         <label>Registration Region</label>

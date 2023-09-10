@@ -416,6 +416,11 @@ class HomeController extends Controller
             $truck->cabin_color = $request->cabin_color;
             $truck->tanker_color = $request->tanker_color;
             $truck->owned_by = $request->owned_by;
+            if($request->has('link'))
+            {
+                $truck->link = $request->link;
+
+            }
             //Addition Start
             $truck->reg_region = $request->reg_region;
             $truck->book_num = $request->book_num;
@@ -546,6 +551,11 @@ class HomeController extends Controller
             $truck->cabin_color = $request->cabin_color;
             $truck->tanker_color = $request->tanker_color;
             $truck->owned_by = $request->owned_by;
+            if($request->has('link'))
+            {
+                $truck->link = $request->link;
+
+            }
             //Addition Start
             $truck->reg_region = $request->reg_region;
             $truck->book_num = $request->book_num;

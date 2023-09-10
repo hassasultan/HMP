@@ -19,6 +19,7 @@ class Truck extends Model
         'chassis_num',
         'owned_by',
         // new Start
+        'link',
         'reg_region',
         'book_num',
         'father_name',
