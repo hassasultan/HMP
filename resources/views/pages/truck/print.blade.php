@@ -102,10 +102,10 @@
                             <!--<tr class="p-0">-->
                                 <th class="w-100 pl-0 pr-0 mr-0">
                                     <div class="row">
-                                        <div class="col-md-6 text-right">
+                                        <div class="col-md-6 text-end">
                                             Vehicle's Details
                                         </div>
-                                        <div class="col-md-6 text-right">
+                                        <div class="col-md-6 text-end">
                                             <a class="btn bg-gradient-primary"><i class="fas fa-map-marker-alt" style="font-size:0.8rem; "></i></a>
                                         </div>
                                     </div>
