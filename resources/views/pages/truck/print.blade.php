@@ -119,9 +119,11 @@
                                     Vehicle's Details
                                 </div>
                                 <div class="col-md-6 text-end mob-end">
+                                    @if ($driver->link != null)
                                     <a class="btn bg-gradient-primary" href="{{ $driver->link }}" target="_blank"
                                         style="margin-bottom: 0rem !important; line-height:0.667 !important;"><i
                                             class="fas fa-map-marker-alt" style="font-size:0.8rem; "></i></a>
+                                    @endif
                                 </div>
                             </div>
                         </th>
