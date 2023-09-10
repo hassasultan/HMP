@@ -102,7 +102,7 @@
                             <!--<tr class="p-0">-->
                                 <th class="w-100 pl-0 pr-0 mr-0">
                                     Vehicle's Details
-                                    <span class="text-right"><button class="btn btn-primary"><i class="fa-solid fa-location-crosshairs"></i></button></span>
+                                    <span class="text-right"><button class="btn btn-primary"><i class="fad fa-location"></i></button></span>
                                 </th>
                             <!--</tr>-->
                         </thead>
