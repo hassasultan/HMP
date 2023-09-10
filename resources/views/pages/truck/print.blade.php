@@ -102,7 +102,7 @@
                             <!--<tr class="p-0">-->
                                 <th class="w-100 pl-0 pr-0 mr-0">
                                     Vehicle's Details
-                                    <span class="text-right"><button class="btn btn-primary fs-2"><i class="fas fa-map-marker-alt"></i></button></span>
+                                    <span class="text-right"><a class="btn bg-gradient-primary fs-2"><i class="fas fa-map-marker-alt"></i></a></span>
                                 </th>
                             <!--</tr>-->
                         </thead>
