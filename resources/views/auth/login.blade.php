@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <title>KWSC - Portal</title>
-<link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/favicon.png') }}">
+<link rel="icon" type="image/x-icon" href="{{ asset('public/assets/img/unnamed.png') }}">
 
 <!-- Mobile Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
