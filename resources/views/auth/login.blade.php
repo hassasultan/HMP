@@ -43,7 +43,7 @@
 <script src={{ asset('/assets/vendor/modernizr/modernizr.js') }}></script>
 
 </head>
-<body style="background-image:url({{ asset('/assets/img/login-bg.jpeg') }});">
+<body style="background-image:url({{ asset('assets/img/login-bg.jpeg') }});">
 <!-- start: page -->
 <section class="body-sign">
     <div class="center-sign">
