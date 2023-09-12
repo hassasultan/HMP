@@ -48,9 +48,9 @@
 <section class="body-sign">
     <div class="center-sign">
         <div class="panel card-sign">
-            <div class="col-md-6">
-                <a href="home" class="logo float-left">
-                    <img src="{{ asset('/assets/img/unnamed.png') }}" alt="KWSC Admin" />
+            <div class="col-md-12">
+                <a href="home" class="logo text-center">
+                    <img src="{{ asset('/assets/img/unnamed.png') }}" class="img-fluid" alt="KWSC Admin" />
                 </a>
             </div>
             <div class="card-body">
