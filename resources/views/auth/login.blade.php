@@ -1,136 +1,135 @@
-@extends('auth.guest')
+<!doctype html>
+<html class="modern fixed has-top-menu has-left-sidebar-half">
+<head>
+    {{-- @include('.admin.includes.head') --}}
+    <!-- Basic -->
+<meta charset="UTF-8">
 
-@section('content')
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<title>KWSC - Portal</title>
+<link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/favicon.png') }}">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+<!-- Web Fonts  -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,300,400,600,700,800,900" rel="stylesheet" type="text/css">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+<!-- Vendor CSS -->
+<link rel="stylesheet" href={{ asset('public/assets/vendor/bootstrap/css/bootstrap.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/animate/animate.compat.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/font-awesome/css/all.min.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/boxicons/css/boxicons.min.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/magnific-popup/magnific-popup.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/morris/morris.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/datatables/media/css/dataTables.bootstrap5.css') }} />
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+<!-- Theme CSS -->
+<link rel="stylesheet" href={{ asset('public/assets/css/theme.css') }} />
+<link rel="stylesheet" type="text/css" href={{ asset('public/assets/css/vendors.css') }}  />
+<link rel="stylesheet" type="text/css" href={{ asset('public/assets/css/style.css') }}  />
+
+<!-- Theme Layout -->
+<link rel="stylesheet" href={{ asset('public/assets/css/layouts/modern.css') }} />
+
+<!-- Skin CSS -->
+<link rel="stylesheet" href={{ asset('public/assets/css/skins/default.css') }} />
+
+<!-- Theme Custom CSS -->
+<link rel="stylesheet" href={{ asset('public/assets/css/custom.css') }} />
+
+<!-- Head Libs -->
+<script src={{ asset('public/assets/vendor/modernizr/modernizr.js') }}></script>
+
+</head>
+<body>
+<!-- start: page -->
+<section class="body-sign">
+    <div class="center-sign">
+        <div class="panel card-sign">
+            <div class="col-md-6">
+                <a href="home" class="logo float-left">
+                    <img src="{{ asset('/assets/img/unnamed.png') }}" alt="KWSC Admin" />
+                </a>
+            </div>
+            <div class="card-body">
+                @if (count($errors) > 0)
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger alert-dismissible">
+                            {{ $error }}
+                        </div>
+                    @endforeach
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <label>Email</label>
+                        <div class="input-group">
+                            <input name="email" type="text" class="form-control  @error('email') is-invalid @enderror" />
+                            <span class="input-group-text">
+										<i class="bx bx-user text-4"></i>
+                            </span>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="clearfix">
+                            <label class="float-left">Password</label>
+                            <a href="forgot-password" class="float-end">Lost Password?</a>
+                        </div>
+                        <div class="input-group">
+                            <input name="password" type="password" class="form-control  @error('password') is-invalid @enderror" />
+                            <span class="input-group-text">
+										<i class="bx bx-lock text-4"></i>
+                            </span>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="RememberMe" name="rememberme" type="checkbox"/>
+                                <label for="RememberMe">Remember Me</label>
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="col-sm-4 text-end">
+                            <button type="" class="btn btn-primary mt-2">Sign In</button>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
+
+        <p class="text-center text-muted mt-3 mb-3"><a href="https://pinkad.pk/">PinkAd</a> &copy; Copyright 2023. All Rights Reserved.</p>
     </div>
-</div> --}}
-<div class="row">
-    <div class="col-lg-4 col-md-8 col-12 mx-auto ">
-      <div class="card z-index-0 fadeIn3 fadeInBottom border-2">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-            <div class="row mt-3">
-              {{-- <div class="col-2 text-center ms-auto">
-                <a class="btn btn-link px-3" href="javascript:;">
-                  <i class="fa fa-facebook text-white text-lg"></i>
-                </a>
-              </div>
-              <div class="col-2 text-center px-1">
-                <a class="btn btn-link px-3" href="javascript:;">
-                  <i class="fa fa-github text-white text-lg"></i>
-                </a>
-              </div>
-              <div class="col-2 text-center me-auto">
-                <a class="btn btn-link px-3" href="javascript:;">
-                  <i class="fa fa-google text-white text-lg"></i>
-                </a>
-              </div> --}}
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <form role="form" class="text-start" method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div class="input-group input-group-outline my-3">
-              <label class="form-label">Email</label>
-              <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="input-group input-group-outline mb-3">
-              <label class="form-label">Password</label>
-              <input type="password"  id="password" class="form-control  @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="form-check form-switch d-flex align-items-center mb-3">
-              <input class="form-check-input" type="checkbox" id="rememberMe">
-              <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
-            </div>
-            {{-- <p class="mt-4 text-sm text-center">
-              Don't have an account?
-              <a href="../pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Sign up</a>
-            </p> --}}
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-@endsection
+</section>
+<!-- end: page -->
+{{-- <footer class="row">
+    @include('.admin.includes.footer')
+</footer> --}}
+</body>
+</html>
