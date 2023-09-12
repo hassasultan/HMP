@@ -16,14 +16,14 @@
 
 <!-- Vendor CSS -->
 <link rel="stylesheet" href={{ asset('public/assets/vendor/bootstrap/css/bootstrap.css') }} />
-<link rel="stylesheet" href={{ asset('public/assets/vendor/animate/animate.compat.css') }} />
-<link rel="stylesheet" href={{ asset('public/assets/vendor/font-awesome/css/all.min.css') }} />
+{{-- <link rel="stylesheet" href={{ asset('public/assets/vendor/animate/animate.compat.css') }} /> --}}
+{{-- <link rel="stylesheet" href={{ asset('public/assets/vendor/font-awesome/css/all.min.css') }} /> --}}
 <link rel="stylesheet" href={{ asset('public/assets/vendor/boxicons/css/boxicons.min.css') }} />
-<link rel="stylesheet" href={{ asset('public/assets/vendor/magnific-popup/magnific-popup.css') }} />
+{{-- <link rel="stylesheet" href={{ asset('public/assets/vendor/magnific-popup/magnific-popup.css') }} />
 <link rel="stylesheet" href={{ asset('public/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') }} />
-<link rel="stylesheet" href={{ asset('public/assets/vendor/morris/morris.css') }} />
+<link rel="stylesheet" href={{ asset('public/assets/vendor/morris/morris.css') }} /> --}}
 <link rel="stylesheet" href={{ asset('public/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') }} />
-<link rel="stylesheet" href={{ asset('public/assets/vendor/datatables/media/css/dataTables.bootstrap5.css') }} />
+{{-- <link rel="stylesheet" href={{ asset('public/assets/vendor/datatables/media/css/dataTables.bootstrap5.css') }} /> --}}
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href={{ asset('public/assets/css/theme.css') }} />
@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <p class="text-center text-muted mt-3 mb-3"><a href="https://pinkad.pk/">PinkAd</a> &copy; Copyright 2023. All Rights Reserved.</p>
+        <p class="text-center text-muted mt-3 mb-3"><a href="http://hmp.esspl.com.pk:8081/login">KWSC</a> &copy; Copyright 2023. All Rights Reserved.</p>
     </div>
 </section>
 <!-- end: page -->
