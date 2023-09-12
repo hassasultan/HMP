@@ -3874,7 +3874,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 }
 /* Header */
 .header {
-	background: #96207a;
+	background: #3f4298;
 	border-bottom: 1px solid #E9E9E6;
 	/*border-top: 3px solid #EDEDED;*/
 	z-index: 1000;
@@ -6153,7 +6153,7 @@ ul.nav-main > li > a {
 }
 
 ul.nav-main > li > a:hover, ul.nav-main > li > a:focus {
-	background-color: #96207a;
+	background-color: #3f4298;
     color:#fff;
 }
 ul.nav-main > li > a:hover .bx, ul.nav-main > li > a:focus {
@@ -7449,7 +7449,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 }
 
 .card-header {
-	background: #96207a;
+	background: #3f4298;
 	border-radius: 5px 5px 0 0 !important;
 	border-bottom: 1px solid #DADADA;
 	padding: 18px;
@@ -7531,7 +7531,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 .card-actions a:hover,
 .card-actions .card-action:hover {
 	background-color: #eeeeee;
-	color: #96207a;
+	color: #3f4298;
 	text-decoration: none;
 }
 
@@ -21636,8 +21636,8 @@ html.dark .mailbox-compose .bootstrap-tagsinput > input {
 	color: #FFF;
 }
 .alert-info {
-    background-color: #96207a2e !important;
-    border-color: #96207a !important;
+    background-color: #3f42982e !important;
+    border-color: #3f4298 !important;
 }
 ul.nav-main > li > a:hover fa{
     color:#fff !important;

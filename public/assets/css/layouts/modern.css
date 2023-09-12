@@ -161,7 +161,7 @@ html.modern .header .separator {
 		top: 24px;
 	}
     html.modern .notifications > li .notification-icon i{
-        color: #96207a !important;
+        color: #3f4298 !important;
     }
 }
 
@@ -380,7 +380,7 @@ html.modern .sidebar-left {
 
 html.modern .sidebar-left .sidebar-header {
 	height: 9px;
-    background: #96207a;
+    background: #3f4298;
 }
 
 html.modern .sidebar-left .sidebar-header .sidebar-title {
@@ -423,7 +423,7 @@ html.modern ul.nav-main li > a span.badge {
 }
 
 html.modern ul.nav-main li i {
-	color: #96207a;
+	color: #3f4298;
 }
 
 html.modern ul.nav-main li i.bx {
@@ -577,7 +577,7 @@ html.modern .sidebar-widget .widget-header h6 {
 @media (max-width: 991px) {
 	html.modern .header.header-nav-menu .header-btn-collapse-nav {
 		background: transparent;
-		color: #96207a !important;
+		color: #3f4298 !important;
 	}
 }
 

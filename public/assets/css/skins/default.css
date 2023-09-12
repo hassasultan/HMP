@@ -1,9 +1,9 @@
 a {
-	color: #96207a;
+	color: #3f4298;
 }
 
 a:hover {
-	color: #96207a;
+	color: #3f4298;
 }
 
 a:focus {
@@ -11,7 +11,7 @@ a:focus {
 }
 
 a:active {
-	color: #96207a;
+	color: #3f4298;
 }
 
 html .heading-primary,
@@ -379,7 +379,7 @@ html.sidebar-light:not(.dark) ul.nav-main > li.nav-active > a {
 }
 
 html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
-	background: #96207a;
+	background: #3f4298;
 }
 
 @media only screen and (min-width: 768px) {
@@ -412,7 +412,7 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 }
 
 .userbox .dropdown-menu a:hover {
-	background: #96207a;
+	background: #3f4298;
 }
 
 .mailbox .mailbox-mail-list li.active {
@@ -448,15 +448,15 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 }
 
 .body-sign .card-sign .card-title-sign .title {
-	background-color: #96207a;
+	background-color: #3f4298;
 }
 
 .body-sign .card-sign .card-body {
-	border-top-color: #96207a;
+	border-top-color: #3f4298;
 }
 
 .body-locked .current-user .user-image {
-	border-color: #96207a;
+	border-color: #3f4298;
 }
 
 .list.list-filter > li a:hover,
@@ -482,7 +482,7 @@ html.modern .dropdown-language + .dropdown-menu .dropdown-item:focus.active {
 }
 
 html.modern .userbox .profile-picture.profile-picture-as-text {
-	background: #96207a;
+	background: #3f4298;
 }
 
 html.modern .userbox.show .dropdown-menu a:hover,
@@ -507,7 +507,7 @@ html.modern .notifications .notification-menu .image.image-as-text {
 }
 
 html.modern .notifications .notification-menu .view-more {
-	color: #96207a;
+	color: #3f4298;
 }
 
 html.modern ul.nav-main li.nav-active i {
@@ -562,7 +562,7 @@ blockquote.primary {
 }
 
 .nav-link {
-	color: #96207a;
+	color: #3f4298;
 }
 
 .nav-link:hover,
@@ -622,8 +622,8 @@ body .btn-primary.dropdown-toggle {
 }
 
 html .btn-primary {
-	background-color: #96207a;
-	border-color: #96207a #96207a #96207a;
+	background-color: #3f4298;
+	border-color: #3f4298 #3f4298 #3f4298;
 	color: #FFF;
 }
 
@@ -1093,8 +1093,8 @@ html .show > .btn-light.dropdown-toggle {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus,
 .pagination .page-item.active .page-link {
-	background-color: #96207a !important;
-	border-color: #96207a;
+	background-color: #3f4298 !important;
+	border-color: #3f4298;
 }
 
 body.dark .pagination > li > a,
@@ -1186,7 +1186,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 }
 
 .form-control:focus {
-	border-color: #96207a;
+	border-color: #3f4298;
 	box-shadow: 0 1px 1px rgba(150, 32, 122, 0.075) inset, 0 0 8px rgba(150, 32, 122, 0.3);
 }
 
@@ -1608,12 +1608,12 @@ html .card-group .card-accordion-light {
 }
 
 .notifications .notification-menu .notification-title .badge-default {
-	background-color: #96207a;
+	background-color: #3f4298;
 }
 
 .notifications .notification-menu:before,
 .notifications .notification-icon:before {
-	border-bottom-color: #96207a;
+	border-bottom-color: #3f4298;
 }
 
 .ui-pnotify .notification-primary {
@@ -1673,7 +1673,7 @@ html body .tabs .nav-tabs .nav-link,
 html.dark body .tabs .nav-tabs .nav-link,
 html body .tabs .nav-tabs .nav-link:hover,
 html.dark body .tabs .nav-tabs .nav-link:hover {
-	color: #96207a;
+	color: #3f4298;
 }
 
 html body .tabs .nav-tabs .nav-link:hover,
@@ -1715,9 +1715,9 @@ html body .tabs.tabs-vertical.tabs-left .nav-tabs li.active .nav-link:hover,
 html.dark body .tabs.tabs-vertical.tabs-left .nav-tabs li.active .nav-link:hover,
 html body .tabs.tabs-vertical.tabs-left .nav-tabs li.active .nav-link:focus,
 html.dark body .tabs.tabs-vertical.tabs-left .nav-tabs li.active .nav-link:focus {
-	border-left-color: #96207a;
-    /*background-color: #96207a;*/
-    color: #96207a;
+	border-left-color: #3f4298;
+    /*background-color: #3f4298;*/
+    color: #3f4298;
 }
 
 html body .tabs.tabs-vertical.tabs-right .nav-tabs li .nav-link:hover,
@@ -2414,7 +2414,7 @@ ul.simple-bullet-list li:before {
 }
 
 .bootstrap-tagsinput .badge {
-	background: #96207a;
+	background: #3f4298;
     margin-bottom: 3px;
 }
 
