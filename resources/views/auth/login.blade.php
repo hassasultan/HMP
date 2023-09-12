@@ -50,7 +50,7 @@
         <div class="panel card-sign">
             <div class="col-md-12">
                 <a href="home" class="logo text-center">
-                    <img src="{{ asset('/assets/img/unnamed.png') }}" class="img-fluid" alt="KWSC Admin" />
+                    <img src="{{ asset('/assets/img/unnamed.png') }}" class="img-fluid" style="width: 200px;" alt="KWSC Admin" />
                 </a>
             </div>
             <div class="card-body">
