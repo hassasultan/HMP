@@ -111,6 +111,15 @@ $.ajax({
 
   </script>
   @if (auth()->user()->role == 1)
+  <header class="page-header page-header-left-inline-breadcrumb">
+    <h2 class="font-weight-bold text-6">Home</h2>
+    <div class="right-wrapper">
+        <ol class="breadcrumbs">
+            <li><span>Dashboard</span></li>
+            <li><span>Home</span></li>
+        </ol>
+    </div>
+</header>
   <div class="row dash-count">
     <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
         <div class="card">
