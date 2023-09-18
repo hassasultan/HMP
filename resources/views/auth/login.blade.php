@@ -49,9 +49,17 @@
     <div class="center-sign">
         <div class="panel card-sign">
             <div class="col-md-12">
-                <a href="home" class="logo text-center">
-                    <img src="{{ asset('/assets/img/unnamed.png') }}" class="img-fluid" style="width: 200px;" alt="KWSC Admin" />
-                </a>
+                <div class="row">
+                    <div class="col-4 logo text-left">
+                        <img src="{{ asset('/assets/img/unnamed.png') }}" class="img-fluid" style="width: 200px;" alt="KWSC Admin" />
+                    </div>
+                    <div class="col-8 text-right" style="padding-top:3.5rem; ">
+                        <h4>HYDRANT MANAGEMENT PORTAL</h4>
+                        <span class="text-right">
+                            <h2>ہائیڈرنٹ مینجمنٹ پورٹل</h2>
+                        </span>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 @if (count($errors) > 0)
