@@ -87,7 +87,7 @@
 	width: 100px;
 	height: 100px;
 	margin: 110px auto 0;
-	border:solid 10px #8822aa;
+	border:solid 10px #3f4298;
 	border-radius: 50%;
 	border-right-color: transparent;
 	border-bottom-color: transparent;
