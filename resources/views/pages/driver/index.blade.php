@@ -19,7 +19,9 @@
         </div>
         <div class="card-body px-0 pb-2">
           <div class=" p-0">
-            <table id="example3" class="table table-bordered align-items-center mb-0">
+            <div class="load"></div>
+
+            <table id="example3" class="d-none table table-bordered align-items-center mb-0">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Driver</th>
@@ -34,6 +36,7 @@
               </thead>
               <tbody id ="driver-table">
                 @if(count($driver) > 0)
+
                     {{-- @foreach ($driver as $key => $row)
                         <tr>
                             <td>
@@ -197,6 +200,8 @@
 
 
                             });
+            $('.load').css('display','none');
+            $('#example3').removeClass('d-none');
             $("#driver-table").html(html);
             $('#example3').DataTable({
                 "paging": true,

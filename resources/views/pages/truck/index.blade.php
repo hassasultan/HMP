@@ -21,6 +21,8 @@
         </div>
         <div class="card-body px-0 pb-2">
           <div class="p-0">
+            <div class="load"></div>
+
             <table id="example3" class="table table-bordered align-items-center mb-0 d-none">
               <thead>
                 <tr>
@@ -37,7 +39,6 @@
               </thead>
               <tbody id="driver-table">
                 @if(count($truck) > 0)
-                <div class="load"></div>
                 @else
                     No Record Find...
                 @endif
