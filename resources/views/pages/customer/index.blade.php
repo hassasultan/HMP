@@ -28,6 +28,7 @@
                   <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Consumer Type</th>
                   <th class="text-secondary opacity-7">Black Listed</th>
 
+                  <th class="text-secondary opacity-7">Reports</th>
                   <th class="text-secondary opacity-7"></th>
                 </tr>
               </thead>
@@ -65,6 +66,11 @@
                                             No</option>
                                     </select>
                                 </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('generate.customer.report',$row->id) }}" target="_blank" class="btn btn-sm btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                                    Generate Report
+                                    </a>
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('customer-management.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

@@ -60,10 +60,11 @@
                 <div class="row">
                     <div class="col-7 text-start" style=" padding-top:2.4rem;">
                         <h5 class="fs-1">HYDRANT MANGEMENT PORTAL</h5>
-                        <p style="font-size: 1.2rem"><span style="font-weight: bold;">Daily Report (In Gallons)</span>
+                        <p style="font-size: 1.2rem"><span style="font-weight: bold;">Order Reports (In Order
+                                Type)</span>
                         </p>
                         <h5 style="font-size: 0.8rem"><span style="font-weight: bold;">DATE FROM:
-                            </span>{{ $dateS }} <span style="font-weight: bold;">TO: </span>{{ $dateE }}
+                            </span>{{ $startDate }} <span style="font-weight: bold;">TO: </span>{{ $endDate }}
                         </h5>
                         <h5 style="font-size: 0.8rem"><span style="font-weight: bold;">Hydrants:</span>
                             {{ $hydrants_name }}</h5>
@@ -80,60 +81,75 @@
                                 <thead>
                                     <tr style="background-color:#5b9bd5; color: #FFF !important;">
                                         <th>Date</th>
-                                        @foreach ($hydrants as $row)
-                                            <th width="10px">{{ $row->name }}</th>
-                                        @endforeach
-                                        {{-- @foreach (array_unique(array_column($complaints->toArray(), 'type_id')) as $complaintTypeId)
-                                            <th>{{ $complaints->firstWhere('type_id', $complaintTypeId)->type->title }}</th>
-                                        @endforeach --}}
+                                        <th>Commercial</th>
+                                        <th>Online (GPS)</th>
+                                        <th>Gps ( billing )</th>
+                                        <th>Gps ( care off )</th>
+                                        <th>GRATIS</th>
+                                        <th>Pak rangers</th>
+                                        <th>P.A.F korangi creek</th>
+                                        <th>Dc quota</th>
+                                        <th>Govt. vehicle</th>
+                                        <th>Total Orders</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($report as $key => $row)
+                                    @php
+                                        $totals = [
+                                            'Commercial' => 0,
+                                            'Online (GPS)' => 0,
+                                            'Gps ( billing )' => 0,
+                                            'Gps ( care off )' => 0,
+                                            'GRATIS' => 0,
+                                            'Pak rangers' => 0,
+                                            'P.A.F korangi creek' => 0,
+                                            'Dc quota' => 0,
+                                            'Govt. vehicle' => 0,
+                                            'Total Orders' => 0,
+                                        ];
+                                    @endphp
+                                    @foreach ($reportData as $data)
                                         <tr>
-                                            <td>{{ date('d-m-Y', strtotime($row['Date']))  }}</td>
-                                            @foreach ($hydrants as $hydrant)
-                                                <td>{{ $row[0][$hydrant->name] }}</td>
-                                            @endforeach
+                                            <td>{{ date('d-m-Y', strtotime($data->order_date)) }}</td>
+                                            <td>{{ $data->Commercial }}</td>
+                                            <td>{{ $data->{"Online (GPS)"} }}</td>
+                                            <td>{{ $data->{"Gps ( billing )"} }}</td>
+                                            <td>{{ $data->{"Gps ( care off )"} }}</td>
+                                            <td>{{ $data->GRATIS }}</td>
+                                            <td>{{ $data->{"Pak rangers"} }}</td>
+                                            <td>{{ $data->{"P.A.F korangi creek"} }}</td>
+                                            <td>{{ $data->{"Dc quota"} }}</td>
+                                            <td>{{ $data->{"Govt. vehicle"} }}</td>
+                                            <td>{{ optional($data)->order_count }}</td>
                                         </tr>
-                                    @endforeach
-
-                                    {{-- @foreach ($complaints->groupBy('date') as $date => $complaintsByDate)
-                                        <tr>
-                                            <td>{{ $date }}</td>
-                                            @foreach ($complaints->pluck('type')->unique('id') as $complaintType)
-                                                @php
-                                                    $count = $complaintsByDate->where('type_id', $complaintType->id)->sum('num_complaints');
-                                                @endphp
-                                                <td>{{ $count ?? 0 }}</td>
-                                            @endforeach
-
-                                        </tr>
+                                        @php
+                                            // Calculate column totals
+                                            $totals['Commercial'] = ($totals['Commercial'] ?? 0) + $data->Commercial;
+                                            $totals['Online (GPS)'] = ($totals['Online (GPS)'] ?? 0) + $data->{"Online (GPS)"};
+                                            $totals['Gps ( billing )'] = ($totals['Gps ( billing )'] ?? 0) + $data->{"Gps ( billing )"};
+                                            $totals['Gps ( care off )'] = ($totals['Gps ( care off )'] ?? 0) + $data->{"Gps ( care off )"};
+                                            $totals['GRATIS'] = ($totals['GRATIS'] ?? 0) + $data->GRATIS;
+                                            $totals['Pak rangers'] = ($totals['Pak rangers'] ?? 0) + $data->{"Pak rangers"};
+                                            $totals['P.A.F korangi creek'] = ($totals['P.A.F korangi creek'] ?? 0) + $data->{"P.A.F korangi creek"};
+                                            $totals['Dc quota'] = ($totals['Dc quota'] ?? 0) + $data->{"Dc quota"};
+                                            $totals['Govt. vehicle'] = ($totals['Govt. vehicle'] ?? 0) + $data->{"Govt. vehicle"};
+                                            $totals['Total Orders'] = ($totals['Total Orders'] ?? 0) + optional($data)->order_count;
+                                        @endphp
                                     @endforeach
                                     <tr>
                                         <td><strong>Total</strong></td>
-                                        @foreach (array_unique(array_column($complaints->toArray(), 'type_id')) as $complaintTypeId)
-                                        <td><b>{{ $complaints->where('type_id', $complaintTypeId)->sum('num_complaints') }}</b></td>
-                                        @endforeach
-                                    </tr> --}}
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td>Total</td>
-                                        @foreach ($hydrants as $hydrant)
-                <td>
-                    {{-- Calculate and display the total for each column --}}
-                    <?php
-                    $columnTotal = 0;
-                    foreach ($report as $row) {
-                        $columnTotal += $row[0][$hydrant->name];
-                    }
-                    echo $columnTotal;
-                    ?>
-                </td>
-            @endforeach
+                                        <td><strong>{{ $totals['Commercial'] }}</strong></td>
+                                        <td><strong>{{ $totals['Online (GPS)'] }}</strong></td>
+                                        <td><strong>{{ $totals['Gps ( billing )'] }}</strong></td>
+                                        <td><strong>{{ $totals['Gps ( care off )'] }}</strong></td>
+                                        <td><strong>{{ $totals['GRATIS'] }}</strong></td>
+                                        <td><strong>{{ $totals['Pak rangers'] }}</strong></td>
+                                        <td><strong>{{ $totals['P.A.F korangi creek'] }}</strong></td>
+                                        <td><strong>{{ $totals['Dc quota'] }}</strong></td>
+                                        <td><strong>{{ $totals['Govt. vehicle'] }}</strong></td>
+                                        <td><strong>{{ $totals['Total Orders'] }}</strong></td>
                                     </tr>
-                                </tfoot>
+                                </tbody>
                             </table>
 
                         </div>
@@ -182,7 +198,7 @@
             print_area.document.write('<html>');
             print_area.document.write(
                 '<link rel="dns-prefetch" href="//fonts.gstatic.com"><link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /><link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" /><link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" /><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
-                );
+            );
             print_area.document.write('<body>');
             print_area.document.write(elem.innerHTML);
             print_area.document.write('</body></html>');

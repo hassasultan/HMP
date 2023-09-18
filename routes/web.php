@@ -34,6 +34,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
 
         Route::get('generate/reports', [App\Http\Controllers\ReportsController::class, 'generate_report'])->name('generate.reports');
+        Route::get('generate/reports/daily-reports', [App\Http\Controllers\ReportsController::class, 'generate_report_standard'])->name('generate.report.standard');
 
         //users
 
@@ -90,6 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::post('store/billing', [App\Http\Controllers\OrderController::class, 'billingstore'])->name('billing.store');
     Route::get('change/status/billing', [App\Http\Controllers\OrderController::class, 'changeBlillingStatus'])->name('billing.change.status');
     Route::resource('/customer-management', CustomerController::class);
+    Route::get('generate/customer/report/{id}', [App\Http\Controllers\CustomerController::class, 'generate_report'])->name('generate.customer.report');
 
     Route::get('change/driver/status', [App\Http\Controllers\HomeController::class, 'changeDriverStatus'])->name('change.driver.status');
     Route::get('change/tanker/status', [App\Http\Controllers\HomeController::class, 'changeVehicleStatus'])->name('change.tanker.status');

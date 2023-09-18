@@ -55,5 +55,10 @@ class CustomerController extends Controller
         $customer->save();
         return 1;
     }
+    public function generate_report($id)
+    {
+        $customer = Customer::with('orders')->find($id);
+        return view('pages.customer.report',compact('customer'));
+    }
 
 }
