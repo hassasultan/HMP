@@ -346,15 +346,19 @@ class HomeController extends Controller
         Truck_type::create($request->all());
         return redirect()->route('truck_type.list');
     }
-    public function truck()
+    public function truck(Request $request)
     {
         if(auth()->user()->role != 1)
         {
-            $truck = Truck::all()->where('hydrant_id',auth()->user()->hydrant_id);
+            $truck = Truck::with('truckCap','hydrant','drivers')->where('hydrant_id',auth()->user()->hydrant_id)->get();
         }
         else
         {
-            $truck = Truck::all();
+            $truck = Truck::with('truckCap','hydrant','drivers')->get();
+        }
+        if($request->has('json'))
+        {
+            return $truck;
         }
         return view('pages.truck.index',compact('truck'));
     }
