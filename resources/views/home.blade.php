@@ -310,7 +310,7 @@ $.ajax({
         <div class="col-xl-3 col-sm-6 @if($key % 4) mt-4 @endif">
             <div class="card">
             <div class="card-header p-3 pt-2">
-                <div class="icon icon-lg icon-shape shadow-info text-center border-radius-xl mt-n4 position-absolute" style="background-color:{{ $row->color }} ">
+                <div class="icon icon-lg icon-shape shadow-info text-center border-radius-xl mt-n4 position-absolute" >
                 <i class="fa fa-building" aria-hidden="true"></i>
                 </div>
                 <div class="text-end pt-1">
