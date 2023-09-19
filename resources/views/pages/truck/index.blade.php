@@ -144,7 +144,7 @@
 
 
                 html += '  <td>';
-                html += '    <a href="{{ route("truck.edit"," ") }}/'+row['id']+'" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>';
+                html += '    <a href="{{ route("truck.edit","") }}/'+row['id']+'" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>';
                 html += '  </td>';
                 html += '</tr>';
 
