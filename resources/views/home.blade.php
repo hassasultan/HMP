@@ -404,8 +404,8 @@ $.ajax({
                 <div class="row">
                     @foreach($hydrants as $row)
                         @if(count($row->orders) != 0)
-                            <div class="col-8" style="color:{{ $row->color }}"><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>
-                            <div class="col-4 text-end" style="color:{{ $row->color }}">{{count($row->orders)}}</div>
+                            <div class="col-8" ><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>
+                            <div class="col-4 text-end" >{{count($row->orders)}}</div>
                         @endif
                     @endforeach
                 </div>
