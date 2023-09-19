@@ -244,8 +244,8 @@ $.ajax({
                     <div class="row" id="total-tanker">
                         @foreach($hydrants as $row)
                             @if(count($row->vehicles) != 0)
-                                <div class="col-8" style="color:{{ $row->color }}"><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>
-                                <div class="col-4 text-end" style="color:{{ $row->color }}">{{count($row->vehicles)}}</div>
+                                <div class="col-8" ><i class="fas fa-check-square me-2"></i>{{$row->name}}</div>
+                                <div class="col-4 text-end" >{{count($row->vehicles)}}</div>
                             @endif
                         @endforeach
                     </div>
