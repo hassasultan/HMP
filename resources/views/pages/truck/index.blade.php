@@ -28,7 +28,7 @@
                 <tr>
                   <!--<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle</th>-->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Model/Number </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Water Tanker Document Copy</th>
+                  {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Water Tanker Document Copy</th> --}}
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrant</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Owned By</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">QR Code</th>
@@ -68,29 +68,29 @@
                 html += '<tr>';
                 html += '  <td>';
                 html += '  <p class="text-xs font-weight-bold mb-0">'+ row['truck_num']+'</p><p class="text-xs text-secondary mb-0">'+ row['model']+'</p>';
-                if(row['vehicle_image'] != null)
-                {
-                    html += '    <div class="d-flex px-2 py-1">';
-                    html += '      <div>';
-                    html += '        <img';
-                    html += '          src="{{ asset("public/storage/") }}/'+ row['vehicle_image']+'"';
-                    html += '          class="avatar avatar-sm me-3 border-radius-lg"';
-                    html += '          alt="user1"';
-                    html += '        />';
-                    html += '      </div>';
-                }
-                html += '  </td>';
-                html += '  <td class="align-middle text-center text-sm">';
-                html += '    <div class="align-middle text-center d-flex px-2 py-1">';
-                html += '      <div class="align-middle text-center">';
-                html += '        <img';
-                html += '          src="{{ asset("public/storage/") }}/'+row['paper_image']+'"';
-                html += '          class="avatar avatar-sm me-3 border-radius-lg"';
-                html += '          alt="user1"';
-                html += '        />';
-                html += '      </div>';
-                html += '    </div>';
-                html += '  </td>';
+                // if(row['vehicle_image'] != null)
+                // {
+                //     html += '    <div class="d-flex px-2 py-1">';
+                //     html += '      <div>';
+                //     html += '        <img';
+                //     html += '          src="{{ asset("public/storage/") }}/'+ row['vehicle_image']+'"';
+                //     html += '          class="avatar avatar-sm me-3 border-radius-lg"';
+                //     html += '          alt="user1"';
+                //     html += '        />';
+                //     html += '      </div>';
+                // }
+                // html += '  </td>';
+                // html += '  <td class="align-middle text-center text-sm">';
+                // html += '    <div class="align-middle text-center d-flex px-2 py-1">';
+                // html += '      <div class="align-middle text-center">';
+                // html += '        <img';
+                // html += '          src="{{ asset("public/storage/") }}/'+row['paper_image']+'"';
+                // html += '          class="avatar avatar-sm me-3 border-radius-lg"';
+                // html += '          alt="user1"';
+                // html += '        />';
+                // html += '      </div>';
+                // html += '    </div>';
+                // html += '  </td>';
 
                 html += '  <td>';
                 html += '    <p class="text-xs font-weight-bold mb-0">'+row['hydrant']['name'] ?? 'Hydrant has been deleted...' +'</p>';
