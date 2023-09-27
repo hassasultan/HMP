@@ -10,6 +10,9 @@ use App\Models\Customer;
 use App\Models\Truck;
 use App\Models\Driver;
 use App\Models\Hydrants;
+use App\Models\OtsOrder;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 class OrderController extends Controller
@@ -212,5 +215,40 @@ class OrderController extends Controller
         $billing = Billings::with('order','order.customer','truck','driver','truck.hydrant')->find($id);
         // dd($billing->toArray());
         return view('pages.billing.print',compact('billing'));
+    }
+
+    public function create_ots_0rder(Request $request)
+    {
+        try
+        {
+            $valid = $this->validate($request,[
+                'order_id'          => 'required|string',
+                'consumer_name'          => 'required|string',
+                'consumer_number'          => 'required|string',
+                'consumer_address'          => 'required|string',
+                'hydrant'          => 'required|string',
+                'gallon'          => 'required|string',
+                'delivery_charges'          => 'required|string',
+                'tanker_amount'          => 'required|string',
+                'km'          => 'required|string',
+                'source'          => 'required|string',
+                'vehicle_no'          => 'required|string',
+                'driver_name'          => 'required|string',
+                'driver_phone'          => 'required|string',
+                'comment'          => 'required|string',
+                'status'          => 'required|string',
+
+            ]);
+            DB::beginTransaction();
+            $data = $request->all();
+            OtsOrder::create($data);
+            DB::commit();
+
+            return response()->json(['success'=> 'Record Updated successfully...'],200);
+        }
+        catch(Exception $ex)
+        {
+            return response()->json(['error', $ex->getMessage()],500);
+        }
     }
 }
