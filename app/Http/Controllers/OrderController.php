@@ -217,7 +217,7 @@ class OrderController extends Controller
         return view('pages.billing.print',compact('billing'));
     }
 
-    public function create_ots_0rder(Request $request)
+    public function create_ots_order(Request $request)
     {
         try
         {
