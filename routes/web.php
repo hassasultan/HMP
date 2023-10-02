@@ -58,6 +58,7 @@ Route::prefix('/admin')->group(function () {
 
         //Order
         Route::get('/order-list', [App\Http\Controllers\OrderController::class, 'index'])->name('order.list');
+        Route::get('/get/ots/order-list', [App\Http\Controllers\OrderController::class, 'get_ots_order'])->name('ots.order.list');
         // Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
         // Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 

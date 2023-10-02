@@ -15,35 +15,29 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+
 class OrderController extends Controller
 {
     //
     public  function index()
     {
         # code...
-        if(auth()->user()->role != 1)
-        {
-            $order = Orders::with('customer')->where('hydrant_id',auth()->user()->hydrant_id);
-            if(auth()->user()->type == "commercial")
-            {
-                $order = $order->whereHas('customer', function($q){
-                    $q->where('standard','Commercial');
+        if (auth()->user()->role != 1) {
+            $order = Orders::with('customer')->where('hydrant_id', auth()->user()->hydrant_id);
+            if (auth()->user()->type == "commercial") {
+                $order = $order->whereHas('customer', function ($q) {
+                    $q->where('standard', 'Commercial');
                 });
-            }
-            else
-            {
-                $order = $order->whereHas('customer', function($q){
-                    $q->where('standard','!=','Commercial');
+            } else {
+                $order = $order->whereHas('customer', function ($q) {
+                    $q->where('standard', '!=', 'Commercial');
                 });
             }
             $order = $order->get();
-        }
-        else
-        {
+        } else {
             $order = Orders::all();
-
         }
-        return view('pages.order.index',compact('order'));
+        return view('pages.order.index', compact('order'));
     }
     public function reports()
     {
@@ -53,25 +47,19 @@ class OrderController extends Controller
     {
         # code...
         $truck_type = Truck_type::all();
-        if(auth()->user()->role != 1)
-        {
-            $customer = Customer::where('user_id',auth()->user()->id);
-            if(auth()->user()->type == "commercial")
-            {
-                $customer = $customer->where('standard','Commercial');
-            }
-            else
-            {
-                $customer = $customer->where('standard','!=','Commercial');
+        if (auth()->user()->role != 1) {
+            $customer = Customer::where('user_id', auth()->user()->id);
+            if (auth()->user()->type == "commercial") {
+                $customer = $customer->where('standard', 'Commercial');
+            } else {
+                $customer = $customer->where('standard', '!=', 'Commercial');
             }
             $customer = $customer->get();
-        }
-        else
-        {
+        } else {
             $customer = Customer::all();
         }
         $hydrants = Hydrants::get();
-        return view('pages.order.create',compact('truck_type','customer','hydrants'));
+        return view('pages.order.create', compact('truck_type', 'customer', 'hydrants'));
     }
 
     public  function store(Request $request)
@@ -80,43 +68,31 @@ class OrderController extends Controller
         $cust = Customer::find($request->customer_id);
         $letter = str_split($cust->address);
         $NEW_ORDER = Orders::latest()->first();
-        if(empty($NEW_ORDER))
-        {
+        if (empty($NEW_ORDER)) {
             $expNum[1] = 0;
-        }
-        else
-        {
+        } else {
             $expNum = explode('-', $NEW_ORDER->Order_Number);
         }
-        $id = strtoupper($letter[0]).'-0000'. $expNum[1]+1;
+        $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
         // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
         // dd($id);
         $request['Order_Number'] = $id;
         //output: INV-000001
         $truck_type = Orders::create($request->all());
-        if(auth()->user()->role != 1)
-        {
+        if (auth()->user()->role != 1) {
             $truck_type->hydrant_id = auth()->user()->hydrant->id;
-        }
-        else
-        {
+        } else {
             $truck_type->hydrant_id = $request->hydrant_id;
         }
         $truck_type->Order_Number = $id;
         $truck_type->customer_id = $request->customer_id;
         $truck_type->save();
-        if(auth()->user()->role != 1)
-        {
+        if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.order.list');
-        }
-        else
-        {
+        } else {
             return redirect()->route('order.list');
-
-
         }
-
     }
 
     //billing
@@ -124,81 +100,58 @@ class OrderController extends Controller
     public  function billingindex()
     {
         # code...
-        if(auth()->user()->role != 1)
-        {
-            $billing = Billings::with('order','order.customer')->whereHas('order',function($query){
-                $query->where('hydrant_id',auth()->user()->hydrant_id);
+        if (auth()->user()->role != 1) {
+            $billing = Billings::with('order', 'order.customer')->whereHas('order', function ($query) {
+                $query->where('hydrant_id', auth()->user()->hydrant_id);
             });
-            if(auth()->user()->type == "commercial")
-            {
-                $billing = $billing->whereHas('order.customer', function($q){
-                    $q->where('standard','Commercial');
+            if (auth()->user()->type == "commercial") {
+                $billing = $billing->whereHas('order.customer', function ($q) {
+                    $q->where('standard', 'Commercial');
                 });
-            }
-            else
-            {
-                $billing = $billing->whereHas('order.customer', function($q){
-                    $q->where('standard','!=','Commercial');
+            } else {
+                $billing = $billing->whereHas('order.customer', function ($q) {
+                    $q->where('standard', '!=', 'Commercial');
                 });
             }
             $billing = $billing->get();
-        }
-        else
-        {
+        } else {
             $billing = Billings::all();
         }
-        return view('pages.billing.index',compact('billing'));
+        return view('pages.billing.index', compact('billing'));
     }
     public  function billingcreate()
     {
         # code...
-        if(auth()->user()->role != 1)
-        {
-            $order = Orders::doesntHave('billing')->where('hydrant_id',auth()->user()->hydrant->id)->get();
-        }
-        else
-        {
+        if (auth()->user()->role != 1) {
+            $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->get();
+        } else {
             $order = Orders::doesntHave('billing')->get();
-
         }
-        if(auth()->user()->role != 1)
-        {
-            $truck = Truck::all()->where('hydrant_id',auth()->user()->hydrant->id);
-        }
-        else
-        {
+        if (auth()->user()->role != 1) {
+            $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id);
+        } else {
             $truck = Truck::all();
         }
-        if(auth()->user()->role != 1)
-        {
-            $driver = Driver::with('truck')->whereHas('truck',function($query){
-                $query->where('hydrant_id',auth()->user()->hydrant->id);
+        if (auth()->user()->role != 1) {
+            $driver = Driver::with('truck')->whereHas('truck', function ($query) {
+                $query->where('hydrant_id', auth()->user()->hydrant->id);
             })->get();
-        }
-        else
-        {
+        } else {
             $driver = Driver::all();
-
         }
 
-        return view('pages.billing.create',compact('order','truck','driver'));
+        return view('pages.billing.create', compact('order', 'truck', 'driver'));
     }
 
     public  function billingstore(Request $request)
     {
         # code...
         $truck_type = Billings::create($request->all());
-        if(auth()->user()->role != 1)
-        {
+        if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.billing.list');
-        }
-        else
-        {
+        } else {
             return redirect()->route('billing.list');
-
-
         }
-
     }
 
     public function changeBlillingStatus(Request $request)
@@ -212,16 +165,15 @@ class OrderController extends Controller
     public  function billingReciept($id)
     {
         # code...
-        $billing = Billings::with('order','order.customer','truck','driver','truck.hydrant')->find($id);
+        $billing = Billings::with('order', 'order.customer', 'truck', 'driver', 'truck.hydrant')->find($id);
         // dd($billing->toArray());
-        return view('pages.billing.print',compact('billing'));
+        return view('pages.billing.print', compact('billing'));
     }
 
     public function create_ots_order(Request $request)
     {
-        try
-        {
-            $valid = $this->validate($request,[
+        try {
+            $valid = $this->validate($request, [
                 'order_id'          => 'required|string',
                 'consumer_name'          => 'required|string',
                 // 'consumer_number'          => 'required|string',
@@ -244,11 +196,30 @@ class OrderController extends Controller
             OtsOrder::create($data);
             DB::commit();
 
-            return response()->json(['success'=> 'Record Updated successfully...'],200);
+            return response()->json(['success' => 'Record Updated successfully...'], 200);
+        } catch (Exception $ex) {
+            return response()->json(['error', $ex->getMessage()], 500);
         }
-        catch(Exception $ex)
-        {
-            return response()->json(['error', $ex->getMessage()],500);
-        }
+    }
+    public function get_ots_order()
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://dev-ots.crdc.biz/api/v1/fetch/orders?status_id=1',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return $response;
     }
 }
