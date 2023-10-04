@@ -67,7 +67,7 @@ class HomeController extends Controller
             })->count();
             $gps = Orders::with('customer')->whereHas('customer',function($query)
             {
-                $query->where('standard',"GPS");
+                $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
             })->count();
             $today_comm = Orders::with('customer')->whereHas('customer',function($query)
             {
