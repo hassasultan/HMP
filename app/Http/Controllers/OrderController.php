@@ -203,7 +203,6 @@ class OrderController extends Controller
     }
     public function get_ots_order()
     {
-
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -234,7 +233,7 @@ class OrderController extends Controller
             $currentPage,
             ['path' => route('ots.order.list'), 'query' => request()->query()]
         );
-        // dd($orders);
+        dd($orders);
         return view('pages.order.ots-orders', compact('orders'));
     }
 }
