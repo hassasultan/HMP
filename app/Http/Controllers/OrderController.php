@@ -91,21 +91,25 @@ class OrderController extends Controller
             $cust = Customer::find($request->customer_id);
         }
         if ($request->has('ots')) {
-            $new_order = new Orders();
-            $new_order->Order_Number = $request->Order_Number;
-            if (auth()->user()->role != 1) {
-                $new_order->hydrant_id = auth()->user()->hydrant->id;
-            } else {
-                $hyd_id = $request->hydrant_id;
-                $user = User::with('hydrant')->whereHas('hydrant', function($query)use($hyd_id){
-                    $query->where('ots_hydrant',$hyd_id);
-                })->first();
-                $new_order->hydrant_id = $user->hydrant_id;
+            $ord_check = Orders::where('Order_Number',$request->Order_Number)->count();
+            if($ord_check == 0)
+            {
+                $new_order = new Orders();
+                $new_order->Order_Number = $request->Order_Number;
+                if (auth()->user()->role != 1) {
+                    $new_order->hydrant_id = auth()->user()->hydrant->id;
+                } else {
+                    $hyd_id = $request->hydrant_id;
+                    $user = User::with('hydrant')->whereHas('hydrant', function($query)use($hyd_id){
+                        $query->where('ots_hydrant',$hyd_id);
+                    })->first();
+                    $new_order->hydrant_id = $user->hydrant_id;
+                }
+                $new_order->customer_id = $cust->id;
+                $new_order->contact_num = $request->contact_num;
+                $new_order->truck_type = 2;
+                $new_order->save();
             }
-            $new_order->customer_id = $cust->id;
-            $new_order->contact_num = $request->contact_num;
-            $new_order->truck_type = 2;
-            $new_order->save();
         }
         else
         {
