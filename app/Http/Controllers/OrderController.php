@@ -67,7 +67,7 @@ class OrderController extends Controller
     {
         # code...
         if ($request->has('ots')) {
-            $cust = Customer::where('contact_num', $request->contact_num);
+            $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
                 $cust = new Customer();
                 $cust->name = $request->name;
