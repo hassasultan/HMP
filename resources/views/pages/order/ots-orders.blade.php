@@ -283,61 +283,63 @@
 
                                             </tr>
                                         @else
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <p>Order Number:</p>
-                                                            <h6 class="mb-0 text-sm">{{ $row['order_no'] }}</h6>
-                                                            <p>Order Id:</p>
-                                                            <p class="text-xs text-secondary mb-0">{{ $row['order_id'] }}
-                                                            </p>
+                                            @if ($row['hydrant']['id'] == auth()->user()->hydrant->ots_hydrant)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p>Order Number:</p>
+                                                                <h6 class="mb-0 text-sm">{{ $row['order_no'] }}</h6>
+                                                                <p>Order Id:</p>
+                                                                <p class="text-xs text-secondary mb-0">{{ $row['order_id'] }}
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">{{ $row['consumer_name'] }}
-                                                    </p>
-                                                    <p class="text-xs text-secondary mb-0">{{ $row['consumer_phone'] }}</p>
-                                                    <p class="text-xs text-primary mb-0">
-                                                        {{ $row['consumer_address']['label'] }}
-                                                    </p>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        {{ $row['consumer_address']['area'] }}</p>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        {{ $row['consumer_address']['block'] }}</p>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        {{ $row['consumer_address']['sector'] }}</p>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        {{ $row['consumer_address']['address'] }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-center font-weight-bold mb-0">
-                                                        {{ $row['hydrant']['title'] }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs text-secondary mb-0">{{ $row['gallons'] }}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0">Delivery Charges:
-                                                        {{ $row['delivery_charges'] }}</p>
-                                                    <p class="text-xs font-weight-bold mb-0">Tanker Amount:
-                                                        {{ $row['tanker_amount'] }}</p>
-                                                    <p class="text-xs font-weight-bold mb-0">Distance:
-                                                        {{ $row['distance_kms'] }}</p>
-                                                </td>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">{{ $row['consumer_name'] }}
+                                                        </p>
+                                                        <p class="text-xs text-secondary mb-0">{{ $row['consumer_phone'] }}</p>
+                                                        <p class="text-xs text-primary mb-0">
+                                                            {{ $row['consumer_address']['label'] }}
+                                                        </p>
+                                                        <p class="text-xs text-secondary mb-0">
+                                                            {{ $row['consumer_address']['area'] }}</p>
+                                                        <p class="text-xs text-secondary mb-0">
+                                                            {{ $row['consumer_address']['block'] }}</p>
+                                                        <p class="text-xs text-secondary mb-0">
+                                                            {{ $row['consumer_address']['sector'] }}</p>
+                                                        <p class="text-xs text-secondary mb-0">
+                                                            {{ $row['consumer_address']['address'] }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-center font-weight-bold mb-0">
+                                                            {{ $row['hydrant']['title'] }}
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs text-secondary mb-0">{{ $row['gallons'] }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">Delivery Charges:
+                                                            {{ $row['delivery_charges'] }}</p>
+                                                        <p class="text-xs font-weight-bold mb-0">Tanker Amount:
+                                                            {{ $row['tanker_amount'] }}</p>
+                                                        <p class="text-xs font-weight-bold mb-0">Distance:
+                                                            {{ $row['distance_kms'] }}</p>
+                                                    </td>
 
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-secondary text-xs font-weight-bold">{{ $row['source'] }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-secondary text-xs font-weight-bold">{{ $row['status'] }}</span>
-                                                </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $row['source'] }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $row['status'] }}</span>
+                                                    </td>
 
-                                            </tr>
+                                                </tr>
+                                            @endif
                                         @endif
                                     @endforeach
                                 @else

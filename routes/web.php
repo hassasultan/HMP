@@ -58,7 +58,6 @@ Route::prefix('/admin')->group(function () {
 
         //Order
         Route::get('/order-list', [App\Http\Controllers\OrderController::class, 'index'])->name('order.list');
-        Route::get('/get/ots/order-list', [App\Http\Controllers\OrderController::class, 'get_ots_order'])->name('ots.order.list');
         // Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
         // Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 
@@ -85,6 +84,7 @@ Route::get('vehicle/details/{id}', [App\Http\Controllers\HomeController::class, 
 Route::get('billing/details/{id}', [App\Http\Controllers\OrderController::class, 'billingReciept'])->name('billing.details');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/get/ots/order-list', [App\Http\Controllers\OrderController::class, 'get_ots_order'])->name('ots.order.list');
     Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
     Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
     Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
