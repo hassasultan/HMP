@@ -11,6 +11,7 @@ use App\Models\Truck;
 use App\Models\Driver;
 use App\Models\Hydrants;
 use App\Models\OtsOrder;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -65,29 +66,69 @@ class OrderController extends Controller
     public  function store(Request $request)
     {
         # code...
-        $cust = Customer::find($request->customer_id);
-        $letter = str_split($cust->address);
-        $NEW_ORDER = Orders::latest()->first();
-        if (empty($NEW_ORDER)) {
-            $expNum[1] = 0;
+        if ($request->has('ots')) {
+            $cust = Customer::where('contact_num', $request->contact_num);
+            if (empty($cust)) {
+                $cust = new Customer();
+                $cust->name = $request->name;
+                $cust->address = $request->address;
+                $cust->street = $request->street;
+                $cust->location = $request->location;
+                $cust->gps = $request->gps;
+                $cust->contact_num = $request->contact_num;
+                $cust->standard = "Online (GPS)";
+                if(auth()->user()->role == 1)
+                {
+                    $cust->user_id = 1;
+                }
+                else
+                {
+                    $cust->user_id = auth()->user()->id;
+                }
+                $cust->save();
+            }
         } else {
-            $expNum = explode('-', $NEW_ORDER->Order_Number);
+            $cust = Customer::find($request->customer_id);
         }
-        $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
-        // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
+        if ($request->has('ots')) {
+            $new_order = new Orders();
+            if (auth()->user()->role != 1) {
+                $new_order->hydrant_id = auth()->user()->hydrant->id;
+            } else {
+                $user = User::where('ots_hydrant',$request->hydrant_id)->first();
+                $new_order->hydrant_id = $user->hydrant_id;
+            }
+            $new_order->customer_id = $cust->id;
+            $new_order->contact_num = $request->contact_num;
+            $new_order->truck_type = 2;
+            $new_order->save();
+        }
+        else
+        {
 
-        // dd($id);
-        $request['Order_Number'] = $id;
-        //output: INV-000001
-        $truck_type = Orders::create($request->all());
-        if (auth()->user()->role != 1) {
-            $truck_type->hydrant_id = auth()->user()->hydrant->id;
-        } else {
-            $truck_type->hydrant_id = $request->hydrant_id;
+            $letter = str_split($cust->address);
+            $NEW_ORDER = Orders::latest()->first();
+            if (empty($NEW_ORDER)) {
+                $expNum[1] = 0;
+            } else {
+                $expNum = explode('-', $NEW_ORDER->Order_Number);
+            }
+            $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
+            // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
+
+            // dd($id);
+            $request['Order_Number'] = $id;
+            //output: INV-000001
+            $truck_type = Orders::create($request->all());
+            if (auth()->user()->role != 1) {
+                $truck_type->hydrant_id = auth()->user()->hydrant->id;
+            } else {
+                $truck_type->hydrant_id = $request->hydrant_id;
+            }
+            $truck_type->Order_Number = $id;
+            $truck_type->customer_id = $request->customer_id;
+            $truck_type->save();
         }
-        $truck_type->Order_Number = $id;
-        $truck_type->customer_id = $request->customer_id;
-        $truck_type->save();
         if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.order.list');
         } else {
