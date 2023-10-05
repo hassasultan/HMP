@@ -95,7 +95,10 @@ class OrderController extends Controller
             if (auth()->user()->role != 1) {
                 $new_order->hydrant_id = auth()->user()->hydrant->id;
             } else {
-                $user = User::where('ots_hydrant',$request->hydrant_id)->first();
+                $hyd_id = $request->hydrant_id;
+                $user = User::with('hydrant')->whereHas('hydrant', function($query)use($hyd_id){
+                    $query->where('ots_hydrant',$hyd_id);
+                })->first();
                 $new_order->hydrant_id = $user->hydrant_id;
             }
             $new_order->customer_id = $cust->id;
