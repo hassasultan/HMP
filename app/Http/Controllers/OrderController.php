@@ -92,6 +92,7 @@ class OrderController extends Controller
         }
         if ($request->has('ots')) {
             $new_order = new Orders();
+            $new_order->Order_Number = $request->Order_Number;
             if (auth()->user()->role != 1) {
                 $new_order->hydrant_id = auth()->user()->hydrant->id;
             } else {
