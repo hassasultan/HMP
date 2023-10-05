@@ -207,7 +207,7 @@ class OrderController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://dev-ots.crdc.biz/api/v1/fetch/orders?status_id=1',
+            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -218,8 +218,23 @@ class OrderController extends Controller
         ));
 
         $response = curl_exec($curl);
-
         curl_close($curl);
-        return $response;
+        $orderData = json_decode($response, true);
+        $orderData = $orderData['data'];
+        $total = $orderData['total'];
+        $count = $orderData['count'];
+        $perPage = $orderData['per_page'];
+        $currentPage = $orderData['current_page'];
+        $totalPages = $orderData['total_pages'];
+
+        $orders = new \Illuminate\Pagination\LengthAwarePaginator(
+            $orderData['data'],
+            $total,
+            $perPage,
+            $currentPage,
+            ['path' => route('ots.order.list'), 'query' => request()->query()]
+        );
+        // dd($orders);
+        return view('pages.order.ots-orders', compact('orders'));
     }
 }

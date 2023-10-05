@@ -110,7 +110,7 @@ class HomeController extends Controller
             })->where('hydrant_id',auth()->user()->hydrant_id)->count();
             $gps = Orders::with('customer')->whereHas('customer',function($query)
             {
-                $query->where('standard',"GPS");
+                $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
             })->where('hydrant_id',auth()->user()->hydrant_id)->count();
             $today_comm = Orders::with('customer')->whereHas('customer',function($query)
             {
@@ -118,7 +118,7 @@ class HomeController extends Controller
             })->where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->count();
             $today_gps = Orders::with('customer')->whereHas('customer',function($query)
             {
-                $query->where('standard',"GPS");
+                $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
             })->where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->count();
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
