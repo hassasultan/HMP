@@ -268,7 +268,7 @@
                                                     <p class="text-xs font-weight-bold mb-0">Delivery Charges:
                                                         {{ $row['delivery_charges'] }}</p>
                                                     <p class="text-xs font-weight-bold mb-0">Tanker Amount:
-                                                        {{ $row['tanker_amount'] }}</p>
+                                                        {{ $row['gallons']['tanker_charges'] }}</p>
                                                     <p class="text-xs font-weight-bold mb-0">Distance:
                                                         {{ $row['distance_kms'] }}</p>
                                                 </td>
@@ -358,7 +358,7 @@
                                                         <p class="text-xs font-weight-bold mb-0">Delivery Charges:
                                                             {{ $row['delivery_charges'] }}</p>
                                                         <p class="text-xs font-weight-bold mb-0">Tanker Amount:
-                                                            {{ $row['tanker_amount'] }}</p>
+                                                            {{ $row['gallons']['tanker_charges'] }}</p>
                                                         <p class="text-xs font-weight-bold mb-0">Distance:
                                                             {{ $row['distance_kms'] }}</p>
                                                     </td>
