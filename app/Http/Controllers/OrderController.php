@@ -122,7 +122,14 @@ class OrderController extends Controller
             } else {
                 $expNum = explode('-', $NEW_ORDER->Order_Number);
             }
-            $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
+            if(isset($expNum[1]))
+            {
+                $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
+            }
+            else
+            {
+                $id = strtoupper($letter[0]) . '-0000' . $expNum[0] + 1;
+            }
             // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
             // dd($id);
