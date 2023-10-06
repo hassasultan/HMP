@@ -66,7 +66,7 @@ class OrderController extends Controller
     public  function store(Request $request)
     {
         # code...
-        dd($request->all());
+        // dd($request->all());
         if ($request->has('ots')) {
             $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
