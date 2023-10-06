@@ -290,7 +290,7 @@ class OrderController extends Controller
             $currentPage,
             ['path' => route('ots.order.list'), 'query' => request()->query()]
         );
-        // dd($orders);
+        dd($orders);
         return view('pages.order.ots-orders', compact('orders'));
     }
 }
