@@ -261,7 +261,8 @@
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs text-secondary mb-0">{{ $row['gallons'] }}</p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {{ $row['gallons']['quantity'] }}</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0">Delivery Charges:
@@ -283,20 +284,31 @@
                                                 <td>
                                                     <form method="post" action="{{ route('order.store') }}">
                                                         @csrf
-                                                        <input type="hidden" name="ots" value="1"/>
-                                                        <input type="hidden" name="name" value="{{ $row['consumer_name'] }}"/>
-                                                        <input type="hidden" name="address" value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}"/>
-                                                        <input type="hidden" name="street" value="{{ $row['consumer_address']['area'] }}"/>
-                                                        <input type="hidden" name="location" value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}"/>
-                                                        <input type="hidden" name="gps" value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}"/>
-                                                        <input type="hidden" name="contact_num" value="{{ $row['consumer_phone'] }}"/>
-                                                        <input type="hidden" name="hydrant_id" value="{{ $row['hydrant']['id'] }}"/>
-                                                        <input type="hidden" name="Order_Number" value="{{ $row['order_no'] }}"/>
+                                                        <input type="hidden" name="ots" value="1" />
+                                                        <input type="hidden" name="name"
+                                                            value="{{ $row['consumer_name'] }}" />
+                                                        <input type="hidden" name="address"
+                                                            value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                        <input type="hidden" name="street"
+                                                            value="{{ $row['consumer_address']['area'] }}" />
+                                                        <input type="hidden" name="location"
+                                                            value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                        <input type="hidden" name="gps"
+                                                            value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}" />
+                                                        <input type="hidden" name="contact_num"
+                                                            value="{{ $row['consumer_phone'] }}" />
+                                                        <input type="hidden" name="hydrant_id"
+                                                            value="{{ $row['hydrant']['id'] }}" />
+                                                        <input type="hidden" name="Order_Number"
+                                                            value="{{ $row['order_no'] }}" />
+                                                        <input type="hidden" name="gallon"
+                                                            value="{{ $row['gallons']['quantity'] }}" />
                                                         {{-- <input type="hidden" name="" value=""/>
                                                         <input type="hidden" name="" value=""/>
-                                                        <input type="hidden" name="" value=""/>
                                                         <input type="hidden" name="" value=""/> --}}
-                                                        <button type="submit" class="badge badge-sm bg-gradient-primary">Generate Order</button>
+                                                        <button type="submit"
+                                                            class="badge badge-sm bg-gradient-primary">Generate
+                                                            Order</button>
                                                     </form>
                                                 </td>
 
@@ -310,15 +322,18 @@
                                                                 <p>Order Number:</p>
                                                                 <h6 class="mb-0 text-sm">{{ $row['order_no'] }}</h6>
                                                                 <p>Order Id:</p>
-                                                                <p class="text-xs text-secondary mb-0">{{ $row['order_id'] }}
+                                                                <p class="text-xs text-secondary mb-0">
+                                                                    {{ $row['order_id'] }}
                                                                 </p>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ $row['consumer_name'] }}
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            {{ $row['consumer_name'] }}
                                                         </p>
-                                                        <p class="text-xs text-secondary mb-0">{{ $row['consumer_phone'] }}</p>
+                                                        <p class="text-xs text-secondary mb-0">{{ $row['consumer_phone'] }}
+                                                        </p>
                                                         <p class="text-xs text-primary mb-0">
                                                             {{ $row['consumer_address']['label'] }}
                                                         </p>
@@ -359,20 +374,33 @@
                                                     <td>
                                                         <form method="post" action="{{ route('order.store') }}">
                                                             @csrf
-                                                            <input type="hidden" name="ots" value="1"/>
-                                                            <input type="hidden" name="name" value="{{ $row['consumer_name'] }}"/>
-                                                            <input type="hidden" name="address" value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}"/>
-                                                            <input type="hidden" name="street" value="{{ $row['consumer_address']['area'] }}"/>
-                                                            <input type="hidden" name="location" value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}"/>
-                                                            <input type="hidden" name="gps" value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}"/>
-                                                            <input type="hidden" name="contact_num" value="{{ $row['consumer_phone'] }}"/>
-                                                            <input type="hidden" name="hydrant_id" value="{{ $row['hydrant']['id'] }}"/>
-                                                            <input type="hidden" name="Order_Number" value="{{ $row['order_no'] }}"/>
+                                                            <input type="hidden" name="ots" value="1" />
+                                                            <input type="hidden" name="name"
+                                                                value="{{ $row['consumer_name'] }}" />
+                                                            <input type="hidden" name="address"
+                                                                value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                            <input type="hidden" name="street"
+                                                                value="{{ $row['consumer_address']['area'] }}" />
+                                                            <input type="hidden" name="location"
+                                                                value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                            <input type="hidden" name="gps"
+                                                                value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}" />
+                                                            <input type="hidden" name="contact_num"
+                                                                value="{{ $row['consumer_phone'] }}" />
+                                                            <input type="hidden" name="hydrant_id"
+                                                                value="{{ $row['hydrant']['id'] }}" />
+                                                            <input type="hidden" name="Order_Number"
+                                                                value="{{ $row['order_no'] }}" />
+                                                            <input type="hidden" name="gallon"
+                                                                value="{{ $row['gallons']['quantity'] }}" />
+
                                                             {{-- <input type="hidden" name="" value=""/>
                                                             <input type="hidden" name="" value=""/>
                                                             <input type="hidden" name="" value=""/>
                                                             <input type="hidden" name="" value=""/> --}}
-                                                            <button type="submit" class="badge badge-sm bg-gradient-primary">Generate Order</button>
+                                                            <button type="submit"
+                                                                class="badge badge-sm bg-gradient-primary">Generate
+                                                                Order</button>
                                                         </form>
                                                     </td>
 

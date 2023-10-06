@@ -108,7 +108,8 @@ class OrderController extends Controller
                 }
                 $new_order->customer_id = $cust->id;
                 $new_order->contact_num = $request->contact_num;
-                $new_order->truck_type = 2;
+                $gallon = Truck_type::where('name',$request->gallon)->first();
+                $new_order->truck_type = $gallon->id;
                 $new_order->save();
             }
         }
