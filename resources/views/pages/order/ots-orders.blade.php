@@ -356,6 +356,25 @@
                                                         <span
                                                             class="text-secondary text-xs font-weight-bold">{{ $row['status'] }}</span>
                                                     </td>
+                                                    <td>
+                                                        <form method="post" action="{{ route('order.store') }}">
+                                                            @csrf
+                                                            <input type="hidden" name="ots" value="1"/>
+                                                            <input type="hidden" name="name" value="{{ $row['consumer_name'] }}"/>
+                                                            <input type="hidden" name="address" value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}"/>
+                                                            <input type="hidden" name="street" value="{{ $row['consumer_address']['area'] }}"/>
+                                                            <input type="hidden" name="location" value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}"/>
+                                                            <input type="hidden" name="gps" value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}"/>
+                                                            <input type="hidden" name="contact_num" value="{{ $row['consumer_phone'] }}"/>
+                                                            <input type="hidden" name="hydrant_id" value="{{ $row['hydrant']['id'] }}"/>
+                                                            <input type="hidden" name="Order_Number" value="{{ $row['order_no'] }}"/>
+                                                            {{-- <input type="hidden" name="" value=""/>
+                                                            <input type="hidden" name="" value=""/>
+                                                            <input type="hidden" name="" value=""/>
+                                                            <input type="hidden" name="" value=""/> --}}
+                                                            <button type="submit" class="badge badge-sm bg-gradient-primary">Generate Order</button>
+                                                        </form>
+                                                    </td>
 
                                                 </tr>
                                             @endif
