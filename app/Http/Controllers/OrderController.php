@@ -203,7 +203,7 @@ class OrderController extends Controller
     public  function billingedit($id)
     {
         # code...
-        $bill = Billings::find($id);
+        $bill = Billings::with('order')->find($id);
         // dd($bill->toArray());
         if (auth()->user()->role != 1) {
             $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->get();

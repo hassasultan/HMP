@@ -35,10 +35,9 @@
                         <label>Order</label>
                         <select name="order_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
-                            {{-- <option selected disabled>-- Select Option --</option> --}}
-
+                            <option value="{{ $bill->order_id }}" selected>{{ $bill->order->Order_Number}}</option>
                             @foreach ($order as $col)
-                                <option value="{{ $col->id }}" @if($bill->order_id == $col->id) selected @endif>{{ $col->Order_Number }}</option>
+                                <option value="{{ $col->id }}">{{ $col->Order_Number }}</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                             @endforeach
                         </select>
