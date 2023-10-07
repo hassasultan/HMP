@@ -352,7 +352,7 @@
                                                         </p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs text-secondary mb-0">{{ {{ $row['gallons']['quantity'] }} }}</p>
+                                                        <p class="text-xs text-secondary mb-0">{{ $row['gallons']['quantity'] }}</p>
                                                     </td>
                                                     <td>
                                                         <p class="text-xs font-weight-bold mb-0">Delivery Charges:
