@@ -22,9 +22,9 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="p-0">
-                        {{-- <div class="load"></div> --}}
+                        <div class="load"></div>
 
-                        <table id="example3" class="table table-bordered align-items-center mb-0"
+                        <table id="example3" class="table table-bordered align-items-center mb-0 d-none"
                             style="width:100%">
                             <thead>
                                 <tr>
@@ -64,201 +64,204 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $('#example3').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                    "url": "{{ route('truck.list') }}",
-                    "type": "GET",
-                    "data": {
-                        "json": "json"
-                    },
-                    "dataSrc": function(json) {
-                        console.log('check', json.data);
-                        return json.data; // Adjust based on your actual response structure
-                    }
-                },
-                "columns": [{
-                        "data": "truck_num",
-                        "name": "truck_num"
-                    },
-                    {
-                        "data": "hydrant.name",
-                        "name": "hydrant.name"
-                    },
-                    {
-                        "data": "owned_by",
-                        "name": "owned_by",
-                        "render": function(data, type, row) {
-                            return data == 1 ? 'Contractor' : 'Third Party';
-                        }
-                    },
-                    {
-                        "data": null,
-                        "name": "qr_code",
-                        "render": function(data, type, row) {
-                            return '<a href="{{ route('generate.qr', '') }}/' + row.id +
-                                '" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a>';
-                        }
-                    },
-                    {
-                        "data": "black_list",
-                        "name": "black_list",
-                        "render": function(data, type, row) {
-                            return data == 1 ? 'Yes' : 'No';
-                        }
-                    },
-                    {
-                        "data": null,
-                        "name": "form_view",
-                        "render": function(data, type, row) {
-                            return '<a href="{{ route('vehicle.details', '') }}/' + row.id +
-                                '" class="text-secondary m-2 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Info Vehicle" target="_blank">Form View</a>';
-                        }
-                    },
-                    {
-                        "data": null,
-                        "name": "action",
-                        "render": function(data, type, row) {
-                            return '<a href="{{ route('truck.edit', '') }}/' + row.id +
-                                '" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>';
-                        }
-                    }
-                ],
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-
-
         // $(document).ready(function() {
-
-        //     $.ajax({
-        //             url: "{{ route('truck.list') }}",
-        //             type: "Get",
-        //             data: {
-        //                 json: "json",
+        //     current_page = null;
+        //     $('#example3').DataTable({
+        //         "processing": true,
+        //         "serverSide": true,
+        //         "ajax": {
+        //             "url": "{{ route('truck.list') }}?page="+current_page,
+        //             "type": "GET",
+        //             "data": {
+        //                 "json": "json"
         //             },
-        //         }).done(function(data) {
-        //             console.log(data);
-        //             html = "";
-        //             select = "";
-        //             secselect = "";
-        //             $.each(data['data'], function(index, row) {
-        //                 console.log(row);
-        //                 html += '<tr>';
-        //                 html += '  <td>';
-        //                 html += '  <p class="text-xs font-weight-bold mb-0">' + row['truck_num'] +
-        //                     '</p><p class="text-xs text-secondary mb-0">' + row['model'] + '</p>';
-        //                 // if(row['vehicle_image'] != null)
-        //                 // {
-        //                 //     html += '    <div class="d-flex px-2 py-1">';
-        //                 //     html += '      <div>';
-        //                 //     html += '        <img';
-        //                 //     html += '          src="{{ asset('public/storage/') }}/'+ row['vehicle_image']+'"';
-        //                 //     html += '          class="avatar avatar-sm me-3 border-radius-lg"';
-        //                 //     html += '          alt="user1"';
-        //                 //     html += '        />';
-        //                 //     html += '      </div>';
-        //                 // }
-        //                 // html += '  </td>';
-        //                 // html += '  <td class="align-middle text-center text-sm">';
-        //                 // html += '    <div class="align-middle text-center d-flex px-2 py-1">';
-        //                 // html += '      <div class="align-middle text-center">';
-        //                 // html += '        <img';
-        //                 // html += '          src="{{ asset('public/storage/') }}/'+row['paper_image']+'"';
-        //                 // html += '          class="avatar avatar-sm me-3 border-radius-lg"';
-        //                 // html += '          alt="user1"';
-        //                 // html += '        />';
-        //                 // html += '      </div>';
-        //                 // html += '    </div>';
-        //                 // html += '  </td>';
-
-        //                 html += '  <td>';
-        //                 html += '    <p class="text-xs font-weight-bold mb-0">' + row['hydrant'][
-        //                     'name'
-        //                 ] ?? 'Hydrant has been deleted...' + '</p>';
-        //                 html += '    <p class="text-xs text-secondary mb-0">' + row['hydrant'][
-        //                     'contact'
-        //                 ] ?? 'Hydrant has been deleted...' + '</p>';
-        //                 html += '    <p class=" mt-2"><span class="p-2" style="background-color: ' +
-        //                     row['hydrant']['color'] + '"></span></p>';
-        //                 html += '  ';
-        //                 html += '  </td>';
-
-        //                 html += '  <td>';
-        //                 if (row['owned_by'] == 1) {
-        //                     html += '<p class="text-center font-weight-bold mb-0">Contractor</p>';
-        //                 } else {
-        //                     html += '<p class="text-center font-weight-bold mb-0">Third Party</p>';
+        //             "dataSrc": function(json) {
+        //                 console.log('check', json);
+        //                 current_page = json.current_page;
+        //                 return json.data; // Adjust based on your actual response structure
+        //             }
+        //         },
+        //         "columns": [{
+        //                 "data": "truck_num",
+        //                 "name": "truck_num"
+        //             },
+        //             {
+        //                 "data": "hydrant.name",
+        //                 "name": "hydrant.name"
+        //             },
+        //             {
+        //                 "data": "owned_by",
+        //                 "name": "owned_by",
+        //                 "render": function(data, type, row) {
+        //                     return data == 1 ? 'Contractor' : 'Third Party';
         //                 }
-        //                 html += '  </td>';
-
-        //                 html +=
-        //                     '  <td class="align-middle text-center text-sm"><a href="{{ route('generate.qr', '') }}/' +
-        //                     row['id'] +
-        //                     '" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a></td>';
-        //                 html += '<td>';
-        //                 html += '    <div class="form-group">';
-        //                 html += '       <select class="form-control border border-dark border-1 p-2"';
-        //                 html += '           id="FormControlAdminSelect-' + row['id'] + '"';
-        //                 html += '               onchange="adminstatus(' + row['id'] + ');">';
-        //                 if (row['black_list'] == 1) {
-        //                     select = "selected";
-        //                 } else {
-        //                     select = "";
+        //             },
+        //             {
+        //                 "data": null,
+        //                 "name": "qr_code",
+        //                 "render": function(data, type, row) {
+        //                     return '<a href="{{ route('generate.qr', '') }}/' + row.id +
+        //                         '" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a>';
         //                 }
-        //                 if (row['black_list'] == 0) {
-        //                     secselect = "selected";
-        //                 } else {
-        //                     secselect = "";
+        //             },
+        //             {
+        //                 "data": "black_list",
+        //                 "name": "black_list",
+        //                 "render": function(data, type, row) {
+        //                     return data == 1 ? 'Yes' : 'No';
         //                 }
-        //                 html += '                   <option ' + select + ' value="1">Yes</option>';
-        //                 html += '                   <option ' + secselect + ' value="0">No</option>';
-        //                 html += '       </select>';
-        //                 html += '      </div>';
-        //                 html += ' </td>'
-        //                 html += '  <td class="align-middle">';
-        //                 html += '  <a href="{{ route('vehicle.details', '') }}/' + row['id'] +
-        //                     '" class="text-secondary m-2 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Info Vehicle" target="_blank">Form View</a>';
-        //                 html += '  </td>';
-
-
-
-        //                 html += '  <td>';
-        //                 html += '    <a href="{{ route('truck.edit', '') }}/' + row['id'] +
-        //                     '" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>';
-        //                 html += '  </td>';
-        //                 html += '</tr>';
-
-
-        //             });
-        //             $('.load').css('display', 'none');
-        //             $('#example3').removeClass('d-none');
-        //             $("#driver-table").html(html);
-        //             $('#example3').DataTable({
-        //                 "paging": true,
-        //                 "lengthChange": false,
-        //                 "searching": true,
-        //                 "ordering": true,
-        //                 "info": true,
-        //                 "autoWidth": false,
-        //                 "responsive": true,
-
-        //             });
-        //             // successModal("Status Has been Changed Successfully...");
-        //         })
-        //         .fail(function(error) {
-        //             console.log(error);
-        //             // errorModal(error);
-
-        //         });
+        //             },
+        //             {
+        //                 "data": null,
+        //                 "name": "form_view",
+        //                 "render": function(data, type, row) {
+        //                     return '<a href="{{ route('vehicle.details', '') }}/' + row.id +
+        //                         '" class="text-secondary m-2 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Info Vehicle" target="_blank">Form View</a>';
+        //                 }
+        //             },
+        //             {
+        //                 "data": null,
+        //                 "name": "action",
+        //                 "render": function(data, type, row) {
+        //                     return '<a href="{{ route('truck.edit', '') }}/' + row.id +
+        //                         '" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>';
+        //                 }
+        //             }
+        //         ],
+        //         "paging": true,
+        //         "lengthChange": false,
+        //         "searching": true,
+        //         "ordering": true,
+        //         "info": true,
+        //         "autoWidth": false,
+        //         "responsive": true,
+        //     });
         // });
+
+
+        $(document).ready(function() {
+
+            $.ajax({
+                    url: "{{ route('truck.list') }}",
+                    type: "Get",
+                    data: {
+                        json: "json",
+                    },
+                }).done(function(data) {
+                    console.log(data);
+                    html = "";
+                    select = "";
+                    secselect = "";
+                    $.each(data, function(index, row) {
+                        console.log(row);
+                        html += '<tr>';
+                        html += '  <td>';
+                        html += '  <p class="text-xs font-weight-bold mb-0">' + row['truck_num'] +
+                            '</p><p class="text-xs text-secondary mb-0">' + row['model'] + '</p>';
+                        // if(row['vehicle_image'] != null)
+                        // {
+                        //     html += '    <div class="d-flex px-2 py-1">';
+                        //     html += '      <div>';
+                        //     html += '        <img';
+                        //     html += '          src="{{ asset('public/storage/') }}/'+ row['vehicle_image']+'"';
+                        //     html += '          class="avatar avatar-sm me-3 border-radius-lg"';
+                        //     html += '          alt="user1"';
+                        //     html += '        />';
+                        //     html += '      </div>';
+                        // }
+                        // html += '  </td>';
+                        // html += '  <td class="align-middle text-center text-sm">';
+                        // html += '    <div class="align-middle text-center d-flex px-2 py-1">';
+                        // html += '      <div class="align-middle text-center">';
+                        // html += '        <img';
+                        // html += '          src="{{ asset('public/storage/') }}/'+row['paper_image']+'"';
+                        // html += '          class="avatar avatar-sm me-3 border-radius-lg"';
+                        // html += '          alt="user1"';
+                        // html += '        />';
+                        // html += '      </div>';
+                        // html += '    </div>';
+                        // html += '  </td>';
+
+                        html += '  <td>';
+                        html += '    <p class="text-xs font-weight-bold mb-0">' + row['hydrant'][
+                            'name'
+                        ] ?? 'Hydrant has been deleted...' + '</p>';
+                        html += '    <p class="text-xs text-secondary mb-0">' + row['hydrant'][
+                            'contact'
+                        ] ?? 'Hydrant has been deleted...' + '</p>';
+                        html += '    <p class=" mt-2"><span class="p-2" style="background-color: ' +
+                            row['hydrant']['color'] + '"></span></p>';
+                        html += '  ';
+                        html += '  </td>';
+
+                        html += '  <td>';
+                        if (row['owned_by'] == 1) {
+                            html += '<p class="text-center font-weight-bold mb-0">Contractor</p>';
+                        } else {
+                            html += '<p class="text-center font-weight-bold mb-0">Third Party</p>';
+                        }
+                        html += '  </td>';
+
+                        html +=
+                            '  <td class="align-middle text-center text-sm"><a href="{{ route('generate.qr', '') }}/' +
+                            row['id'] +
+                            '" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate QrCode</span></a></td>';
+                        html += '<td>';
+                        html += '    <div class="form-group">';
+                        html += '       <select class="form-control border border-dark border-1 p-2"';
+                        html += '           id="FormControlAdminSelect-' + row['id'] + '"';
+                        html += '               onchange="adminstatus(' + row['id'] + ');">';
+                        if (row['black_list'] == 1) {
+                            select = "selected";
+                        } else {
+                            select = "";
+                        }
+                        if (row['black_list'] == 0) {
+                            secselect = "selected";
+                        } else {
+                            secselect = "";
+                        }
+                        html += '                   <option ' + select + ' value="1">Yes</option>';
+                        html += '                   <option ' + secselect + ' value="0">No</option>';
+                        html += '       </select>';
+                        html += '      </div>';
+                        html += ' </td>'
+                        html += '  <td class="align-middle">';
+                        html += '  <a href="{{ route('vehicle.details', '') }}/' + row['id'] +
+                            '" class="text-secondary m-2 font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Info Vehicle" target="_blank">Form View</a>';
+                        html += '  </td>';
+
+
+
+                        html += '  <td>';
+                        html += '    <a href="{{ route('truck.edit', '') }}/' + row['id'] +
+                            '" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>';
+                        html += '  </td>';
+                        html += '</tr>';
+
+
+                    });
+                    // console.log(html);
+                    $('.load').css('display', 'none');
+                    $('#example3').removeClass('d-none');
+                    $("#driver-table").html(html);
+                    $('#example3').DataTable({
+                        "paging": true,
+                        "lengthChange": false,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false,
+                        "responsive": true,
+
+                    });
+                    // successModal("Status Has been Changed Successfully...");
+                })
+                .fail(function(error) {
+                    console.log(error);
+                    // errorModal(error);
+
+                });
+        });
     </script>
 @endsection
