@@ -35,6 +35,8 @@
                         <label>Order</label>
                         <select name="order_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
+                            <option selected disabled>-- Select Option --</option>
+
                             @foreach ($order as $col)
                                 <option value="{{ $col->id }}">{{ $col->Order_Number }}</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
@@ -45,6 +47,8 @@
                         <label>Vehicle</label>
                         <select name="truck_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
+                            <option selected disabled>-- Select Option --</option>
+
                             @foreach ($truck as $col)
                                 <option value="{{ $col->id }}">{{ $col->hydrant->name }} - {{ $col->truckCap->name }} - {{ $col->name }} : {{ $col->truck_num }} ({{ $col->company_name }})</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
