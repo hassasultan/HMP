@@ -206,7 +206,7 @@ class OrderController extends Controller
         # code...
         $data = $request->all();
         $data['status'] = 2;
-        $truck_type = Billings::create($request->all());
+        $truck_type = Billings::create($data);
         if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.billing.list');
         } else {
