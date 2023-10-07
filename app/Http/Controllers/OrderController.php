@@ -291,6 +291,7 @@ class OrderController extends Controller
             $currentPage,
             ['path' => route('ots.order.list'), 'query' => request()->query()]
         );
+        dd(auth()->user()->hydrant->ots_hydrant);
         // dd($orders);
         return view('pages.order.ots-orders', compact('orders'));
     }
