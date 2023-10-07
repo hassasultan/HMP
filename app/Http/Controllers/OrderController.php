@@ -204,6 +204,8 @@ class OrderController extends Controller
     public  function billingstore(Request $request)
     {
         # code...
+        $data = $request->all();
+        $data['status'] = 2;
         $truck_type = Billings::create($request->all());
         if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.billing.list');
