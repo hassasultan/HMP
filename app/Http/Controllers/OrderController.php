@@ -261,10 +261,19 @@ class OrderController extends Controller
     }
     public function get_ots_order()
     {
+        // dd(request('page'));
         $curl = curl_init();
+        if(request()->has('page'))
+        {
+            $new_page = '?page='.request('page');
+        }
+        else
+        {
+            $new_page = null;
+        }
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders',
+            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders'.$new_page,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -273,7 +282,6 @@ class OrderController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
-
         $response = curl_exec($curl);
         curl_close($curl);
         $orderData = json_decode($response, true);
@@ -281,7 +289,7 @@ class OrderController extends Controller
         $total = $orderData['total'];
         $count = $orderData['count'];
         $perPage = $orderData['per_page'];
-        $currentPage = $orderData['current_page'];
+        $currentPage = request('page');
         $totalPages = $orderData['total_pages'];
 
         $orders = new \Illuminate\Pagination\LengthAwarePaginator(
