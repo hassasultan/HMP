@@ -204,6 +204,7 @@ class OrderController extends Controller
     {
         # code...
         $bill = Billings::find($id);
+        // dd($bill->toArray());
         if (auth()->user()->role != 1) {
             $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->get();
         } else {
