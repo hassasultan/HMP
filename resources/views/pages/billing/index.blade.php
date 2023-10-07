@@ -98,6 +98,8 @@
                                         onchange="adminstatusbilling({{ $row->id }});">
                                         <option @if ($row->status == 1) selected @endif value='1'  class="bg-success">
                                             Completed</option>
+                                        <option @if ($row->status == 2) selected @endif value='2' class="bg-danger">
+                                            Dispatch</option>
                                         <option @if ($row->status == 0) selected @endif value='0' class="bg-danger">
                                             Pending</option>
                                     </select>
