@@ -53,7 +53,7 @@
                 @endif
                     <div class="form-group col-12">
                         <label>Customer Alternate Phone</label>
-                        <input type="tel" class="form-control border-bottom" placeholder="Enter driver Phone Number..." name="contact_num" value="{{ old('contact_num') }}"/>
+                        <input type="tel" class="form-control border-bottom" placeholder="Enter Customer Alternate Phone Number..." name="contact_num" value="{{ old('contact_num') }}"/>
                     </div>
 
 

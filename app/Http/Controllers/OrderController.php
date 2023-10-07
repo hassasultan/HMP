@@ -200,6 +200,30 @@ class OrderController extends Controller
 
         return view('pages.billing.create', compact('order', 'truck', 'driver'));
     }
+    public  function billingedit($id)
+    {
+        # code...
+        $bill = Billings::find($id);
+        if (auth()->user()->role != 1) {
+            $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->get();
+        } else {
+            $order = Orders::doesntHave('billing')->get();
+        }
+        if (auth()->user()->role != 1) {
+            $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id);
+        } else {
+            $truck = Truck::all();
+        }
+        if (auth()->user()->role != 1) {
+            $driver = Driver::with('truck')->whereHas('truck', function ($query) {
+                $query->where('hydrant_id', auth()->user()->hydrant->id);
+            })->get();
+        } else {
+            $driver = Driver::all();
+        }
+
+        return view('pages.billing.edit', compact('bill','order', 'truck', 'driver'));
+    }
 
     public  function billingstore(Request $request)
     {
@@ -207,6 +231,18 @@ class OrderController extends Controller
         $data = $request->all();
         $data['status'] = 2;
         $truck_type = Billings::create($data);
+        if (auth()->user()->role != 1) {
+            return redirect()->route('hydrant.billing.list');
+        } else {
+            return redirect()->route('billing.list');
+        }
+    }
+    public  function billingupdate(Request $request,$id)
+    {
+        # code...
+        $data = $request->except(['_token']);
+        $data['status'] = 2;
+        $truck_type = Billings::where('id',$id)->update($data);
         if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.billing.list');
         } else {

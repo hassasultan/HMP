@@ -110,9 +110,9 @@
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('billing.details',$row->id) }}" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate Reciept</span></a>
-                                {{-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                <a href="{{ route('billing.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                 Edit
-                                </a> --}}
+                                </a>
                             </td>
                         </tr>
                     @endforeach
