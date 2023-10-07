@@ -24,7 +24,7 @@
                         <select name="driver_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
                             @foreach ($driver as $col)
-                                <option value="{{ $col->id }}">{{ $col->name }}</option>
+                                <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->phone }}</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                             @endforeach
                         </select>
