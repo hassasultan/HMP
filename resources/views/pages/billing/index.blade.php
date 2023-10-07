@@ -19,7 +19,7 @@
         </div>
         <div class="card-body px-0 pb-2">
           <div class=" p-0">
-            <table id="example1" class="table table-bordered align-items-center mb-0">
+            <table id="example1" class="table table-bordered table-responsive align-items-center mb-0">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order</th>
@@ -109,10 +109,14 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('billing.details',$row->id) }}" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate Reciept</span></a>
-                                <a href="{{ route('billing.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                Edit
-                                </a>
+                                <div>
+                                    <a href="{{ route('billing.details',$row->id) }}" target="_blank"><span class="badge badge-sm bg-gradient-primary">Generate Reciept</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ route('billing.edit',$row->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                    Edit
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
