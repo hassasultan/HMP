@@ -22,8 +22,8 @@
                     <div class="form-group col-12">
                             <label>Driver</label>
                         <select name="driver_id"
-                            class="select2-multiple form-control fs-14  h-50px" required id="driver-id">
-                            <option selected disabled>-- Select Option --</option>
+                            class="select2-multiple form-control fs-14  h-50px"  id="driver-id" required>
+                            <option selected disabled value="">-- Select Option --</option>
                             @foreach ($driver as $col)
                                 <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->phone }}</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
