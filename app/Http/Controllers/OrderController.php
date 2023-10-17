@@ -36,7 +36,7 @@ class OrderController extends Controller
             }
             $order = $order->get();
         } else {
-            $order = Orders::OrderBy('id','DESC')->get();
+            $order = Orders::OrderBy('id', 'DESC')->get();
         }
         return view('pages.order.index', compact('order'));
     }
@@ -78,12 +78,9 @@ class OrderController extends Controller
                 $cust->gps = $request->gps;
                 $cust->contact_num = $request->contact_num;
                 $cust->standard = "Online (GPS)";
-                if(auth()->user()->role == 1)
-                {
+                if (auth()->user()->role == 1) {
                     $cust->user_id = 1;
-                }
-                else
-                {
+                } else {
                     $cust->user_id = auth()->user()->id;
                 }
                 $cust->save();
@@ -92,31 +89,27 @@ class OrderController extends Controller
             $cust = Customer::find($request->customer_id);
         }
         if ($request->has('ots')) {
-            $ord_check = Orders::where('Order_Number',$request->Order_Number)->count();
-            if($ord_check == 0)
-            {
+            $ord_check = Orders::where('Order_Number', $request->Order_Number)->count();
+            if ($ord_check == 0) {
                 $new_order = new Orders();
                 $new_order->Order_Number = $request->Order_Number;
                 if (auth()->user()->role != 1) {
                     $new_order->hydrant_id = auth()->user()->hydrant->id;
                 } else {
                     $hyd_id = $request->hydrant_id;
-                    $user = User::with('hydrant')->whereHas('hydrant', function($query)use($hyd_id){
-                        $query->where('ots_hydrant',$hyd_id);
+                    $user = User::with('hydrant')->whereHas('hydrant', function ($query) use ($hyd_id) {
+                        $query->where('ots_hydrant', $hyd_id);
                     })->first();
                     $new_order->hydrant_id = $user->hydrant_id;
                 }
                 $new_order->customer_id = $cust->id;
                 $new_order->contact_num = $request->contact_num;
-                $gallon = Truck_type::where('name',$request->gallon)->first();
+                $gallon = Truck_type::where('name', $request->gallon)->first();
                 $new_order->truck_type = $gallon->id;
                 $new_order->save();
             }
-        }
-        else
-        {
-            foreach($request->customer_id as $row)
-            {
+        } else {
+            foreach ($request->customer_id as $row) {
                 $letter = explode(' ', $request->order_type);
                 $NEW_ORDER = Orders::latest()->first();
                 if (empty($NEW_ORDER)) {
@@ -124,13 +117,10 @@ class OrderController extends Controller
                 } else {
                     $expNum = explode('-', $NEW_ORDER->Order_Number);
                 }
-                if(isset($expNum[1]))
-                {
-                    $id = strtoupper($letter[0]) .'-'. date('YmdHis') .  $expNum[1] + 1;
-                }
-                else
-                {
-                    $id = strtoupper($letter[0]) .'-'. date('YmdHis') . '-' . $expNum[0] + 1;
+                if (isset($expNum[1])) {
+                    $id = strtoupper($letter[0]) . '-' . date('YmdHis') .  $expNum[1] + 1;
+                } else {
+                    $id = strtoupper($letter[0]) . '-' . date('YmdHis') . '-' . $expNum[0] + 1;
                 }
                 // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
@@ -188,9 +178,9 @@ class OrderController extends Controller
         # code...
         $vehicle_type = Truck_type::all();
         if (auth()->user()->role != 1) {
-            $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->where('id',$id)->get();
+            $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->where('id', $id)->get();
         } else {
-            $order = Orders::doesntHave('billing')->where('id',$id)->get();
+            $order = Orders::doesntHave('billing')->where('id', $id)->get();
         }
         if (auth()->user()->role != 1) {
             $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id);
@@ -205,7 +195,7 @@ class OrderController extends Controller
             $driver = Driver::all();
         }
 
-        return view('pages.billing.create', compact('order', 'truck', 'driver','vehicle_type'));
+        return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type'));
     }
     public  function billingedit($id)
     {
@@ -230,7 +220,7 @@ class OrderController extends Controller
             $driver = Driver::all();
         }
 
-        return view('pages.billing.edit', compact('bill','order', 'truck', 'driver'));
+        return view('pages.billing.edit', compact('bill', 'order', 'truck', 'driver'));
     }
 
     public  function billingstore(Request $request)
@@ -238,11 +228,9 @@ class OrderController extends Controller
         # code...
         $data = $request->all();
         $order = Orders::find($request->order_id);
-        if($request->has('new_tanker'))
-        {
-            $check = Truck::where('truck_num',$request->reg_num)->first();
-            if(empty($check))
-            {
+        if ($request->has('new_tanker')) {
+            $check = Truck::where('truck_num', $request->reg_num)->first();
+            if (empty($check)) {
                 $truck = Truck::create([
                     "truck_num" => $request->reg_num,
                     "truck_type" => $request->turck_type,
@@ -250,31 +238,23 @@ class OrderController extends Controller
                 ]);
                 $truckId = $truck->id;
                 $data['truck_id'] = $truck->id;
-            }
-            else
-            {
+            } else {
                 $truckId = $check->id;
                 $data['truck_id'] = $check->id;
             }
-        }
-        else
-        {
+        } else {
             $truckId = $request->turck_type;
         }
-        if($request->has('new_driver'))
-        {
-            $check2 = Driver::where('phone',$request->driver_phone)->first();
-            if(empty($check2))
-            {
+        if ($request->has('new_driver')) {
+            $check2 = Driver::where('phone', $request->driver_phone)->first();
+            if (empty($check2)) {
                 $driver = Driver::create([
                     "name" => $request->driver_name,
                     "phone" => $request->driver_phone,
                     "truck_id" => $truckId,
                 ]);
                 $data['driver_id'] = $driver->id;
-            }
-            else
-            {
+            } else {
                 $data['driver_id'] = $check2->id;
             }
         }
@@ -282,17 +262,17 @@ class OrderController extends Controller
         $data['status'] = 2;
         $truck_type = Billings::create($data);
         if (auth()->user()->role != 1) {
-            return redirect()->route('billing.details',$truck_type->id);
+            return redirect()->route('billing.details', $truck_type->id);
         } else {
-            return redirect()->route('billing.details',$truck_type->id);
+            return redirect()->route('billing.details', $truck_type->id);
         }
     }
-    public  function billingupdate(Request $request,$id)
+    public  function billingupdate(Request $request, $id)
     {
         # code...
         $data = $request->except(['_token']);
         $data['status'] = 2;
-        $truck_type = Billings::where('id',$id)->update($data);
+        $truck_type = Billings::where('id', $id)->update($data);
         if (auth()->user()->role != 1) {
             return redirect()->route('hydrant.billing.list');
         } else {
@@ -351,25 +331,34 @@ class OrderController extends Controller
     {
         // dd(request('page'));
         $curl = curl_init();
-        if(request()->has('page'))
-        {
-            $new_page = '?page='.request('page');
-        }
-        else
-        {
+        if (request()->has('page')) {
+            $new_page = '?page=' . request('page');
+        } else {
             $new_page = null;
         }
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders'.$new_page,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
+        if (auth()->user()->role_id == 1) {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders' . $new_page,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+            ));
+        } else {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='.auth()->user()->hydrant->ots_hydrant . $new_page,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+            ));
+        }
         $response = curl_exec($curl);
         curl_close($curl);
         $orderData = json_decode($response, true);

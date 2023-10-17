@@ -16,6 +16,7 @@ class Hydrants extends Model
         'contact',
         'owned',
         'alternate',
+        'ots_hydrant',
         'color',
     ];
     // public function truck_type_fun()
