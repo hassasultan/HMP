@@ -11,9 +11,9 @@
                 <div class="col-6">
                     <h6 class="text-white text-capitalize ps-3">Billing List</h6>
                 </div>
-                <div class="col-6 text-end">
+                {{-- <div class="col-6 text-end">
                     <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('billing.create') }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
-                </div>
+                </div> --}}
             </div>
           </div>
         </div>

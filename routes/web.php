@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
     Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
     Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
-    Route::get('create/billing', [App\Http\Controllers\OrderController::class, 'billingcreate'])->name('billing.create');
+    Route::get('create/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingcreate'])->name('billing.create');
     Route::get('edit/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingedit'])->name('billing.edit');
     Route::post('store/billing', [App\Http\Controllers\OrderController::class, 'billingstore'])->name('billing.store');
     Route::post('update/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingupdate'])->name('billing.update');

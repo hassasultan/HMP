@@ -183,14 +183,14 @@ class OrderController extends Controller
         }
         return view('pages.billing.index', compact('billing'));
     }
-    public  function billingcreate()
+    public  function billingcreate($id)
     {
         # code...
         $vehicle_type = Truck_type::all();
         if (auth()->user()->role != 1) {
-            $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->get();
+            $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->where('id',$id)->get();
         } else {
-            $order = Orders::doesntHave('billing')->get();
+            $order = Orders::doesntHave('billing')->where('id',$id)->get();
         }
         if (auth()->user()->role != 1) {
             $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id);

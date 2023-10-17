@@ -40,6 +40,9 @@
                                         Vehicle Type </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Generate Bill </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created_at</th>
                                     {{-- <th class="text-secondary opacity-7"></th> --}}
                                 </tr>
@@ -80,6 +83,9 @@
                                                 </p>
                                             </td>
 
+                                            <td class="align-middle text-center">
+                                                <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('billing.create',$row->id) }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
+                                            </td>
                                             <td class="align-middle text-center">
                                                 <span
                                                     class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>

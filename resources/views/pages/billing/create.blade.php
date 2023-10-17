@@ -52,7 +52,7 @@
                         <label>Order</label>
                         <select name="order_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
-                            <option selected disabled>-- Select Option --</option>
+                            {{-- <option selected disabled>-- Select Option --</option> --}}
 
                             @foreach ($order as $col)
                                 <option value="{{ $col->id }}">{{ $col->Order_Number }}</option>
