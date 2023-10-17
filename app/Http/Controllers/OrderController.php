@@ -141,7 +141,7 @@ class OrderController extends Controller
                 $data[] = $request->all();
                 $data['customer_id'] = $row;
                 $truck_type = Orders::create($request->all());
-                dd($truck_type);
+                // dd($truck_type);
                 if (auth()->user()->role != 1) {
                     $truck_type->hydrant_id = auth()->user()->hydrant->id;
                 } else {
