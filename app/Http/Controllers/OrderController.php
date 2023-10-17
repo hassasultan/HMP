@@ -241,7 +241,7 @@ class OrderController extends Controller
         if($request->has('new_tanker'))
         {
             $check = Truck::where('truck_num',$request->reg_num)->first();
-            if(count($check) == 0)
+            if(empty($check))
             {
                 $truck = Truck::create([
                     "truck_num" => $request->reg_num,
@@ -264,7 +264,7 @@ class OrderController extends Controller
         if($request->has('new_driver'))
         {
             $check2 = Driver::where('phone',$request->driver_phone)->first();
-            if(count($check2) == 0)
+            if(empty($check2))
             {
                 $driver = Driver::create([
                     "name" => $request->driver_name,
