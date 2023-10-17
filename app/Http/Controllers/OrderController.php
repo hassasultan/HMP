@@ -138,9 +138,9 @@ class OrderController extends Controller
                 $request['Order_Number'] = $id;
 
                 //output: INV-000001
-                $data[] = $request->all();
+                $data = $request->all();
                 $data['customer_id'] = $row;
-                $truck_type = Orders::create($request->all());
+                $truck_type = Orders::create($data);
                 // dd($truck_type);
                 if (auth()->user()->role != 1) {
                     $truck_type->hydrant_id = auth()->user()->hydrant->id;
