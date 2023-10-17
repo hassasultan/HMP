@@ -36,7 +36,7 @@ class OrderController extends Controller
             }
             $order = $order->get();
         } else {
-            $order = Orders::all();
+            $order = Orders::OrderBy('DESC','id')->get();
         }
         return view('pages.order.index', compact('order'));
     }
