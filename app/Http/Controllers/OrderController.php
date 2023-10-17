@@ -118,7 +118,7 @@ class OrderController extends Controller
             foreach($request->customer_id as $row)
             {
                 $letter = explode(' ', $request->order_type);
-                // dd($letter[0]);
+                dd($letter[0]);
                 $NEW_ORDER = Orders::latest()->first();
                 if (empty($NEW_ORDER)) {
                     $expNum[1] = 0;
