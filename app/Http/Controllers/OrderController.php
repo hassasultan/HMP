@@ -118,7 +118,6 @@ class OrderController extends Controller
             foreach($request->customer_id as $row)
             {
                 $letter = explode(' ', $request->order_type);
-                dd($letter[0]);
                 $NEW_ORDER = Orders::latest()->first();
                 if (empty($NEW_ORDER)) {
                     $expNum[1] = 0;
@@ -137,6 +136,8 @@ class OrderController extends Controller
 
                 // dd($id);
                 $request['Order_Number'] = $id;
+                dd($request['Order_Number']);
+
                 //output: INV-000001
                 $truck_type = Orders::create($request->all());
                 if (auth()->user()->role != 1) {
