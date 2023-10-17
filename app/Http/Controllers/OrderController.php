@@ -34,7 +34,7 @@ class OrderController extends Controller
                     $q->where('standard', '!=', 'Commercial');
                 });
             }
-            $order = $order->get();
+            $order = $order->OrderBy('id', 'DESC')->get();
         } else {
             $order = Orders::OrderBy('id', 'DESC')->get();
         }
@@ -118,9 +118,25 @@ class OrderController extends Controller
                     $expNum = explode('-', $NEW_ORDER->Order_Number);
                 }
                 if (isset($expNum[1])) {
-                    $id = strtoupper($letter[0]) . '-' . date('YmdHis') .  $expNum[1] + 1;
+                    if(isset($letter[1]))
+                    {
+                        $id = strtoupper($letter[1]) . '-' . date('YmdHis') .  $expNum[1] + 1;
+                    }
+                    else
+                    {
+                        $id = strtoupper($letter[0]) . '-' . date('YmdHis') .  $expNum[1] + 1;
+
+                    }
                 } else {
-                    $id = strtoupper($letter[0]) . '-' . date('YmdHis') . '-' . $expNum[0] + 1;
+                    if(isset($letter[1]))
+                    {
+                        $id = strtoupper($letter[1]) . '-' . date('YmdHis') . '-' . $expNum[0] + 1;
+                    }
+                    else
+                    {
+                        $id = strtoupper($letter[0]) . '-' . date('YmdHis') . '-' . $expNum[0] + 1;
+
+                    }
                 }
                 // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
