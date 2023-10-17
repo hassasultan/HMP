@@ -126,11 +126,11 @@ class OrderController extends Controller
                 }
                 if(isset($expNum[1]))
                 {
-                    $id = strtoupper($letter[0]) . date('YmdHis') . $expNum[1] + 1;
+                    $id = strtoupper($letter[0]) . date('YmdHis') . '-' . $expNum[1] + 1;
                 }
                 else
                 {
-                    $id = strtoupper($letter[0]) . date('YmdHis') . $expNum[0] + 1;
+                    $id = strtoupper($letter[0]) . date('YmdHis') . '-' . $expNum[0] + 1;
                 }
                 // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
