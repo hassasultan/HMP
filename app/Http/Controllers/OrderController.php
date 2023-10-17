@@ -126,20 +126,22 @@ class OrderController extends Controller
                 }
                 if(isset($expNum[1]))
                 {
-                    $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
+                    $id = strtoupper($letter[0]) . date('YmdHis') . $expNum[1] + 1;
                 }
                 else
                 {
-                    $id = strtoupper($letter[0]) . '-0000' . $expNum[0] + 1;
+                    $id = strtoupper($letter[0]) . date('YmdHis') . $expNum[0] + 1;
                 }
                 // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
                 // dd($id);
                 $request['Order_Number'] = $id;
-                dd($request['Order_Number']);
 
                 //output: INV-000001
+                $data[] = $request->all();
+                $data['customer_id'] = $row;
                 $truck_type = Orders::create($request->all());
+                dd($truck_type);
                 if (auth()->user()->role != 1) {
                     $truck_type->hydrant_id = auth()->user()->hydrant->id;
                 } else {
