@@ -454,11 +454,11 @@
         $(function() {
             $("#example1").DataTable({
                 "paging": true,
-                "lengthChange": false,
+                // "lengthChange": false,
                 "searching": true,
                 // "ordering": true,
-                "info": true,
-                "autoWidth": false,
+                // "info": true,
+                // "autoWidth": false,
                 "responsive": true,
             });
             $('#example2').DataTable({
