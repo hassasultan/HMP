@@ -115,41 +115,44 @@ class OrderController extends Controller
         }
         else
         {
-
-            $letter = str_split($cust->address);
-            $NEW_ORDER = Orders::latest()->first();
-            if (empty($NEW_ORDER)) {
-                $expNum[1] = 0;
-            } else {
-                $expNum = explode('-', $NEW_ORDER->Order_Number);
-            }
-            if(isset($expNum[1]))
+            foreach($request->customer_id as $row)
             {
-                $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
-            }
-            else
-            {
-                $id = strtoupper($letter[0]) . '-0000' . $expNum[0] + 1;
-            }
-            // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
+                $letter = explode(' ', $request->order_type);
+                // dd($letter[0]);
+                $NEW_ORDER = Orders::latest()->first();
+                if (empty($NEW_ORDER)) {
+                    $expNum[1] = 0;
+                } else {
+                    $expNum = explode('-', $NEW_ORDER->Order_Number);
+                }
+                if(isset($expNum[1]))
+                {
+                    $id = strtoupper($letter[0]) . '-0000' . $expNum[1] + 1;
+                }
+                else
+                {
+                    $id = strtoupper($letter[0]) . '-0000' . $expNum[0] + 1;
+                }
+                // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
 
-            // dd($id);
-            $request['Order_Number'] = $id;
-            //output: INV-000001
-            $truck_type = Orders::create($request->all());
-            if (auth()->user()->role != 1) {
-                $truck_type->hydrant_id = auth()->user()->hydrant->id;
-            } else {
-                $truck_type->hydrant_id = $request->hydrant_id;
+                // dd($id);
+                $request['Order_Number'] = $id;
+                //output: INV-000001
+                $truck_type = Orders::create($request->all());
+                if (auth()->user()->role != 1) {
+                    $truck_type->hydrant_id = auth()->user()->hydrant->id;
+                } else {
+                    $truck_type->hydrant_id = $request->hydrant_id;
+                }
+                $truck_type->Order_Number = $id;
+                $truck_type->customer_id = $row;
+                $truck_type->save();
             }
-            $truck_type->Order_Number = $id;
-            $truck_type->customer_id = $request->customer_id;
-            $truck_type->save();
         }
         if (auth()->user()->role != 1) {
-            return redirect()->route('hydrant.order.list');
+            return redirect()->back();
         } else {
-            return redirect()->route('order.list');
+            return redirect()->back();
         }
     }
 
@@ -180,6 +183,7 @@ class OrderController extends Controller
     public  function billingcreate()
     {
         # code...
+        $vehicle_type = Truck_type::all();
         if (auth()->user()->role != 1) {
             $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->get();
         } else {
@@ -198,7 +202,7 @@ class OrderController extends Controller
             $driver = Driver::all();
         }
 
-        return view('pages.billing.create', compact('order', 'truck', 'driver'));
+        return view('pages.billing.create', compact('order', 'truck', 'driver','vehicle_type'));
     }
     public  function billingedit($id)
     {
@@ -230,12 +234,54 @@ class OrderController extends Controller
     {
         # code...
         $data = $request->all();
+        $order = Orders::find($request->order_id);
+        if($request->has('new_tanker'))
+        {
+            $check = Truck::where('truck_num',$request->reg_num)->first();
+            if(count($check) == 0)
+            {
+                $truck = Truck::create([
+                    "truck_num" => $request->reg_num,
+                    "truck_type" => $request->turck_type,
+                    "hydrant_id" => $order->hydrant_id,
+                ]);
+                $truckId = $truck->id;
+                $data['truck_id'] = $truck->id;
+            }
+            else
+            {
+                $truckId = $check->id;
+                $data['truck_id'] = $check->id;
+            }
+        }
+        else
+        {
+            $truckId = $request->turck_type;
+        }
+        if($request->has('new_driver'))
+        {
+            $check2 = Driver::where('phone',$request->driver_phone)->first();
+            if(count($check2) == 0)
+            {
+                $driver = Driver::create([
+                    "name" => $request->driver_name,
+                    "phone" => $request->driver_phone,
+                    "truck_id" => $truckId,
+                ]);
+                $data['driver_id'] = $driver->id;
+            }
+            else
+            {
+                $data['driver_id'] = $check2->id;
+            }
+        }
+
         $data['status'] = 2;
         $truck_type = Billings::create($data);
         if (auth()->user()->role != 1) {
-            return redirect()->route('hydrant.billing.list');
+            return redirect()->route('billing.details',$truck_type->id);
         } else {
-            return redirect()->route('billing.list');
+            return redirect()->route('billing.details',$truck_type->id);
         }
     }
     public  function billingupdate(Request $request,$id)

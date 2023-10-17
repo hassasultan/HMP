@@ -34,7 +34,7 @@
                     <select name="customer_id"
                         class="select2-multiple form-control fs-14  h-50px" required>
                         @foreach ($customer as $col)
-                            <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->address }} {{ $col->street }}</option>
+                            <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->address }} {{ $col->street }} {{ $col->contact_num }}</option>
                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                         @endforeach
                     </select>

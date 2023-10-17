@@ -22,13 +22,30 @@
                     <div class="form-group col-12">
                             <label>Driver</label>
                         <select name="driver_id"
-                            class="select2-multiple form-control fs-14  h-50px" required>
+                            class="select2-multiple form-control fs-14  h-50px" required id="driver-id">
                             <option selected disabled>-- Select Option --</option>
                             @foreach ($driver as $col)
                                 <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->phone }}</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group mt-2 col-12">
+                        <input type="checkbox"   name="new_driver" id="checkbox"/>
+                        <label for="checkbox">New Driver</label>
+
+                    </div>
+                    <div class="form-group d-none" id="new-driver-div">
+                        <div class="form-group col-12">
+                            <label>Driver Name</label>
+                            <input type="text" class="form-control border-bottom" placeholder="Enter Driver Name..." name="driver_name" id="driver-name" value="{{ old('driver_name') }}" />
+
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Driver Phone</label>
+                            <input type="number" class="form-control border-bottom" placeholder="Enter Driver Phone..." name="driver_phone" id="driver-phone" value="{{ old('driver_phone') }}" />
+
+                        </div>
                     </div>
 
                     <div class="form-group col-12">
@@ -46,11 +63,40 @@
                     <div class="form-group col-12">
                         <label>Vehicle</label>
                         <select name="truck_id"
-                            class="select2-multiple form-control fs-14  h-50px" required>
+                            class="select2-multiple form-control fs-14  h-50px" required id="vehicle-id">
                             <option selected disabled>-- Select Option --</option>
 
                             @foreach ($truck as $col)
                                 <option value="{{ $col->id }}">{{ $col->hydrant->name }} - {{ $col->truckCap->name }} - {{ $col->name }} : {{ $col->truck_num }} ({{ $col->company_name }})</option>
+                                {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mt-2 col-12">
+                        <input type="checkbox"   name="new_tanker" id="tanker-checkbox"/>
+                        <label for="checkbox">New Tanker</label>
+
+                    </div>
+                    <div class="form-group d-none" id="new-tanker-div">
+                        <div class="form-group col-12">
+                            <label>Registration Number</label>
+                            <input type="text" class="form-control border-bottom" placeholder="Enter Registration Number..." name="reg_num" id="reg-num" value="{{ old('reg_num') }}" />
+
+                        </div>
+                        {{-- <div class="form-group col-12">
+                            <label>Driver Phone</label>
+                            <input type="number" class="form-control border-bottom" placeholder="Enter Driver Phone..." name="driver_phone" value="{{ old('driver_phone') }}" />
+
+                        </div> --}}
+                    </div>
+                    <div class="form-group col-12">
+                        <label>Gallon</label>
+                        <select name="turck_type"
+                            class="select2-multiple form-control fs-14  h-50px" required>
+                            <option selected disabled>-- Select Option --</option>
+
+                            @foreach ($vehicle_type as $col)
+                                <option value="{{ $col->id }}">{{ $col->name }}</option>
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                             @endforeach
                         </select>
@@ -76,5 +122,40 @@
   </div>
 </div>
 
+<script>
+    $("#checkbox").change(function(){
+        if(this.checked == true)
+        {
+            $("#new-driver-div").removeClass('d-none');
+            $("#driver-id").attr('disabled',true);
+            $("#driver-name").attr('required',true);
+            $("#driver-phone").attr('required',true);
 
+        }
+        else
+        {
+            $("#new-driver-div").addClass('d-none');
+            $("#driver-id").attr('disabled',false);
+            $("#driver-name").attr('required',false);
+            $("#driver-phone").attr('required',false);
+
+        }
+    });
+    $("#tanker-checkbox").change(function(){
+        if(this.checked == true)
+        {
+            $("#new-tanker-div").removeClass('d-none');
+            $("#vehicle-id").attr('disabled',true);
+            $("#reg-num").attr('required',true);
+        }
+        else
+        {
+            $("#new-tanker-div").addClass('d-none');
+            $("#vehicle-id").attr('disabled',false);
+            $("#reg-num").attr('required',false);
+
+
+        }
+    });
+</script>
 @endsection
