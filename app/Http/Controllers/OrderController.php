@@ -275,7 +275,8 @@ class OrderController extends Controller
                 $data['driver_id'] = $check2->id;
             }
         }
-
+        $order->truck_type = $request->turck_type;
+        $order->save();
         $data['status'] = 2;
         $truck_type = Billings::create($data);
         if (auth()->user()->role != 1) {
