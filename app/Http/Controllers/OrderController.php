@@ -120,21 +120,21 @@ class OrderController extends Controller
                 if (isset($expNum[1])) {
                     if(isset($letter[1]))
                     {
-                        $id = strtoupper($letter[1]) . '-' . date('YmdHis') .  $expNum[1] + 1;
+                        $id = strtoupper($letter[1]) . '-' . date('YmdHis');
                     }
                     else
                     {
-                        $id = strtoupper($letter[0]) . '-' . date('YmdHis') .  $expNum[1] + 1;
+                        $id = strtoupper($letter[0]) . '-' . date('YmdHis');
 
                     }
                 } else {
                     if(isset($letter[1]))
                     {
-                        $id = strtoupper($letter[1]) . '-' . date('YmdHis') . '-' . $expNum[0] + 1;
+                        $id = strtoupper($letter[1]) . '-' . date('YmdHis');
                     }
                     else
                     {
-                        $id = strtoupper($letter[0]) . '-' . date('YmdHis') . '-' . $expNum[0] + 1;
+                        $id = strtoupper($letter[0]) . '-' . date('YmdHis');
 
                     }
                 }
