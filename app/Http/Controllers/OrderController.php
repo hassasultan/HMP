@@ -242,7 +242,7 @@ class OrderController extends Controller
     public  function billingstore(Request $request)
     {
         # code...
-        dd($request->all());
+        // dd($request->all());
         $data = $request->all();
         $order = Orders::find($request->order_id);
         if ($request->has('new_tanker')) {
@@ -260,7 +260,7 @@ class OrderController extends Controller
                 $data['truck_id'] = $check->id;
             }
         } else {
-            $truckId = $request->turck_type;
+            $truckId = $request->truck_id;
         }
         if ($request->has('new_driver')) {
             $check2 = Driver::where('phone', $request->driver_phone)->first();
