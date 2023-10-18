@@ -72,8 +72,13 @@
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="text-center font-weight-bold mb-0">{{ $row->customer->standard }}
-                                                </p>
+                                                @if ($row->order_type != null)
+                                                    <p class="text-center font-weight-bold mb-0">
+                                                        {{ $row->order_type }}</p>
+                                                @else
+                                                    <p class="text-center font-weight-bold mb-0">
+                                                        {{ $row->customer->standard }}</p>
+                                                @endif
                                             </td>
                                             <td>
                                                 <p class="text-xs text-secondary mb-0">{{ $row->contact_num }}</p>
