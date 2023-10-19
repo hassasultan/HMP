@@ -226,7 +226,7 @@
                         <p class="font-weight-bold">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
-                        $date = \Carbon\Carbon::parse($billing->order->created_at);
+                        $date = \Carbon\Carbon::parse($billing->created_at);
                         $date->toDateString();
                         $url = route('billing.details', $billing->id);
                     @endphp
