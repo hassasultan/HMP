@@ -127,11 +127,14 @@
                                                             value='1' class="bg-success">
                                                             Completed</option>
                                                         <option @if ($row->status == 2) selected @endif
-                                                            value='2' class="bg-danger">
+                                                            value='2' class="bg-primary">
                                                             Dispatch</option>
                                                         <option @if ($row->status == 0) selected @endif
-                                                            value='0' class="bg-danger">
+                                                            value='0' class="bg-warning">
                                                             Pending</option>
+                                                        <option @if ($row->status == 3) selected @endif
+                                                            value='3' class="bg-danger">
+                                                            Cancelled</option>
                                                     </select>
                                                 </div>
                                             </td>
