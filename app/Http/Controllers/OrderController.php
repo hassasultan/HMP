@@ -183,9 +183,9 @@ class OrderController extends Controller
                     $q->where('standard', '!=', 'Commercial');
                 });
             }
-            $billing = $billing->get();
+            $billing = $billing->OrderBy('id', 'DESC')->get();
         } else {
-            $billing = Billings::all();
+            $billing = Billings::OrderBy('id', 'DESC')->get();
         }
         return view('pages.billing.index', compact('billing'));
     }
