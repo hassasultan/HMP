@@ -203,7 +203,8 @@
                         {!! \QrCode::size(150)->generate($url) !!}
                     </div>
                     <div class="col-12  text-center pt-4">
-                        <p style="line-height: 1.2 !important">if any Complaint/Query Contact Service Care on Phone 99245138 - 99245140. www.kwsb.gos.pk</p>
+                        <p style="line-height: 1.2 !important">if any Complaint/Query Contact Service Care on Phone
+                            99245138 - 99245140. www.kwsb.gos.pk</p>
                     </div>
                 </div>
             </div>
@@ -244,7 +245,6 @@
                         <div class="col-6">
                             <p class="font-weight-bold">{{ $billing->order->order_type }}</p>
                         </div>
-
                     @else
                         <div class="col-6">
                             <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
@@ -322,43 +322,44 @@
                     <div class="col-6">
                         <p class="font-weight-bold">{{ $billing->driver->phone }}</p>
                     </div>
+                    @if ($billing->order->order_type != 'Dc quota')
+                        <div class="col-6">
+                            <p class="font-weight-bold">Extra Per KM amount:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold"> Rs. {{ number_format($billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Extra Per KM amount:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold"> Rs. {{ number_format($billing->km_amount) }}</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Invoice amount:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold"> Rs.
+                                {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Invoice amount:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold"> Rs.
-                            {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Paid:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Rs.0</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Paid:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">Rs.0</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Balance:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">
+                                {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Balance:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">
-                            {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
-                    </div>
-
-                    <div class="col-6">
-                        <p class="font-weight-bold">Payment mode:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">COD</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Payment mode:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">COD</p>
+                        </div>
+                    @endif
                     {!! \QrCode::size(150)->generate($url) !!}
 
                 </div>
@@ -535,7 +536,7 @@
             print_area.document.write('<html>');
             print_area.document.write(
                 '<link rel="dns-prefetch" href="//fonts.gstatic.com"><link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /><link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" /><link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" /><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
-                );
+            );
             print_area.document.write('<body>');
             print_area.document.write(elem.innerHTML);
             print_area.document.write('</body></html>');
