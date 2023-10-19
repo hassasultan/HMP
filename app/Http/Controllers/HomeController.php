@@ -69,6 +69,7 @@ class HomeController extends Controller
             {
                 $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
             })->count();
+            $dc = Orders::with('billing')->where('order_type',"Dc quota")->count();
             $today_comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
@@ -116,6 +117,8 @@ class HomeController extends Controller
             {
                 $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
             })->where('hydrant_id',auth()->user()->hydrant_id)->count();
+            $dc = Orders::with('billing')->where('order_type',"Dc quota")->count();
+
             $today_comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
@@ -173,7 +176,7 @@ class HomeController extends Controller
             $data['today_dc'] = $today_dc;
             return $data;
         }
-        return view('home',compact('today_dc','customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
+        return view('home',compact('today_dc','dc','customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
     }
     public function driver(Request $request)
     {
