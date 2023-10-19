@@ -367,7 +367,7 @@ class OrderController extends Controller
             ));
         } else {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='.auth()->user()->hydrant->ots_hydrant . $new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders' . $new_page.'&hydrant_id='.auth()->user()->hydrant->ots_hydrant,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
