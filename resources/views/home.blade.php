@@ -345,7 +345,7 @@ $.ajax({
             <div class="col-md-7 p-2 ">
                 <div class="card text-center p-3 m-3">
                     <h6>DC Qouta Today</h6>
-                    <b class="fs-5" id="today-comm">0</b>
+                    <b class="fs-5" id="today-comm">{{ $today_dc }}</b>
                 </div>
                 <div class="card text-center p-5">
                     <h6>Total Today Orders</h6>
