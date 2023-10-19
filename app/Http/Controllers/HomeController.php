@@ -77,6 +77,10 @@ class HomeController extends Controller
             {
                 $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
             })->whereDay('created_at', '=', date('d'))->count();
+            $today_dc = Orders::with('customer')->whereHas('customer',function($query)
+            {
+                $query->whereIn('standard',["Dc quota"]);
+            })->where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->count();
             $hydrants = Hydrants::with('vehicles')->get();
             $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->get();
             // dd($today->toArray());
