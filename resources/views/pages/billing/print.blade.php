@@ -87,9 +87,15 @@
                     <div class="col-6">
                         <p class="font-weight-bold">Order Type:</p>
                     </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
-                    </div>
+                    @if ($billing->order->order_type != null)
+                        <div class="col-6">
+                            <p class="font-weight-bold">{{ $billing->order->order_type }}</p>
+                        </div>
+                    @else
+                        <div class="col-6">
+                            <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
+                        </div>
+                    @endif
 
                     <div class="col-6">
                         <p class="font-weight-bold">Customer Contact:</p>
@@ -163,42 +169,44 @@
                         <p class="font-weight-bold">{{ $billing->driver->phone }}</p>
                     </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Extra Per KM amount:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold"> Rs. {{ number_format($billing->km_amount) }}</p>
-                    </div>
+                    @if ($billing->order->order_type != 'Dc quota')
+                        <div class="col-6">
+                            <p class="font-weight-bold">Extra Per KM amount:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold"> Rs. {{ number_format($billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Invoice amount:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold"> Rs.
-                            {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Invoice amount:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold"> Rs.
+                                {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Paid:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">Rs.0</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Paid:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Rs.0</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Balance:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">
-                            {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Balance:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">
+                                {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Payment mode:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">COD</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Payment mode:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">COD</p>
+                        </div>
+                    @endif
                     <div class="col-12 text-center">
                         {!! \QrCode::size(150)->generate($url) !!}
                     </div>
@@ -397,9 +405,15 @@
                     <div class="col-6">
                         <p class="font-weight-bold">Order Type:</p>
                     </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
-                    </div>
+                    @if ($billing->order->order_type != null)
+                        <div class="col-6">
+                            <p class="font-weight-bold">{{ $billing->order->order_type }}</p>
+                        </div>
+                    @else
+                        <div class="col-6">
+                            <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
+                        </div>
+                    @endif
 
                     <div class="col-6">
                         <p class="font-weight-bold">Customer Contact:</p>
@@ -473,42 +487,44 @@
                         <p class="font-weight-bold">{{ $billing->driver->phone }}</p>
                     </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Extra Per KM amount:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold"> Rs. {{ number_format($billing->km_amount) }}</p>
-                    </div>
+                    @if ($billing->order->order_type != 'Dc quota')
+                        <div class="col-6">
+                            <p class="font-weight-bold">Extra Per KM amount:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold"> Rs. {{ number_format($billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Invoice amount:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold"> Rs.
-                            {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Invoice amount:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold"> Rs.
+                                {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Paid:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">Rs.0</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Paid:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Rs.0</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Balance:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">
-                            {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Balance:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">
+                                {{ number_format((int) $billing->amount + (int) $billing->km_amount) }}</p>
+                        </div>
 
-                    <div class="col-6">
-                        <p class="font-weight-bold">Payment mode:</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">COD</p>
-                    </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">Payment mode:</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="font-weight-bold">COD</p>
+                        </div>
+                    @endif
                     {!! \QrCode::size(150)->generate($url) !!}
 
                 </div>
