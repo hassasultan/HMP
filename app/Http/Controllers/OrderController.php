@@ -350,13 +350,13 @@ class OrderController extends Controller
         // dd(request('page'));
         $curl = curl_init();
         if (request()->has('page')) {
-            $new_page = '?page=' . request('page');
+            $new_page = 'page=' . request('page');
         } else {
             $new_page = null;
         }
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders' . $new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $new_page,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -367,7 +367,7 @@ class OrderController extends Controller
             ));
         } else {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders' . $new_page.'&hydrant_id='.auth()->user()->hydrant->ots_hydrant,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='.auth()->user()->hydrant->ots_hydrant.'&'.$new_page,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -381,7 +381,6 @@ class OrderController extends Controller
         curl_close($curl);
         $orderData = json_decode($response, true);
         $orderData = $orderData['data'];
-        dd($orderData);
         $total = $orderData['total'];
         $count = $orderData['count'];
         $perPage = $orderData['per_page'];
