@@ -240,9 +240,16 @@
                     <div class="col-6">
                         <p class="font-weight-bold">Order Type:</p>
                     </div>
-                    <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
-                    </div>
+                    @if ($billing->order->order_type != null)
+                        <div class="col-6">
+                            <p class="font-weight-bold">{{ $billing->order->order_type }}</p>
+                        </div>
+
+                    @else
+                        <div class="col-6">
+                            <p class="font-weight-bold">{{ $billing->order->customer->standard }}</p>
+                        </div>
+                    @endif
 
                     <div class="col-6">
                         <p class="font-weight-bold">Customer Contact:</p>
