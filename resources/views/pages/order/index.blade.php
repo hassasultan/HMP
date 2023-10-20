@@ -89,7 +89,7 @@
                                             </td>
 
                                             <td class="align-middle text-center">
-                                                @if(count($row->billing) > 0)
+                                                @if($row->billing != null)
                                                     <span class="badge badge-orimary">Already generated</span>
                                                 @else
                                                     <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('billing.create',$row->id) }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
