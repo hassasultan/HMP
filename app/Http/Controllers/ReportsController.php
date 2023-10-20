@@ -214,4 +214,28 @@ class ReportsController extends Controller
         return view('pages.reports.daily-report', compact('startDate', 'endDate', 'hydrants_name','standards','reportData'));
         // return view('pages.reports.report');
     }
+
+    public function generate_hydrants_reports(Request $request)
+    {
+        $dateS = $request->from_date;
+        $dateE = $request->to_date;
+        $hydrants = Hydrants::with('orders','orders.billing')->whereHas('orders.billing',function($query)use($dateS, $dateE) {
+            $query->whereBetween('created_at', [$dateS,$dateE]);
+        });
+        if(auth()->user()->role == 1)
+        {
+            if ($request->hydrant_id != "all")
+            {
+                $hydrants = $hydrants->where('id',$request->hydrant_id)->get();
+            } else {
+                $hydrants = $hydrants->get();
+            }
+        }
+        else
+        {
+            $hydrants = $hydrants->where('id',auth()->user()->hydrant->id)->get();
+        }
+        // dd($hydrants->toArray());
+        return view('pages.reports.hydrants-report', compact('dateS', 'dateE','hydrants'));
+    }
 }

@@ -31,7 +31,6 @@ Route::prefix('/admin')->group(function () {
 
         Route::get('change/driver/active/status', [App\Http\Controllers\HomeController::class, 'changeDriverActiveStatus'])->name('change.driver.active.status');
 
-        Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
 
         Route::get('generate/reports', [App\Http\Controllers\ReportsController::class, 'generate_report'])->name('generate.reports');
         Route::get('generate/reports/daily-reports', [App\Http\Controllers\ReportsController::class, 'generate_report_standard'])->name('generate.report.standard');
@@ -84,6 +83,12 @@ Route::get('vehicle/details/{id}', [App\Http\Controllers\HomeController::class, 
 Route::get('billing/details/{id}', [App\Http\Controllers\OrderController::class, 'billingReciept'])->name('billing.details');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
+    Route::get('hydrants/reports/orders', [App\Http\Controllers\ReportsController::class, 'generate_hydrants_reports'])->name('generate.report.hydrant.orders');
+
+
+
     Route::get('/get/ots/order-list', [App\Http\Controllers\OrderController::class, 'get_ots_order'])->name('ots.order.list');
     Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
     Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');

@@ -1,101 +1,154 @@
 @extends('layouts.app')
 @section('content')
-
-<div class="row">
-    <div class="col-12">
-      <div class="card my-4">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <div class="row">
-                <div class="col-6">
-                    <h6 class="text-white text-capitalize ps-3">Reports/Trips</h6>
-                </div>
-                {{-- <div class="col-6 text-end">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-white text-capitalize ps-3">Reports/Trips</h6>
+                            </div>
+                            {{-- <div class="col-6 text-end">
                     <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('compaints-type-management.create') }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
                 </div> --}}
-            </div>
-          </div>
-        </div>
-        <div class="card-body px-0 pb-2">
-            <div class="p-4">
-                <h5>Generate Report/Trips</h5>
-                <div class="card p-2">
-                    <h6>Order Report in Gallons</h6>
-                    <div class="p-3">
-                        <form role="form" method="get" action="{{ route('generate.reports') }}" enctype="multipart/form-data">
-                            <div class="row">
-
-                                <div class="form-group col-6 p-3">
-                                    <label>From Date</label>
-                                    <input type="date" class="form-control border-bottom" placeholder="Enter Customer Title..." name="from_date" value="{{ old('title') }}" required/>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <label>To Date</label>
-                                    <input type="date" class="form-control border-bottom" placeholder="Enter Customer Title..." name="to_date" value="{{ old('title') }}" required/>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <label>Select Reports/Trips</label>
-                                    <select name="category" class="select2-multiple form-control border-bottom">
-                                        <option value="reports">Daily Reports</option>
-                                        {{-- <option value="trips">Daily Trips</option> --}}
-                                    </select>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <label>Hydrants</label>
-                                    <select name="hydrant_id" class="select2-multiple form-control border-bottom">
-                                        <option value="all">All</option>
-                                        @foreach ($hydrants as $row)
-                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <button type="submit" class="btn bg-gradient-primary btn-lg ">Create</button>
-                                </div>
-                            </div>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
-                <div class="card p-2 mt-2">
-                    <h6>Order Report in Standards</h6>
-                    <div class="p-3">
-                        <form role="form" method="get" action="{{ route('generate.report.standard') }}" enctype="multipart/form-data">
-                            <div class="row">
+                <div class="card-body px-0 pb-2">
+                    <div class="p-4">
+                        <h5>Generate Report/Trips</h5>
+                        <div class="card p-2">
+                            <h6>Order Report in Gallons</h6>
+                            <div class="p-3">
+                                <form role="form" method="get" action="{{ route('generate.reports') }}"
+                                    enctype="multipart/form-data">
+                                    <div class="row">
 
-                                <div class="form-group col-6 p-3">
-                                    <label>From Date</label>
-                                    <input type="date" class="form-control border-bottom" placeholder="Enter Customer Title..." name="from_date" value="{{ old('title') }}" required/>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <label>To Date</label>
-                                    <input type="date" class="form-control border-bottom" placeholder="Enter Customer Title..." name="to_date" value="{{ old('title') }}" required/>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <label>Select Reports/Trips</label>
-                                    <select name="category" class="select2-multiple form-control border-bottom">
-                                        {{-- <option value="reports">Daily Reports</option> --}}
-                                        <option value="trips">Daily Trips</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <label>Hydrants</label>
-                                    <select name="hydrant_id" class="select2-multiple form-control border-bottom">
-                                        {{-- <option value="all">All</option> --}}
-                                        @foreach ($hydrants as $row)
-                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-6 p-3">
-                                    <button type="submit" class="btn bg-gradient-primary btn-lg ">Create</button>
-                                </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>From Date</label>
+                                            <input type="date" class="form-control border-bottom"
+                                                placeholder="Enter Customer Title..." name="from_date"
+                                                value="{{ old('title') }}" required />
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>To Date</label>
+                                            <input type="date" class="form-control border-bottom"
+                                                placeholder="Enter Customer Title..." name="to_date"
+                                                value="{{ old('title') }}" required />
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>Select Reports/Trips</label>
+                                            <select name="category" class="select2-multiple form-control border-bottom">
+                                                <option value="reports">Daily Reports</option>
+                                                {{-- <option value="trips">Daily Trips</option> --}}
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>Hydrants</label>
+                                            <select name="hydrant_id" class="select2-multiple form-control border-bottom">
+                                                <option value="all">All</option>
+                                                @foreach ($hydrants as $row)
+                                                    <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <button type="submit" class="btn bg-gradient-primary btn-lg ">Create</button>
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
+                        </div>
+                        <div class="card p-2 mt-2">
+                            <h6>Order Report in Standards</h6>
+                            <div class="p-3">
+                                <form role="form" method="get" action="{{ route('generate.report.standard') }}"
+                                    enctype="multipart/form-data">
+                                    <div class="row">
 
-                        </form>
-                    </div>
-                </div>
-                {{-- <div class="p-3">
+                                        <div class="form-group col-6 p-3">
+                                            <label>From Date</label>
+                                            <input type="date" class="form-control border-bottom"
+                                                placeholder="Enter Customer Title..." name="from_date"
+                                                value="{{ old('title') }}" required />
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>To Date</label>
+                                            <input type="date" class="form-control border-bottom"
+                                                placeholder="Enter Customer Title..." name="to_date"
+                                                value="{{ old('title') }}" required />
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>Select Reports/Trips</label>
+                                            <select name="category" class="select2-multiple form-control border-bottom">
+                                                {{-- <option value="reports">Daily Reports</option> --}}
+                                                <option value="trips">Daily Trips</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <label>Hydrants</label>
+                                            <select name="hydrant_id" class="select2-multiple form-control border-bottom">
+                                                {{-- <option value="all">All</option> --}}
+                                                @foreach ($hydrants as $row)
+                                                    <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6 p-3">
+                                            <button type="submit" class="btn bg-gradient-primary btn-lg ">Create</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card p-2 mt-2">
+                            <div class="card-header">
+                                <h2>Hydrants Order Reports</h2>
+                            </div>
+                            <div class="p-3">
+                                <form role="form" method="get" action="{{ route('generate.report.hydrant.orders') }}"
+                                    enctype="multipart/form-data">
+                                    <div class="card-body">
+                                        <div class="row">
+
+                                            <div class="form-group col-6 p-3">
+                                                <label>From Date</label>
+                                                <input type="date" class="form-control border-bottom"
+                                                    placeholder="Enter Customer Title..." name="from_date"
+                                                    value="{{ old('title') }}" required />
+                                            </div>
+                                            <div class="form-group col-6 p-3">
+                                                <label>To Date</label>
+                                                <input type="date" class="form-control border-bottom"
+                                                    placeholder="Enter Customer Title..." name="to_date"
+                                                    value="{{ old('title') }}" required />
+                                            </div>
+                                            <div class="form-group col-12 p-3">
+                                                <label>Hydrants</label>
+                                                <select name="hydrant_id"
+                                                    class="select2-multiple form-control border-bottom">
+                                                    <option value="all">All</option>
+                                                    @foreach ($hydrants as $row)
+                                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="form-group col-6 p-3">
+                                            <button type="submit"
+                                                class="btn bg-gradient-primary btn-lg ">Create</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        {{-- <div class="p-3">
                     <form role="form" method="get" action="{{ route('compaints-reports.reports') }}" enctype="multipart/form-data">
                         <div class="row">
 
@@ -235,9 +288,9 @@
                     </form>
                 </div> --}}
 
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
     </div>
-</div>
 @endsection
