@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
 use QrCode;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 
 class ReportsController extends Controller
 {
@@ -45,13 +45,13 @@ class ReportsController extends Controller
         $source = null;
         $consumer = null;
         if ($request->hydrant_id != "all") {
-            $hydrants = Hydrants::where('id',$request->hydrant_id)->get();
+            $hydrants = Hydrants::where('id', $request->hydrant_id)->get();
         } else {
             $hydrants = Hydrants::get();
         }
         $reportData = Orders::with(['hydrant', 'billing.truck.truckCap'])
-        ->whereBetween('orders.created_at', [$dateS,$dateE])
-        ->whereHas('billing')
+            ->whereBetween('orders.created_at', [$dateS, $dateE])
+            ->whereHas('billing')
             ->select('orders.*') // Select all columns from the orders table
             // ->groupBy('orders.id') // Group by the primary key of the orders table
             ->orderBy('orders.created_at')
@@ -76,12 +76,12 @@ class ReportsController extends Controller
                 //     ->leftJoin('truck', 'truck.id', '=', 'orders.truck_id')
                 //     ->sum('truck.capacity');
 
-                $capacity = Orders::with(['hydrant', 'billing','truck_type_fun'])
-                ->where('orders.created_at', $date)
-                ->whereHas('billing')
-                ->where('hydrant_id', $hydrant->id)
-                ->join('truck_types', 'orders.truck_type', '=', 'truck_types.id')
-                ->sum('truck_types.name');
+                $capacity = Orders::with(['hydrant', 'billing', 'truck_type_fun'])
+                    ->where('orders.created_at', $date)
+                    ->whereHas('billing')
+                    ->where('hydrant_id', $hydrant->id)
+                    ->join('truck_types', 'orders.truck_type', '=', 'truck_types.id')
+                    ->sum('truck_types.name');
 
                 // print_r($order->toArray());
                 // Add the capacity to the array for this hydrant
@@ -96,7 +96,7 @@ class ReportsController extends Controller
             ];
         }
         // dd($report);
-        return view('pages.reports.report', compact('dateS', 'dateE', 'hydrants_name', 'hydrants','report'));
+        return view('pages.reports.report', compact('dateS', 'dateE', 'hydrants_name', 'hydrants', 'report'));
         // return view('pages.reports.report');
     }
     public function generate_report_standard(Request $request)
@@ -211,7 +211,7 @@ class ReportsController extends Controller
         //     ];
         // }
         // dd($report);
-        return view('pages.reports.daily-report', compact('startDate', 'endDate', 'hydrants_name','standards','reportData'));
+        return view('pages.reports.daily-report', compact('startDate', 'endDate', 'hydrants_name', 'standards', 'reportData'));
         // return view('pages.reports.report');
     }
 
@@ -219,23 +219,48 @@ class ReportsController extends Controller
     {
         $dateS = $request->from_date;
         $dateE = $request->to_date;
-        $hydrants = Hydrants::with('orders','orders.billing')->whereHas('orders.billing',function($query)use($dateS, $dateE) {
-            $query->whereBetween('created_at', [$dateS,$dateE]);
+        $hydrants = Hydrants::with('orders', 'orders.billing')->whereHas('orders.billing', function ($query) use ($dateS, $dateE) {
+            $query->whereBetween('created_at', [$dateS, $dateE]);
         });
-        if(auth()->user()->role == 1)
-        {
-            if ($request->hydrant_id != "all")
-            {
-                $hydrants = $hydrants->where('id',$request->hydrant_id)->get();
+        if (auth()->user()->role == 1) {
+            if ($request->hydrant_id != "all") {
+                $hydrants = $hydrants->where('id', $request->hydrant_id)->get();
             } else {
                 $hydrants = $hydrants->get();
             }
+        } else {
+            $hydrants = $hydrants->where('id', auth()->user()->hydrant->id)->get();
         }
-        else
-        {
-            $hydrants = $hydrants->where('id',auth()->user()->hydrant->id)->get();
+        if ($request->has('download')) {
+            view()->share(['dateS'=>$dateS,'dateE'=>$dateE,'hydrants'=>$hydrants]);
+            $pdf = PDF::loadView('pages.reports.hydrants-report');
+            return $pdf->download('pdfview.pdf');
         }
         // dd($hydrants->toArray());
-        return view('pages.reports.hydrants-report', compact('dateS', 'dateE','hydrants'));
+        return view('pages.reports.hydrants-report', compact('dateS', 'dateE', 'hydrants'));
+    }
+    public function pdfview(Request $request)
+    {
+        // if (auth()->user()->role != 1) {
+        //     $items = Orders::with('customer')->where('hydrant_id', auth()->user()->hydrant_id);
+        //     if (auth()->user()->type == "commercial") {
+        //         $items = $items->whereHas('customer', function ($q) {
+        //             $q->where('standard', 'Commercial');
+        //         });
+        //     } else {
+        //         $items = $items->whereHas('customer', function ($q) {
+        //             $q->where('standard', '!=', 'Commercial');
+        //         });
+        //     }
+        //     $items = $items->OrderBy('id', 'DESC')->get();
+        // } else {
+        //     $items = Orders::OrderBy('id', 'DESC')->get();
+        // }
+        // view()->share('items', $items);
+        if ($request->has('download')) {
+            $pdf = PDF::loadView('pages.reports.hydrants-report');
+            return $pdf->download('pdfview.pdf');
+        }
+        // return view('pdfview');
     }
 }

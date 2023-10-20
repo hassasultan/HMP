@@ -46,7 +46,7 @@
         h4,
         h5,
         h6 {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: sans-serif;
             color: #000;
         }
 
@@ -121,6 +121,10 @@
             </div>
         </div>
     </div>
+    <form action="{{ route('generate.report.hydrant.orders') }}">
+        <input type="hidden" name="download" value="pdf"/>
+        <button type="submit" class="btn btn-primary">Download PDF</button>
+    </form>
     {{-- <button type="button"onclick="getPrint()" class="btn btn-primary">print</button> --}}
 
     <!--   Core JS Files   -->
