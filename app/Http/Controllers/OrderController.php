@@ -345,10 +345,19 @@ class OrderController extends Controller
             return response()->json(['error', $ex->getMessage()], 500);
         }
     }
-    public function get_ots_order()
+    public function get_ots_order(Request $request)
     {
         // dd(request('page'));
         $curl = curl_init();
+        $filter = null;
+        if($request->has('date'))
+        {
+            $filter = 'date='.$request->get('date');
+        }
+        if($request->has('gallon'))
+        {
+            $filter = $filter.'&gallon='.$request->get('gallon');
+        }
         if (request()->has('page')) {
             $new_page = 'page=' . request('page');
         } else {
@@ -356,7 +365,7 @@ class OrderController extends Controller
         }
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?'.$filter.'&'. $new_page,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -367,7 +376,7 @@ class OrderController extends Controller
             ));
         } else {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='.auth()->user()->hydrant->ots_hydrant.'&'.$new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='.auth()->user()->hydrant->ots_hydrant.'&'.$filter.'&'.$new_page,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
