@@ -3,11 +3,17 @@
         "300": "C:\\xampp\\htdocs\\HMP\\storage\\fonts\/\/roboto_300_21960201651f2ea862182ff34dfd5ead",
         "normal": "C:\\xampp\\htdocs\\HMP\\storage\\fonts\/\/roboto_normal_9fa47a070a8b30b595086d70bb7ac78c",
         "500": "C:\\xampp\\htdocs\\HMP\\storage\\fonts\/\/roboto_500_d0dcda9e813eb9b854a1cc044831f6fe",
-        "bold": "C:\\xampp\\htdocs\\HMP\\storage\\fonts\/\/roboto_bold_3d0ad20d45ace845335f9e6c390a09d9",
-        "900": "roboto_900_509a5e5b153550862359e315131088d5"
+        "bold": "roboto_bold_3d0ad20d45ace845335f9e6c390a09d9",
+        "900": "C:\\xampp\\htdocs\\HMP\\storage\\fonts\/\/roboto_900_509a5e5b153550862359e315131088d5"
     },
     "roboto slab": {
         "normal": "C:\\xampp\\htdocs\\HMP\\storage\\fonts\/\/roboto_slab_normal_21896e4d1a036eedceb7eae6c2ce15eb",
         "bold": "roboto_slab_bold_326672abcbcf2ca10d672b438b831b47"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_d726fe9f0eedcde03c194e171054f6d7"
+    },
+    "material icons": {
+        "normal": "material_icons_normal_c8ff36056e8dee147c1ed2d6ed4318a4"
     }
 }

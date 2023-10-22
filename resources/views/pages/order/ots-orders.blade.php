@@ -221,6 +221,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Date</th>
                                     <th class="text-secondary opacity-7">Action</th>
                                 </tr>
                             </thead>
@@ -280,6 +283,10 @@
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">{{ $row['status'] }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ $row['created_at'] }}</span>
                                                 </td>
                                                 <td>
                                                     <form method="post" action="{{ route('order.store') }}">
@@ -370,6 +377,10 @@
                                                     <td class="align-middle text-center">
                                                         <span
                                                             class="text-secondary text-xs font-weight-bold">{{ $row['status'] }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-secondary text-xs font-weight-bold">{{ $row['created_at'] }}</span>
                                                     </td>
                                                     <td>
                                                         <form method="post" action="{{ route('order.store') }}">
