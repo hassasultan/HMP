@@ -388,13 +388,23 @@ class HomeController extends Controller
         //         'total' => $truck->total(),
         //     ]);
         // }
+        // $hydrants = Hydrant
+        $truck = Truck::with('truckCap','hydrant','drivers');
+        if($request->has('reg_num'))
+        {
+            $truck = $truck->where('truck_num','like', '%' .$request->reg_num. '%');
+        }
+        if($request->has('name'))
+        {
+            $truck = $truck->where('name','like', '%' .$request->name. '%');
+        }
         if(auth()->user()->role != 1)
         {
-            $truck = Truck::with('truckCap','hydrant','drivers')->where('hydrant_id',auth()->user()->hydrant_id)->paginate(20);
+            $truck = $truck->where('hydrant_id',auth()->user()->hydrant_id)->paginate(20);
         }
         else
         {
-            $truck = Truck::with('truckCap','hydrant','drivers')->paginate(20);
+            $truck = $truck->paginate(20);
         }
         if($request->has('json'))
         {

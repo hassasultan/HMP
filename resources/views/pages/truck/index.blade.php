@@ -20,12 +20,52 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-header">
+                    @if (auth()->user()->role == 1)
+                        <form action="{{ route('truck.list') }}" method="GET">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="reg_num">Registration Number</label>
+                                    <input type="text" name="reg_num" class="form-control border p-2"
+                                        value="{{ request()->get('reg_num') }}" id="reg_num" />
+                                </div>
+                                {{-- <div class="col-md-4">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="number" name="phone" class="form-control border p-2"
+                                        value="{{ request()->get('phone') }}" id="phone" />
+                                </div> --}}
+                                <div class="col-md-4">
+                                    <br />
+                                    <button type="submit" class="mt-2 btn  border">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    @else
+                        <form action="{{ route('hydrant.truck.list') }}" method="GET">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="reg_num">Registration Number</label>
+                                    <input type="text" name="reg_num" class="form-control border p-2"
+                                        value="{{ request()->get('reg_num') }}" id="reg_num" />
+                                </div>
+                                {{-- <div class="col-md-4">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="number" name="phone" class="form-control border p-2"
+                                        value="{{ request()->get('phone') }}" id="phone" />
+                                </div> --}}
+                                <div class="col-md-4">
+                                    <br />
+                                    <button type="submit" class="mt-2 btn  border">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    @endif
+                </div>
                 <div class="card-body px-0 pb-2">
                     <div class="p-0">
                         {{-- <div class="load"></div> --}}
 
-                        <table id="example3" class="table table-bordered align-items-center mb-0"
-                            style="width:100%">
+                        <table id="example3" class="table table-bordered align-items-center mb-0" style="width:100%">
                             <thead>
                                 <tr>
                                     <!--<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle</th>-->
