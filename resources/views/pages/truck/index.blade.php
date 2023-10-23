@@ -75,7 +75,7 @@
 
 
                                             <td class="align-middle text-center text-sm">
-                                                <a href="{{ route(generate . qr, $row->id) }}" target="_blank">
+                                                <a href="{{ route('generate.qr', $row->id) }}" target="_blank">
                                                     <span class="badge badge-sm bg-gradient-primary">Generate QrCode</span>
                                                 </a>
                                             </td>
@@ -109,13 +109,13 @@
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{ route(vehicle . details, $row->id) }}"
+                                                <a href="{{ route('vehicle.details', $row->id) }}"
                                                     class="text-secondary m-2 font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Info Vehicle"
                                                     target="_blank">Form View</a>
                                             </td>
                                             <td>
-                                                <a href="{{ route(truck . edit, $row->id) }}"
+                                                <a href="{{ route('truck.edit', $row->id) }}"
                                                     class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                                                     data-original-title="Edit user">Edit</a>
                                             </td>
