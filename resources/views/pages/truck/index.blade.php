@@ -82,8 +82,8 @@
                                             <td>
                                                 <div class="form-group">
                                                     <select class="form-control border border-dark border-1 p-2"
-                                                        id="FormControlAdminSelect- {{ $row->id }} "
-                                                        onchange="adminstatus( {{ $row->id }} )">
+                                                        id="FormControlAdminSelect-{{ $row->id }}"
+                                                        onchange="adminstatus({{ $row->id }})">
                                                         @php
                                                             if ($row->black_list == 1) {
                                                                 $select = 'selected';
