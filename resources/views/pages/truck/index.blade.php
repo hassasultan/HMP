@@ -22,7 +22,7 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="p-0">
-                        <div class="load"></div>
+                        {{-- <div class="load"></div> --}}
 
                         <table id="example3" class="table table-bordered align-items-center mb-0 d-none"
                             style="width:100%">
