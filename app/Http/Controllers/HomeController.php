@@ -390,11 +390,11 @@ class HomeController extends Controller
         // }
         if(auth()->user()->role != 1)
         {
-            $truck = Truck::with('truckCap','hydrant','drivers')->where('hydrant_id',auth()->user()->hydrant_id)->get();
+            $truck = Truck::with('truckCap','hydrant','drivers')->where('hydrant_id',auth()->user()->hydrant_id)->paginate(20);
         }
         else
         {
-            $truck = Truck::with('truckCap','hydrant','drivers')->get();
+            $truck = Truck::with('truckCap','hydrant','drivers')->paginate(20);
         }
         if($request->has('json'))
         {
