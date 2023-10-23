@@ -18,6 +18,7 @@ class Truck extends Model
         'truck_num',
         'chassis_num',
         'owned_by',
+        'unregister',
         // new Start
         'link',
         'reg_region',
