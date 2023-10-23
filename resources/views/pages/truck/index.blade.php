@@ -42,6 +42,7 @@
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         QR Code</th>
                                     <th class="text-secondary opacity-7">Active</th>
+                                    <th class="text-secondary opacity-7">Status</th>
                                     <th class="text-secondary opacity-7">Form View</th>
                                     <th class="text-secondary opacity-7">Action</th>
                                 </tr>
@@ -99,6 +100,13 @@
                                                         <option {{ $secselect }} value="0">No</option>
                                                     </select>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                @if ($row->unregister == 1)
+                                                    <span class="badge badge-sm bg-danger">UnRegister</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-success">Register</span>
+                                                @endif
                                             </td>
                                             <td class="align-middle">
                                                 <a href="{{ route(vehicle . details, $row->id) }}"
