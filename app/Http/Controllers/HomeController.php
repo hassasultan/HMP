@@ -619,6 +619,7 @@ class HomeController extends Controller
             $truck->cfra_no = $request->cfra_no;
             $truck->issue_date = $request->issue_date;
             $truck->expiry_date = $request->expiry_date;
+            $truck->unregister = 0;
 
             //Addition End
             if($request->has('paper_image'))

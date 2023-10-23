@@ -252,6 +252,7 @@ class OrderController extends Controller
                     "truck_num" => $request->reg_num,
                     "truck_type" => $request->turck_type,
                     "hydrant_id" => $order->hydrant_id,
+                    "unregister" => 1,
                 ]);
                 $truckId = $truck->id;
                 $data['truck_id'] = $truck->id;
