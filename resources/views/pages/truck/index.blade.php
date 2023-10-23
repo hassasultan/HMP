@@ -24,7 +24,7 @@
                     <div class="p-0">
                         {{-- <div class="load"></div> --}}
 
-                        <table id="example3" class="table table-bordered align-items-center mb-0 d-none"
+                        <table id="example3" class="table table-bordered align-items-center mb-0"
                             style="width:100%">
                             <thead>
                                 <tr>
