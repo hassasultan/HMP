@@ -410,7 +410,14 @@ class OrderController extends Controller
     }
     public function generate_excel()
     {
-        $data = Orders::with('truck_type_fun','hydrant','customer','billing')->whereHas('billing')->get();
+        if(auth()->user()->role == 1)
+        {
+            $data = Orders::with('truck_type_fun','hydrant','customer','billing')->whereHas('billing')->get();
+        }
+        else
+        {
+            $data = Orders::with('truck_type_fun','hydrant','customer','billing')->where('hydrant_id',auth()->user()->hydrant->id)->whereHas('billing')->get();
+        }
         // dd($data->toArray());
         return Excel::download(new MyDataExport($data), 'my-data.xlsx');
     }
