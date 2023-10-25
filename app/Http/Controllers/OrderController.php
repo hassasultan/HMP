@@ -411,7 +411,7 @@ class OrderController extends Controller
     public function generate_excel()
     {
         $data = Orders::with('truck_type_fun','hydrant','customer','billing')->whereHas('billing')->get();
-        dd($data->toArray());
+        // dd($data->toArray());
         return Excel::download(new MyDataExport($data), 'my-data.xlsx');
     }
 }
