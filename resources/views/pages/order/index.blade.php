@@ -17,10 +17,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 p-2">
+                        <a  href="{{ route('excelview') }}" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3" aria-hidden="true"></i> File</a>
+                    </div>
+                    {{-- <button id="export-excel" onclick="converExcel()" class="btn btn-primary">Export to Excel</button> --}}
+
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class=" p-0">
-                        <table id="example1" class="table table-bordered align-items-center mb-0">
+                        <table id="example1" class="table table-bordered align-items-center mb-0 display nowrap">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order
@@ -89,10 +94,13 @@
                                             </td>
 
                                             <td class="align-middle text-center">
-                                                @if($row->billing != null)
+                                                @if ($row->billing != null)
                                                     <span class="badge bg-gradient-primary">Already generated</span>
                                                 @else
-                                                    <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('billing.create',$row->id) }}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
+                                                    <a class="btn bg-gradient-dark mb-0 mr-3"
+                                                        href="{{ route('billing.create', $row->id) }}"><i
+                                                            class="material-icons text-sm">add</i>&nbsp;&nbsp;<i
+                                                            class="fa fa-truck"></i></a>
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center">
@@ -116,5 +124,31 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.4/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blob-polyfill/2.0.20171115/Blob.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/js/tableexport.min.js"
+        integrity="sha512-XmZS54be9JGMZjf+zk61JZaLZyjTRgs41JLSmx5QlIP5F+sSGIyzD2eJyxD4K6kGGr7AsVhaitzZ2WTfzpsQzg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function converExcel() {
+
+            var sFileName = 'ngophi';
+            $('#example1').tableExport({fileName: sFileName,
+                        type: 'xlsx'
+                       });
+
+
+            // Your code that uses TableExport
+            // var tableExport = TableExport(document.getElementById('example1'));
+            // console.log(tableExport);
+            // // Call the convert function
+            // tableExport.convert({
+            //     format: 'xlsx', // Format for the export
+            //     filename: 'my-excel-file', // File name
+            // });
+        }
+    </script>
 
 @endsection

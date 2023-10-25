@@ -15,7 +15,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
 </head>
@@ -23,7 +24,7 @@
 <body>
 
     <div id="app">
-        <div class="container">
+        <div class="container" id="pdf-content">
             {{-- <table class="border" style="width:100%;">
                 <thead>
                     <tr class="border">
@@ -71,13 +72,28 @@
                         <h6>Total</h6>
                     </div>
                     @foreach ($hydrants as $row)
-                    @php
-                        $pending =  App\Models\Orders::with('billing')->whereHas('billing', fn ($query) => $query->where('status', 0))->where('hydrant_id',$row->id)->count();
-                        $close =  App\Models\Orders::with('billing')->whereHas('billing', fn ($query) => $query->where('status', 1))->where('hydrant_id',$row->id)->count();
-                        $dispatch =  App\Models\Orders::with('billing')->whereHas('billing', fn ($query) => $query->where('status', 2))->where('hydrant_id',$row->id)->count();
-                        $cancelled =  App\Models\Orders::with('billing')->whereHas('billing', fn ($query) => $query->where('status', 3))->where('hydrant_id',$row->id)->count();
-                        $total =  App\Models\Orders::with('billing')->whereHas('billing')->where('hydrant_id',$row->id)->count();
-                    @endphp
+                        @php
+                            $pending = App\Models\Orders::with('billing')
+                                ->whereHas('billing', fn($query) => $query->where('status', 0))
+                                ->where('hydrant_id', $row->id)
+                                ->count();
+                            $close = App\Models\Orders::with('billing')
+                                ->whereHas('billing', fn($query) => $query->where('status', 1))
+                                ->where('hydrant_id', $row->id)
+                                ->count();
+                            $dispatch = App\Models\Orders::with('billing')
+                                ->whereHas('billing', fn($query) => $query->where('status', 2))
+                                ->where('hydrant_id', $row->id)
+                                ->count();
+                            $cancelled = App\Models\Orders::with('billing')
+                                ->whereHas('billing', fn($query) => $query->where('status', 3))
+                                ->where('hydrant_id', $row->id)
+                                ->count();
+                            $total = App\Models\Orders::with('billing')
+                                ->whereHas('billing')
+                                ->where('hydrant_id', $row->id)
+                                ->count();
+                        @endphp
                         <div class="col-2 border">
                             <p>{{ $row->name }}</p>
                         </div>
@@ -102,16 +118,15 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('generate.report.hydrant.orders') }}">
-        <input type="hidden" name="download" value="pdf"/>
-        <button type="submit" class="btn btn-primary">Download PDF</button>
-    </form>
-    {{-- <button type="button"onclick="getPrint()" class="btn btn-primary">print</button> --}}
+
+    {{-- <button type="submit" class="btn btn-primary">Download PDF</button> --}}
+    <button type="button" id="convert" class="btn btn-primary">print</button>
 
     <!--   Core JS Files   -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -120,6 +135,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
-    </html>
+
+    <script>
+        document.getElementById('convert').addEventListener('click', function() {
+            const element = document.getElementById('pdf-content');
+            html2pdf()
+                .from(element)
+                .save('my-pdf-document.pdf');
+        });
+    </script>
+
+</body>
+
+</html>

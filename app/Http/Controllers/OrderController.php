@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MyDataExport;
 use App\Models\Billings;
 use Illuminate\Http\Request;
 use App\Models\Orders;
@@ -14,7 +15,7 @@ use App\Models\OtsOrder;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class OrderController extends Controller
@@ -406,5 +407,10 @@ class OrderController extends Controller
         );
         // dd($orders);
         return view('pages.order.ots-orders', compact('orders'));
+    }
+    public function generate_excel()
+    {
+        $data = Orders::with('truck_type_fun','hydrant','customer','billing')->whereHas('billing')->get();
+        return Excel::download(new MyDataExport($data), 'my-data.xlsx');
     }
 }

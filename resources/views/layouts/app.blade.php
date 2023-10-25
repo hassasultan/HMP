@@ -15,8 +15,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/unnamed.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/unnamed.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/unnamed.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/unnamed.png') }}">
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -54,55 +54,60 @@
         float: right;
         margin-right: 10px;
     }
+
     #example2_filter {
         position: relative;
         float: right;
         margin-right: 10px;
     }
+
     #example3_filter {
         position: relative;
         float: right;
         margin-right: 10px;
     }
+
     @keyframes rotate {
-    from {
-        transform: rotate(0deg);
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
     }
-    to {
-        transform: rotate(360deg);
-    }
-}
 
 
- @-webkit-keyframes rotate {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}
+    @-webkit-keyframes rotate {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
 
-.load {
-	width: 100px;
-	height: 100px;
-	margin: 110px auto 0;
-	border:solid 10px #3f4298;
-	border-radius: 50%;
-	border-right-color: transparent;
-	border-bottom-color: transparent;
-	 -webkit-transition: all 0.5s ease-in;
-    -webkit-animation-name:             rotate;
-    -webkit-animation-duration:         1.0s;
-    -webkit-animation-iteration-count:  infinite;
-    -webkit-animation-timing-function: linear;
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
 
-    	 transition: all 0.5s ease-in;
-    animation-name:             rotate;
-    animation-duration:         1.0s;
-    animation-iteration-count:  infinite;
-    animation-timing-function: linear;
-}
+    .load {
+        width: 100px;
+        height: 100px;
+        margin: 110px auto 0;
+        border: solid 10px #3f4298;
+        border-radius: 50%;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        -webkit-transition: all 0.5s ease-in;
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 1.0s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+
+        transition: all 0.5s ease-in;
+        animation-name: rotate;
+        animation-duration: 1.0s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
 </style>
 
 <body>
@@ -453,14 +458,19 @@
         });
         $(function() {
             $("#example1").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
                 "ordering": true,
-                "sorting":false,
+                "sorting": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+
             });
             $('#example2').DataTable({
                 "paging": true,
@@ -470,10 +480,10 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+
             });
 
         });
-
     </script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;

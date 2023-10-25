@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
     Route::get('hydrants/reports/orders', [App\Http\Controllers\ReportsController::class, 'generate_hydrants_reports'])->name('generate.report.hydrant.orders');
     Route::get('pdfview',[App\Http\Controllers\ReportsController::class,'pdfview'])->name('pdfview');
+    Route::get('excel/view',[App\Http\Controllers\OrderController::class,'generate_excel'])->name('excelview');
 
 
     Route::get('/get/ots/order-list', [App\Http\Controllers\OrderController::class, 'get_ots_order'])->name('ots.order.list');
