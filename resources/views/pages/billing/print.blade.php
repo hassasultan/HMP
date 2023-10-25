@@ -314,7 +314,7 @@
                         <p class="font-weight-bold">Capacity: </p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->truck->truckCap->name }}</p>
+                        <p class="font-weight-bold">{{ $billing->order->truck_type_fun->name }}</p>
                     </div>
 
                     <div class="col-6">
@@ -470,7 +470,7 @@
                         <p class="font-weight-bold">Capacity: </p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->truck->truckCap->name }}</p>
+                        <p class="font-weight-bold">{{ $billing->order->truck_type_fun->name }}</p>
                     </div>
 
                     <div class="col-6">
