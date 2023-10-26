@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
 
 </head>
@@ -25,7 +26,7 @@
 
     <div id="app">
 
-        <button id="btnExport" onclick="exportReportToExcel(this)" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3" aria-hidden="true"></i></button>
+        {{-- <button id="btnExport" onclick="exportReportToExcel(this)" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3" aria-hidden="true"></i> FILE</button> --}}
         <div class="container" id="pdf-content">
             {{-- <table class="border" style="width:100%;">
                 <thead>
@@ -143,8 +144,7 @@
 
     <script>
         function exportReportToExcel() {
-            let table = document.getElementsByTagName(
-            "table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+            let table = document.getElementById("pdf-content"); // you can use document.getElementById('tableId') as well by providing id to the table tag
             TableToExcel.convert(table[
             0], { // html code may contain multiple tables so here we are refering to 1st table tag
                 name: `export.xlsx`, // fileName you could use any name
