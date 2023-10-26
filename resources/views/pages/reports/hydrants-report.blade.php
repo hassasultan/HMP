@@ -24,6 +24,8 @@
 <body>
 
     <div id="app">
+
+        <button id="btnExport" onclick="exportReportToExcel(this)" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3" aria-hidden="true"></i></button>
         <div class="container" id="pdf-content">
             {{-- <table class="border" style="width:100%;">
                 <thead>
@@ -136,9 +138,21 @@
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 
 
     <script>
+        function exportReportToExcel() {
+            let table = document.getElementsByTagName(
+            "table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+            TableToExcel.convert(table[
+            0], { // html code may contain multiple tables so here we are refering to 1st table tag
+                name: `export.xlsx`, // fileName you could use any name
+                sheet: {
+                    name: 'Sheet 1' // sheetName
+                }
+            });
+        }
         document.getElementById('convert').addEventListener('click', function() {
             const element = document.getElementById('pdf-content');
             html2pdf()

@@ -55,6 +55,9 @@
         }
     </style>
     <div id="app">
+        {{-- <iframe id="txtArea1" style="display:none"></iframe>
+    <button id="btnExport" onclick="fnExcelReport();"> EXPORT </button> --}}
+    <button id="btnExport" onclick="exportReportToExcel(this)" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3" aria-hidden="true"></i> FILE</button>
         <div class="container p-4 bg-white  text-center " id="getPrint">
             <div class="bg-white m-auto">
                 <div class="row">
@@ -78,7 +81,7 @@
 
                         <div class="table mt-4">
                             <table class="table  table-striped">
-                                <thead>
+                                <thead id="headerTable">
                                     <tr style="background-color:#5b9bd5; color: #FFF !important;">
                                         <th>Date</th>
                                         <th>Commercial</th>
@@ -159,6 +162,7 @@
             </div>
         </div>
     </div>
+
     {{-- @foreach (array_unique(array_column($complaintsByDate->toArray(), 'type_id')) as $complaintTypeId)
         <td>{{ $complaintsByDate->where('type_id', $complaintTypeId)->sum('num_complaints') }}</td>
     @endforeach --}}
@@ -177,27 +181,58 @@
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
     <script>
-        $(document).ready(function() {
-            // Select2 Multiple
-            $('.select2-multiple').select2({
-                placeholder: "Select",
-                allowClear: true
+        function exportReportToExcel()
+        {
+            let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+            TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+                name: `export.xlsx`, // fileName you could use any name
+                sheet: {
+                name: 'Sheet 1' // sheetName
+                }
             });
+        }
+        function fnExcelReport()
+        {
+            var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+            var textRange; var j=0;
+            tab = document.getElementById('headerTable'); // id of table
 
-            $('.select2-multiple2').select2({
-                placeholder: "Select",
-                allowClear: true
-            });
+            for(j = 0 ; j < tab.rows.length ; j++)
+            {
+                tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+                //tab_text=tab_text+"</tr>";
+            }
 
-        });
+            tab_text=tab_text+"</table>";
+            tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+            tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+            tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+            {
+                txtArea1.document.open("txt/html","replace");
+                txtArea1.document.write(tab_text);
+                txtArea1.document.close();
+                txtArea1.focus();
+                sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+            }
+            else                 //other browser not tested on IE 11
+                sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+            return (sa);
+        }
 
         function getPrint() {
             var elem = document.getElementById('getPrint');
             var print_area = window.open();
             print_area.document.write('<html>');
             print_area.document.write(
-                '<link rel="dns-prefetch" href="//fonts.gstatic.com"><link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /><link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" /><link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" /><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
+                '<link rel="dns-prefetch" href="//fonts.gstatic.com"><link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /><link href="{{ asset("assets/css/nucleo-icons.css") }}" rel="stylesheet" /><link href="{{ asset("assets/css/nucleo-svg.css") }}" rel="stylesheet" /><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link id="pagestyle" href="{{ asset("assets/css/material-dashboard.css?v=3.0.0") }}" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
             );
             print_area.document.write('<body>');
             print_area.document.write(elem.innerHTML);
@@ -206,251 +241,7 @@
             print_area.print();
             // print_area.close();
         }
-        var ctx = document.getElementById("chart-bars").getContext("2d");
 
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["M", "T", "W", "T", "F", "S", "S"],
-                datasets: [{
-                    label: "Sales",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40],
-                    maxBarThickness: 6
-                }, ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: 500,
-                            beginAtZero: true,
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                            color: "#fff"
-                        },
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-
-
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    tension: 0,
-                    borderWidth: 0,
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                    pointBorderColor: "transparent",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderWidth: 4,
-                    backgroundColor: "transparent",
-                    fill: true,
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-                    maxBarThickness: 6
-
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-
-        var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-        new Chart(ctx3, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    tension: 0,
-                    borderWidth: 0,
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                    pointBorderColor: "transparent",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderWidth: 4,
-                    backgroundColor: "transparent",
-                    fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    maxBarThickness: 6
-
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#f8f9fa',
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
     </script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;

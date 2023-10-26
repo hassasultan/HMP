@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url); !!}
+                        {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url) !!}
                     </div>
                 </div>
             </div>
