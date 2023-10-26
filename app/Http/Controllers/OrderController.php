@@ -137,6 +137,8 @@ class OrderController extends Controller
                 }
                 $new_order->customer_id = $cust->id;
                 $new_order->contact_num = $request->contact_num;
+                $new_order->delivery_charges = $request->delivery_charges;
+                $new_order->distance_kms = $request->distance_kms;
                 $gallon = Truck_type::where('name', $request->gallon)->first();
                 $new_order->truck_type = $gallon->id;
                 $new_order->save();
@@ -190,6 +192,10 @@ class OrderController extends Controller
                 $truck_type->customer_id = $row;
                 $truck_type->save();
             }
+        }
+        if($request->has('ots'))
+        {
+            return redirect()->route('billing.create',$new_order->id);
         }
         if (auth()->user()->role != 1) {
             return redirect()->back();

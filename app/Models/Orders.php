@@ -16,6 +16,8 @@ class Orders extends Model
         'contact_num',
         'truck_type',
         'order_type',
+        'delivery_charges',
+        'distance_kms',
         'status',
     ];
     public function truck_type_fun()

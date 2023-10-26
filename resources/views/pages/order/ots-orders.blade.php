@@ -334,9 +334,9 @@
                                                             value="{{ $row['order_no'] }}" />
                                                         <input type="hidden" name="gallon"
                                                             value="{{ $row['gallons']['quantity'] }}" />
-                                                        {{-- <input type="hidden" name="" value=""/>
-                                                        <input type="hidden" name="" value=""/>
-                                                        <input type="hidden" name="" value=""/> --}}
+                                                        <input type="hidden" name="delivery_charges" value="{{ $row['delivery_charges'] }}"/>
+                                                        <input type="hidden" name="distance_kms" value="{{ $row['distance_kms'] }}"/>
+                                                        {{-- <input type="hidden" name="" value=""/> --}}
                                                         <button type="submit"
                                                             class="badge badge-sm bg-gradient-primary">Generate
                                                             Order</button>

@@ -103,12 +103,12 @@
                     </div>
                     <div class="form-group col-12">
                         <label>Tanker Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="{{ old('amount') }}" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="{{ $order[0]->delivery_charges }}" required/>
 
                     </div>
                     <div class="form-group col-12">
-                        <label>Extra Per KM Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Extra Per KM Amount..." name="km_amount" value="{{ old('km_amount') }}" required/>
+                        <label>Extra Distance KM</label>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Distance KM..." name="km_amount" value="{{ $order[0]->distance_kms }}" required/>
 
                     </div>
                     <div class="text-center">
