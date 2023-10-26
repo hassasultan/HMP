@@ -398,6 +398,10 @@ class OrderController extends Controller
         {
             $filter = $filter.'&gallon='.$request->get('gallon');
         }
+        if($request->has('order_no'))
+        {
+            $filter = $filter.'&order_no='.$request->get('order_no');
+        }
         if (request()->has('page')) {
             $new_page = 'page=' . request('page');
         } else {

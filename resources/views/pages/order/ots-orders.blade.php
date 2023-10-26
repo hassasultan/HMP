@@ -201,11 +201,15 @@
                 <div class="card-header">
                     <form action="{{ route('ots.order.list') }}" method="GET">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="date">Date</label>
                                 <input type="date" name="date" class="form-control border p-2" value="{{ request()->get('date') }}" id="date"/>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <label for="order_no">Order Number</label>
+                                <input type="text" name="order_no" class="form-control border p-2" value="{{ request()->get('order_no') }}" id="order_no"/>
+                            </div>
+                            <div class="col-md-3">
                                 <label for="gallon">Gallon</label>
                                 <select class="form-control border p-2" id="gallon" name="gallon">
                                     <option value="1000" @if(request()->get('gallon') == "1000") selected @endif>1000</option>
@@ -215,7 +219,7 @@
                                     <option value="5000" @if(request()->get('gallon') == "5000") selected @endif>5000</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <br/>
                                 <button type="submit" class="mt-2 btn  border">Search</button>
                             </div>
