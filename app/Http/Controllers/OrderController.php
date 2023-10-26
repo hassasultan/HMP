@@ -21,11 +21,13 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class OrderController extends Controller
 {
     //
-    public  function index()
+    public  function index(Request $request)
     {
         # code...
+        $vehicle_type = Truck_type::all();
+        $order = Orders::with('truck_type_fun','hydrant','customer','billing');
         if (auth()->user()->role != 1) {
-            $order = Orders::with('customer')->where('hydrant_id', auth()->user()->hydrant_id);
+            $order = $order->where('hydrant_id', auth()->user()->hydrant_id);
             if (auth()->user()->type == "commercial") {
                 $order = $order->whereHas('customer', function ($q) {
                     $q->where('standard', 'Commercial');
@@ -35,11 +37,41 @@ class OrderController extends Controller
                     $q->where('standard', '!=', 'Commercial');
                 });
             }
-            $order = $order->OrderBy('id', 'DESC')->get();
-        } else {
-            $order = Orders::OrderBy('id', 'DESC')->get();
         }
-        return view('pages.order.index', compact('order'));
+
+        if($request->has('vehicle_type') && $request->vehicle_type != '')
+        {
+            $order = $order->where('truck_type',$request->vehicle_type);
+        }
+        if($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '')
+        {
+            $order = $order->whereBetween('created_at',[$request->from_date, $request->to_date]);
+        }
+        // dd($order->OrderBy('id', 'DESC')->get()->toArray());
+
+        if($request->has('order_type') && $request->order_type != '')
+        {
+            $order = $order->where('order_type',$request->order_type);
+        }
+        if($request->has('order_num') && $request->order_num != '')
+        {
+            $order = $order->where('Order_Number',$request->order_num);
+        }
+        if($request->has('customer_phone') && $request->customer_phone != '')
+        {
+            $phone = $request->customer_phone;
+            $order = $order->whereHas('customer', function ($q) use($phone) {
+                $q->where('contact_num', $phone);
+            });
+        }
+        if($request->has('report'))
+        {
+            $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
+            return Excel::download(new MyDataExport($data), 'my-data.xlsx');
+        }
+        $order = $order->OrderBy('id', 'DESC')->paginate(20);
+
+        return view('pages.order.index', compact('order','vehicle_type'));
     }
     public function reports()
     {
