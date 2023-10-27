@@ -183,6 +183,7 @@
                                             </td>
 
                                             <td class="align-middle text-center">
+                                                {{ dd($row->billing) }}
                                                 @if ($row->billing != null)
                                                     <span class="badge bg-gradient-primary">Already generated</span>
                                                 @else
