@@ -183,7 +183,7 @@
                                             </td>
 
                                             <td class="align-middle text-center">
-                                                @if ($row->billing != '[]')
+                                                @if ($row->billing != null)
                                                     <span class="badge bg-gradient-primary">Already generated</span>
                                                 @else
                                                     <a class="btn bg-gradient-dark mb-0 mr-3"
