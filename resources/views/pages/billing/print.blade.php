@@ -75,6 +75,7 @@
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
                         $date->toDateString();
+                        $now = \Carbon\Carbon::now();
                         $url = route('billing.details', $billing->id);
                     @endphp
                     <div class="col-6">
@@ -124,7 +125,7 @@
                         <p class="font-weight-bold">Filling time:</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $date->format('g:i a') }}</p>
+                        <p class="font-weight-bold">{{ $now->format('g:i a') }}</p>
                     </div>
 
                     <div class="col-6">
@@ -237,6 +238,7 @@
                     @php
                         $date = \Carbon\Carbon::parse($billing->created_at);
                         $date->toDateString();
+                        $now = \Carbon\Carbon::now();
                         $url = route('billing.details', $billing->id);
                     @endphp
                     <div class="col-6">
@@ -286,7 +288,7 @@
                         <p class="font-weight-bold">Filling time:</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $date->format('g:i a') }}</p>
+                        <p class="font-weight-bold">{{ $now->format('g:i a') }}</p>
                     </div>
 
                     <div class="col-6">
@@ -393,6 +395,7 @@
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
                         $date->toDateString();
+                        $now = \Carbon\Carbon::now();
                         $url = route('billing.details', $billing->id);
                     @endphp
                     <div class="col-6">
@@ -442,7 +445,7 @@
                         <p class="font-weight-bold">Filling time:</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $date->format('g:i a') }}</p>
+                        <p class="font-weight-bold">{{ $now->format('g:i a') }}</p>
                     </div>
 
                     <div class="col-6">
