@@ -138,7 +138,14 @@ class OrderController extends Controller
                 $new_order->customer_id = $cust->id;
                 $new_order->contact_num = $request->contact_num;
                 $new_order->delivery_charges = $request->delivery_charges;
-                $new_order->distance_kms = $request->distance_kms;
+                if((int)$request->distance_kms < 11)
+                {
+                    $new_order->distance_kms = 0;
+                }
+                else
+                {
+                    $new_order->distance_kms = $request->distance_kms;
+                }
                 $gallon = Truck_type::where('name', $request->gallon)->first();
                 $new_order->truck_type = $gallon->id;
                 $new_order->save();
