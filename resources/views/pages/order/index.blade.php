@@ -183,10 +183,10 @@
                                             </td>
 
                                             <td class="align-middle text-center">
-                                                {{-- {{ dd($row->billing) }} --}}
                                                 @if ($row->billing != null)
                                                     <span class="badge bg-gradient-primary">Already generated</span>
                                                 @else
+                                                {{ dd($row->billing) }}
                                                     <a class="btn bg-gradient-dark mb-0 mr-3"
                                                         href="{{ route('billing.create', $row->id) }}"><i
                                                             class="material-icons text-sm">add</i>&nbsp;&nbsp;<i
