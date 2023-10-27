@@ -70,7 +70,7 @@ class OrderController extends Controller
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
         }
         $order = $order->OrderBy('id', 'DESC')->paginate(20);
-
+        dd($order->toArray());
         return view('pages.order.index', compact('order','vehicle_type'));
     }
     public function reports()
