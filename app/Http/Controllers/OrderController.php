@@ -143,6 +143,11 @@ class OrderController extends Controller
                 $new_order->truck_type = $gallon->id;
                 $new_order->save();
             }
+            else
+            {
+                $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
+            }
+
         } else {
             foreach ($request->customer_id as $row) {
                 $letter = explode(' ', $request->order_type);
