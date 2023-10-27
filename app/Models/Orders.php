@@ -34,6 +34,6 @@ class Orders extends Model
     }
     public function billing()
     {
-        return $this->belongsTo(Billings::class,'id');
+        return $this->belongsTo(Billings::class,'id','order_id');
     }
 }
