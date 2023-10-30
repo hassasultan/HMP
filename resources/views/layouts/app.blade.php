@@ -396,17 +396,35 @@
         function adminstatusbilling(id) {
 
             var id = id;
+            var note = null;
+            var myModal = new bootstrap.Modal(document.getElementById('reasonModal'), {
+                keyboard: false
+            });
             var status = $('#FormControlAdminSelect-' + id).val();
-            console.log(status);
+            if (status == 3) {
+                if ($('#note').val() == null || $('#note').val() == '') {
+                    $('#reason-submit').attr('data-id', id);
+                    myModal.show();
+                    return false;
+                } else {
+                    note = $("#note").val();
+                }
+            }
+            console.log(note);
             $.ajax({
                     url: "{{ route('billing.change.status') }}",
                     type: "Get",
                     data: {
                         id: id,
                         status: status,
+                        note: note,
                     },
                 }).done(function(data) {
                     console.log(data);
+                    if (status == 3) {
+                        $("#note").val('');
+                        myModal.hide();
+                    }
                     successModal("Status Has been Changed Successfully...");
                 })
                 .fail(function(error) {

@@ -16,6 +16,7 @@ class Billings extends Model
         'amount',
         'km_amount',
         'status',
+        'cancle_reason'
     ];
     public function order()
     {

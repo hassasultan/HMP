@@ -169,4 +169,49 @@
         </div>
     </div>
 
+    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reasonModal">
+        Launch demo modal
+      </button> --}}
+    <div class="modal fade" id="reasonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Canceled Reason</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <fieldset class="border rounded-3 p-3">
+                    <legend class="float-none w-auto px-3" >Reason</legend>
+                    <textarea id="note" class="form-control"></textarea>
+
+                </fieldset>
+                <span class="text-danger d-none" id="alert-field">Please fill this field first then submit ...</span>
+              {{-- <textarea id="note" class="form-control border"></textarea> --}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" id="reason-submit" data-id="">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $("#reason-submit").click(function()
+        {
+            id = $(this).attr('data-id');
+            var note = $("#note").val();
+            if(note == null || note == '')
+            {
+                $("#alert-field").removeClass('d-none');
+            }
+            else
+            {
+                $("#alert-field").addClass('d-none');
+                console.log(id);
+                adminstatusbilling(id);
+            }
+
+        });
+      </script>
 @endsection
