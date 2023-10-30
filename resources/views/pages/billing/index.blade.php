@@ -129,7 +129,7 @@
                                                         <option @if ($row->status == 2) selected @endif
                                                             value='2' class="bg-primary">
                                                             Dispatch</option>
-                                                        <option @if ($row->status == 0) selected @endif
+                                                        <option @if ($row->status == 0) selected @else disabled @endif
                                                             value='0' class="bg-warning">
                                                             Pending</option>
                                                         <option @if ($row->status == 3) selected @endif
