@@ -414,7 +414,7 @@ class OrderController extends Controller
               $response = curl_exec($curl);
 
               curl_close($curl);
-              dd($response);
+            //   dd($response);
         }
         if($request->status == 3)
         {
