@@ -390,6 +390,9 @@ class OrderController extends Controller
             $driver_name = $billing->driver->name;
             $driver_phone = $billing->driver->phone;
 
+            $billing->cancle_reason = $request->note;
+
+
         }
         $curl = curl_init();
         curl_setopt_array($curl, array(
