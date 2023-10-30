@@ -392,7 +392,6 @@ class OrderController extends Controller
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
 
-                $billing->cancle_reason = $request->note;
 
 
             }
@@ -416,6 +415,10 @@ class OrderController extends Controller
 
               curl_close($curl);
             //   dd($response);
+        }
+        if($request->status == 3)
+        {
+            $billing->cancle_reason = $request->note;
         }
         $billing->status = $request->status;
         $billing->save();
