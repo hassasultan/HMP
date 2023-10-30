@@ -415,6 +415,7 @@ class OrderController extends Controller
               $response = curl_exec($curl);
 
               curl_close($curl);
+              dd($response);
         }
         $billing->status = $request->status;
         $billing->save();
