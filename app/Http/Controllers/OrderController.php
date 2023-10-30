@@ -360,59 +360,62 @@ class OrderController extends Controller
         $driver_name = '';
         $driver_phone = '';
         $billing = Billings::with('order','truck','driver')->find($request->id);
-        if($request->status == 2)
+        if($billing->order->delivery_charges != NULL || $billing->order->distance_kms != NULL)
         {
-            $status = 2;
-            $state = "dispatched";
-            $amount = $billing->amount;
-            $vehicle_no = $billing->truck->truck_num;
-            $driver_name = $billing->driver->name;
-            $driver_phone = $billing->driver->phone;
+            if($request->status == 2)
+            {
+                $status = 2;
+                $state = "dispatched";
+                $amount = $billing->amount;
+                $vehicle_no = $billing->truck->truck_num;
+                $driver_name = $billing->driver->name;
+                $driver_phone = $billing->driver->phone;
 
+            }
+            elseif($request->status == 1)
+            {
+                $status = 3;
+                $state = "closed";
+                $amount = $billing->amount;
+                $vehicle_no = $billing->truck->truck_num;
+                $driver_name = $billing->driver->name;
+                $driver_phone = $billing->driver->phone;
+
+            }
+            elseif($request->status == 3)
+            {
+                $status = 4;
+                $state = "cancelled";
+                $note = $request->note;
+                $amount = $billing->amount;
+                $vehicle_no = $billing->truck->truck_num;
+                $driver_name = $billing->driver->name;
+                $driver_phone = $billing->driver->phone;
+
+                $billing->cancle_reason = $request->note;
+
+
+            }
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/'.$billing->order->Order_Number.'/update',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('status' => $status,'state' => $state,'amount' => $amount,'vehicle_no' => $vehicle_no,'driver_phone' => $driver_phone,'note' => $note,'driver_name' => $driver_name),
+                CURLOPT_HTTPHEADER => array(
+                  'Accept: application/json'
+                ),
+              ));
+
+              $response = curl_exec($curl);
+
+              curl_close($curl);
         }
-        elseif($request->status == 1)
-        {
-            $status = 3;
-            $state = "closed";
-            $amount = $billing->amount;
-            $vehicle_no = $billing->truck->truck_num;
-            $driver_name = $billing->driver->name;
-            $driver_phone = $billing->driver->phone;
-
-        }
-        elseif($request->status == 3)
-        {
-            $status = 4;
-            $state = "cancelled";
-            $note = $request->note;
-            $amount = $billing->amount;
-            $vehicle_no = $billing->truck->truck_num;
-            $driver_name = $billing->driver->name;
-            $driver_phone = $billing->driver->phone;
-
-            $billing->cancle_reason = $request->note;
-
-
-        }
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/'.$billing->order->Order_Number.'/update',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('status' => $status,'state' => $state,'amount' => $amount,'vehicle_no' => $vehicle_no,'driver_phone' => $driver_phone,'note' => $note,'driver_name' => $driver_name),
-            CURLOPT_HTTPHEADER => array(
-              'Accept: application/json'
-            ),
-          ));
-
-          $response = curl_exec($curl);
-
-          curl_close($curl);
         $billing->status = $request->status;
         $billing->save();
         return 1;
