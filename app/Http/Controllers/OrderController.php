@@ -445,11 +445,12 @@ class OrderController extends Controller
               $response = curl_exec($curl);
 
               curl_close($curl);
+              dd($response);
+
               if($response['error'] == true)
               {
                 return response()->json(['error'=>$response['data']['message']],500);
               }
-            //   dd($response);
         }
         if($request->status == 3)
         {
