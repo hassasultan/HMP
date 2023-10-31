@@ -159,7 +159,7 @@
                                 @if (count($billing) > 0)
                                     @foreach ($billing as $key => $row)
                                         <tr>
-                                            <td>
+                                            <td style="width: 5%;">
                                                 <div class="d-flex px-2 py-1">
                                                     {{-- <div>
                                     <img src="{{ asset('storage/'.$row->image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
@@ -170,7 +170,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td style="width: 5%;">
                                                 <p class="text-xs font-weight-bold mb-0">
                                                     {{ $row->truck->name }}({{ $row->truck->company_name }})</p>
                                                 <p class="text-xs text-secondary mb-0">{{ $row->truck->truck_num }}</p>
@@ -182,7 +182,7 @@
                                     </div>
                                 </div> --}}
                                             </td>
-                                            <td>
+                                            <td style="width: 5%;">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $row->driver->name }}</p>
                                                 <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p>
                                                 {{-- <div class="d-flex px-2 py-1">
@@ -191,7 +191,7 @@
                                     </div>
                                 </div> --}}
                                             </td>
-                                            <td>
+                                            <td style="width: 5%;">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $row->order->hydrant->name }}
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p> --}}
@@ -201,7 +201,7 @@
                                     </div>
                                 </div> --}}
                                             </td>
-                                            <td style="width: 40px;">
+                                            <td style="width: 20%;">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $row->order->customer->name }}
                                                 </p>
                                                 <p class="text-xs text-secondary mb-0">
@@ -219,7 +219,7 @@
                                     </div>
                                 </div> --}}
                                             </td>
-                                            <td>
+                                            <td style="width: 10%;">
                                                 @if ($row->order->order_type != null)
                                                     <p class="text-center font-weight-bold mb-0">
                                                         {{ $row->order->order_type }}</p>
@@ -228,7 +228,7 @@
                                                         {{ $row->order->customer->standard }}</p>
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td style="width: 15%;">
                                                 <div class="form-group">
                                                     <select class="form-control border border-dark border-1 p-2"
                                                         id="FormControlAdminSelect-{{ $row->id }}"
@@ -250,11 +250,11 @@
                                                     </select>
                                                 </div>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle text-center" style="width: 5%;">
                                                 <span
                                                     class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle"  style="width: 15%;">
                                                 <div>
                                                     <a href="{{ route('billing.details', $row->id) }}"
                                                         target="_blank"><span
