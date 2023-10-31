@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         # code...
         $vehicle_type = Truck_type::all();
-        $order = Orders::with('truck_type_fun','hydrant','customer','billing');
+        $order = Orders::with('truck_type_fun', 'hydrant', 'customer', 'billing');
         if (auth()->user()->role != 1) {
             $order = $order->where('hydrant_id', auth()->user()->hydrant_id);
             if (auth()->user()->type == "commercial") {
@@ -39,39 +39,33 @@ class OrderController extends Controller
             }
         }
 
-        if($request->has('vehicle_type') && $request->vehicle_type != '')
-        {
-            $order = $order->where('truck_type',$request->vehicle_type);
+        if ($request->has('vehicle_type') && $request->vehicle_type != '') {
+            $order = $order->where('truck_type', $request->vehicle_type);
         }
-        if($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '')
-        {
-            $order = $order->whereBetween('created_at',[$request->from_date, $request->to_date]);
+        if ($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '') {
+            $order = $order->whereBetween('created_at', [$request->from_date, $request->to_date]);
         }
         // dd($order->OrderBy('id', 'DESC')->get()->toArray());
 
-        if($request->has('order_type') && $request->order_type != '')
-        {
-            $order = $order->where('order_type',$request->order_type);
+        if ($request->has('order_type') && $request->order_type != '') {
+            $order = $order->where('order_type', $request->order_type);
         }
-        if($request->has('order_num') && $request->order_num != '')
-        {
-            $order = $order->where('Order_Number',$request->order_num);
+        if ($request->has('order_num') && $request->order_num != '') {
+            $order = $order->where('Order_Number', $request->order_num);
         }
-        if($request->has('customer_phone') && $request->customer_phone != '')
-        {
+        if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
-            $order = $order->whereHas('customer', function ($q) use($phone) {
+            $order = $order->whereHas('customer', function ($q) use ($phone) {
                 $q->where('contact_num', $phone);
             });
         }
-        if($request->has('report'))
-        {
+        if ($request->has('report')) {
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
         }
         $order = $order->OrderBy('id', 'DESC')->paginate(20);
         // dd($order->toArray());
-        return view('pages.order.index', compact('order','vehicle_type'));
+        return view('pages.order.index', compact('order', 'vehicle_type'));
     }
     public function reports()
     {
@@ -138,23 +132,17 @@ class OrderController extends Controller
                 $new_order->customer_id = $cust->id;
                 $new_order->contact_num = $request->contact_num;
                 $new_order->delivery_charges = $request->delivery_charges;
-                if((int)$request->distance_kms < 11)
-                {
+                if ((int)$request->distance_kms < 11) {
                     $new_order->distance_kms = 0;
-                }
-                else
-                {
+                } else {
                     $new_order->distance_kms = $request->distance_kms;
                 }
                 $gallon = Truck_type::where('name', $request->gallon)->first();
                 $new_order->truck_type = $gallon->id;
                 $new_order->save();
-            }
-            else
-            {
+            } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
             }
-
         } else {
             foreach ($request->customer_id as $row) {
                 $letter = explode(' ', $request->order_type);
@@ -165,24 +153,16 @@ class OrderController extends Controller
                     $expNum = explode('-', $NEW_ORDER->Order_Number);
                 }
                 if (isset($expNum[1])) {
-                    if(isset($letter[1]))
-                    {
+                    if (isset($letter[1])) {
                         $id = strtoupper($letter[1]) . '-' . date('YmdHis');
-                    }
-                    else
-                    {
+                    } else {
                         $id = strtoupper($letter[0]) . '-' . date('YmdHis');
-
                     }
                 } else {
-                    if(isset($letter[1]))
-                    {
+                    if (isset($letter[1])) {
                         $id = strtoupper($letter[1]) . '-' . date('YmdHis');
-                    }
-                    else
-                    {
+                    } else {
                         $id = strtoupper($letter[0]) . '-' . date('YmdHis');
-
                     }
                 }
                 // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
@@ -205,9 +185,8 @@ class OrderController extends Controller
                 $truck_type->save();
             }
         }
-        if($request->has('ots'))
-        {
-            return redirect()->route('billing.create',$new_order->id);
+        if ($request->has('ots')) {
+            return redirect()->route('billing.create', $new_order->id);
         }
         if (auth()->user()->role != 1) {
             return redirect()->back();
@@ -237,39 +216,34 @@ class OrderController extends Controller
                 });
             }
         }
-        if($request->has('vehicle_type') && $request->vehicle_type != '')
-        {
-            $billing = $billing->whereHas('order',function($query)use($request){
-                $query->where('truck_type',$request->vehicle_type);
+        if ($request->has('vehicle_type') && $request->vehicle_type != '') {
+            $billing = $billing->whereHas('order', function ($query) use ($request) {
+                $query->where('truck_type', $request->vehicle_type);
             });
         }
-        if($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '')
-        {
-            $billing = $billing->whereBetween('created_at',[$request->from_date, $request->to_date]);
+        if ($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '') {
+            $billing = $billing->whereBetween('created_at', [$request->from_date, $request->to_date]);
         }
         // dd($order->OrderBy('id', 'DESC')->get()->toArray());
 
-        if($request->has('order_type') && $request->order_type != '')
-        {
-            $billing = $billing->whereHas('order',function($query)use($request){
-                $query->where('order_type',$request->order_type);
+        if ($request->has('order_type') && $request->order_type != '') {
+            $billing = $billing->whereHas('order', function ($query) use ($request) {
+                $query->where('order_type', $request->order_type);
             });
         }
-        if($request->has('order_num') && $request->order_num != '')
-        {
-            $billing = $billing->whereHas('order',function($query)use($request){
-                $query->where('Order_Number',$request->order_num);
+        if ($request->has('order_num') && $request->order_num != '') {
+            $billing = $billing->whereHas('order', function ($query) use ($request) {
+                $query->where('Order_Number', $request->order_num);
             });
         }
-        if($request->has('customer_phone') && $request->customer_phone != '')
-        {
+        if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
-            $billing = $billing->whereHas('order.customer', function ($q) use($phone) {
+            $billing = $billing->whereHas('order.customer', function ($q) use ($phone) {
                 $q->where('contact_num', $phone);
             });
         }
         $billing = $billing->OrderBy('id', 'DESC')->paginate(10);
-        return view('pages.billing.index', compact('billing','vehicle_type'));
+        return view('pages.billing.index', compact('billing', 'vehicle_type'));
     }
     public  function billingcreate($id)
     {
@@ -326,7 +300,7 @@ class OrderController extends Controller
         # code...
         // dd($request->all());
         $data = $request->all();
-        $order = Orders::find($request->order_id);
+        $order = Orders::with('truck_type_fun')->find($request->order_id);
         if ($request->has('new_tanker')) {
             $check = Truck::where('truck_num', $request->reg_num)->first();
             if (empty($check)) {
@@ -361,11 +335,32 @@ class OrderController extends Controller
         $order->truck_type = $request->turck_type;
         $order->save();
         $data['status'] = 2;
-        $truck_type = Billings::create($data);
+        $billing = Billings::create($data);
+        $truck = Truck::find($billing->truck_id);
+        $driver = Truck::Driver($billing->driver_id);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
         if (auth()->user()->role != 1) {
-            return redirect()->route('billing.details', $truck_type->id);
+            return redirect()->route('billing.details', $billing->id);
         } else {
-            return redirect()->route('billing.details', $truck_type->id);
+            return redirect()->route('billing.details', $billing->id);
         }
     }
     public  function billingupdate(Request $request, $id)
@@ -390,31 +385,23 @@ class OrderController extends Controller
         $vehicle_no = '';
         $driver_name = '';
         $driver_phone = '';
-        $billing = Billings::with('order','truck','driver')->find($request->id);
-        if($billing->order->delivery_charges != NULL || $billing->order->distance_kms != NULL)
-        {
-            if($request->status == 2)
-            {
+        $billing = Billings::with('order', 'truck', 'driver')->find($request->id);
+        if ($billing->order->delivery_charges != NULL || $billing->order->distance_kms != NULL) {
+            if ($request->status == 2) {
                 $status = 2;
                 $state = "dispatched";
                 $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
-
-            }
-            elseif($request->status == 1)
-            {
+            } elseif ($request->status == 1) {
                 $status = 3;
                 $state = "closed";
                 $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
-
-            }
-            elseif($request->status == 3)
-            {
+            } elseif ($request->status == 3) {
                 $status = 4;
                 $state = "cancelled";
                 $note = $request->note;
@@ -422,13 +409,10 @@ class OrderController extends Controller
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
-
-
-
             }
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/'.$billing->order->Order_Number.'/update',
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $billing->order->Order_Number . '/update',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -436,30 +420,28 @@ class OrderController extends Controller
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('status' => $status,'state' => $state,'amount' => $amount,'vehicle_no' => $vehicle_no,'driver_phone' => $driver_phone,'note' => $note,'driver_name' => $driver_name),
+                CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
                 CURLOPT_HTTPHEADER => array(
-                  'Accept: application/json'
+                    'Accept: application/json'
                 ),
-              ));
+            ));
 
-              $response = curl_exec($curl);
+            $response = curl_exec($curl);
 
-              curl_close($curl);
-              $res = json_decode($response, true);
+            curl_close($curl);
+            $res = json_decode($response, true);
 
-              if($res['error'] == true)
-              {
+            if ($res['error'] == true) {
                 //   dd($res['data']['message']);
-                return response()->json(['error'=>$res['data']['message']],500);
-              }
+                return response()->json(['error' => $res['data']['message']], 500);
+            }
         }
-        if($request->status == 3)
-        {
+        if ($request->status == 3) {
             $billing->cancle_reason = $request->note;
         }
         $billing->status = $request->status;
         $billing->save();
-        return response()->json(['message'=>"Status Has been Changed Successfully..."],200);
+        return response()->json(['message' => "Status Has been Changed Successfully..."], 200);
     }
 
     public  function billingReciept($id)
@@ -506,17 +488,14 @@ class OrderController extends Controller
         // dd(request('page'));
         $curl = curl_init();
         $filter = null;
-        if($request->has('date'))
-        {
-            $filter = 'date='.$request->get('date');
+        if ($request->has('date')) {
+            $filter = 'date=' . $request->get('date');
         }
-        if($request->has('gallon'))
-        {
-            $filter = $filter.'&gallon='.$request->get('gallon');
+        if ($request->has('gallon')) {
+            $filter = $filter . '&gallon=' . $request->get('gallon');
         }
-        if($request->has('order_no'))
-        {
-            $filter = $filter.'&order_no='.$request->get('order_no');
+        if ($request->has('order_no')) {
+            $filter = $filter . '&order_no=' . $request->get('order_no');
         }
         if (request()->has('page')) {
             $new_page = 'page=' . request('page');
@@ -525,7 +504,7 @@ class OrderController extends Controller
         }
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?'.$filter.'&'. $new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . '&' . $new_page,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -536,7 +515,7 @@ class OrderController extends Controller
             ));
         } else {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='.auth()->user()->hydrant->ots_hydrant.'&'.$filter.'&'.$new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' . auth()->user()->hydrant->ots_hydrant . '&' . $filter . '&' . $new_page,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -568,13 +547,10 @@ class OrderController extends Controller
     }
     public function generate_excel()
     {
-        if(auth()->user()->role == 1)
-        {
-            $data = Orders::with('truck_type_fun','hydrant','customer','billing')->whereHas('billing')->get();
-        }
-        else
-        {
-            $data = Orders::with('truck_type_fun','hydrant','customer','billing')->where('hydrant_id',auth()->user()->hydrant->id)->whereHas('billing')->get();
+        if (auth()->user()->role == 1) {
+            $data = Orders::with('truck_type_fun', 'hydrant', 'customer', 'billing')->whereHas('billing')->get();
+        } else {
+            $data = Orders::with('truck_type_fun', 'hydrant', 'customer', 'billing')->where('hydrant_id', auth()->user()->hydrant->id)->whereHas('billing')->get();
         }
         // dd($data->toArray());
         return Excel::download(new MyDataExport($data), 'my-data.xlsx');
