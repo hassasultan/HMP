@@ -449,8 +449,8 @@ class OrderController extends Controller
 
               if($res['error'] == true)
               {
-                  dd($res['data']['message']);
-                return response()->json(['error'=>$response['data']['message']],500);
+                //   dd($res['data']['message']);
+                return response()->json(['error'=>$res['data']['message']],500);
               }
         }
         if($request->status == 3)
