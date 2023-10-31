@@ -436,7 +436,7 @@
                 })
                 .fail(function(error) {
                     console.log(error);
-                    errorModal(error);
+                    errorModal(error['statusText']);
 
                 });
 
