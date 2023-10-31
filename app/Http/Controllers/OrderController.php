@@ -218,9 +218,10 @@ class OrderController extends Controller
 
     //billing
 
-    public  function billingindex()
+    public  function billingindex(Request $request)
     {
         # code...
+        $vehicle_type = Truck_type::all();
         $billing = Billings::with('order', 'order.customer');
         if (auth()->user()->role != 1) {
             $billing = $billing->whereHas('order', function ($query) {
@@ -235,11 +236,40 @@ class OrderController extends Controller
                     $q->where('standard', '!=', 'Commercial');
                 });
             }
-            $billing = $billing->OrderBy('id', 'DESC')->get();
-        } else {
-            $billing = $billing->OrderBy('id', 'DESC')->get();
         }
-        return view('pages.billing.index', compact('billing'));
+        if($request->has('vehicle_type') && $request->vehicle_type != '')
+        {
+            $billing = $billing->whereHas('order',function($query)use($request){
+                $query->where('truck_type',$request->vehicle_type);
+            });
+        }
+        if($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '')
+        {
+            $billing = $billing->whereBetween('created_at',[$request->from_date, $request->to_date]);
+        }
+        // dd($order->OrderBy('id', 'DESC')->get()->toArray());
+
+        if($request->has('order_type') && $request->order_type != '')
+        {
+            $billing = $billing->whereHas('order',function($query)use($request){
+                $query->where('order_type',$request->order_type);
+            });
+        }
+        if($request->has('order_num') && $request->order_num != '')
+        {
+            $billing = $billing->whereHas('order',function($query)use($request){
+                $query->where('Order_Number',$request->order_num);
+            });
+        }
+        if($request->has('customer_phone') && $request->customer_phone != '')
+        {
+            $phone = $request->customer_phone;
+            $billing = $billing->whereHas('order.customer', function ($q) use($phone) {
+                $q->where('contact_num', $phone);
+            });
+        }
+        $billing = $billing->OrderBy('id', 'DESC')->paginate(10);
+        return view('pages.billing.index', compact('billing','vehicle_type'));
     }
     public  function billingcreate($id)
     {
