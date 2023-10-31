@@ -127,7 +127,7 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class=" p-0">
-                        <table id="example1" class="table table-bordered table-responsive align-items-center mb-0">
+                        <table class="table table-striped table-bordered table-responsive align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order
@@ -201,7 +201,7 @@
                                     </div>
                                 </div> --}}
                                             </td>
-                                            <td>
+                                            <td style="width: 40px;">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $row->order->customer->name }}
                                                 </p>
                                                 <p class="text-xs text-secondary mb-0">
