@@ -221,8 +221,9 @@ class OrderController extends Controller
     public  function billingindex()
     {
         # code...
+        $billing = Billings::with('order', 'order.customer');
         if (auth()->user()->role != 1) {
-            $billing = Billings::with('order', 'order.customer')->whereHas('order', function ($query) {
+            $billing = $billing->whereHas('order', function ($query) {
                 $query->where('hydrant_id', auth()->user()->hydrant_id);
             });
             if (auth()->user()->type == "commercial") {
@@ -236,7 +237,7 @@ class OrderController extends Controller
             }
             $billing = $billing->OrderBy('id', 'DESC')->get();
         } else {
-            $billing = Billings::OrderBy('id', 'DESC')->get();
+            $billing = $billing->OrderBy('id', 'DESC')->get();
         }
         return view('pages.billing.index', compact('billing'));
     }
@@ -414,7 +415,7 @@ class OrderController extends Controller
               $response = curl_exec($curl);
 
               curl_close($curl);
-              dd($response);
+            //   dd($response);
         }
         if($request->status == 3)
         {

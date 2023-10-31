@@ -121,7 +121,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <select class="form-control border border-dark border-1 p-2"
-                                                        id="FormControlAdminSelect-{{ $row->id }}"
+                                                        id="FormControlAdminSelect-{{ $row->id }}" @if ($row->status == 3) disabled @endif
                                                         onchange="adminstatusbilling({{ $row->id }});">
                                                         <option @if ($row->status == 1) selected @endif
                                                             value='1' class="bg-success">
