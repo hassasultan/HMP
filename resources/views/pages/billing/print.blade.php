@@ -117,7 +117,7 @@
                         <p class="font-weight-bold">Filling Station: </p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->truck->hydrant->name }}</p>
+                        <p class="font-weight-bold">{{ $billing->order->hydrant->name }}</p>
                     </div>
 
                     <div class="col-6">
@@ -279,7 +279,7 @@
                         <p class="font-weight-bold">Filling Station: </p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->truck->hydrant->name }}</p>
+                        <p class="font-weight-bold">{{ $billing->order->hydrant->name }}</p>
                     </div>
 
                     <div class="col-6">
@@ -435,7 +435,7 @@
                         <p class="font-weight-bold">Filling Station: </p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ $billing->truck->hydrant->name }}</p>
+                        <p class="font-weight-bold">{{ $billing->order->hydrant->name }}</p>
                     </div>
 
                     <div class="col-6">
