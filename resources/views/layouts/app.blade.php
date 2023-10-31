@@ -425,7 +425,14 @@
                         $("#note").val('');
                         myModal.hide();
                     }
-                    successModal("Status Has been Changed Successfully...");
+                    if(data['error'])
+                    {
+                        errorModal(data['error']);
+                    }
+                    else
+                    {
+                        successModal(data['message']);
+                    }
                 })
                 .fail(function(error) {
                     console.log(error);

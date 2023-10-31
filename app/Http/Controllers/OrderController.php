@@ -445,6 +445,10 @@ class OrderController extends Controller
               $response = curl_exec($curl);
 
               curl_close($curl);
+              if($response['error'] == true)
+              {
+                return response()->json(['error'=>$response['data']['message']],500);
+              }
             //   dd($response);
         }
         if($request->status == 3)
@@ -453,7 +457,7 @@ class OrderController extends Controller
         }
         $billing->status = $request->status;
         $billing->save();
-        return 1;
+        return response()->json(['message'=>"Status Has been Changed Successfully..."],200);
     }
 
     public  function billingReciept($id)
