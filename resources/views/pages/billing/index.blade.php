@@ -234,6 +234,7 @@
                                                         id="FormControlAdminSelect-{{ $row->id }}"
                                                         @if ($row->status == 3) disabled @endif
                                                         onchange="adminstatusbilling({{ $row->id }});">
+                                                        <option  selected disabled value='' > -- Select Status --</option>
                                                         <option @if ($row->status == 1) selected @endif
                                                             value='1' class="bg-success">
                                                             Completed</option>
