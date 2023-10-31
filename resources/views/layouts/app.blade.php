@@ -435,8 +435,8 @@
                     }
                 })
                 .fail(function(error) {
-                    console.log(error);
-                    errorModal(error['statusText']);
+                    console.log(error['responseJSON']['error']);
+                    errorModal(error['responseJSON']['error']);
 
                 });
 
