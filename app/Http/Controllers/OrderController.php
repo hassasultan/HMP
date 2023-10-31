@@ -337,7 +337,7 @@ class OrderController extends Controller
         $data['status'] = 2;
         $billing = Billings::create($data);
         $truck = Truck::find($billing->truck_id);
-        $driver = Truck::Driver($billing->driver_id);
+        $driver = Driver::find($billing->driver_id);
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
