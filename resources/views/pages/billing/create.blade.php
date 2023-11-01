@@ -94,21 +94,22 @@
                         <select name="turck_type"
                             class="select2-multiple form-control fs-14  h-50px" required>
                             <option selected disabled>-- Select Option --</option>
-
-                            @foreach ($vehicle_type as $col)
-                                <option value="{{ $col->id }}" @if($order[0]->truck_type == $col->id) selected @endif>{{ $col->name }}</option>
-                                {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
-                            @endforeach
+                            @if ($order != null)
+                                @foreach ($vehicle_type as $col)
+                                    <option value="{{ $col->id }}" @if($order[0]->truck_type == $col->id) selected @endif>{{ $col->name }}</option>
+                                    {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="form-group col-12">
                         <label>Tanker Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="{{ $order[0]->delivery_charges }}" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="@if ($order != null)  {{ $order[0]->delivery_charges }} @endif" required/>
 
                     </div>
                     <div class="form-group col-12">
                         <label>Extra Distance KM</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Distance KM..." name="km_amount" value="{{ $order[0]->distance_kms }}" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Distance KM..." name="km_amount" value="@if ($order != null) {{ $order[0]->distance_kms }} @endif" required/>
 
                     </div>
                     <div class="text-center">
