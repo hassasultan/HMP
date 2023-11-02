@@ -141,7 +141,7 @@ class OrderController extends Controller
                 $new_order->contact_num = $request->contact_num;
                 $new_order->delivery_charges = $request->delivery_charges;
                 $new_order->save();
-                dd($new_order->toArray());
+                // dd($new_order->toArray());
             } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
             }
@@ -300,7 +300,7 @@ class OrderController extends Controller
     public  function billingstore(Request $request)
     {
         # code...
-        dd($request->all());
+        // dd($request->all());
         $data = $request->all();
         $order = Orders::with('truck_type_fun')->find($request->order_id);
         if ($request->has('new_tanker')) {
