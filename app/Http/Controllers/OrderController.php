@@ -266,7 +266,7 @@ class OrderController extends Controller
         } else {
             $driver = Driver::all();
         }
-        dd($order->toArray());
+        // dd($order->toArray());
         return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type'));
     }
     public  function billingedit($id)
