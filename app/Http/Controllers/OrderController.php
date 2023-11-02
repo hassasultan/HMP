@@ -405,7 +405,7 @@ class OrderController extends Controller
                 $status = 4;
                 $state = "cancelled";
                 $note = $request->note;
-                $amount = $billing->amount;
+                // $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
