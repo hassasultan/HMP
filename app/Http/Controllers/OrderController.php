@@ -130,8 +130,7 @@ class OrderController extends Controller
                     $new_order->hydrant_id = $user->hydrant_id;
                 }
                 $new_order->customer_id = $cust->id;
-                $new_order->contact_num = $request->contact_num;
-                $new_order->delivery_charges = $request->delivery_charges;
+
                 if ((int)$request->distance_kms < 11) {
                     $new_order->distance_kms = 0;
                 } else {
@@ -139,6 +138,8 @@ class OrderController extends Controller
                 }
                 $gallon = Truck_type::where('name', $request->gallon)->first();
                 $new_order->truck_type = $gallon->id;
+                $new_order->contact_num = $request->contact_num;
+                $new_order->delivery_charges = $request->delivery_charges;
                 $new_order->save();
             } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
@@ -348,7 +349,7 @@ class OrderController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
+            CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => '', 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
             CURLOPT_HTTPHEADER => array(
                 'Accept: application/json'
             ),
