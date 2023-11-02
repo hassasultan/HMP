@@ -527,37 +527,38 @@ class OrderController extends Controller
         } else {
             $new_page = null;
         }
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166';
-        $response = Http::get($apiUrl);
         // $data = $response->json(); // Convert the response to JSON
         // $data = response()->json($data);
-        $orderData = json_decode($response, true);
-        dd($orderData);
+
         if (auth()->user()->role_id == 1) {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-            ));
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166'. $filter . $new_page;
+
+            // curl_setopt_array($curl, array(
+            //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' ,
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'GET',
+            // ));
         } else {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' . auth()->user()->hydrant->ots_hydrant . $filter . $new_page,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-            ));
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166'. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
+
+            // curl_setopt_array($curl, array(
+            //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' ,
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'GET',
+            // ));
         }
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $response = Http::get($apiUrl);
+
         $orderData = json_decode($response, true);
         $orderData = $orderData['data'];
         $total = $orderData['total'];
