@@ -543,7 +543,7 @@ class OrderController extends Controller
             $currentPage,
             ['path' => route('ots.order.list'), 'query' => request()->query()]
         );
-        dd('https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . '&' . $new_page);
+        dd($orderData);
         return view('pages.order.ots-orders', compact('orders'));
     }
     public function generate_excel()
