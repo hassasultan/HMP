@@ -531,7 +531,7 @@ class OrderController extends Controller
         // $data = response()->json($data);
 
         if (auth()->user()->role_id == 1) {
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166'. $filter . $new_page;
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders'. $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' ,
@@ -544,7 +544,7 @@ class OrderController extends Controller
             //     CURLOPT_CUSTOMREQUEST => 'GET',
             // ));
         } else {
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166'. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders'. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' ,
