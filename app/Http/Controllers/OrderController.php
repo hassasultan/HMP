@@ -529,7 +529,8 @@ class OrderController extends Controller
         }
         $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders';
         $response = Http::get($apiUrl);
-        dd($response);
+        $data = $response->json(); // Convert the response to JSON
+        dd(response()->json($data));
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page,
