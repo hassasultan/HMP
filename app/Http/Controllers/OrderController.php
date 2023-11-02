@@ -17,7 +17,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-
+use Illuminate\Support\Facades\Http;
 class OrderController extends Controller
 {
     //
@@ -93,7 +93,7 @@ class OrderController extends Controller
     public  function store(Request $request)
     {
         # code...
-        dd($request->all());
+        // dd($request->all());
         if ($request->has('ots')) {
             $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
@@ -339,6 +339,9 @@ class OrderController extends Controller
         $billing = Billings::create($data);
         $truck = Truck::find($billing->truck_id);
         $driver = Driver::find($billing->driver_id);
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders';
+        $response = Http::get($apiUrl);
+        dd($response);
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
