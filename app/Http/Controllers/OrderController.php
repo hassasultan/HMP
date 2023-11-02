@@ -563,7 +563,7 @@ class OrderController extends Controller
         $response = Http::get($apiUrl);
 
         $orderData = json_decode($response, true);
-        dd($apiUrl);
+        // dd($apiUrl);
         $orderData = $orderData['data'];
         $total = $orderData['total'];
         $count = $orderData['count'];
