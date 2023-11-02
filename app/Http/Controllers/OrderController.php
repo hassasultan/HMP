@@ -390,14 +390,14 @@ class OrderController extends Controller
             if ($request->status == 2) {
                 $status = 2;
                 $state = "dispatched";
-                $amount = $billing->amount;
+                // $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
             } elseif ($request->status == 1) {
                 $status = 3;
                 $state = "closed";
-                $amount = $billing->amount;
+                // $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
