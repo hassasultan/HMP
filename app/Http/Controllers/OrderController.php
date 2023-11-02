@@ -500,7 +500,7 @@ class OrderController extends Controller
             }
             else
             {
-                $filter = 'gallon=' . $request->get('gallon');
+                $filter = '?gallon=' . $request->get('gallon');
 
             }
         }
@@ -511,7 +511,7 @@ class OrderController extends Controller
             }
             else
             {
-                $filter = 'order_no=' . $request->get('order_no');
+                $filter = '?order_no=' . $request->get('order_no');
             }
         }
         if (request()->has('page'))
@@ -522,7 +522,7 @@ class OrderController extends Controller
             }
             else
             {
-                $new_page = 'page=' . request('page');
+                $new_page = '?page=' . request('page');
             }
         } else {
             $new_page = null;
