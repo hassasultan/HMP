@@ -141,6 +141,7 @@ class OrderController extends Controller
                 $new_order->contact_num = $request->contact_num;
                 $new_order->delivery_charges = $request->delivery_charges;
                 $new_order->save();
+                dd($new_order->toArray());
             } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
             }
