@@ -339,9 +339,7 @@ class OrderController extends Controller
         $billing = Billings::create($data);
         $truck = Truck::find($billing->truck_id);
         $driver = Driver::find($billing->driver_id);
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders';
-        $response = Http::get($apiUrl);
-        dd($response);
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
@@ -529,6 +527,9 @@ class OrderController extends Controller
         } else {
             $new_page = null;
         }
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders';
+        $response = Http::get($apiUrl);
+        dd($response);
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page,
