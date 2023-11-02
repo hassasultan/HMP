@@ -528,7 +528,7 @@ class OrderController extends Controller
         }
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page,
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -536,7 +536,17 @@ class OrderController extends Controller
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'GET',
-            ));
+              ));
+            // curl_setopt_array($curl, array(
+            //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page,
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'GET',
+            // ));
         } else {
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' . auth()->user()->hydrant->ots_hydrant . $filter . $new_page,
@@ -566,7 +576,7 @@ class OrderController extends Controller
             $currentPage,
             ['path' => route('ots.order.list'), 'query' => request()->query()]
         );
-        dd('https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page);
+        // dd('https://kwsb.crdc.biz/api/v1/fetch/orders?' . $filter . $new_page);
         return view('pages.order.ots-orders', compact('orders'));
     }
     public function generate_excel()
