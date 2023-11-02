@@ -493,10 +493,25 @@ class OrderController extends Controller
             $filter = 'date=' . $request->get('date');
         }
         if ($request->has('gallon')) {
-            $filter = $filter . '&gallon=' . $request->get('gallon');
+            if($filter != null)
+            {
+                $filter = $filter . '&gallon=' . $request->get('gallon');
+            }
+            else
+            {
+                $filter = 'gallon=' . $request->get('gallon');
+
+            }
         }
         if ($request->has('order_no')) {
-            $filter = $filter . '&order_no=' . $request->get('order_no');
+            if($filter != null)
+            {
+                $filter = $filter . '&order_no=' . $request->get('order_no');
+            }
+            else
+            {
+                $filter = 'order_no=' . $request->get('order_no');
+            }
         }
         if (request()->has('page')) {
             $new_page = 'page=' . request('page');
