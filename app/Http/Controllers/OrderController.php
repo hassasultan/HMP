@@ -529,9 +529,9 @@ class OrderController extends Controller
         }
         $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166';
         $response = Http::get($apiUrl);
-        $data = $response->json(); // Convert the response to JSON
+        // $data = $response->json(); // Convert the response to JSON
         // $data = response()->json($data);
-        $orderData = json_decode($data, true);
+        $orderData = json_decode($response, true);
         dd($orderData);
         if (auth()->user()->role_id == 1) {
             curl_setopt_array($curl, array(
