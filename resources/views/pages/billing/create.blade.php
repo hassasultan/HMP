@@ -105,12 +105,12 @@
                     </div>
                     <div class="form-group col-12">
                         <label>Tanker Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="@if ($order != null)  {{ $order[0]->delivery_charges }} @endif" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="@if (count($order) > 0)  {{ $order[0]->delivery_charges }} @endif" required/>
 
                     </div>
                     <div class="form-group col-12">
                         <label>Extra Distance KM</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Distance KM..." name="km_amount" value="@if ($order != null) {{ $order[0]->distance_kms }} @endif" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Distance KM..." name="km_amount" value="@if (count($order) > 0) {{ $order[0]->distance_kms }} @endif" required/>
 
                     </div>
                     <div class="text-center">
