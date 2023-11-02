@@ -105,7 +105,7 @@
                     </div>
                     <div class="form-group col-12">
                         <label>Tanker Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="@if (count($order) > 0)  {{ $order[0]->delivery_charges }} @endif" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="" required/>
 
                     </div>
                     <div class="form-group col-12">
