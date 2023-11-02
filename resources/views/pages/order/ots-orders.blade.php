@@ -212,6 +212,7 @@
                             <div class="col-md-3">
                                 <label for="gallon">Gallon</label>
                                 <select class="form-control border p-2" id="gallon" name="gallon">
+                                    <option selected disabled value=""></option>
                                     <option value="1000" @if(request()->get('gallon') == "1000") selected @endif>1000</option>
                                     <option value="2000" @if(request()->get('gallon') == "2000") selected @endif>2000</option>
                                     <option value="3000" @if(request()->get('gallon') == "3000") selected @endif>3000</option>
@@ -222,6 +223,10 @@
                             <div class="col-md-3">
                                 <br/>
                                 <button type="submit" class="mt-2 btn  border">Search</button>
+                            </div>
+                            <div class="col-md-3">
+                                <br/>
+                                <a href="{{ route('ots.order.list') }}" class="mt-2 btn  border">Reset</a>
                             </div>
                         </div>
                     </form>
