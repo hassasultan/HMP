@@ -547,7 +547,7 @@ class OrderController extends Controller
         }
         else
         {
-            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?'. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
+            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' ,
