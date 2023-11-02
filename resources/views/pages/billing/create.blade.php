@@ -89,7 +89,7 @@
 
                         </div> --}}
                     </div>
-                    {{ dd($order) }}
+                    {{-- {{ dd($order) }} --}}
                     <div class="form-group col-12">
                         <label>Gallon</label>
                         <select name="turck_type"
