@@ -529,9 +529,10 @@ class OrderController extends Controller
         }
         // $data = $response->json(); // Convert the response to JSON
         // $data = response()->json($data);
-        dd($new_page);
-        if (auth()->user()->role_id == 1) {
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders'. $filter . $new_page;
+        // dd($new_page);
+        if (auth()->user()->role_id == 1)
+        {
+            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders'. $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' ,
@@ -543,8 +544,10 @@ class OrderController extends Controller
             //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             //     CURLOPT_CUSTOMREQUEST => 'GET',
             // ));
-        } else {
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders'. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
+        }
+        else
+        {
+            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?'. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' ,
