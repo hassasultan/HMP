@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Http;
+
 class OrderController extends Controller
 {
     //
@@ -340,26 +341,27 @@ class OrderController extends Controller
         $billing = Billings::create($data);
         $truck = Truck::find($billing->truck_id);
         $driver = Driver::find($billing->driver_id);
+        if ($order->delivery_charges != NULL || $order->distance_kms != NULL) {
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->km_amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
+                CURLOPT_HTTPHEADER => array(
+                    'Accept: application/json'
+                ),
+            ));
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->km_amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json'
-            ),
-        ));
+            $response = curl_exec($curl);
 
-        $response = curl_exec($curl);
-
-        curl_close($curl);
+            curl_close($curl);
+        }
         if (auth()->user()->role != 1) {
             return redirect()->route('billing.details', $billing->id);
         } else {
@@ -495,34 +497,23 @@ class OrderController extends Controller
             $filter = '?date=' . $request->get('date');
         }
         if ($request->has('gallon')) {
-            if($filter != null)
-            {
+            if ($filter != null) {
                 $filter = $filter . '&gallon=' . $request->get('gallon');
-            }
-            else
-            {
+            } else {
                 $filter = '?gallon=' . $request->get('gallon');
-
             }
         }
         if ($request->has('order_no')) {
-            if($filter != null)
-            {
+            if ($filter != null) {
                 $filter = $filter . '&order_no=' . $request->get('order_no');
-            }
-            else
-            {
+            } else {
                 $filter = '?order_no=' . $request->get('order_no');
             }
         }
-        if (request()->has('page'))
-        {
-            if($filter != null)
-            {
+        if (request()->has('page')) {
+            if ($filter != null) {
                 $new_page = '&page=' . request('page');
-            }
-            else
-            {
+            } else {
                 $new_page = '?page=' . request('page');
             }
         } else {
@@ -531,9 +522,8 @@ class OrderController extends Controller
         // $data = $response->json(); // Convert the response to JSON
         // $data = response()->json($data);
         // dd($new_page);
-        if (auth()->user()->role == 1)
-        {
-            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders'. $filter . $new_page;
+        if (auth()->user()->role == 1) {
+            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders' . $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?' ,
@@ -545,10 +535,8 @@ class OrderController extends Controller
             //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             //     CURLOPT_CUSTOMREQUEST => 'GET',
             // ));
-        }
-        else
-        {
-            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id='. auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
+        } else {
+            $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' . auth()->user()->hydrant->ots_hydrant . $filter . $new_page;
 
             // curl_setopt_array($curl, array(
             //     CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/fetch/orders?hydrant_id=' ,
