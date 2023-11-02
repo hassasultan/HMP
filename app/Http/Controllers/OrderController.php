@@ -491,7 +491,7 @@ class OrderController extends Controller
         $curl = curl_init();
         $filter = null;
         if ($request->has('date') && $request->date != "") {
-            $filter = 'date=' . $request->get('date');
+            $filter = '?date=' . $request->get('date');
         }
         if ($request->has('gallon')) {
             if($filter != null)
