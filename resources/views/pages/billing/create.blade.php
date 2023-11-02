@@ -109,8 +109,8 @@
 
                     </div>
                     <div class="form-group col-12">
-                        <label>Extra Distance KM</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Distance KM..." name="km_amount" value="@if (count($order) > 0) {{ $order[0]->distance_kms }} @endif" required/>
+                        <label>Extra Km Price</label>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter KM Price..." name="km_amount" value="@if (count($order) > 0)  {{ $order[0]->delivery_charges }} @endif" required/>
 
                     </div>
                     <div class="text-center">

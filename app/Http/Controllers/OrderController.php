@@ -349,7 +349,7 @@ class OrderController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => '', 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
+            CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->km_amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
             CURLOPT_HTTPHEADER => array(
                 'Accept: application/json'
             ),
