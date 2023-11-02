@@ -543,7 +543,7 @@ class OrderController extends Controller
             $currentPage,
             ['path' => route('ots.order.list'), 'query' => request()->query()]
         );
-        dd($orders);
+        dd($orders->toArray());
         return view('pages.order.ots-orders', compact('orders'));
     }
     public function generate_excel()
