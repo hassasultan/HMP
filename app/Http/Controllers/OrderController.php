@@ -527,7 +527,7 @@ class OrderController extends Controller
         } else {
             $new_page = null;
         }
-        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders';
+        $apiUrl = 'https://kwsb.crdc.biz/api/v1/fetch/orders?order_no=021123001166';
         $response = Http::get($apiUrl);
         $data = $response->json(); // Convert the response to JSON
         dd(response()->json($data));
