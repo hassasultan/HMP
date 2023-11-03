@@ -497,31 +497,43 @@ class OrderController extends Controller
             if (auth()->user()->role == 1) {
 
                 $filter = '?date=' . $request->get('date');
-            }
-            else
-            {
-                $filter = 'date=' . $request->get('date');
+            } else {
+                $filter = '&date=' . $request->get('date');
             }
         }
         if ($request->has('gallon')) {
             if ($filter != null) {
                 $filter = $filter . '&gallon=' . $request->get('gallon');
             } else {
-                $filter = '?gallon=' . $request->get('gallon');
+                if (auth()->user()->role == 1) {
+
+                    $filter = '?gallon=' . $request->get('gallon');
+                } else {
+                    $filter = '&gallon=' . $request->get('gallon');
+                }
             }
         }
         if ($request->has('order_no')) {
             if ($filter != null) {
                 $filter = $filter . '&order_no=' . $request->get('order_no');
             } else {
-                $filter = '?order_no=' . $request->get('order_no');
+                if (auth()->user()->role == 1) {
+                    $filter = '?order_no=' . $request->get('order_no');
+                } else {
+                    $filter = '&order_no=' . $request->get('order_no');
+                }
             }
         }
         if (request()->has('page')) {
             if ($filter != null) {
                 $new_page = '&page=' . request('page');
             } else {
-                $new_page = '?page=' . request('page');
+                if (auth()->user()->role == 1) {
+
+                    $new_page = '?page=' . request('page');
+                } else {
+                    $new_page = '&page=' . request('page');
+                }
             }
         } else {
             $new_page = null;
@@ -559,7 +571,7 @@ class OrderController extends Controller
         $response = Http::get($apiUrl);
 
         $orderData = json_decode($response, true);
-        dd($filter);
+        // dd($filter);
         $orderData = $orderData['data'];
         $total = $orderData['total'];
         $count = $orderData['count'];
