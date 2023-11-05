@@ -256,7 +256,7 @@ class OrderController extends Controller
         {
             $page = $request->per_page;
         }
-        $billing = $billing->OrderBy('id', 'DESC')->paginate(20);
+        $billing = $billing->OrderBy('id', 'DESC')->paginate($page);
         return view('pages.billing.index', compact('billing', 'vehicle_type'));
     }
     public  function billingcreate($id)
