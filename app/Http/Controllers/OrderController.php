@@ -471,7 +471,7 @@ class OrderController extends Controller
         $driver_phone = '';
         foreach($request->getIds as $row)
         {
-            $billing = Billings::with('order', 'truck', 'driver')->find($row->id);
+            $billing = Billings::with('order', 'truck', 'driver')->find($row);
             if ($billing->order->delivery_charges != NULL || $billing->order->distance_kms != NULL) {
                 if ($request->status == 2) {
                     $status = 2;
