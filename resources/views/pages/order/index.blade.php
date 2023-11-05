@@ -92,6 +92,14 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-3 p-3 mt-4">
+                                        <select name="page" class="select2-multiple form-control fs-14  h-50px">
+                                            <option value="20" @if(request()->get('page') == "20") selected @endif>20</option>
+                                            <option value="50" @if(request()->get('page') == "50") selected @endif>50</option>
+                                            <option value="100" @if(request()->get('page') == "100") selected @endif>100</option>
+                                            <option value="200" @if(request()->get('page') == "200") selected @endif>200</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-3 p-3 mt-4">
                                         <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
                                     </div>
                                 </div>
@@ -147,9 +155,6 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                    <img src="{{ asset('storage/'.$row->image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                </div> --}}
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">{{ $row->Order_Number }}</h6>
                                                         {{-- <p class="text-xs text-secondary mb-0">{{ $row->company_name }}</p> --}}
@@ -196,11 +201,7 @@
                                                 <span
                                                     class="text-secondary text-xs font-weight-bold">{{ $row->created_at }}</span>
                                             </td>
-                                            {{-- <td class="align-middle">
-                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                Edit
-                                </a>
-                            </td> --}}
+
                                         </tr>
                                     @endforeach
                                 @else

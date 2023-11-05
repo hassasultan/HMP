@@ -118,6 +118,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-3 p-3 mt-4">
+                                    <select name="page" class="select2-multiple form-control fs-14  h-50px">
+                                        <option value="20" @if (request()->get('page') == '20') selected @endif>20
+                                        </option>
+                                        <option value="50" @if (request()->get('page') == '50') selected @endif>50
+                                        </option>
+                                        <option value="100" @if (request()->get('page') == '100') selected @endif>100
+                                        </option>
+                                        <option value="200" @if (request()->get('page') == '200') selected @endif>200
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-3 p-3 mt-4">
                                     <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
                                 </div>
                             </div>
@@ -130,6 +142,8 @@
                         <table class="table table-striped table-bordered align-items-center mb-0">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -157,121 +171,119 @@
                             </thead>
                             <tbody>
                                 @if (count($billing) > 0)
-                                    @foreach ($billing as $key => $row)
-                                        <tr>
-                                            <td style="width: 5%;">
-                                                <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                    <img src="{{ asset('storage/'.$row->image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $row->order->Order_Number }}</h6>
-                                                        {{-- <p class="text-xs text-secondary mb-0">{{ $row->company_name }}</p> --}}
+                                    <form id="form-bulk-status">
+                                        @foreach ($billing as $key => $row)
+                                            <tr>
+                                                <td>
+                                                    @if ($row->status != 3 && $row->status != 1)
+                                                        <input type="checkbox" name="getIds[]"
+                                                            value="{{ $row->id }}" />
+                                                    @endif
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{ $row->order->Order_Number }}</h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td style="width: 5%;">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $row->truck->name }}({{ $row->truck->company_name }})</p>
-                                                <p class="text-xs text-secondary mb-0">{{ $row->truck->truck_num }}</p>
-                                                <p class="text-xs text-secondary mb-0">{{ $row->truck->truckCap->name }}
-                                                </p>
-                                                {{-- <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                    </div>
-                                </div> --}}
-                                            </td>
-                                            <td style="width: 5%;">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $row->driver->name }}</p>
-                                                <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p>
-                                                {{-- <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                    </div>
-                                </div> --}}
-                                            </td>
-                                            <td style="width: 5%;">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $row->order->hydrant->name }}
-                                                </p>
-                                                {{-- <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p> --}}
-                                                {{-- <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                    </div>
-                                </div> --}}
-                                            </td>
-                                            <td style="width: 20%;">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $row->order->customer->name }}
-                                                </p>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    {{ $row->order->customer->location }}
-                                                </p>
-                                                <p class="text-xs text-secondary mb-0">{{ $row->order->customer->street }}
-                                                </p>
-                                                <p class="text-xs text-secondary mb-0">{{ $row->order->customer->address }}
-                                                </p>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    {{ $row->order->customer->contact_num }}</p>
-                                                {{-- <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="{{ asset('storage/'.$row->nic_image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                    </div>
-                                </div> --}}
-                                            </td>
-                                            <td style="width: 10%;">
-                                                @if ($row->order->order_type != null)
-                                                    <p class="text-center font-weight-bold mb-0">
-                                                        {{ $row->order->order_type }}</p>
-                                                @else
-                                                    <p class="text-center font-weight-bold mb-0">
-                                                        {{ $row->order->customer->standard }}</p>
-                                                @endif
-                                            </td>
-                                            <td style="width: 15%;">
-                                                <div class="form-group">
-                                                    <select class="form-control border border-dark border-1 p-2"
-                                                        id="FormControlAdminSelect-{{ $row->id }}"
-                                                        @if ($row->status == 3) disabled @endif
-                                                        onchange="adminstatusbilling({{ $row->id }});">
-                                                        <option  selected disabled value='' > -- Select Status --</option>
-                                                        <option @if ($row->status == 1) selected @endif
-                                                            value='1' class="bg-success">
-                                                            Completed</option>
-                                                        <option @if ($row->status == 2) selected @endif
-                                                            value='2' class="bg-primary">
-                                                            Dispatch</option>
-                                                        <option
-                                                            @if ($row->status == 0) selected @else disabled @endif
-                                                            value='0' class="bg-warning">
-                                                            Pending</option>
-                                                        <option @if ($row->status == 3) selected @endif
-                                                            value='3' class="bg-danger">
-                                                            Cancelled</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle text-center" style="width: 5%;">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>
-                                            </td>
-                                            <td class="align-middle"  style="width: 15%;">
-                                                <div>
-                                                    <a href="{{ route('billing.details', $row->id) }}"
-                                                        target="_blank"><span
-                                                            class="badge badge-sm bg-gradient-primary">Generate
-                                                            Reciept</span></a>
-                                                </div>
-                                                <div>
-                                                    <a href="{{ route('billing.edit', $row->id) }}"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $row->truck->name }}({{ $row->truck->company_name }})</p>
+                                                    <p class="text-xs text-secondary mb-0">{{ $row->truck->truck_num }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {{ $row->truck->truckCap->name }}
+                                                    </p>
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $row->driver->name }}</p>
+                                                    <p class="text-xs text-secondary mb-0">{{ $row->driver->nic }}</p>
+                                                </td>
+                                                <td style="width: 5%;">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $row->order->hydrant->name }}
+                                                    </p>
+                                                </td>
+                                                <td style="width: 20%;">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $row->order->customer->name }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {{ $row->order->customer->location }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {{ $row->order->customer->street }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {{ $row->order->customer->address }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {{ $row->order->customer->contact_num }}</p>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    @if ($row->order->order_type != null)
+                                                        <p class="text-center font-weight-bold mb-0">
+                                                            {{ $row->order->order_type }}</p>
+                                                    @else
+                                                        <p class="text-center font-weight-bold mb-0">
+                                                            {{ $row->order->customer->standard }}</p>
+                                                    @endif
+                                                </td>
+                                                <td style="width: 15%;">
+                                                    <div class="form-group">
+                                                        <select class="form-control border border-dark border-1 p-2"
+                                                            id="FormControlAdminSelect-{{ $row->id }}"
+                                                            @if ($row->status == 3) disabled @endif
+                                                            onchange="adminstatusbilling({{ $row->id }});">
+                                                            <option selected disabled value=''> -- Select Status --
+                                                            </option>
+                                                            <option @if ($row->status == 1) selected @endif
+                                                                value='1' class="bg-success">
+                                                                Completed</option>
+                                                            <option @if ($row->status == 2) selected @endif
+                                                                value='2' class="bg-primary">
+                                                                Dispatch</option>
+                                                            <option
+                                                                @if ($row->status == 0) selected @else disabled @endif
+                                                                value='0' class="bg-warning">
+                                                                Pending</option>
+                                                            <option @if ($row->status == 3) selected @endif
+                                                                value='3' class="bg-danger">
+                                                                Cancelled</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle text-center" style="width: 5%;">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ $row->amount }}</span>
+                                                </td>
+                                                <td class="align-middle" style="width: 15%;">
+                                                    <div>
+                                                        <a href="{{ route('billing.details', $row->id) }}"
+                                                            target="_blank"><span
+                                                                class="badge badge-sm bg-gradient-primary">Generate
+                                                                Reciept</span></a>
+                                                    </div>
+                                                    <div>
+                                                        <a href="{{ route('billing.edit', $row->id) }}"
+                                                            class="text-secondary font-weight-bold text-xs"
+                                                            data-toggle="tooltip" data-original-title="Edit user">
+                                                            Edit
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <div class="col-md-2">
+                                            <textarea class="d-none" name="reason" id="canc-reason"></textarea>
+                                            <select name="status" class="select2-multiple form-control fs-14  h-50px"
+                                                id="bulk-change">
+                                                <option value="1">Closed</option>
+                                                <option value='3'>Cancelled</option>
+                                            </select>
+                                        </div>
+                                    </form>
                                 @else
                                     No Record Find...
                                 @endif
@@ -312,8 +324,72 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="bulk-reasonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Canceled Reason</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <fieldset class="border rounded-3 p-3">
+                        <legend class="float-none w-auto px-3">Reason</legend>
+                        <textarea id="bulk-note" class="form-control"></textarea>
+
+                    </fieldset>
+                    <span class="text-danger d-none" id="alert-field">Please fill this field first then submit ...</span>
+                    {{-- <textarea id="note" class="form-control border"></textarea> --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="bulk-reason-submit" data-id="">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="alert-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are You sure you want to submit this action...</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-success" id="submit-alert" data-id="">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
+        $("#bulk-change").change(function() {
+            if ($(this).val() == 3) {
+                var myModal = new bootstrap.Modal(document.getElementById('bulk-reasonModal'), {
+                    keyboard: false
+                });
+                myModal.show();
+
+            }
+            else
+            {
+                var myModal = new bootstrap.Modal(document.getElementById('alert-Modal'), {
+                    keyboard: false
+                });
+                myModal.show();
+
+            }
+        });
+        $("#bulk-reason-submit").click(function() {
+            $("#canc-reason").val($("#bulk-note").val());
+            var myModal = new bootstrap.Modal(document.getElementById('alert-Modal'), {
+                    keyboard: false
+                });
+                myModal.show();
+        });
+        $("#submit-alert").click(function(){
+            $("#form-bulk-status").submit();
+        });
         $("#reason-submit").click(function() {
             id = $(this).attr('data-id');
             var note = $("#note").val();

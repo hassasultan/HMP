@@ -25,6 +25,7 @@ class OrderController extends Controller
     public  function index(Request $request)
     {
         # code...
+        $page = 20;
         $vehicle_type = Truck_type::all();
         $order = Orders::with('truck_type_fun', 'hydrant', 'customer', 'billing');
         if (auth()->user()->role != 1) {
@@ -52,7 +53,7 @@ class OrderController extends Controller
             $order = $order->where('order_type', $request->order_type);
         }
         if ($request->has('order_num') && $request->order_num != '') {
-            $order = $order->where('Order_Number', $request->order_num);
+            $order = $order->where('Order_Number',  'like', '%' . $request->order_num . '%');
         }
         if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
@@ -64,7 +65,11 @@ class OrderController extends Controller
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
         }
-        $order = $order->OrderBy('id', 'DESC')->paginate(20);
+        if ($request->has('page'))
+        {
+            $page = $request->page;
+        }
+        $order = $order->OrderBy('id', 'DESC')->paginate($page);
         // dd($order->toArray());
         return view('pages.order.index', compact('order', 'vehicle_type'));
     }
@@ -141,6 +146,7 @@ class OrderController extends Controller
                 $new_order->truck_type = $gallon->id;
                 $new_order->contact_num = $request->contact_num;
                 $new_order->delivery_charges = $request->delivery_charges;
+                $new_order->order_type = "Online (GPS)";
                 $new_order->save();
                 // dd($new_order->toArray());
             } else {
