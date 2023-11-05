@@ -144,6 +144,7 @@
                                 <textarea class="d-none" name="reason" id="canc-reason"></textarea>
                                 <select name="status" class="select2-multiple form-control fs-14  h-50px"
                                     id="bulk-change">
+                                    <option value="" selected disabled>-- Select Status --</option>
                                     <option value="1">Closed</option>
                                     <option value='3'>Cancelled</option>
                                 </select>
