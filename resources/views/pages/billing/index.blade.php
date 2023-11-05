@@ -139,7 +139,8 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="col-md-12 p-0">
-                        <form id="form-bulk-status">
+                        <form id="form-bulk-status" action="{{ route('billing.status.bulk') }}">
+                            @csrf
                             <div class="col-md-2">
                                 <textarea class="d-none" name="reason" id="canc-reason"></textarea>
                                 <select name="status" class="select2-multiple form-control fs-14  h-50px"

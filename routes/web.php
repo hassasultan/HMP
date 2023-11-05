@@ -97,6 +97,8 @@ Route::middleware('auth')->group(function () {
     Route::get('create/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingcreate'])->name('billing.create');
     Route::get('edit/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingedit'])->name('billing.edit');
     Route::post('store/billing', [App\Http\Controllers\OrderController::class, 'billingstore'])->name('billing.store');
+    //bulk submit
+    Route::post('change/billing/status/bulk', [App\Http\Controllers\OrderController::class, 'changeBlillingStatusBulk'])->name('billing.status.bulk');
     Route::post('update/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingupdate'])->name('billing.update');
     Route::get('change/status/billing', [App\Http\Controllers\OrderController::class, 'changeBlillingStatus'])->name('billing.change.status');
     Route::resource('/customer-management', CustomerController::class);
