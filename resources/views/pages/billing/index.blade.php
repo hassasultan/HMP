@@ -144,6 +144,7 @@
                             @csrf
                             <div class="col-md-2">
                                 <textarea class="d-none" name="reason" id="canc-reason"></textarea>
+                                <label>Select Bulk Action</label>
                                 <select name="status" class="select2-multiple form-control fs-14  h-50px"
                                     id="bulk-change">
                                     <option value="" selected disabled>-- Select Status --</option>
@@ -155,6 +156,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
 
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order
                                     </th>
@@ -192,6 +194,7 @@
                                                             value="{{ $row->id }}" />
                                                     @endif
                                                 </td>
+                                                <td>{{ ++$key }}</td>
                                                 <td style="width: 5%;">
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
