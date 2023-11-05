@@ -118,6 +118,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-3 p-3 mt-4">
+                                    <label>Per Page Enteries</label>
                                     <select name="page" class="select2-multiple form-control fs-14  h-50px">
                                         <option value="20" @if (request()->get('page') == '20') selected @endif>20
                                         </option>
@@ -139,7 +140,7 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="col-md-12 p-0">
-                        <form id="form-bulk-status" action="{{ route('billing.status.bulk') }}">
+                        <form id="form-bulk-status" action="{{ route('billing.status.bulk') }}" method="POST">
                             @csrf
                             <div class="col-md-2">
                                 <textarea class="d-none" name="reason" id="canc-reason"></textarea>

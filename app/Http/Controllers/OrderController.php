@@ -209,6 +209,7 @@ class OrderController extends Controller
     public  function billingindex(Request $request)
     {
         # code...
+        $page = 20;
         $vehicle_type = Truck_type::all();
         $billing = Billings::with('order', 'order.customer');
         if (auth()->user()->role != 1) {
@@ -251,7 +252,11 @@ class OrderController extends Controller
                 $q->where('contact_num', $phone);
             });
         }
-        $billing = $billing->OrderBy('id', 'DESC')->paginate(10);
+        if ($request->has('page'))
+        {
+            $page = $request->page;
+        }
+        $billing = $billing->OrderBy('id', 'DESC')->paginate(20);
         return view('pages.billing.index', compact('billing', 'vehicle_type'));
     }
     public  function billingcreate($id)
