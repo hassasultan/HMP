@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="form-group col-3 p-3 mt-4">
                                     <label>Per Page Enteries</label>
-                                    <select name="page" class="select2-multiple form-control fs-14  h-50px">
+                                    <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
                                         <option value="20" @if (request()->get('page') == '20') selected @endif>20
                                         </option>
                                         <option value="50" @if (request()->get('page') == '50') selected @endif>50

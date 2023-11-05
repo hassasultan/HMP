@@ -65,9 +65,9 @@ class OrderController extends Controller
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
         }
-        if ($request->has('page'))
+        if ($request->has('per_page'))
         {
-            $page = $request->page;
+            $page = $request->per_page;
         }
         $order = $order->OrderBy('id', 'DESC')->paginate($page);
         // dd($order->toArray());
@@ -252,9 +252,9 @@ class OrderController extends Controller
                 $q->where('contact_num', $phone);
             });
         }
-        if ($request->has('page'))
+        if ($request->has('per_page'))
         {
-            $page = $request->page;
+            $page = $request->per_page;
         }
         $billing = $billing->OrderBy('id', 'DESC')->paginate(20);
         return view('pages.billing.index', compact('billing', 'vehicle_type'));
