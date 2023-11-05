@@ -139,6 +139,15 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="col-md-12 p-0">
+                        <form id="form-bulk-status">
+                            <div class="col-md-2">
+                                <textarea class="d-none" name="reason" id="canc-reason"></textarea>
+                                <select name="status" class="select2-multiple form-control fs-14  h-50px"
+                                    id="bulk-change">
+                                    <option value="1">Closed</option>
+                                    <option value='3'>Cancelled</option>
+                                </select>
+                            </div>
                         <table class="table table-striped table-bordered align-items-center mb-0">
                             <thead>
                                 <tr>
@@ -171,7 +180,7 @@
                             </thead>
                             <tbody>
                                 @if (count($billing) > 0)
-                                    <form id="form-bulk-status">
+
                                         @foreach ($billing as $key => $row)
                                             <tr>
                                                 <td>
@@ -275,20 +284,14 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                        <div class="col-md-2">
-                                            <textarea class="d-none" name="reason" id="canc-reason"></textarea>
-                                            <select name="status" class="select2-multiple form-control fs-14  h-50px"
-                                                id="bulk-change">
-                                                <option value="1">Closed</option>
-                                                <option value='3'>Cancelled</option>
-                                            </select>
-                                        </div>
-                                    </form>
+
                                 @else
                                     No Record Find...
                                 @endif
                             </tbody>
                         </table>
+                    </form>
+
                     </div>
                     <div class="d-flex justify-content-center">
                         {{ $billing->appends(request()->query())->links() }}
