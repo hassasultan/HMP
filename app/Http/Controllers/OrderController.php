@@ -461,7 +461,7 @@ class OrderController extends Controller
     }
     public function changeBlillingStatusBulk(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $status = '';
         $state = '';
         $note = '';
