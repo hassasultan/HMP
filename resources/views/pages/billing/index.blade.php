@@ -120,13 +120,13 @@
                                 <div class="form-group col-3 p-3 mt-4">
                                     <label>Per Page Enteries</label>
                                     <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
-                                        <option value="20" @if (request()->get('page') == '20') selected @endif>20
+                                        <option value="20" @if (request()->get('per_page') == '20') selected @endif>20
                                         </option>
-                                        <option value="50" @if (request()->get('page') == '50') selected @endif>50
+                                        <option value="50" @if (request()->get('per_page') == '50') selected @endif>50
                                         </option>
-                                        <option value="100" @if (request()->get('page') == '100') selected @endif>100
+                                        <option value="100" @if (request()->get('per_page') == '100') selected @endif>100
                                         </option>
-                                        <option value="200" @if (request()->get('page') == '200') selected @endif>200
+                                        <option value="200" @if (request()->get('per_page') == '200') selected @endif>200
                                         </option>
                                     </select>
                                 </div>
