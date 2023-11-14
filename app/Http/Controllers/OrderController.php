@@ -426,13 +426,13 @@ class OrderController extends Controller
 
                     // Convert the given timestamp to a Carbon instance
                     $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
-                    dd($givenTime);
 
                     // Get the current time
                     $currentTime = Carbon::now();
 
                     // Calculate the difference in hours
                     $timeDifferenceInHours = $givenTime->diffInHours($currentTime);
+                    dd($timeDifferenceInHours);
 
                     // Check if the time difference is greater than 48 hours
                     if ($timeDifferenceInHours < 48) {
