@@ -19,6 +19,7 @@ class Orders extends Model
         'delivery_charges',
         'distance_kms',
         'status',
+        'ots_created_at',
     ];
     public function truck_type_fun()
     {

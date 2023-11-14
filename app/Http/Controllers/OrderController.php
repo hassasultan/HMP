@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -65,8 +66,7 @@ class OrderController extends Controller
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
         }
-        if ($request->has('per_page'))
-        {
+        if ($request->has('per_page')) {
             $page = $request->per_page;
         }
         $order = $order->OrderBy('id', 'DESC')->paginate($page);
@@ -145,6 +145,7 @@ class OrderController extends Controller
                 $gallon = Truck_type::where('name', $request->gallon)->first();
                 $new_order->truck_type = $gallon->id;
                 $new_order->contact_num = $request->contact_num;
+                $new_order->ots_created_at = $request->ots_created_at;
                 $new_order->delivery_charges = $request->delivery_charges;
                 $new_order->order_type = "Online (GPS)";
                 $new_order->save();
@@ -252,8 +253,7 @@ class OrderController extends Controller
                 $q->where('contact_num', $phone);
             });
         }
-        if ($request->has('per_page'))
-        {
+        if ($request->has('per_page')) {
             $page = $request->per_page;
         }
         $billing = $billing->OrderBy('id', 'DESC')->paginate($page);
@@ -421,6 +421,24 @@ class OrderController extends Controller
                 $status = 4;
                 $state = "cancelled";
                 $note = $request->note;
+                if ($billing->order->ots_created_at != null) {
+                    $givenTimestamp = $billing->order->ots_created_at;
+
+                    // Convert the given timestamp to a Carbon instance
+                    $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+
+                    // Get the current time
+                    $currentTime = Carbon::now();
+
+                    // Calculate the difference in hours
+                    $timeDifferenceInHours = $givenTime->diffInHours($currentTime);
+
+                    // Check if the time difference is greater than 48 hours
+                    if ($timeDifferenceInHours < 48) {
+                        // Your code here if the condition is true
+                        return response()->json(['error' => "You can not cancelled the order before 48 hours..."], 500);
+                    }
+                }
                 // $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
@@ -469,8 +487,7 @@ class OrderController extends Controller
         $vehicle_no = '';
         $driver_name = '';
         $driver_phone = '';
-        foreach($request->getIds as $row)
-        {
+        foreach ($request->getIds as $row) {
             $billing = Billings::with('order', 'truck', 'driver')->find($row);
             if ($billing->order->delivery_charges != NULL || $billing->order->distance_kms != NULL) {
                 if ($request->status == 2) {
@@ -492,6 +509,24 @@ class OrderController extends Controller
                     $state = "cancelled";
                     $note = $request->note;
                     // $amount = $billing->amount;
+                    if ($billing->order->ots_created_at != null) {
+                        $givenTimestamp = $billing->order->ots_created_at;
+
+                        // Convert the given timestamp to a Carbon instance
+                        $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+
+                        // Get the current time
+                        $currentTime = Carbon::now();
+
+                        // Calculate the difference in hours
+                        $timeDifferenceInHours = $givenTime->diffInHours($currentTime);
+
+                        // Check if the time difference is greater than 48 hours
+                        if ($timeDifferenceInHours < 48) {
+                            // Your code here if the condition is true
+                            continue;
+                        }
+                    }
                     $vehicle_no = $billing->truck->truck_num;
                     $driver_name = $billing->driver->name;
                     $driver_phone = $billing->driver->phone;
