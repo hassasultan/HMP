@@ -485,7 +485,7 @@ class OrderController extends Controller
             // Check if the time difference is greater than 48 hours
             if ($timeDifferenceInHours < 48) {
                 // Your code here if the condition is true
-                return response()->json(['error' => ['responseJSON' => ['error' => "You can not cancelled the order before 48 hours..."] ]], 500);
+                return response()->json(['error' => "You can not cancelled the order before 48 hours..."], 500);
             }
             $billing->cancle_reason = $request->note;
         }
