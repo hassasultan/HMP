@@ -425,7 +425,7 @@ class OrderController extends Controller
                     $givenTimestamp = $billing->order->ots_created_at;
 
                     // Convert the given timestamp to a Carbon instance
-                    $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+                    $givenTime = Carbon::createFromFormat('d-m-y h:i:s A', $givenTimestamp);
 
                     // Get the current time
                     $currentTime = Carbon::now();
@@ -530,7 +530,8 @@ class OrderController extends Controller
                         $givenTimestamp = $billing->order->ots_created_at;
 
                         // Convert the given timestamp to a Carbon instance
-                        $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+                        $givenTime = Carbon::createFromFormat('d-m-y h:i:s A', $givenTimestamp);
+
 
                         // Get the current time
                         $currentTime = Carbon::now();
