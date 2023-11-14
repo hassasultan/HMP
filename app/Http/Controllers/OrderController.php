@@ -423,10 +423,10 @@ class OrderController extends Controller
                 $note = $request->note;
                 if ($billing->order->ots_created_at != null) {
                     $givenTimestamp = $billing->order->ots_created_at;
-                    dd($givenTimestamp);
 
                     // Convert the given timestamp to a Carbon instance
                     $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+                    dd($givenTime);
 
                     // Get the current time
                     $currentTime = Carbon::now();
