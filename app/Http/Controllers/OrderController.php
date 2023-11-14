@@ -432,7 +432,6 @@ class OrderController extends Controller
 
                     // Calculate the difference in hours
                     $timeDifferenceInHours = $givenTime->diffInHours($currentTime);
-                    dd($timeDifferenceInHours);
 
                     // Check if the time difference is greater than 48 hours
                     if ($timeDifferenceInHours < 48) {
