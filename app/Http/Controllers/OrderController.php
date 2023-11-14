@@ -439,6 +439,25 @@ class OrderController extends Controller
                         return response()->json(['error' => "You can not cancelled the order before 48 hours..."], 500);
                     }
                 }
+                else
+                {
+                    $givenTimestamp = $billing->order->created_at;
+
+                    // Convert the given timestamp to a Carbon instance
+                    $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+
+                    // Get the current time
+                    $currentTime = Carbon::now();
+
+                    // Calculate the difference in hours
+                    $timeDifferenceInHours = $givenTime->diffInHours($currentTime);
+
+                    // Check if the time difference is greater than 48 hours
+                    if ($timeDifferenceInHours < 48) {
+                        // Your code here if the condition is true
+                        return response()->json(['error' => "You can not cancelled the order before 48 hours..."], 500);
+                    }
+                }
                 // $amount = $billing->amount;
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
@@ -511,6 +530,25 @@ class OrderController extends Controller
                     // $amount = $billing->amount;
                     if ($billing->order->ots_created_at != null) {
                         $givenTimestamp = $billing->order->ots_created_at;
+
+                        // Convert the given timestamp to a Carbon instance
+                        $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
+
+                        // Get the current time
+                        $currentTime = Carbon::now();
+
+                        // Calculate the difference in hours
+                        $timeDifferenceInHours = $givenTime->diffInHours($currentTime);
+
+                        // Check if the time difference is greater than 48 hours
+                        if ($timeDifferenceInHours < 48) {
+                            // Your code here if the condition is true
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        $givenTimestamp = $billing->order->created_at;
 
                         // Convert the given timestamp to a Carbon instance
                         $givenTime = Carbon::createFromFormat('y-m-d h:i:s A', $givenTimestamp);
