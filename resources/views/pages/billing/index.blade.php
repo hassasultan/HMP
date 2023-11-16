@@ -117,7 +117,7 @@
                                         @endif
                                     </select>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="form-group col-3 p-3">
                                     <label>Per Page Enteries</label>
                                     <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
                                         <option value="20" @if (request()->get('per_page') == '20') selected @endif>20
@@ -130,23 +130,23 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="form-group col-3 p-3">
                                     <label>Status</label>
                                     <select name="status" class="select2-multiple form-control fs-14  h-50px"
-                                        id="bulk-change">
+                                        >
                                         <option value="" selected disabled>-- Select Status --</option>
                                         <option @if (request()->get('status') == 1) selected @endif
-                                            value='1' class="bg-success">
+                                            value='1' >
                                             Completed</option>
                                         <option @if (request()->get('status') == 2) selected @endif
-                                            value='2' class="bg-primary">
+                                            value='2' >
                                             Dispatch</option>
                                         <option
                                             @if (request()->get('status') == 0) selected @else disabled @endif
-                                            value='0' class="bg-warning">
+                                            value='0' >
                                             Pending</option>
                                         <option @if (request()->get('status') == 3) selected @endif
-                                            value='3' class="bg-danger">
+                                            value='3'>
                                             Cancelled</option>
                                     </select>
                                 </div>
