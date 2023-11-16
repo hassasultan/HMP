@@ -247,6 +247,9 @@ class OrderController extends Controller
                 $query->where('Order_Number', $request->order_num);
             });
         }
+        if ($request->has('status') && $request->status != '') {
+            $billing = $billing->where('status',$request->status);
+        }
         if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
             $billing = $billing->whereHas('order.customer', function ($q) use ($phone) {

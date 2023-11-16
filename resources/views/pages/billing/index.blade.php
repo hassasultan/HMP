@@ -130,6 +130,26 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div class="col-md-2">
+                                    <label>Status</label>
+                                    <select name="status" class="select2-multiple form-control fs-14  h-50px"
+                                        id="bulk-change">
+                                        <option value="" selected disabled>-- Select Status --</option>
+                                        <option @if (request()->get('status') == 1) selected @endif
+                                            value='1' class="bg-success">
+                                            Completed</option>
+                                        <option @if (request()->get('status') == 2) selected @endif
+                                            value='2' class="bg-primary">
+                                            Dispatch</option>
+                                        <option
+                                            @if (request()->get('status') == 0) selected @else disabled @endif
+                                            value='0' class="bg-warning">
+                                            Pending</option>
+                                        <option @if (request()->get('status') == 3) selected @endif
+                                            value='3' class="bg-danger">
+                                            Cancelled</option>
+                                    </select>
+                                </div>
                                 <div class="form-group col-3 p-3 mt-4">
                                     <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
                                 </div>
