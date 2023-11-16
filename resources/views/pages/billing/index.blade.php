@@ -80,8 +80,8 @@
                                                 <option value="Gps ( care off )"
                                                     @if (request()->get('order_type') == 'Gps ( care off )') selected @endif>Gps ( care off )
                                                 </option>
-                                                <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
-                                                    GRATIS</option>
+                                                {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
+                                                    GRATIS</option> --}}
                                                 <option value="Pak rangers"
                                                     @if (request()->get('order_type') == 'Pak rangers') selected @endif>Pak rangers</option>
                                                 <option value="P.A.F korangi creek"
@@ -103,8 +103,8 @@
                                             <option value="Gps ( care off )"
                                                 @if (request()->get('order_type') == 'Gps ( care off )') selected @endif>Gps ( care off )
                                             </option>
-                                            <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
-                                                GRATIS</option>
+                                            {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
+                                                GRATIS</option> --}}
                                             <option value="Pak rangers" @if (request()->get('order_type') == 'Pak rangers') selected @endif>
                                                 Pak rangers</option>
                                             <option value="P.A.F korangi creek"

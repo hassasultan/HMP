@@ -88,7 +88,7 @@
                                         <th>Online (GPS)</th>
                                         <th>Gps ( billing )</th>
                                         <th>Gps ( care off )</th>
-                                        <th>GRATIS</th>
+                                        {{-- <th>GRATIS</th> --}}
                                         <th>Pak rangers</th>
                                         <th>P.A.F korangi creek</th>
                                         <th>Dc quota</th>
@@ -103,7 +103,7 @@
                                             'Online (GPS)' => 0,
                                             'Gps ( billing )' => 0,
                                             'Gps ( care off )' => 0,
-                                            'GRATIS' => 0,
+                                            // 'GRATIS' => 0,
                                             'Pak rangers' => 0,
                                             'P.A.F korangi creek' => 0,
                                             'Dc quota' => 0,
@@ -118,7 +118,7 @@
                                             <td>{{ $data->{"Online (GPS)"} }}</td>
                                             <td>{{ $data->{"Gps ( billing )"} }}</td>
                                             <td>{{ $data->{"Gps ( care off )"} }}</td>
-                                            <td>{{ $data->GRATIS }}</td>
+                                            {{-- <td>{{ $data->GRATIS }}</td> --}}
                                             <td>{{ $data->{"Pak rangers"} }}</td>
                                             <td>{{ $data->{"P.A.F korangi creek"} }}</td>
                                             <td>{{ $data->{"Dc quota"} }}</td>
@@ -131,7 +131,7 @@
                                             $totals['Online (GPS)'] = ($totals['Online (GPS)'] ?? 0) + $data->{"Online (GPS)"};
                                             $totals['Gps ( billing )'] = ($totals['Gps ( billing )'] ?? 0) + $data->{"Gps ( billing )"};
                                             $totals['Gps ( care off )'] = ($totals['Gps ( care off )'] ?? 0) + $data->{"Gps ( care off )"};
-                                            $totals['GRATIS'] = ($totals['GRATIS'] ?? 0) + $data->GRATIS;
+                                            // $totals['GRATIS'] = ($totals['GRATIS'] ?? 0) + $data->GRATIS;
                                             $totals['Pak rangers'] = ($totals['Pak rangers'] ?? 0) + $data->{"Pak rangers"};
                                             $totals['P.A.F korangi creek'] = ($totals['P.A.F korangi creek'] ?? 0) + $data->{"P.A.F korangi creek"};
                                             $totals['Dc quota'] = ($totals['Dc quota'] ?? 0) + $data->{"Dc quota"};
@@ -145,7 +145,7 @@
                                         <td><strong>{{ $totals['Online (GPS)'] }}</strong></td>
                                         <td><strong>{{ $totals['Gps ( billing )'] }}</strong></td>
                                         <td><strong>{{ $totals['Gps ( care off )'] }}</strong></td>
-                                        <td><strong>{{ $totals['GRATIS'] }}</strong></td>
+                                        {{-- <td><strong>{{ $totals['GRATIS'] }}</strong></td> --}}
                                         <td><strong>{{ $totals['Pak rangers'] }}</strong></td>
                                         <td><strong>{{ $totals['P.A.F korangi creek'] }}</strong></td>
                                         <td><strong>{{ $totals['Dc quota'] }}</strong></td>

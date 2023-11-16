@@ -72,7 +72,7 @@
                                                     <option value="Online (GPS)" @if(request()->get('order_type') == "Online (GPS)") selected @endif>Online (GPS)</option>
                                                     <option value="Gps ( billing )" @if(request()->get('order_type') == "Gps ( billing )") selected @endif>Gps ( billing )</option>
                                                     <option value="Gps ( care off )" @if(request()->get('order_type') == "Gps ( care off )") selected @endif>Gps ( care off )</option>
-                                                    <option value="GRATIS" @if(request()->get('order_type') == "GRATIS") selected @endif>GRATIS</option>
+                                                    {{-- <option value="GRATIS" @if(request()->get('order_type') == "GRATIS") selected @endif>GRATIS</option> --}}
                                                     <option value="Pak rangers" @if(request()->get('order_type') == "Pak rangers") selected @endif>Pak rangers</option>
                                                     <option value="P.A.F korangi creek" @if(request()->get('order_type') == "P.A.F korangi creek") selected @endif>P.A.F korangi creek</option>
                                                     <option value="Dc quota" @if(request()->get('order_type') == "Dc quota") selected @endif>Dc quota</option>
@@ -83,7 +83,7 @@
                                                 <option value="Online (GPS)" @if(request()->get('order_type') == "Online (GPS)") selected @endif>Online (GPS)</option>
                                                 <option value="Gps ( billing )" @if(request()->get('order_type') == "Gps ( billing )") selected @endif>Gps ( billing )</option>
                                                 <option value="Gps ( care off )" @if(request()->get('order_type') == "Gps ( care off )") selected @endif>Gps ( care off )</option>
-                                                <option value="GRATIS" @if(request()->get('order_type') == "GRATIS") selected @endif>GRATIS</option>
+                                                {{-- <option value="GRATIS" @if(request()->get('order_type') == "GRATIS") selected @endif>GRATIS</option> --}}
                                                 <option value="Pak rangers" @if(request()->get('order_type') == "Pak rangers") selected @endif>Pak rangers</option>
                                                 <option value="P.A.F korangi creek" @if(request()->get('order_type') == "P.A.F korangi creek") selected @endif>P.A.F korangi creek</option>
                                                 <option value="Dc quota" @if(request()->get('order_type') == "Dc quota") selected @endif>Dc quota</option>
