@@ -132,8 +132,7 @@
                                 </div>
                                 <div class="form-group col-3 p-3">
                                     <label>Status</label>
-                                    <select name="status" class="select2-multiple form-control fs-14  h-50px"
-                                        >
+                                    <select name="status" class="select2-multiple form-control fs-14  h-50px">
                                         <option value="" selected disabled>-- Select Status --</option>
                                         <option @if (request()->get('status') == 1) selected @endif
                                             value='1' >
