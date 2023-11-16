@@ -117,7 +117,7 @@
                                         @endif
                                     </select>
                                 </div>
-                                <div class="form-group col-3 p-3 mt-4">
+                                <div class="form-group col-3">
                                     <label>Per Page Enteries</label>
                                     <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
                                         <option value="20" @if (request()->get('per_page') == '20') selected @endif>20
@@ -130,7 +130,7 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="form-group col-3">
                                     <label>Status</label>
                                     <select name="status" class="select2-multiple form-control fs-14  h-50px"
                                         id="bulk-change">
