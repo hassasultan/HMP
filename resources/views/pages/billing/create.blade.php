@@ -105,7 +105,7 @@
                     </div>
                     <div class="form-group col-12">
                         <label>Tanker Amount</label>
-                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="" required/>
+                        <input type="number" class="form-control border-bottom" placeholder="Enter Tanker Amount..." name="amount" value="{{ $order[0]->tanker_charges}}" required/>
 
                     </div>
                     <div class="form-group col-12">

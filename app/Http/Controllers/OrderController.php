@@ -149,6 +149,40 @@ class OrderController extends Controller
                 $new_order->delivery_charges = $request->delivery_charges;
                 $new_order->order_type = "Online (GPS)";
                 $new_order->save();
+                $new_order->tanker_charges = $request->tanker_charges;
+                $new_order->save();
+
+                if ($request->has('cancel')) {
+                    $status = 4;
+                    $state = "cancelled";
+                    $note = $request->note;
+                    $amount = $request->delivery_charges;
+                    $vehicle_no = "none";
+                    $driver_name = "noe";
+                    $driver_phone = "none";
+
+                    $curl = curl_init();
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $new_order->Order_Number . '/update',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
+                        CURLOPT_HTTPHEADER => array(
+                            'Accept: application/json'
+                        ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+                    $res = json_decode($response, true);
+                }
+
                 // dd($new_order->toArray());
             } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
@@ -248,7 +282,7 @@ class OrderController extends Controller
             });
         }
         if ($request->has('status') && $request->status != '') {
-            $billing = $billing->where('status',$request->status);
+            $billing = $billing->where('status', $request->status);
         }
         if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;

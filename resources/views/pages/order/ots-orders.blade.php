@@ -203,29 +203,31 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label for="date">Date</label>
-                                <input type="date" name="date" class="form-control border p-2" value="{{ request()->get('date') }}" id="date"/>
+                                <input type="date" name="date" class="form-control border p-2"
+                                    value="{{ request()->get('date') }}" id="date" />
                             </div>
                             <div class="col-md-3">
                                 <label for="order_no">Order Number</label>
-                                <input type="text" name="order_no" class="form-control border p-2" value="{{ request()->get('order_no') }}" id="order_no"/>
+                                <input type="text" name="order_no" class="form-control border p-2"
+                                    value="{{ request()->get('order_no') }}" id="order_no" />
                             </div>
                             <div class="col-md-3">
                                 <label for="gallon">Gallon</label>
                                 <select class="form-control border p-2" id="gallon" name="gallon">
                                     <option selected disabled value=""></option>
-                                    <option value="1000" @if(request()->get('gallon') == "1000") selected @endif>1000</option>
-                                    <option value="2000" @if(request()->get('gallon') == "2000") selected @endif>2000</option>
-                                    <option value="3000" @if(request()->get('gallon') == "3000") selected @endif>3000</option>
-                                    <option value="4000" @if(request()->get('gallon') == "4000") selected @endif>4000</option>
-                                    <option value="5000" @if(request()->get('gallon') == "5000") selected @endif>5000</option>
+                                    <option value="1000" @if (request()->get('gallon') == '1000') selected @endif>1000</option>
+                                    <option value="2000" @if (request()->get('gallon') == '2000') selected @endif>2000</option>
+                                    <option value="3000" @if (request()->get('gallon') == '3000') selected @endif>3000</option>
+                                    <option value="4000" @if (request()->get('gallon') == '4000') selected @endif>4000</option>
+                                    <option value="5000" @if (request()->get('gallon') == '5000') selected @endif>5000</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <br/>
+                                <br />
                                 <button type="submit" class="mt-2 btn  border">Search</button>
                             </div>
                             <div class="col-md-3">
-                                <br/>
+                                <br />
                                 <a href="{{ route('ots.order.list') }}" class="mt-2 btn  border">Reset</a>
                             </div>
                         </div>
@@ -248,6 +250,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Charges </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Cancelled </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Source </th>
@@ -308,7 +313,45 @@
                                                     <p class="text-xs font-weight-bold mb-0">Distance:
                                                         {{ $row['distance_kms'] }}</p>
                                                 </td>
-
+                                                <td>
+                                                    <form method="post" action="{{ route('order.store') }}"
+                                                        id="cancel-form">
+                                                        @csrf
+                                                        <input type="hidden" name="cancel" value="1" />
+                                                        <input type="hidden" name="ots" value="1" />
+                                                        <input type="hidden" name="note" value=""
+                                                            id="cancel-note" />
+                                                        <input type="hidden" name="name"
+                                                            value="{{ $row['consumer_name'] }}" />
+                                                        <input type="hidden" name="address"
+                                                            value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                        <input type="hidden" name="street"
+                                                            value="{{ $row['consumer_address']['area'] }}" />
+                                                        <input type="hidden" name="location"
+                                                            value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                        <input type="hidden" name="gps"
+                                                            value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}" />
+                                                        <input type="hidden" name="contact_num"
+                                                            value="{{ $row['consumer_phone'] }}" />
+                                                        <input type="hidden" name="hydrant_id"
+                                                            value="{{ $row['hydrant']['id'] }}" />
+                                                        <input type="hidden" name="Order_Number"
+                                                            value="{{ $row['order_no'] }}" />
+                                                        <input type="hidden" name="gallon"
+                                                            value="{{ $row['gallons']['quantity'] }}" />
+                                                        <input type="hidden" name="delivery_charges"
+                                                            value="{{ $row['delivery_charges'] }}" />
+                                                        <input type="hidden" name="tanker_charges"
+                                                            value="{{ $row['gallons']['tanker_charges'] }}" />
+                                                        <input type="hidden" name="distance_kms"
+                                                            value="{{ $row['distance_kms'] }}" />
+                                                        <input type="hidden" name="ots_created_at"
+                                                            value="{{ $row['created_at'] }}" />
+                                                        <button type="type"
+                                                            class="badge badge-sm bg-gradient-danger"  id="cancelled-btn">Canceled
+                                                            Order</button>
+                                                    </form>
+                                                </td>
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">{{ $row['source'] }}</span>
@@ -343,9 +386,14 @@
                                                             value="{{ $row['order_no'] }}" />
                                                         <input type="hidden" name="gallon"
                                                             value="{{ $row['gallons']['quantity'] }}" />
-                                                        <input type="hidden" name="delivery_charges" value="{{ $row['delivery_charges'] }}"/>
-                                                        <input type="hidden" name="distance_kms" value="{{ $row['distance_kms'] }}"/>
-                                                        <input type="hidden" name="ots_created_at" value="{{ $row['created_at'] }}"/>
+                                                        <input type="hidden" name="delivery_charges"
+                                                            value="{{ $row['delivery_charges'] }}" />
+                                                        <input type="hidden" name="tanker_charges"
+                                                            value="{{ $row['gallons']['tanker_charges'] }}" />
+                                                        <input type="hidden" name="distance_kms"
+                                                            value="{{ $row['distance_kms'] }}" />
+                                                        <input type="hidden" name="ots_created_at"
+                                                            value="{{ $row['created_at'] }}" />
                                                         <button type="submit"
                                                             class="badge badge-sm bg-gradient-primary">Generate
                                                             Order</button>
@@ -372,7 +420,8 @@
                                                         <p class="text-xs font-weight-bold mb-0">
                                                             {{ $row['consumer_name'] }}
                                                         </p>
-                                                        <p class="text-xs text-secondary mb-0">{{ $row['consumer_phone'] }}
+                                                        <p class="text-xs text-secondary mb-0">
+                                                            {{ $row['consumer_phone'] }}
                                                         </p>
                                                         <p class="text-xs text-primary mb-0">
                                                             {{ $row['consumer_address']['label'] }}
@@ -392,7 +441,8 @@
                                                         </p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs text-secondary mb-0">{{ $row['gallons']['quantity'] }}</p>
+                                                        <p class="text-xs text-secondary mb-0">
+                                                            {{ $row['gallons']['quantity'] }}</p>
                                                     </td>
                                                     <td>
                                                         <p class="text-xs font-weight-bold mb-0">Delivery Charges:
@@ -466,5 +516,58 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="reasonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Canceled Reason</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <fieldset class="border rounded-3 p-3">
+                        <legend class="float-none w-auto px-3">Reason</legend>
+                        <select id="note" class="form-control">
+                            <option value="" selected disabled>-- Select Reason --</option>
+                            <option value="duplicate order">Duplicate order</option>
+                            <option value="Wrong area selection">Wrong area selection</option>
+                            <option value="incomplete address">Incomplete address</option>
+                        </select>
 
+                    </fieldset>
+                    <span class="text-danger d-none" id="alert-field">Please fill this field first then submit ...</span>
+                    {{-- <textarea id="note" class="form-control border"></textarea> --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="reason-submit" data-id="">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#cancelled-btn").click(function() {
+            // $("#canc-reason").val($("#bulk-note").val());
+            var myModal = new bootstrap.Modal(document.getElementById('reasonModal'), {
+                keyboard: false
+            });
+            myModal.show();
+        });
+        $("#reason-submit").click(function(){
+            note = $("#note").val();
+            if(note != null)
+            {
+                $("#alert-field").addClass('d-none');
+                $("#cancel-form").val(note);
+                $("#cancel-form").submit();
+                var myModal = new bootstrap.Modal(document.getElementById('reasonModal'), {
+                    keyboard: false
+                });
+                myModal.hide();
+            }
+            else
+            {
+                $("#alert-field").removeClass('d-none');
+            }
+        });
+    </script>
 @endsection

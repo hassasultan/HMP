@@ -18,6 +18,7 @@ class Orders extends Model
         'order_type',
         'delivery_charges',
         'distance_kms',
+        'tanker_charges',
         'status',
         'ots_created_at',
     ];
