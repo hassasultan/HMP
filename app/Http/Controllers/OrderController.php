@@ -193,7 +193,7 @@ class OrderController extends Controller
                 $letter = explode(' ', $request->order_type);
                 $NEW_ORDER = Orders::latest()->first();
                 $now = Carbon::now();
-                $formatted_date = $now->format("YmdHis") . $now->format("u") / 1000;
+                $formatted_date = $now->format("YmdHis") . round($now->format("u") / 1000);
                 if (empty($NEW_ORDER)) {
                     $expNum[1] = 0;
                 } else {
