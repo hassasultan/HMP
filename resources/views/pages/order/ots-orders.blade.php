@@ -565,13 +565,15 @@
                 </div>
                 <div class="modal-body">
                     {{-- <fieldset class="border rounded-3 p-3"> --}}
-                    <label class="float-none w-auto px-3">Reason</label>
-                    <select id="note" class="form-control">
-                        <option value="" selected disabled>-- Select Reason --</option>
-                        <option value="duplicate order">Duplicate order</option>
-                        <option value="Wrong area selection">Wrong area selection</option>
-                        <option value="incomplete address">Incomplete address</option>
-                    </select>
+                        <div class="form-group">
+                            <label class="float-none w-auto px-3">Reason</label>
+                            <select id="note" class="form-control">
+                                <option value="" selected disabled>-- Select Reason --</option>
+                                <option value="duplicate order">Duplicate order</option>
+                                <option value="Wrong area selection">Wrong area selection</option>
+                                <option value="incomplete address">Incomplete address</option>
+                            </select>
+                        </div>
 
                     {{-- </fieldset> --}}
                     <span class="text-danger d-none" id="alert-field">Please fill this field first then submit ...</span>
