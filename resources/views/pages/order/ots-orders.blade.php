@@ -347,7 +347,7 @@
                                                             value="{{ $row['distance_kms'] }}" />
                                                         <input type="hidden" name="ots_created_at"
                                                             value="{{ $row['created_at'] }}" />
-                                                        <button type="type" class="badge badge-sm bg-gradient-danger"
+                                                        <button type="button" class="badge badge-sm bg-gradient-danger"
                                                             id="cancelled-btn">Canceled
                                                             Order</button>
                                                     </form>
@@ -486,7 +486,7 @@
                                                                 value="{{ $row['distance_kms'] }}" />
                                                             <input type="hidden" name="ots_created_at"
                                                                 value="{{ $row['created_at'] }}" />
-                                                            <button type="type"
+                                                            <button type="button"
                                                                 class="badge badge-sm bg-gradient-danger"
                                                                 id="cancelled-btn">Canceled
                                                                 Order</button>
@@ -563,8 +563,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <fieldset class="border rounded-3 p-3">
-                        <legend class="float-none w-auto px-3">Reason</legend>
+                    {{-- <fieldset class="border rounded-3 p-3"> --}}
+                        <label class="float-none w-auto px-3">Reason</label>
                         <select id="note" class="form-control">
                             <option value="" selected disabled>-- Select Reason --</option>
                             <option value="duplicate order">Duplicate order</option>
@@ -572,7 +572,7 @@
                             <option value="incomplete address">Incomplete address</option>
                         </select>
 
-                    </fieldset>
+                    {{-- </fieldset> --}}
                     <span class="text-danger d-none" id="alert-field">Please fill this field first then submit ...</span>
                     {{-- <textarea id="note" class="form-control border"></textarea> --}}
                 </div>
