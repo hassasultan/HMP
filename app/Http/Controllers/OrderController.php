@@ -181,6 +181,7 @@ class OrderController extends Controller
 
                     curl_close($curl);
                     $res = json_decode($response, true);
+                    return redirect()->back();
                 }
 
                 // dd($new_order->toArray());
