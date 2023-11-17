@@ -598,7 +598,7 @@
             note = $("#note").val();
             if (note != null) {
                 $("#alert-field").addClass('d-none');
-                $("#cancel-form").val(note);
+                $("#cancel-note").val(note);
                 $("#cancel-form").submit();
                 var myModal = new bootstrap.Modal(document.getElementById('reasonModal'), {
                     keyboard: false
