@@ -526,7 +526,8 @@
                                                                 value="{{ $row['order_no'] }}" />
                                                             <input type="hidden" name="gallon"
                                                                 value="{{ $row['gallons']['quantity'] }}" />
-
+                                                            <input type="hidden" name="tanker_charges"
+                                                                value="{{ $row['gallons']['tanker_charges'] }}" />
                                                             {{-- <input type="hidden" name="" value=""/>
                                                             <input type="hidden" name="" value=""/>
                                                             <input type="hidden" name="" value=""/>
@@ -564,13 +565,13 @@
                 </div>
                 <div class="modal-body">
                     {{-- <fieldset class="border rounded-3 p-3"> --}}
-                        <label class="float-none w-auto px-3">Reason</label>
-                        <select id="note" class="form-control">
-                            <option value="" selected disabled>-- Select Reason --</option>
-                            <option value="duplicate order">Duplicate order</option>
-                            <option value="Wrong area selection">Wrong area selection</option>
-                            <option value="incomplete address">Incomplete address</option>
-                        </select>
+                    <label class="float-none w-auto px-3">Reason</label>
+                    <select id="note" class="form-control">
+                        <option value="" selected disabled>-- Select Reason --</option>
+                        <option value="duplicate order">Duplicate order</option>
+                        <option value="Wrong area selection">Wrong area selection</option>
+                        <option value="incomplete address">Incomplete address</option>
+                    </select>
 
                     {{-- </fieldset> --}}
                     <span class="text-danger d-none" id="alert-field">Please fill this field first then submit ...</span>
