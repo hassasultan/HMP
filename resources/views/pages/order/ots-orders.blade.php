@@ -347,8 +347,8 @@
                                                             value="{{ $row['distance_kms'] }}" />
                                                         <input type="hidden" name="ots_created_at"
                                                             value="{{ $row['created_at'] }}" />
-                                                        <button type="type"
-                                                            class="badge badge-sm bg-gradient-danger"  id="cancelled-btn">Canceled
+                                                        <button type="type" class="badge badge-sm bg-gradient-danger"
+                                                            id="cancelled-btn">Canceled
                                                             Order</button>
                                                     </form>
                                                 </td>
@@ -452,7 +452,46 @@
                                                         <p class="text-xs font-weight-bold mb-0">Distance:
                                                             {{ $row['distance_kms'] }}</p>
                                                     </td>
-
+                                                    <td>
+                                                        <form method="post" action="{{ route('order.store') }}"
+                                                            id="cancel-form">
+                                                            @csrf
+                                                            <input type="hidden" name="cancel" value="1" />
+                                                            <input type="hidden" name="ots" value="1" />
+                                                            <input type="hidden" name="note" value=""
+                                                                id="cancel-note" />
+                                                            <input type="hidden" name="name"
+                                                                value="{{ $row['consumer_name'] }}" />
+                                                            <input type="hidden" name="address"
+                                                                value="{{ $row['consumer_address']['address'] }}, {{ $row['consumer_address']['area'] }}, {{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                            <input type="hidden" name="street"
+                                                                value="{{ $row['consumer_address']['area'] }}" />
+                                                            <input type="hidden" name="location"
+                                                                value="{{ $row['consumer_address']['block'] }}, {{ $row['consumer_address']['sector'] }}" />
+                                                            <input type="hidden" name="gps"
+                                                                value="{{ $row['consumer_address']['lat'] }},{{ $row['consumer_address']['lon'] }}" />
+                                                            <input type="hidden" name="contact_num"
+                                                                value="{{ $row['consumer_phone'] }}" />
+                                                            <input type="hidden" name="hydrant_id"
+                                                                value="{{ $row['hydrant']['id'] }}" />
+                                                            <input type="hidden" name="Order_Number"
+                                                                value="{{ $row['order_no'] }}" />
+                                                            <input type="hidden" name="gallon"
+                                                                value="{{ $row['gallons']['quantity'] }}" />
+                                                            <input type="hidden" name="delivery_charges"
+                                                                value="{{ $row['delivery_charges'] }}" />
+                                                            <input type="hidden" name="tanker_charges"
+                                                                value="{{ $row['gallons']['tanker_charges'] }}" />
+                                                            <input type="hidden" name="distance_kms"
+                                                                value="{{ $row['distance_kms'] }}" />
+                                                            <input type="hidden" name="ots_created_at"
+                                                                value="{{ $row['created_at'] }}" />
+                                                            <button type="type"
+                                                                class="badge badge-sm bg-gradient-danger"
+                                                                id="cancelled-btn">Canceled
+                                                                Order</button>
+                                                        </form>
+                                                    </td>
                                                     <td class="align-middle text-center">
                                                         <span
                                                             class="text-secondary text-xs font-weight-bold">{{ $row['source'] }}</span>
@@ -552,10 +591,9 @@
             });
             myModal.show();
         });
-        $("#reason-submit").click(function(){
+        $("#reason-submit").click(function() {
             note = $("#note").val();
-            if(note != null)
-            {
+            if (note != null) {
                 $("#alert-field").addClass('d-none');
                 $("#cancel-form").val(note);
                 $("#cancel-form").submit();
@@ -563,9 +601,7 @@
                     keyboard: false
                 });
                 myModal.hide();
-            }
-            else
-            {
+            } else {
                 $("#alert-field").removeClass('d-none');
             }
         });
