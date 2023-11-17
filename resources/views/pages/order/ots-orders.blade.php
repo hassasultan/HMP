@@ -567,7 +567,7 @@
                     {{-- <fieldset class="border rounded-3 p-3"> --}}
                         <div class="form-group">
                             <label class="float-none w-auto px-3">Reason</label>
-                            <select id="note" class="form-control">
+                            <select id="note" class="form-control border">
                                 <option value="" selected disabled>-- Select Reason --</option>
                                 <option value="duplicate order">Duplicate order</option>
                                 <option value="Wrong area selection">Wrong area selection</option>
