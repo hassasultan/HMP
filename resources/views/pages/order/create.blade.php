@@ -58,8 +58,8 @@
                                             <option value="Commercial">Commercial</option>
                                         @else
                                             <option value="Online (GPS)">Online (GPS)</option>
-                                            <option value="Gps ( billing )">Gps ( billing )</option>
-                                            <option value="Gps ( care off )">Gps ( care off )</option>
+                                            <option value="Gps(billing)">Gps ( billing )</option>
+                                            <option value="Gps(careoff)">Gps ( care off )</option>
                                             {{-- <option value="GRATIS">GRATIS</option> --}}
                                             <option value="Pak rangers">Pak rangers</option>
                                             <option value="P.A.F korangi creek">P.A.F korangi creek</option>
@@ -69,8 +69,8 @@
                                     @else
                                         <option value="Commercial">Commercial</option>
                                         <option value="Online (GPS)">Online (GPS)</option>
-                                        <option value="Gps ( billing )">Gps ( billing )</option>
-                                        <option value="Gps ( care off )">Gps ( care off )</option>
+                                        <option value="Gps(billing)">Gps ( billing )</option>
+                                        <option value="Gps(careoff)">Gps ( care off )</option>
                                         {{-- <option value="GRATIS">GRATIS</option> --}}
                                         <option value="Pak rangers">Pak rangers</option>
                                         <option value="P.A.F korangi creek">P.A.F korangi creek</option>
