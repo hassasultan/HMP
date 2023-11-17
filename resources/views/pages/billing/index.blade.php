@@ -141,7 +141,7 @@
                                             value='2' >
                                             Dispatch</option>
                                         <option
-                                            @if (request()->get('status') == 0) selected @else disabled @endif
+                                            @if (request()->get('status') == 0) selected @endif
                                             value='0' >
                                             Pending</option>
                                         <option @if (request()->get('status') == 3) selected @endif

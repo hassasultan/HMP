@@ -192,6 +192,8 @@ class OrderController extends Controller
             foreach ($request->customer_id as $row) {
                 $letter = explode(' ', $request->order_type);
                 $NEW_ORDER = Orders::latest()->first();
+                $now = Carbon::now();
+                $formatted_date = $now->format("YmdHis") . $now->format("u") / 1000;
                 if (empty($NEW_ORDER)) {
                     $expNum[1] = 0;
                 } else {
@@ -199,15 +201,15 @@ class OrderController extends Controller
                 }
                 if (isset($expNum[1])) {
                     if (isset($letter[1])) {
-                        $id = strtoupper($letter[1]) . '-' . date('YmdHis');
+                        $id = strtoupper($letter[1]) . '-' . $formatted_date;
                     } else {
-                        $id = strtoupper($letter[0]) . '-' . date('YmdHis');
+                        $id = strtoupper($letter[0]) . '-' . $formatted_date;
                     }
                 } else {
                     if (isset($letter[1])) {
-                        $id = strtoupper($letter[1]) . '-' . date('YmdHis');
+                        $id = strtoupper($letter[1]) . '-' . $formatted_date;
                     } else {
-                        $id = strtoupper($letter[0]) . '-' . date('YmdHis');
+                        $id = strtoupper($letter[0]) . '-' . $formatted_date;
                     }
                 }
                 // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
