@@ -130,19 +130,18 @@
                                         </option>
                                     </select>
                                 </div>
+                                {{ dd(request()->get('status')) }}
                                 <div class="form-group col-3 p-3">
                                     <label>Status</label>
                                     <select name="status" class="select2-multiple form-control fs-14  h-50px">
-                                        <option value="" selected disabled>-- Select Status --</option>
+                                        <option value="" selected disabled> -- Select Status -- </option>
                                         <option @if (request()->get('status') == 1) selected @endif
                                             value='1' >
                                             Completed</option>
                                         <option @if (request()->get('status') == 2) selected @endif
                                             value='2' >
                                             Dispatch</option>
-                                        <option
-                                            @if (request()->get('status') == 0) selected @endif
-                                            value='0' >
+                                        <option @if (request()->get('status') == 0) selected @endif value='0' >
                                             Pending</option>
                                         <option @if (request()->get('status') == 3) selected @endif
                                             value='3'>
