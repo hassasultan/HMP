@@ -74,11 +74,11 @@
                                             @else
                                                 <option value="Online (GPS)"
                                                     @if (request()->get('order_type') == 'Online (GPS)') selected @endif>Online (GPS)</option>
-                                                <option value="Gps ( billing )"
-                                                    @if (request()->get('order_type') == 'Gps ( billing )') selected @endif>Gps ( billing )
+                                                <option value="Gps(billing)"
+                                                    @if (request()->get('order_type') == 'Gps(billing)') selected @endif>Gps ( billing )
                                                 </option>
-                                                <option value="Gps ( care off )"
-                                                    @if (request()->get('order_type') == 'Gps ( care off )') selected @endif>Gps ( care off )
+                                                <option value="Gps(careoff)"
+                                                    @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>Gps ( care off )
                                                 </option>
                                                 {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
                                                     GRATIS</option> --}}
@@ -98,10 +98,10 @@
                                                 Commercial</option>
                                             <option value="Online (GPS)"
                                                 @if (request()->get('order_type') == 'Online (GPS)') selected @endif>Online (GPS)</option>
-                                            <option value="Gps ( billing )"
-                                                @if (request()->get('order_type') == 'Gps ( billing )') selected @endif>Gps ( billing )</option>
-                                            <option value="Gps ( care off )"
-                                                @if (request()->get('order_type') == 'Gps ( care off )') selected @endif>Gps ( care off )
+                                            <option value="Gps(billing)"
+                                                @if (request()->get('order_type') == 'Gps(billing)') selected @endif>Gps ( billing )</option>
+                                            <option value="Gps(careoff)"
+                                                @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>Gps ( care off )
                                             </option>
                                             {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
                                                 GRATIS</option> --}}
