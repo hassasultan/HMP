@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
         $driver = 0;
         $today_gallon_count = 0;
-
+        $unreg = 0;
         if(auth()->user()->role == 1)
         {
             $vehicle = Truck::count();
@@ -49,8 +49,9 @@ class HomeController extends Controller
             $third_driver = Driver::with('truck')->whereHas('truck',function($query){
                 $query->where('owned_by',0);
             })->count();
-            $contractor = Truck::where('owned_by',1)->count();
-            $third = Truck::where('owned_by',0)->count();
+            $contractor = Truck::where('owned_by',1)->where('unregister',0)->count();
+            $third = Truck::where('owned_by',0)->where('unregister',0)->count();
+            $unreg = Truck::where('owned_by',0)->where('unregister',1)->count();
             $hydCount = Hydrants::count();
             $order = Orders::count();
             $today_order = Orders::whereDay('created_at', '=', date('d'))->count();
@@ -99,7 +100,8 @@ class HomeController extends Controller
                 $query->where('owned_by',0);
             })->count();
             $contractor = Truck::where('owned_by',1)->count();
-            $third = Truck::where('owned_by',0)->count();
+            $third = Truck::where('owned_by',0)->where('unregister',0)->count();
+            $unreg = Truck::where('owned_by',0)->where('unregister',1)->count();
             $customer_count = Customer::where('user_id',auth()->user()->id)->count();
             $order = Orders::where('hydrant_id',auth()->user()->hydrant_id)->count();
             $today_order = Orders::where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->count();
@@ -176,7 +178,7 @@ class HomeController extends Controller
             $data['today_dc'] = $today_dc;
             return $data;
         }
-        return view('home',compact('today_dc','dc','customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third'));
+        return view('home',compact('today_dc','dc','customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third','unreg'));
     }
     public function driver(Request $request)
     {

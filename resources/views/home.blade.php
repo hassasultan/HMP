@@ -222,6 +222,13 @@ $.ajax({
                     </div>
                 </div>
                 <div class="col-md-3">
+                    <div class="card text-center px-3 pt-3">
+                        <img src="{{ asset('assets/img/truck2.JPG') }}" class="img-fluid" style="height: 80px"/>
+                        <h6  style="font-size: 0.7rem">Total UnRegister Registered Water Tanker (Third Party)</h6>
+                        <h3 id="third" >{{ $unreg }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="card text-center p-2">
                         <img src="{{ asset('assets/img/driver1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total Driver Registered Water Tanker (contractor)</h6>
