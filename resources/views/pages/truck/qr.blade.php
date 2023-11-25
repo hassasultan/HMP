@@ -52,6 +52,9 @@
                     <div class="col-6">
                         {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url) !!}
                     </div>
+                    <div class="col-12 text-center">
+                      <p>{{ $driver->truck_num }}</p>
+                    </div>
                 </div>
             </div>
         </div>
