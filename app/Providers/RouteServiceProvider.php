@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->setHomeConstant();
+        $this->setHomeProperty();
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+        parent::boot();
     }
 
     /**
@@ -44,12 +45,6 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
-    {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-        });
-    }
     protected function setHomeProperty()
     {
         if (auth()->check() && auth()->user()->role == 1) {
@@ -58,4 +53,11 @@ class RouteServiceProvider extends ServiceProvider
             self::$HOME = '/hydrant/home';
         }
     }
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+    }
+
 }
