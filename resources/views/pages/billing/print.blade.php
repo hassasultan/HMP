@@ -70,7 +70,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6 ">
-                        <p class="font-weight-bold">@php
+                        <p class="font-weight-bold" style="line-height:0.925rem !imprtant;">@php
                             $string = $billing->order->Order_Number; // Replace with your actual string
                             $firstLine = substr($string, 0, 13);
                             $remainingCharacters = substr($string, 13);
@@ -238,7 +238,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">@php
+                        <p class="font-weight-bold" style="line-height:0.925rem !imprtant;">@php
                             $string = $billing->order->Order_Number; // Replace with your actual string
                             $firstLine = substr($string, 0, 13);
                             $remainingCharacters = substr($string, 13);
@@ -400,7 +400,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">@php
+                        <p class="font-weight-bold" style="line-height:0.925rem !imprtant;">@php
                             $string = $billing->order->Order_Number; // Replace with your actual string
                             $firstLine = substr($string, 0, 13);
                             $remainingCharacters = substr($string, 13);
