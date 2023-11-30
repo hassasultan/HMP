@@ -188,6 +188,22 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if (Session::get('success', false))
+                    <?php $data = Session::get('success'); ?>
+                    @if (is_array($data))
+                        @foreach ($data as $msg)
+                            <div class="alert alert-success" role="alert">
+                                <i class="fa fa-check"></i>
+                                {{ $msg }}
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="alert alert-success" role="alert">
+                            <i class="fa fa-check"></i>
+                            {{ $data }}
+                        </div>
+                    @endif
+                @endif
                 @yield('content')
                 @include('layouts.include.footer')
             </div>
@@ -293,6 +309,9 @@
     {{-- <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script> --}}
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    @section("scripts")
+
+    @show
 
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -425,12 +444,9 @@
                         $("#note").val('');
                         myModal.hide();
                     }
-                    if(data['error'])
-                    {
+                    if (data['error']) {
                         errorModal(data['error']);
-                    }
-                    else
-                    {
+                    } else {
                         successModal(data['message']);
                     }
                 })

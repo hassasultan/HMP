@@ -309,7 +309,7 @@ class OrderController extends Controller
             $order = Orders::doesntHave('billing')->where('id', $id)->get();
         }
         if (auth()->user()->role != 1) {
-            $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id);
+            $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0);
         } else {
             $truck = Truck::all();
         }
@@ -334,7 +334,7 @@ class OrderController extends Controller
             $order = Orders::doesntHave('billing')->get();
         }
         if (auth()->user()->role != 1) {
-            $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id);
+            $truck = Truck::all()->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0);
         } else {
             $truck = Truck::all();
         }

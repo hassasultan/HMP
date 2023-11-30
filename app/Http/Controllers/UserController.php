@@ -10,6 +10,7 @@ use App\Models\Hydrants;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 
 class UserController extends Controller
@@ -144,5 +145,21 @@ class UserController extends Controller
         {
             return redirect()->back()->with('error', $valid->errors());
         }
+    }
+    public function get_role_assign($id)
+    {
+        $role = Role::where('id', $id)->first();
+        $user = User::whereDoesntHave('roles')->get();
+        return view('pages.roles.assignRole', compact('role','user'));
+    }
+    public function role_assign(Request $request,$id)
+    {
+        $role = Role::where('id', $id)->first();
+        foreach($request->user_id as $row)
+        {
+            $user = User::where('id',$row)->first();
+            $user->assignRole([$role->id]);
+        }
+        return redirect()->back()->with('success','Assigned Role successfully...');
     }
 }

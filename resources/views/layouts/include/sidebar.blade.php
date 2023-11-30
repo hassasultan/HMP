@@ -24,16 +24,35 @@
                 </a>
             </li>
             @if (auth()->user()->role == 1)
-                <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('user-management.index')) active bg-gradient-primary @endif"
-                        href="{{ route('user-management.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">User Management</span>
-                    </a>
-                </li>
-
+                {{-- @role('Admin') --}}
+                    <li class="nav-item">
+                        <a class="nav-link text-white @if (Route::is('user-management.index')) active bg-gradient-primary @endif"
+                            href="{{ route('user-management.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">User Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white @if (Route::is('roles.index')) active bg-gradient-primary @endif"
+                            href="{{ route('roles.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Roles Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white @if (Route::is('permissions.index')) active bg-gradient-primary @endif"
+                            href="{{ route('permissions.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Permissions Management</span>
+                        </a>
+                    </li>
+                {{-- @endrole --}}
                 <li class="nav-item">
                     <a class="nav-link text-white @if (Route::is('truck_type.list')) active  bg-gradient-primary @endif"
                         href="{{ route('truck_type.list') }}">
@@ -128,7 +147,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white @if (Route::is('hydrant.truck.list')) bg-gradient-primary active  @endif"
+                    <a class="nav-link text-white @if (Route::is('hydrant.truck.list')) bg-gradient-primary active @endif"
                         href="{{ route('hydrant.truck.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-truck"></i>
