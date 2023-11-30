@@ -17,8 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const ADMIN_HOME = '/admin/home';
-    public const HYDRANT_HOME = '/hydrant/home';
+    public static $HOME;
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
@@ -53,9 +52,9 @@ class RouteServiceProvider extends ServiceProvider
     protected function setHomeConstant()
     {
         if (auth()->check() && auth()->user()->role == 1) {
-            define('HOME', self::ADMIN_HOME);
+            self::$HOME = '/admin/home';
         } else {
-            define('HOME', self::HYDRANT_HOME);
+            self::$HOME = '/hydrant/home';
         }
     }
 }
