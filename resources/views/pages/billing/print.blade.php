@@ -70,7 +70,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6 ">
-                        <p class="font-weight-bold fs-5">{{ $billing->order->Order_Number }}</p>
+                        <p class="font-weight-bold" style="font-size: 0.6rem;">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
@@ -232,7 +232,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold fs-5">{{ $billing->order->Order_Number }}</p>
+                        <p class="font-weight-bold" style="font-size: 0.6rem;">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->created_at);
@@ -388,7 +388,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold fs-5">{{ $billing->order->Order_Number }}</p>
+                        <p class="font-weight-bold" style="font-size: 0.6rem;">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
