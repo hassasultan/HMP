@@ -70,7 +70,13 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6 ">
-                        <p class="font-weight-bold">{{ wordwrap($billing->order->Order_Number, 13, "\n", true) }}</p>
+                        <p class="font-weight-bold">@php
+                            $string = $billing->order->Order_Number; // Replace with your actual string
+                            $firstLine = substr($string, 0, 13);
+                            $remainingCharacters = substr($string, 13);
+                        @endphp
+                            {{ $firstLine }}<br>
+                            {{ $remainingCharacters }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
@@ -232,7 +238,13 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ wordwrap($billing->order->Order_Number, 13, "\n", true) }}</p>
+                        <p class="font-weight-bold">@php
+                            $string = $billing->order->Order_Number; // Replace with your actual string
+                            $firstLine = substr($string, 0, 13);
+                            $remainingCharacters = substr($string, 13);
+                        @endphp
+                            {{ $firstLine }}<br>
+                            {{ $remainingCharacters }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->created_at);
@@ -388,7 +400,13 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ wordwrap($billing->order->Order_Number, 13, "\n", true) }}</p>
+                        <p class="font-weight-bold">@php
+                            $string = $billing->order->Order_Number; // Replace with your actual string
+                            $firstLine = substr($string, 0, 13);
+                            $remainingCharacters = substr($string, 13);
+                        @endphp
+                            {{ $firstLine }}<br>
+                            {{ $remainingCharacters }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
