@@ -21,6 +21,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+
 Auth::routes();
 Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::prefix('/admin')->group(function () {
@@ -91,7 +92,16 @@ Route::get('vehicle/details/{id}', [App\Http\Controllers\HomeController::class, 
 Route::get('billing/details/{id}', [App\Http\Controllers\OrderController::class, 'billingReciept'])->name('billing.details');
 
 Route::middleware('auth')->group(function () {
-
+    Route::get('/main/home', function () {
+        if(auth()->user()->role == 1)
+        {
+            return redirect()->route('home');
+        }
+        else
+        {
+            return redirect()->route('hydrant.home');
+        }
+    });
     Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
     Route::get('hydrants/reports/orders', [App\Http\Controllers\ReportsController::class, 'generate_hydrants_reports'])->name('generate.report.hydrant.orders');
     Route::get('pdfview', [App\Http\Controllers\ReportsController::class, 'pdfview'])->name('pdfview');

@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public static $HOME;
+    public const HOME = '/main/home';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -26,7 +26,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->setHomeProperty();
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -37,7 +36,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
-        // parent::boot();
     }
 
     /**
@@ -45,19 +43,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function setHomeProperty()
-    {
-        if (auth()->check() && auth()->user()->role == 1) {
-            self::$HOME = '/admin/home';
-        } else {
-            self::$HOME = '/hydrant/home';
-        }
-    }
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
-
 }
