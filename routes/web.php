@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
         {
             return redirect()->route('hydrant.home');
         }
-    });
+    })->name('main.home');
     Route::get('reports', [App\Http\Controllers\ReportsController::class, 'report'])->name('reports');
     Route::get('hydrants/reports/orders', [App\Http\Controllers\ReportsController::class, 'generate_hydrants_reports'])->name('generate.report.hydrant.orders');
     Route::get('pdfview', [App\Http\Controllers\ReportsController::class, 'pdfview'])->name('pdfview');
