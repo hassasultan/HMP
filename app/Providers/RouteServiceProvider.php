@@ -17,8 +17,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    public const ADMIN_HOME = '/admin/home';
+    public const HYDRANT_HOME = '/hydrant/home';
     public const HOME = '/admin/home';
-
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
@@ -26,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->setHomeConstant();
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -48,5 +50,13 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+    protected function setHomeConstant()
+    {
+        if (auth()->check() && auth()->user()->role == 1) {
+            define('HOME', self::ADMIN_HOME);
+        } else {
+            define('HOME', self::HYDRANT_HOME);
+        }
     }
 }
