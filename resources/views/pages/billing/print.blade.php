@@ -69,7 +69,7 @@
                     <div class="col-6">
                         <p class="font-weight-bold">Order#</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6  fs-3">
                         <p class="font-weight-bold">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
@@ -231,7 +231,7 @@
                     <div class="col-6">
                         <p class="font-weight-bold">Order#</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 fs-3">
                         <p class="font-weight-bold">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
@@ -387,7 +387,7 @@
                     <div class="col-6">
                         <p class="font-weight-bold">Order#</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6  fs-3">
                         <p class="font-weight-bold">{{ $billing->order->Order_Number }}</p>
                     </div>
                     @php
