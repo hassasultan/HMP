@@ -70,7 +70,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6 ">
-                        <p class="font-weight-bold">{{ wordwrap($billing->order->Order_Number,13,"<br>\n")  }}</p>
+                        <p class="font-weight-bold">{{ str_split($billing->order->Order_Number, 13) }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
@@ -232,7 +232,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ wordwrap($billing->order->Order_Number,13,"<br>\n")  }}</p>
+                        <p class="font-weight-bold">{{ str_split($billing->order->Order_Number, 13) }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->created_at);
@@ -388,7 +388,8 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ wordwrap($billing->order->Order_Number,13,"<br>\n")  }}</p>
+
+                        <p class="font-weight-bold">{{ str_split($billing->order->Order_Number, 13) }}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
