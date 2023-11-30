@@ -19,7 +19,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const ADMIN_HOME = '/admin/home';
     public const HYDRANT_HOME = '/hydrant/home';
-    public const HOME = '/admin/home';
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
