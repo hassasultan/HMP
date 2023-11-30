@@ -70,7 +70,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6 ">
-                        <p class="font-weight-bold">{{ str_split($billing->order->Order_Number, 13) }}</p>
+                        <p class="font-weight-bold">{{ nl2br(e(($billing->order->Order_Number, 13) ))}}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
@@ -232,7 +232,7 @@
                         <p class="font-weight-bold">Order#</p>
                     </div>
                     <div class="col-6">
-                        <p class="font-weight-bold">{{ str_split($billing->order->Order_Number, 13) }}</p>
+                        <p class="font-weight-bold">{{ nl2br(e(($billing->order->Order_Number, 13) ))}}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->created_at);
@@ -389,7 +389,7 @@
                     </div>
                     <div class="col-6">
 
-                        <p class="font-weight-bold">{{ str_split($billing->order->Order_Number, 13) }}</p>
+                        <p class="font-weight-bold">{{ nl2br(e(($billing->order->Order_Number, 13) ))}}</p>
                     </div>
                     @php
                         $date = \Carbon\Carbon::parse($billing->order->created_at);
