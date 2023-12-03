@@ -139,7 +139,7 @@ $.ajax({
         </div>
     </div>
     @if (auth()->user()->role == 1)
-        <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
+        {{-- <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-header p-3 pt-2">
                 <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
@@ -152,7 +152,7 @@ $.ajax({
                 </div>
 
             </div>
-        </div>
+        </div> --}}
     @endif
     <div class="col-xl-2 col-sm-4 mb-xl-0 mb-4">
         <div class="card">
@@ -221,13 +221,13 @@ $.ajax({
                         <h3 id="third" >{{ $third }}</h3>
                     </div>
                 </div>
-                <div class="col-md-3">
+                {{-- <div class="col-md-3">
                     <div class="card text-center px-3 pt-3">
                         <img src="{{ asset('assets/img/truck2.JPG') }}" class="img-fluid" style="height: 80px"/>
                         <h6  style="font-size: 0.7rem">Total UnRegister Registered Water Tanker (Third Party)</h6>
                         <h3 id="third" >{{ $unreg }}</h3>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-md-3">
                     <div class="card text-center p-2">
                         <img src="{{ asset('assets/img/driver1JPG.JPG') }}" class="img-fluid" style="height: 80px"/>

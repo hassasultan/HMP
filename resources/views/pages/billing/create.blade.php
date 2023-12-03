@@ -72,7 +72,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mt-2 col-12">
+                    {{-- <div class="form-group mt-2 col-12">
                         <input type="checkbox"   name="new_tanker" id="tanker-checkbox"/>
                         <label for="checkbox">New Tanker</label>
 
@@ -83,12 +83,7 @@
                             <input type="text" class="form-control border-bottom" placeholder="Enter Registration Number..." name="reg_num" id="reg-num" value="{{ old('reg_num') }}" />
 
                         </div>
-                        {{-- <div class="form-group col-12">
-                            <label>Driver Phone</label>
-                            <input type="number" class="form-control border-bottom" placeholder="Enter Driver Phone..." name="driver_phone" value="{{ old('driver_phone') }}" />
-
-                        </div> --}}
-                    </div>
+                    </div> --}}
                     {{-- {{ dd($order) }} --}}
                     <div class="form-group col-12">
                         <label>Gallon</label>
