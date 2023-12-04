@@ -116,7 +116,7 @@
                     <div class="col-6">
                         <p class="font-weight-bold" style="line-height: 1.02 !important;">
                             {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
-                            {{ $billing->order->customer->location }}, gps : {{ $billing->order->customer->gps }}</p>
+                            {{ $billing->order->customer->location }}</p>
                     </div>
 
                     <div class="col-6">
@@ -284,7 +284,7 @@
                     <div class="col-6">
                         <p class="font-weight-bold" style="line-height: 1.02 !important;">
                             {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
-                            {{ $billing->order->customer->location }}, gps : {{ $billing->order->customer->gps }}</p>
+                            {{ $billing->order->customer->location }}</p>
                     </div>
 
                     <div class="col-6">
@@ -446,7 +446,7 @@
                     <div class="col-6">
                         <p class="font-weight-bold" style="line-height: 1.02 !important;">
                             {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
-                            {{ $billing->order->customer->location }}, gps : {{ $billing->order->customer->gps }}</p>
+                            {{ $billing->order->customer->location }}</p>
                     </div>
 
                     <div class="col-6">
