@@ -145,7 +145,7 @@ class UserController extends Controller
     public function get_role_assign($id)
     {
         $role = Role::where('id', $id)->first();
-        $user = User::whereDoesntHave('roles')->get();
+        $user = User::whereDoesntHave('roles')->where('role',1)->get();
         return view('pages.roles.assignRole', compact('role', 'user'));
     }
     public function role_assign(Request $request, $id)
