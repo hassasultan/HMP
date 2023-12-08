@@ -18,9 +18,18 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 setInterval(function () {
-
+    var role = "{{ auth()->user()->role }}";
+    var url = "";
+    if(role == 1)
+    {
+        url = "{{ route('home') }}";
+    }
+    else
+    {
+        url = "{{ route('hydrant.home') }}";
+    }
     $.ajax({
-            url: "{{ route('home') }}",
+            url: url,
             type: "Get",
             data: {
                 status:"api",
