@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
             Route::get('/truck-list', [App\Http\Controllers\HomeController::class, 'truck'])->name('truck.list');
             // Route::get('create/truck', [App\Http\Controllers\HomeController::class, 'TruckCreate'])->name('truck.create');
             // Route::post('store/truck', [App\Http\Controllers\HomeController::class, 'truckStore'])->name('truck.store');
-            // Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
+            Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
             // Route::get('edit/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckEdit'])->name('truck.edit');
             // Route::post('update/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckUpdate'])->name('truck.update');
 
@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/get/ots/order-list', [App\Http\Controllers\OrderController::class, 'get_ots_order'])->name('ots.order.list');
-    Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
+    // Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
     Route::get('create/order', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
     Route::post('store/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
     Route::get('create/billing/{id}', [App\Http\Controllers\OrderController::class, 'billingcreate'])->name('billing.create');
@@ -137,7 +137,7 @@ Route::prefix('/hydrant')->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('hydrant.home');
 
         //truck
-        Route::get('/truck-list', [App\Http\Controllers\HomeController::class, 'truck'])->name('hydrant.truck.list');
+        // Route::get('/truck-list', [App\Http\Controllers\HomeController::class, 'truck'])->name('hydrant.truck.list');
 
 
         //Order
