@@ -28,6 +28,7 @@ setInterval(function () {
     {
         url = "{{ route('hydrant.home') }}";
     }
+    console.log(url);
     $.ajax({
             url: url,
             type: "Get",
