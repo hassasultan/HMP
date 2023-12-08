@@ -18,32 +18,37 @@ class UserController extends Controller
     //
     public function index()
     {
-        $user = User::where('id','!=',auth()->user()->id)->get();
-        return view('pages.user.index',compact('user'));
+        $user = User::where('id', '!=', auth()->user()->id)->get();
+        return view('pages.user.index', compact('user'));
     }
     public function create()
     {
         $hydrant = Hydrants::all();
-        return view('pages.user.create',compact('hydrant'));
+        return view('pages.user.create', compact('hydrant'));
     }
     public function store(Request $request)
     {
-        $valid = $this->validate($request,[
+        $valid = $this->validate($request, [
             'email'         => 'required|string|unique:users,email',
             'name'          => 'required|string',
+            'role'          => 'required|numeric|In:1,2',
             'type'          => 'required|string|In:commercial,gps',
             'hydrant_id'    => 'required|numeric|exists:hydrants,id',
         ]);
-        try
-        {
+        try {
             DB::beginTransaction();
             $user = new User();
             $user->name         = $request->name;
             $user->email         = $request->email;
             $user->password         = Hash::make('12345678');
-            $user->role        = 2;
-            $user->type        = $request->type;
-            $user->hydrant_id        = $request->hydrant_id;
+            $user->role        = $request->role;
+            if ($request->role != 1) {
+                $user->type        = $request->type;
+                $user->hydrant_id        = $request->hydrant_id;
+            } else {
+                $user->type        = null;
+                $user->hydrant_id        = 0;
+            }
             $user->save();
 
             $hydrant = Hydrants::find($request->hydrant_id);
@@ -53,9 +58,7 @@ class UserController extends Controller
             DB::commit();
 
             return redirect()->route('user-management.index')->with('success', 'Record created successfully.');
-        }
-        catch(Exception $ex)
-        {
+        } catch (Exception $ex) {
             return back()->with('error', $ex->getMessage());
         }
     }
@@ -63,53 +66,55 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $hydrant = Hydrants::all();
-        return view('pages.user.edit',compact('user','hydrant'));
+        return view('pages.user.edit', compact('user', 'hydrant'));
     }
-    public function update($id,Request $request)
+    public function update($id, Request $request)
     {
-        $valid = $this->validate($request,[
-            'email'          => 'required|string|unique:users,email,'.$id,
+        $valid = $this->validate($request, [
+            'email'          => 'required|string|unique:users,email,' . $id,
             'name'          => 'required|string',
+            'role'          => 'required|numeric|In:1,2',
             'hydrant_id'    => 'required|numeric|exists:hydrants,id',
             'type'          => 'required|string|In:commercial,gps',
 
         ]);
-        try
-        {
+        try {
             DB::beginTransaction();
             $user = User::find($id);
-            if($request->has('name'))
-            {
+            if ($request->has('name')) {
                 $user->name  = $request->name;
             }
-            if($request->has('email'))
-            {
+            if ($request->has('email')) {
                 $user->email   = $request->email;
             }
-            if($request->has('password'))
-            {
+            if ($request->has('password')) {
                 $user->password   = Hash::make($request->password);
             }
-            if($request->has('type'))
-            {
-                $user->type        = $request->type;
+            $user->role        = $request->role;
+            if ($request->role != 1) {
+                if ($request->has('type')) {
+                    $user->type        = $request->type;
+                }
+                if ($request->has('hydrant_id')) {
+                    $user->hydrant_id        = $request->hydrant_id;
+                    $user->save();
+                    $hydrant = Hydrants::find($request->hydrant_id);
+                    $hydrant->user_id = $user->id;
+                    $hydrant->save();
+                }
+                // $user->type        = $request->type;
+                $user->hydrant_id        = $request->hydrant_id;
+            } else {
+                $user->type        = null;
+                $user->hydrant_id        = 0;
             }
             $user->save();
-            if($request->has('hydrant_id'))
-            {
-                $user->hydrant_id        = $request->hydrant_id;
-                $user->save();
-                $hydrant = Hydrants::find($request->hydrant_id);
-                $hydrant->user_id = $user->id;
-                $hydrant->save();
-            }
+
 
             DB::commit();
 
             return redirect()->route('user-management.index')->with('success', 'Record Updated successfully.');
-        }
-        catch(Exception $ex)
-        {
+        } catch (Exception $ex) {
             return back()->with('error', $ex->getMessage());
         }
     }
@@ -119,30 +124,21 @@ class UserController extends Controller
             'old_password' => ['required', 'string',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        if(!$valid->fails())
-        {
-            try
-            {
-                if(Hash::check($request->old_password, auth()->user()->password))
-                {
+        if (!$valid->fails()) {
+            try {
+                if (Hash::check($request->old_password, auth()->user()->password)) {
                     $user = User::find(auth()->user()->id);
                     $user->password = Hash::make($request->password);
                     $user->save();
-                    return redirect()->back()->with('success',"Password has been successfully updated...");
-                }
-                else
-                {
+                    return redirect()->back()->with('success', "Password has been successfully updated...");
+                } else {
                     $message = "Your Entered Old Password is wrong...";
                     return redirect()->back()->with('error', $message);
                 }
-            }
-            catch(Exception $ex)
-            {
+            } catch (Exception $ex) {
                 return redirect()->back()->with('error', $ex->getMessage());
             }
-        }
-        else
-        {
+        } else {
             return redirect()->back()->with('error', $valid->errors());
         }
     }
@@ -150,16 +146,15 @@ class UserController extends Controller
     {
         $role = Role::where('id', $id)->first();
         $user = User::whereDoesntHave('roles')->get();
-        return view('pages.roles.assignRole', compact('role','user'));
+        return view('pages.roles.assignRole', compact('role', 'user'));
     }
-    public function role_assign(Request $request,$id)
+    public function role_assign(Request $request, $id)
     {
         $role = Role::where('id', $id)->first();
-        foreach($request->user_id as $row)
-        {
-            $user = User::where('id',$row)->first();
+        foreach ($request->user_id as $row) {
+            $user = User::where('id', $row)->first();
             $user->assignRole([$role->id]);
         }
-        return redirect()->back()->with('success','Assigned Role successfully...');
+        return redirect()->back()->with('success', 'Assigned Role successfully...');
     }
 }
