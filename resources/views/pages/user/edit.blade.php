@@ -33,6 +33,14 @@
                         <input type="password" class="form-control border-bottom border-1 border-dark" placeholder="Enter password here..." name="password" value="{{ old('password') }}"/>
                     </div>
                     <div class="form-group col-12 p-3">
+                        <label>Select Role</label>
+                        <select name="role"
+                            class="select2-multiple form-control fs-14  h-50px" required>
+                                <option @if($user->role == "1") selected @endif value="1">Subadmin</option>
+                                <option @if($user->role == "2") selected @endif value="2">Hydrant</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12 p-3">
                         <label>Hydrants</label>
                         <select name="hydrant_id"
                             class="select2-multiple form-control fs-14  h-50px" required>
