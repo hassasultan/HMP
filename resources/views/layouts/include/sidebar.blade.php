@@ -146,7 +146,7 @@
                         <span class="nav-link-text ms-1">Customer Management</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link text-white @if (Route::is('hydrant.truck.list')) bg-gradient-primary active @endif"
                         href="{{ route('hydrant.truck.list') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -154,7 +154,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Water Tanker</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link text-white @if (Route::is('hydrant.order.list')) active bg-gradient-primary @endif"
                         href="{{ route('hydrant.order.list') }}">
