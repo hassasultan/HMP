@@ -37,11 +37,10 @@
                                     <label for="status">Status</label>
                                     <select name="status" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <select name="status" class="form-control border p-2">
-                                            <option disabled selected>-- Select Option --</option>
-                                            <option @if(request()->get('status') == 1) selected @endif value="1">Active</option>
-                                            <option @if(request()->get('status') == 0) selected @endif value="0">DeActive</option>
-                                        </select>
+                                        <option @if (request()->get('status') == 1) selected @endif value="1">Active
+                                        </option>
+                                        <option @if (request()->get('status') == 0) selected @endif value="0">DeActive
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-1">
@@ -55,7 +54,7 @@
                                 </div>
                             </div>
                         </form>
-                    {{-- @else
+                        {{-- @else
                         <form action="{{ route('hydrant.truck.list') }}" method="GET">
                             <div class="row">
                                 <div class="col-md-3">
