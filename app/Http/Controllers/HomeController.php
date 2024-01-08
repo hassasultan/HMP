@@ -392,6 +392,8 @@ class HomeController extends Controller
         // }
         // $hydrants = Hydrant
         $truck = Truck::with('truckCap','hydrant','drivers');
+        $hydrant = Hydrants::all();
+
         if($request->has('reg_num'))
         {
             $truck = $truck->where('truck_num','like', '%' .$request->reg_num. '%');
@@ -399,6 +401,29 @@ class HomeController extends Controller
         if($request->has('name'))
         {
             $truck = $truck->where('name','like', '%' .$request->name. '%');
+        }
+        if($request->has('hydrant_id'))
+        {
+            $truck = $truck->where('hydrant_id',$request->hydrant_id);
+        }
+        if($request->has('unregister'))
+        {
+            $truck = $truck->where('unregister',$request->unregister);
+        }
+        if($request->has('status'))
+        {
+            $truck = $truck->where('status',$request->status);
+        }
+        if($request->has('link'))
+        {
+            if($request->link == '1')
+            {
+                $truck = $truck->where('link','!=',null);
+            }
+            else
+            {
+                $truck = $truck->where('link',null);
+            }
         }
         if(auth()->user()->role != 1)
         {
@@ -412,7 +437,7 @@ class HomeController extends Controller
         {
             return $truck;
         }
-        return view('pages.truck.index',compact('truck'));
+        return view('pages.truck.index',compact('truck','hydrant'));
     }
     public function TruckCreate()
     {
