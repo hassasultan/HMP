@@ -198,8 +198,9 @@ class HomeController extends Controller
         }
         if($request->has('truck_num'))
         {
-            $driver = $driver->whereHas('truck',function($q)use($request){
-                $q->where('truck_num',$request->truck_num);
+            $truckNum = $request->truck_num;
+            $driver = $driver->whereHas('truck',function($q)use($truckNum){
+                $q->where('truck_num',$truckNum);
             });
         }
         $driver = $driver->orderBy('id', 'DESC')->paginate(15);
