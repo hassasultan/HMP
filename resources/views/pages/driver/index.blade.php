@@ -32,6 +32,11 @@
                                     <input type="text" name="phone" class="form-control border p-2"
                                         value="{{ request()->get('phone') }}" id="phone" />
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="truck_num">Truck Number</label>
+                                    <input type="text" name="truck_num" class="form-control border p-2"
+                                        value="{{ request()->get('truck_num') }}" id="truck_num" />
+                                </div>
 
                                 <div class="col-md-3">
                                     <label for="status">Status</label>
