@@ -86,16 +86,16 @@
                                     <label for="unregister">Regiter/UnRegister</label>
                                     <select name="unregister" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <option @if({{ request()->get('unregister') }} == 1) selected @endif value="1">UnRegister</option>
-                                        <option @if({{ request()->get('unregister') }} == 0) selected @endif value="0">Register</option>
+                                        <option @if(request()->get('unregister') == 1) selected @endif value="1">UnRegister</option>
+                                        <option @if(request()->get('unregister') == 0) selected @endif value="0">Register</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="link">Link</label>
                                     <select name="link" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <option @if({{ request()->get('link') }} == 1) selected @endif value="1">Yes</option>
-                                        <option @if({{ request()->get('link') }} == 1) selected @endif value="0">No</option>
+                                        <option @if(request()->get('link') == 1) selected @endif value="1">Yes</option>
+                                        <option @if(request()->get('link') == 1) selected @endif value="0">No</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -103,7 +103,7 @@
                                     <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px">
                                         <option disabled selected>-- Select Option --</option>
                                         @foreach ($hydrant as $col)
-                                            <option @if({{ request()->get('hydrant_id') }} == $col->id) selected @endif value="{{ $col->id }}">{{ $col->name }}</option>
+                                            <option @if(request()->get('hydrant_id') == $col->id) selected @endif value="{{ $col->id }}">{{ $col->name }}</option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                         @endforeach
                                     </select>
