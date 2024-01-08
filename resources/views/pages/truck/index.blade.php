@@ -33,24 +33,24 @@
                                     <label for="unregister">Regiter/UnRegister</label>
                                     <select name="unregister" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <option value="1">UnRegister</option>
-                                        <option value="0">Register</option>
+                                        <option @if({{ request()->get('unregister') }} == 1) selected @endif value="1">UnRegister</option>
+                                        <option @if({{ request()->get('unregister') }} == 0) selected @endif value="0">Register</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="link">Link</label>
                                     <select name="link" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option @if({{ request()->get('link') }} == 1) selected @endif value="1">Yes</option>
+                                        <option @if({{ request()->get('link') }} == 1) selected @endif value="0">No</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Hydrants</label>
-                                    <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px" >
+                                    <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px">
                                         <option disabled selected>-- Select Option --</option>
                                         @foreach ($hydrant as $col)
-                                            <option value="{{ $col->id }}">{{ $col->name }}</option>
+                                            <option @if({{ request()->get('hydrant_id') }} == $col->id) selected @endif value="{{ $col->id }}">{{ $col->name }}</option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                         @endforeach
                                     </select>
@@ -59,8 +59,8 @@
                                     <label for="status">Status</label>
                                     <select name="status" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">DeActive</option>
+                                        <option @if({{ request()->get('status') }} == 1) selected @endif value="1">Active</option>
+                                        <option @if({{ request()->get('status') }} == 0) selected @endif value="0">DeActive</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1">
@@ -69,26 +69,61 @@
                                 </div>
                                 <div class="col-md-2">
                                     <br />
-                                    <a href="{{ route('truck.list') }}" class="mt-2 btn btn-primary bg-gradient-primary">Reset Filter</a>
+                                    <a href="{{ route('truck.list') }}"
+                                        class="mt-2 btn btn-primary bg-gradient-primary">Reset Filter</a>
                                 </div>
                             </div>
                         </form>
                     @else
                         <form action="{{ route('hydrant.truck.list') }}" method="GET">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-3">
                                     <label for="reg_num">Registration Number</label>
                                     <input type="text" name="reg_num" class="form-control border p-2"
                                         value="{{ request()->get('reg_num') }}" id="reg_num" />
                                 </div>
-                                {{-- <div class="col-md-4">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="number" name="phone" class="form-control border p-2"
-                                        value="{{ request()->get('phone') }}" id="phone" />
-                                </div> --}}
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <label for="unregister">Regiter/UnRegister</label>
+                                    <select name="unregister" class="form-control border p-2">
+                                        <option disabled selected>-- Select Option --</option>
+                                        <option @if({{ request()->get('unregister') }} == 1) selected @endif value="1">UnRegister</option>
+                                        <option @if({{ request()->get('unregister') }} == 0) selected @endif value="0">Register</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="link">Link</label>
+                                    <select name="link" class="form-control border p-2">
+                                        <option disabled selected>-- Select Option --</option>
+                                        <option @if({{ request()->get('link') }} == 1) selected @endif value="1">Yes</option>
+                                        <option @if({{ request()->get('link') }} == 1) selected @endif value="0">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Hydrants</label>
+                                    <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px">
+                                        <option disabled selected>-- Select Option --</option>
+                                        @foreach ($hydrant as $col)
+                                            <option @if({{ request()->get('hydrant_id') }} == $col->id) selected @endif value="{{ $col->id }}">{{ $col->name }}</option>
+                                            {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="status">Status</label>
+                                    <select name="status" class="form-control border p-2">
+                                        <option disabled selected>-- Select Option --</option>
+                                        <option @if({{ request()->get('status') }} == 1) selected @endif value="1">Active</option>
+                                        <option @if({{ request()->get('status') }} == 0) selected @endif value="0">DeActive</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
                                     <br />
                                     <button type="submit" class="mt-2 btn  border">Search</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <br />
+                                    <a href="{{ route('truck.list') }}"
+                                        class="mt-2 btn btn-primary bg-gradient-primary">Reset Filter</a>
                                 </div>
                             </div>
                         </form>
