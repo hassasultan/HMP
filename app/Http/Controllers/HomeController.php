@@ -432,7 +432,7 @@ class HomeController extends Controller
         }
         if($request->has('status'))
         {
-            $truck = $truck->where('status',$request->status);
+            $truck = $truck->where('black_list',$request->status);
         }
         if($request->has('link'))
         {
