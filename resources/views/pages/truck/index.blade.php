@@ -33,8 +33,8 @@
                                     <label for="unregister">Regiter/UnRegister</label>
                                     <select name="unregister" class="form-control border p-2">
                                         <option disabled selected>-- Select Option --</option>
-                                        <option @if(request()->has('status') && request()->get('unregister') == 1) selected @endif value="1">UnRegister</option>
-                                        <option @if(request()->has('status') && request()->get('unregister') == 0) selected @endif value="0">Register</option>
+                                        <option @if(request()->has('unregister') && request()->get('unregister') == 1) selected @endif value="1">UnRegister</option>
+                                        <option @if(request()->has('unregister') && request()->get('unregister') == 0) selected @endif value="0">Register</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
