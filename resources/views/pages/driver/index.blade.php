@@ -96,7 +96,7 @@
 
                                             <td class="align-middle">
 
-                                                {!! \QrCode::size(250)->generate('www.google.com') !!}
+                                                {{-- {!! \QrCode::size(250)->generate('www.google.com') !!} --}}
                                                 <a href="{{ route('driver.edit', $row->id) }}"
                                                     class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                                                     data-original-title="Edit user">
