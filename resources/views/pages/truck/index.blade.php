@@ -32,6 +32,7 @@
                                 <div class="col-md-3">
                                     <label for="unregister">Regiter/UnRegister</label>
                                     <select name="unregister" class="form-control border p-2">
+                                        <option disabled selected>-- Select Option --</option>
                                         <option value="1">UnRegister</option>
                                         <option value="0">Register</option>
                                     </select>
@@ -39,13 +40,15 @@
                                 <div class="col-md-3">
                                     <label for="link">Link</label>
                                     <select name="link" class="form-control border p-2">
+                                        <option disabled selected>-- Select Option --</option>
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Hydrants</label>
-                                    <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px" required>
+                                    <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px" >
+                                        <option disabled selected>-- Select Option --</option>
                                         @foreach ($hydrant as $col)
                                             <option value="{{ $col->id }}">{{ $col->name }}</option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
@@ -55,6 +58,7 @@
                                 <div class="col-md-3">
                                     <label for="status">Status</label>
                                     <select name="status" class="form-control border p-2">
+                                        <option disabled selected>-- Select Option --</option>
                                         <option value="1">Active</option>
                                         <option value="0">DeActive</option>
                                     </select>
