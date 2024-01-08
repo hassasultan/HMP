@@ -183,7 +183,7 @@ class HomeController extends Controller
     public function driver(Request $request)
     {
 
-        $driver = Driver::with('truck','truck.hydrant')->get();
+        $driver = Driver::with('truck','truck.hydrant')->paginate(15);
         if($request->has('json'))
         {
             return $driver;
