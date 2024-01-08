@@ -20,9 +20,9 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class=" p-0">
-                        <div class="load"></div>
+                        {{-- <div class="load"></div> --}}
 
-                        <table id="example3" class="d-none table table-bordered align-items-center mb-0">
+                        <table id="example3" class="table table-bordered align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Driver
@@ -40,7 +40,7 @@
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
-                            <tbody id ="driver-table">
+                            <tbody>
                                 @if (count($driver) > 0)
                                     @foreach ($driver as $key => $row)
                                         <tr>
