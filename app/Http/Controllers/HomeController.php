@@ -200,7 +200,7 @@ class HomeController extends Controller
         {
             $truckNum = $request->truck_num;
             $driver = $driver->whereHas('truck',function($q)use($truckNum){
-                $q->where('truck_num',$truckNum);
+                $q->where('truck_num','like', '%' .$truckNum. '%');
             });
         }
         $driver = $driver->orderBy('id', 'DESC')->paginate(15);
