@@ -194,7 +194,7 @@ class HomeController extends Controller
         }
         if($request->has('status'))
         {
-            $driver = $driver->where('status',$request->status);
+            $driver = $driver->where('black_list',$request->status);
         }
         if($request->has('truck_num') && $request->truck_num != "")
         {
@@ -432,7 +432,7 @@ class HomeController extends Controller
         }
         if($request->has('status'))
         {
-            $truck = $truck->where('black_list',$request->status);
+            $truck = $truck->where('status',$request->status);
         }
         if($request->has('link'))
         {
