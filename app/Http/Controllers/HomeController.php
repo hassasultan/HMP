@@ -184,11 +184,11 @@ class HomeController extends Controller
     {
 
         $driver = Driver::with('truck','truck.hydrant');
-        if($request->has('name'))
+        if($request->has('name') && $request->name != "")
         {
             $driver = $driver->where('name','like', '%' .$request->name. '%');
         }
-        if($request->has('phone'))
+        if($request->has('phone') && $request->phone != "")
         {
             $driver = $driver->where('phone',$request->phone);
         }
@@ -196,7 +196,7 @@ class HomeController extends Controller
         {
             $driver = $driver->where('status',$request->status);
         }
-        if($request->has('truck_num'))
+        if($request->has('truck_num') && $request->truck_num != "")
         {
             $truckNum = $request->truck_num;
             $driver = $driver->whereHas('truck',function($q)use($truckNum){
@@ -414,11 +414,11 @@ class HomeController extends Controller
         $truck = Truck::with('truckCap','hydrant','drivers');
         $hydrant = Hydrants::all();
 
-        if($request->has('reg_num'))
+        if($request->has('reg_num') && $request->reg_num != "")
         {
             $truck = $truck->where('truck_num','like', '%' .$request->reg_num. '%');
         }
-        if($request->has('name'))
+        if($request->has('name') && $request->reg_num != "")
         {
             $truck = $truck->where('name','like', '%' .$request->name. '%');
         }
