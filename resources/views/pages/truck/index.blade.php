@@ -63,11 +63,11 @@
                                         <option value="0">DeActive</option>
                                     </select>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <br />
                                     <button type="submit" class="mt-2 btn  border">Search</button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <br />
                                     <a href="{{ route('truck.list') }}" class="mt-2 btn btn-primary bg-gradient-primary">Reset Filter</a>
                                 </div>
