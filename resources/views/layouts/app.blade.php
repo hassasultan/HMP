@@ -318,15 +318,15 @@
     <!-- select2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const searchLogicDriver = function() {
+        const searchLogicDriver = function(val,len) {
 
             $("#driver-id").html("");
-            console.log();
+            console.log("driver");
 
             // console.log($('#search-cast .select2-selection__rendered input[type=search]').length);
-            if ($(this).val().length > 4) {
+            if (len > 4) {
                 formData = {
-                    name: $(this).val(),
+                    name: val,
                 }
                 $.ajax({
                         type: "GET",
@@ -342,7 +342,7 @@
                             html += '<option value="' + value.id + '">' + value.name + '-' + value.phone +
                                 '</option>';
                         });
-                        $("#driver-id").append(html);
+                        $("#driver-id").html(html);
                         this.value = "";
                     })
                     .fail(function(error) {
@@ -351,13 +351,13 @@
             }
 
         }
-        const searchLogicTruck = function() {
+        const searchLogicTruck = function(val,len) {
 
             $("#vehicle-id").html("");
 
-            if ($(this).val().length > 4) {
+            if (len > 4) {
                 formData = {
-                    name: $(this).val(),
+                    name: val,
                 }
                 $.ajax({
                         type: "GET",
@@ -386,18 +386,25 @@
 
         }
         $(document).on("keyup", 'input[type="search"]', function() {
-            console.log("check");
+            console.log($(this).val().length > 4);
+            if($(this).val().length > 4)
+            {
+                if ($('.select2-search input[type=search]').length) {
+                    if ($('.select2-search input[type=search]').attr('aria-controls') == "select2-driver-id-results") {
+                        // console.log("driver");
+                        searchLogicDriver($(this).val(),$(this).val().length);
+                        // $('.select2-search input[type=search]').unbind("keydown", searchLogicDriver);
+                        // $('.select2-search input[type=search]').on("keypress", searchLogicDriver);
+                    }
+                    if ($('.select2-search input[type=search]').attr('aria-controls') == "select2-vehicle-id-results") {
+                        console.log("truck");
+                        searchLogicTruck($(this).val(),$(this).val().length);
 
-            if ($('.select2-search input[type=search]').length) {
-                if ($('.select2-search input[type=search]').attr('aria-controls') == "select2-driver-id-results") {
-                    // $('.select2-search input[type=search]').unbind("keydown", searchLogicDriver);
-                    $('.select2-search input[type=search]').on("keydown", searchLogicDriver);
-                }
-                if ($('.select2-search input[type=search]').attr('aria-controls') == "select2-vehicle-id-results") {
-                    // $('.select2-search input[type=search]').unbind("keydown", searchLogicTruck);
-                    $('.select2-search input[type=search]').on("keydown", searchLogicTruck);
-                }
+                        // $('.select2-search input[type=search]').unbind("keydown", searchLogicTruck);
+                        // $('.select2-search input[type=search]').on("keypress", searchLogicTruck);
+                    }
 
+                }
             }
         });
 

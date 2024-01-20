@@ -302,7 +302,22 @@ class OrderController extends Controller
     public function truck_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
+            $truck = Truck::with('hydrant','truckCap','drivers')->where(function ($query) {
+                // Check if hydrant_id is equal to the authenticated user's hydrant_id
+                $query->where('hydrant_id', auth()->user()->hydrant->id);
+
+                // Or check if owned_by is equal to 0 when hydrant_id is not equal to auth()->user()->hydrant->id
+                $query->orWhere(function ($subquery) {
+                    $subquery->where('hydrant_id', '!=', auth()->user()->hydrant->id)
+                        ->where('owned_by', 0);
+                });
+            })->where(function ($query) use($request) {
+                $query->where('name', 'like', '%' . $request->name . '%');
+                $query->orWhere(function ($subquery) use($request) {
+                    $subquery->where('name', '!=','like', '%' . $request->name . '%')
+                        ->where('truck_num', 'like', '%' . $request->name . '%');
+                });
+            })->take(8)->get();
         } else {
             $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
         }
