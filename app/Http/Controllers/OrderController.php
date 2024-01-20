@@ -313,10 +313,7 @@ class OrderController extends Controller
                 });
             })->where(function ($query) use($request) {
                 $query->where('name', 'like', '%' . $request->name . '%');
-                $query->orWhere(function ($subquery) use($request) {
-                    $subquery->where('name', '!=','like', '%' . $request->name . '%')
-                        ->where('truck_num', 'like', '%' . $request->name . '%');
-                });
+                $query->orWhere('truck_num', 'like', '%' . $request->name . '%');
             })->take(8)->get();
         } else {
             $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
