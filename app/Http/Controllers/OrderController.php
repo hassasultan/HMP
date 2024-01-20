@@ -299,6 +299,27 @@ class OrderController extends Controller
         $billing = $billing->OrderBy('id', 'DESC')->paginate($page);
         return view('pages.billing.index', compact('billing', 'vehicle_type'));
     }
+    public function truck_selection_list()
+    {
+        if (auth()->user()->role != 1) {
+            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->get();
+        } else {
+            $truck = Truck::with('hydrant','truckCap','drivers')->get();
+        }
+        return $truck;
+
+    }
+    public function driver_selection_list()
+    {
+        if (auth()->user()->role != 1) {
+            $driver = Driver::with('truck')->whereHas('truck', function ($query) {
+                $query->where('hydrant_id', auth()->user()->hydrant->id);
+            })->get();
+        } else {
+            $driver = Driver::all();
+        }
+        return $driver;
+    }
     public  function billingcreate($id)
     {
         # code...

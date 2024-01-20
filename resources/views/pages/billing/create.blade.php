@@ -19,15 +19,15 @@
             <form role="form" method="POST" action="{{ route('billing.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="form-group col-12">
+                    <div class="form-group col-12" id="search-driver">
                             <label>Driver</label>
                         <select name="driver_id"
                             class="select2-multiple form-control fs-14  h-50px"  id="driver-id" required>
                             <option selected disabled value="">-- Select Option --</option>
-                            @foreach ($driver as $col)
-                                <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->phone }}</option>
+                            {{-- @foreach ($driver as $col)
+                                <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->phone }}</option> --}}
                                 {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
-                            @endforeach
+                            {{-- @endforeach --}}
                         </select>
                     </div>
                     <div class="form-group mt-2 col-12">
@@ -66,10 +66,9 @@
                             class="select2-multiple form-control fs-14  h-50px" required id="vehicle-id">
                             <option selected disabled>-- Select Option --</option>
 
-                            @foreach ($truck as $col)
+                            {{-- @foreach ($truck as $col)
                                 <option value="{{ $col->id }}">{{ $col->hydrant->name }} - {{ $col->truckCap->name }} - {{ $col->name }} : {{ $col->truck_num }} ({{ $col->company_name }})</option>
-                                {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     {{-- <div class="form-group mt-2 col-12">

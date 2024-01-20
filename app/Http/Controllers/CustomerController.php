@@ -10,15 +10,21 @@ use App\Models\User;
 class CustomerController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
+        $customer = new Customer();
         if(auth()->user()->role != 1)
         {
-            $customer = Customer::where('user_id',auth()->user()->id)->get();
+            $customer = $customer->where('user_id',auth()->user()->id);
         }
-        else
+        if($request->has('name'))
         {
-            $customer = Customer::all();
+            $customer = $customer->where('name', 'like', '%' . $request->name . '%')->orwhere('contact_num', 'like', '%' . $request->name . '%');
+        }
+        $customer = $customer->get();
+        if($request->has('search'))
+        {
+            return $customer;
         }
         return view('pages.customer.index',compact('customer'));
     }
