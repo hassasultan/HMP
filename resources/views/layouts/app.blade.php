@@ -320,81 +320,86 @@
     <script>
         const searchLogicDriver = function() {
 
-            $("#driver-id").append("");
+            $("#driver-id").html("");
+            console.log();
+
             // console.log($('#search-cast .select2-selection__rendered input[type=search]').length);
+            if ($(this).val().length > 4) {
+                formData = {
+                    name: $(this).val(),
+                }
+                $.ajax({
+                        type: "GET",
+                        url: "{{ route('search.driver.billing') }}",
+                        data: formData,
+                        dataType: "json",
+                        encode: true,
+                    }).done(function(data) {
+                        $("#driver-id").html("");
 
-            formData = {
-                name: $(this).val(),
-            }
-            $.ajax({
-                    type: "GET",
-                    url: "{{ route('search.driver.billing') }}",
-                    data: formData,
-                    dataType: "json",
-                    encode: true,
-                }).done(function(data) {
-                    $("#driver-id").html("");
-
-                    html = '';
-                    $.each(data, function(index, value) {
-                        html += '<option value="' + value.id + '">' + value.name + '-' + value.phone +
-                            '</option>';
+                        html = '';
+                        $.each(data, function(index, value) {
+                            html += '<option value="' + value.id + '">' + value.name + '-' + value.phone +
+                                '</option>';
+                        });
+                        $("#driver-id").append(html);
+                        this.value = "";
+                    })
+                    .fail(function(error) {
+                        console.log(error);
                     });
-                    $("#driver-id").append(html);
-                    this.value = "";
-                })
-                .fail(function(error) {
-                    console.log(error);
-                });
+            }
 
         }
         const searchLogicTruck = function() {
 
-            $("#vehicle-id").append("");
+            $("#vehicle-id").html("");
 
-            // console.log($('#search-cast .select2-selection__rendered input[type=search]').length);
+            if ($(this).val().length > 4) {
+                formData = {
+                    name: $(this).val(),
+                }
+                $.ajax({
+                        type: "GET",
+                        url: "{{ route('search.truck.billing') }}",
+                        data: formData,
+                        dataType: "json",
+                        encode: true,
+                    }).done(function(data) {
+                        // console.log(data);
+                        $("#vehicle-id").html("");
 
-            formData = {
-                name: $(this).val(),
-            }
-            $.ajax({
-                    type: "GET",
-                    url: "{{ route('search.truck.billing') }}",
-                    data: formData,
-                    dataType: "json",
-                    encode: true,
-                }).done(function(data) {
-                    // console.log(data);
-                    $("#vehicle-id").html("");
-
-                    html = '';
-                    $.each(data, function(index, value) {
-                        html += '<option value="' + value.id + '">'+ value['hydrant']['name']+ '-' + value['truck_cap']['name'] + '-' + value.name + ':' + value.truck_num + ' ' + value.company_name +
-                            '</option>';
+                        html = '';
+                        $.each(data, function(index, value) {
+                            html += '<option value="' + value.id + '">' + value['hydrant']['name'] + '-' +
+                                value['truck_cap']['name'] + '-' + value.name + ':' + value.truck_num +
+                                ' ' + value.company_name +
+                                '</option>';
+                        });
+                        $("#vehicle-id").append(html);
+                        this.value = "";
+                    })
+                    .fail(function(error) {
+                        console.log(error);
                     });
-                    $("#vehicle-id").append(html);
-                    this.value = "";
-                })
-                .fail(function(error) {
-                    console.log(error);
-                });
+            }
 
         }
-        const getInterval = setInterval(() => {
-            // console.log("check");
+        $(document).on("keyup", 'input[type="search"]', function() {
+            console.log("check");
 
             if ($('.select2-search input[type=search]').length) {
                 if ($('.select2-search input[type=search]').attr('aria-controls') == "select2-driver-id-results") {
-                    $('.select2-search input[type=search]').unbind("keydown", searchLogicDriver);
+                    // $('.select2-search input[type=search]').unbind("keydown", searchLogicDriver);
                     $('.select2-search input[type=search]').on("keydown", searchLogicDriver);
                 }
                 if ($('.select2-search input[type=search]').attr('aria-controls') == "select2-vehicle-id-results") {
-                    $('.select2-search input[type=search]').unbind("keydown", searchLogicTruck);
+                    // $('.select2-search input[type=search]').unbind("keydown", searchLogicTruck);
                     $('.select2-search input[type=search]').on("keydown", searchLogicTruck);
                 }
 
             }
-        }, 1000);
+        });
 
         function errorModal(error) {
             Swal.fire({

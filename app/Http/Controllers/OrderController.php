@@ -302,9 +302,9 @@ class OrderController extends Controller
     public function truck_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->get();
+            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
         } else {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->get();
+            $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
         }
         return $truck;
 
@@ -314,9 +314,9 @@ class OrderController extends Controller
         if (auth()->user()->role != 1) {
             $driver = Driver::with('truck')->whereHas('truck', function ($query) {
                 $query->where('hydrant_id', auth()->user()->hydrant->id);
-            })->where('name', 'like', '%' . $request->name . '%')->orwhere('phone', 'like', '%' . $request->name . '%')->get();
+            })->where('name', 'like', '%' . $request->name . '%')->orwhere('phone', 'like', '%' . $request->name . '%')->take(8)->get();
         } else {
-            $driver = Driver::where('name', 'like', '%' . $request->name . '%')->orwhere('phone', 'like', '%' . $request->name . '%')->get();
+            $driver = Driver::where('name', 'like', '%' . $request->name . '%')->orwhere('phone', 'like', '%' . $request->name . '%')->take(8)->get();
         }
         return $driver;
     }
