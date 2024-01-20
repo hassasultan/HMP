@@ -299,24 +299,24 @@ class OrderController extends Controller
         $billing = $billing->OrderBy('id', 'DESC')->paginate($page);
         return view('pages.billing.index', compact('billing', 'vehicle_type'));
     }
-    public function truck_selection_list()
+    public function truck_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->get();
+            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->orwhere('owned_by',0)->get();
         } else {
-            $truck = Truck::with('hydrant','truckCap','drivers')->get();
+            $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->get();
         }
         return $truck;
 
     }
-    public function driver_selection_list()
+    public function driver_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
             $driver = Driver::with('truck')->whereHas('truck', function ($query) {
                 $query->where('hydrant_id', auth()->user()->hydrant->id);
-            })->get();
+            })->where('name', 'like', '%' . $request->name . '%')->orwhere('phone', 'like', '%' . $request->name . '%')->get();
         } else {
-            $driver = Driver::all();
+            $driver = Driver::where('name', 'like', '%' . $request->name . '%')->orwhere('phone', 'like', '%' . $request->name . '%')->get();
         }
         return $driver;
     }

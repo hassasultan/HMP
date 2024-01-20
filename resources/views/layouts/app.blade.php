@@ -324,7 +324,7 @@
             // console.log($('#search-cast .select2-selection__rendered input[type=search]').length);
 
             formData = {
-                value: $(this).val(),
+                name: $(this).val(),
             }
             $.ajax({
                     type: "GET",
@@ -355,7 +355,7 @@
             // console.log($('#search-cast .select2-selection__rendered input[type=search]').length);
 
             formData = {
-                value: $(this).val(),
+                name: $(this).val(),
             }
             $.ajax({
                     type: "GET",
