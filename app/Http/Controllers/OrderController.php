@@ -302,7 +302,7 @@ class OrderController extends Controller
     public function truck_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where('hydrant_id', auth()->user()->hydrant->id)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->orwhere('owned_by',0)->get();
+            $truck = Truck::with('hydrant','truckCap','drivers')->orwhere('hydrant_id', auth()->user()->hydrant->id)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->orwhere('owned_by',0)->get();
         } else {
             $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->get();
         }
