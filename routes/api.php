@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,14 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
+
+    Route::get('/get-truck/list', [HomeController::class, 'truck']);
+    Route::post('/edit/{id}', [HomeController::class, 'TruckEdit']);
+    Route::post('/update/truck/{id}', [HomeController::class, 'TruckUpdate']);
+
+    Route::get('/get-driver/list', [HomeController::class, 'driver']);
+    Route::post('/driver/edit/{id}', [HomeController::class, 'edit']);
+    Route::post('/update/driver/{id}', [HomeController::class, 'update']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

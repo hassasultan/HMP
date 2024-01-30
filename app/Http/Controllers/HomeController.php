@@ -216,9 +216,13 @@ class HomeController extends Controller
         $truck = Truck::all();
         return view('pages.driver.create',compact('truck'));
     }
-    public function edit($id)
+    public function edit($id,Request $request)
     {
         $driver = Driver::find($id);
+        if($request->has('via'))
+        {
+            return $driver;
+        }
         $truck = Truck::all();
         return view('pages.driver.edit',compact('truck','driver'));
     }
@@ -586,9 +590,8 @@ class HomeController extends Controller
             }
             else
             {
+
                 return redirect()->route('truck.list');
-
-
             }
         }
         catch(Exception $ex)
@@ -597,11 +600,15 @@ class HomeController extends Controller
         }
 
     }
-    public function TruckEdit($id)
+    public function TruckEdit($id,Request $request)
     {
         $truck = Truck::find($id);
         $driver = Truck_type::get();
         $hydrant = Hydrants::all();
+        if($request->has('via'))
+        {
+            return response()->json(['truck'=> $truck, 'driver' => $driver, 'hydrants' => $hydrant]);
+        }
         return view('pages.truck.edit',compact('driver','hydrant','truck'));
     }
     public function TruckUpdate($id,Request $request)
@@ -715,12 +722,17 @@ class HomeController extends Controller
             //Addition End
             $truck->model = $request->model;
             $truck->save();
+            if($request->has('via'))
+            {
+                return $truck;
+            }
             if(auth()->user()->role != 1)
             {
                 return redirect()->route('hydrant.truck.list')->with('success', 'Record Updated successfully.');
             }
             else
             {
+
                 return redirect()->route('truck.list')->with('success', 'Record Updated successfully.');
 
 
