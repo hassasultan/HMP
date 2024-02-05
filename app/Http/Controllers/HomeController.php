@@ -449,13 +449,27 @@ class HomeController extends Controller
                 $truck = $truck->where('link',null);
             }
         }
-        if(auth()->user()->role != 1)
+        if($request->has('json'))
         {
-            $truck = $truck->where('hydrant_id',auth()->user()->hydrant_id)->paginate(20);
+            if(auth('api')->user()->role != 1)
+            {
+                $truck = $truck->where('hydrant_id',auth()->user()->hydrant_id)->paginate(20);
+            }
+            else
+            {
+                $truck = $truck->paginate(20);
+            }
         }
         else
         {
-            $truck = $truck->paginate(20);
+            if(auth()->user()->role != 1)
+            {
+                $truck = $truck->where('hydrant_id',auth()->user()->hydrant_id)->paginate(20);
+            }
+            else
+            {
+                $truck = $truck->paginate(20);
+            }
         }
         if($request->has('json'))
         {
