@@ -64,7 +64,7 @@ setInterval(function () {
 
         });
 
-}, 3000);
+}, 30000);
 </script>
 <script type="text/javascript">
 setInterval(function () {
