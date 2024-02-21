@@ -55,7 +55,7 @@ class HomeController extends Controller
             $hydCount = Hydrants::count();
             $order = Orders::count();
             $today_order = Orders::where('created_at', '>=', Carbon::today())->count();
-            $today_gallon = Orders::with('truck_type_fun')->whereDay('created_at', '=', date('d'))->get();
+            $today_gallon = Orders::with('truck_type_fun')->where('created_at', '>=', Carbon::today())->get();
             $customer_count = Customer::count();
             foreach($today_gallon as $row)
             {
