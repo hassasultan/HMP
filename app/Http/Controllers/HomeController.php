@@ -54,7 +54,7 @@ class HomeController extends Controller
             $unreg = Truck::where('owned_by',0)->where('unregister',1)->count();
             $hydCount = Hydrants::count();
             $order = Orders::count();
-            $today_order = Orders::whereDay('created_at', '=', date('d'))->count();
+            $today_order = Orders::where('created_at', '>=', Carbon::today())->count();
             $today_gallon = Orders::with('truck_type_fun')->whereDay('created_at', '=', date('d'))->get();
             $customer_count = Customer::count();
             foreach($today_gallon as $row)
