@@ -105,7 +105,7 @@ class HomeController extends Controller
             $customer_count = Customer::where('user_id',auth()->user()->id)->count();
             $order = Orders::where('hydrant_id',auth()->user()->hydrant_id)->count();
             $today_order = Orders::where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
-            $today_gallon = Orders::with('truck_type_fun')->where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->get();
+            $today_gallon = Orders::with('truck_type_fun')->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->get();
             foreach($today_gallon as $row)
             {
                 $expNum = explode(' ', $row->truck_type_fun->name);
