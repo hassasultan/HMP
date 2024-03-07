@@ -593,7 +593,7 @@
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ],
-                "paging": true,
+                // "paging": true,
                 "lengthChange": false,
                 "searching": true,
                 "ordering": true,
