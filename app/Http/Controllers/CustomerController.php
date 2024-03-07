@@ -21,7 +21,7 @@ class CustomerController extends Controller
         {
             $customer = $customer->where('name', 'like', '%' . $request->name . '%')->orwhere('contact_num', 'like', '%' . $request->name . '%');
         }
-        $customer = $customer->get();
+        $customer = $customer->paginate(20);
         if($request->has('search'))
         {
             return $customer;
