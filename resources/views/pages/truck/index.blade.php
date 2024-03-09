@@ -230,7 +230,7 @@
                                                         <form action="{{ route('register-truck.store') }}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="truck_id" value="{{ $row->id }}"/>
-                                                            <button type="submit" class="btn btn-sucess"> Send to Register List</button>
+                                                            <button type="submit" class="btn btn-sucsess bg-success"> Send to Register List</button>
                                                         </form>
                                                     @endif
                                             </td>

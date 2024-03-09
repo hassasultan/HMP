@@ -50,9 +50,9 @@
                                             </td>
                                             <td>
                                                 @if ($row->status == 1)
-                                                    <span class="badge badge-sm badge-success">Active</p>
+                                                    <span class="badge badge-sm bg-success">Active</p>
                                                     @else
-                                                        <span class="badge badge-sm badge-danger">DeActive</p>
+                                                        <span class="badge badge-sm bg-danger">DeActive</p>
                                                 @endif
                                             </td>
                                             {{-- <td>
