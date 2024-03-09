@@ -228,8 +228,9 @@
                                                     data-original-title="Edit user">Edit</a>
                                                     @if ($row->reg_truck == null)
                                                         <form action="{{ route('register-truck.store') }}" method="POST">
+                                                            @csrf
                                                             <input type="hidden" name="truck_id" value="{{ $row->id }}"/>
-                                                            <button type="submit"> Send to Register List</button>
+                                                            <button type="submit" class="btn btn-sucess"> Send to Register List</button>
                                                         </form>
                                                     @endif
                                             </td>
