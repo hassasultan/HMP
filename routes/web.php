@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\RegTrucksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +43,8 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
             //users
 
             Route::resource('/user-management', UserController::class);
-
+            Route::resource('/register-truck', RegTrucksController::class);
+            Route::get('register-truck/delete/truck/{id}', [RegTrucksController::class, 'destroy'])->name('reg.truck.del');
 
             Route::get('/truck-list', [App\Http\Controllers\HomeController::class, 'truck'])->name('truck.list');
             // Route::get('create/truck', [App\Http\Controllers\HomeController::class, 'TruckCreate'])->name('truck.create');

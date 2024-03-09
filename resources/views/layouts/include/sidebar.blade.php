@@ -52,6 +52,15 @@
                             <span class="nav-link-text ms-1">Permissions Management</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white @if (Route::is('register-truck.index')) active bg-gradient-primary @endif"
+                            href="{{ route('register-truck.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Register Trucks For Trcking</span>
+                        </a>
+                    </li>
                 {{-- @endrole --}}
                 <li class="nav-item">
                     <a class="nav-link text-white @if (Route::is('truck_type.list')) active  bg-gradient-primary @endif"

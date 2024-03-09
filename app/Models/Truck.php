@@ -56,6 +56,10 @@ class Truck extends Model
     {
         return $this->belongsTo(Truck_type::class,'truck_type');
     }
+    public function reg_truck()
+    {
+        return $this->belongsTo(RegTrucks::class,'id','truck_id');
+    }
     public function hydrant()
     {
         return $this->belongsTo(Hydrants::class,'hydrant_id');

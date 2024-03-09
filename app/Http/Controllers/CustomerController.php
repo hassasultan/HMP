@@ -21,11 +21,12 @@ class CustomerController extends Controller
         {
             $customer = $customer->where('name', 'like', '%' . $request->name . '%')->orwhere('contact_num', 'like', '%' . $request->name . '%');
         }
-        $customer = $customer->paginate(20);
         if($request->has('search'))
         {
+            $customer = $customer->get();
             return $customer;
         }
+        $customer = $customer->paginate(20);
         return view('pages.customer.index',compact('customer'));
     }
     public function create()

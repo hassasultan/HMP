@@ -226,6 +226,12 @@
                                                 <a href="{{ route('truck.edit', $row->id) }}"
                                                     class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                                                     data-original-title="Edit user">Edit</a>
+                                                    @if ($row->reg_truck == null)
+                                                        <form action="{{ route('register-truck.store') }}" method="POST">
+                                                            <input type="hidden" name="truck_id" value="{{ $row->id }}"/>
+                                                            <button type="submit"> Send to Register List</button>
+                                                        </form>
+                                                    @endif
                                             </td>
                                         </tr>
                                     @endforeach
