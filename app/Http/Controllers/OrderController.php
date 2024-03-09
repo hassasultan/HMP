@@ -19,6 +19,10 @@ use Maatwebsite\Excel\Facades\Excel;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Models\RegTrucks;
+use App\Models\TruckTracking;
+
+
 
 class OrderController extends Controller
 {
@@ -423,6 +427,14 @@ class OrderController extends Controller
         $order->save();
         $data['status'] = 2;
         $billing = Billings::create($data);
+        $regTruck = RegTrucks::where('truck_id',$truckId)->first();
+        if (!empty($regTruck)) 
+        {
+            TruckTracking::create([
+                'reg_truck_id'  => $regTruck->id,
+                'billing_id'    => $billing->id,
+            ]);
+        }
         $truck = Truck::find($billing->truck_id);
         $driver = Driver::find($billing->driver_id);
         if ($order->delivery_charges != NULL || $order->distance_kms != NULL) {
@@ -490,6 +502,11 @@ class OrderController extends Controller
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
+                $truck_tracking = TruckTracking::where('billing_id',$billing->id)->first();
+                if ($truck_tracking != NULL) 
+                {
+                    $truck_tracking->delete();
+                }
             } elseif ($request->status == 3) {
                 $status = 4;
                 $state = "cancelled";
@@ -516,6 +533,11 @@ class OrderController extends Controller
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
+                $truck_tracking = TruckTracking::where('billing_id',$billing->id)->first();
+                if ($truck_tracking != NULL) 
+                {
+                    $truck_tracking->delete();
+                }
             }
             $curl = curl_init();
             curl_setopt_array($curl, array(

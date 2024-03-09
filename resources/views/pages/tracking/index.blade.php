@@ -9,12 +9,12 @@
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <div class="row">
                             <div class="col-6">
-                                <h6 class="text-white text-capitalize ps-3">Registered Truck List</h6>
+                                <h6 class="text-white text-capitalize ps-3">Currently tracking Truck List</h6>
                             </div>
-                            <div class="col-6 text-end">
+                            {{-- <div class="col-6 text-end">
                                 <a class="btn bg-gradient-dark mb-0 mr-3" href="{{ route('register-truck.create') }}"><i
                                         class="material-icons text-sm">add</i>&nbsp;&nbsp;<i class="fa fa-truck"></i></a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -42,8 +42,8 @@
                                     <img src="{{ asset('storage/'.$row->image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                                 </div> --}}
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $row->truck->name }}</h6>
-                                                        <p class="text-xs text-secondary mb-0">{{ $row->truck->truck_num }}
+                                                        <h6 class="mb-0 text-sm">{{ $row->reg_truck->truck->name }}</h6>
+                                                        <p class="text-xs text-secondary mb-0">{{ $row->->$row->reg_trucktruck->truck_num }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -63,16 +63,15 @@
                                 @endif
                             </td> --}}
 
-                                            {{-- <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span>
-                                            </td> --}}
+                                            <td class="align-middle text-center">
+                                                {{-- <span class="text-secondary text-xs font-weight-bold">{{ $row->expiry }}</span> --}}
+                                            </td>
                                             <td class="align-middle">
-                                                <a href="{{ route('reg.truck.del', $row->id) }}"
+                                                {{-- <a href="{{ route('reg.truck.del', $row->id) }}"
                                                     class="text-danger font-weight-bold text-xs" data-toggle="tooltip"
                                                     data-original-title="Delete user">
                                                     <span class="fas fa-trash"></span>
-                                                    {{-- delete --}}
-                                                </a>
+                                                </a> --}}
                                             </td>
                                         </tr>
                                     @endforeach

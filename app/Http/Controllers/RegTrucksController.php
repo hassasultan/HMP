@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RegTrucks;
+use App\Models\TruckTracking;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,11 @@ class RegTrucksController extends Controller
     public function index()
     {
         $regTrucks = RegTrucks::orderBy("created_at","desc")->paginate(20);
+        return view("pages.register-truck.index",compact("regTrucks"));
+    }
+    public function truck_tracking_list()
+    {
+        $regTrucks = TruckTracking::orderBy("created_at","desc")->paginate(20);
         return view("pages.register-truck.index",compact("regTrucks"));
     }
     public function create()
