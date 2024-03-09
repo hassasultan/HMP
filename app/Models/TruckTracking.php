@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TruckTracking extends Model
 {
     use HasFactory;
-    protected $tabel = "truck_tracking";
+    protected $tabel = "truck_trackings";
     protected $fillable = [
         'reg_truck_id',
         'billing_id',
