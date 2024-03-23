@@ -36,7 +36,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd("check");
+        dd(auth()->user()->role);
         $driver = 0;
         $today_gallon_count = 0;
         $unreg = 0;
