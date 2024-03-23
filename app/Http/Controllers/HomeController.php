@@ -139,7 +139,7 @@ class HomeController extends Controller
             $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->where('user_id',auth()->user()->id)->get();
 
         }
-        dd($today->toArray());
+        // dd($today->toArray());
         $result[] = ['Clicks','Viewers'];
         foreach ($hydrants as $key => $value) {
             $result[++$key] = [$value->name, (int)count($value->orders)];
@@ -157,7 +157,7 @@ class HomeController extends Controller
         foreach ($hydrants as $key => $value) {
             $result2[++$key] = [$value->name, (int)count($value->vehicles)];
         }
-        // dd($result);
+        dd($result);
         if($request->has('status') && $request->status == "api")
         {
             $data['result'] = $result;
