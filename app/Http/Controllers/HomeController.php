@@ -36,6 +36,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        dd("check");
         $driver = 0;
         $today_gallon_count = 0;
         $unreg = 0;
