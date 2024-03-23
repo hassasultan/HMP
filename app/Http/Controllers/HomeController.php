@@ -177,7 +177,7 @@ class HomeController extends Controller
             $data['today_dc'] = $today_dc;
             return $data;
         }
-        dd($today_dc);
+        // dd($today_dc);
         return view('home',compact('today_dc','dc','customer_count','today_gallon_count','today_order','today_comm','today_gps','comm','gps','vehicle','driver','hydCount','hydrants','result','result2','order','contractor_driver','third_driver','contractor','third','unreg'));
     }
     public function driver(Request $request)
