@@ -16,7 +16,7 @@
 
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
+{{--<script type="text/javascript">
 setInterval(function () {
     var role = "{{ auth()->user()->role }}";
     var url = "";
@@ -79,7 +79,7 @@ setInterval(function () {
         url = "{{ route('hydrant.home') }}";
     }
     console.log(url);
-$.ajax({
+    $.ajax({
         url: url,
         type: "Get",
         data: {
@@ -129,7 +129,7 @@ $.ajax({
 
 }, 3000);
 
-  </script>
+  </script>--}}
   @if (auth()->user()->role == 1)
   <header class="page-header page-header-left-inline-breadcrumb">
     <h2 class="font-weight-bold text-6">Home</h2>
