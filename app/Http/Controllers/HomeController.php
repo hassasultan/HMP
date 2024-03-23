@@ -57,12 +57,12 @@ class HomeController extends Controller
             $today_order = Orders::where('created_at', '>=', Carbon::today())->count();
             $today_gallon = Orders::with('truck_type_fun')->where('created_at', '>=', Carbon::today())->get();
             $customer_count = Customer::count();
-            // dd($customer_count);
             foreach($today_gallon as $row)
             {
                 $expNum = explode(' ', $row->truck_type_fun->name);
                 $today_gallon_count = $today_gallon_count + (int)$expNum[0];
             }
+            dd($today_gallon_count);
             $comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
