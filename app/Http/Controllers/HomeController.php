@@ -62,7 +62,6 @@ class HomeController extends Controller
                 $expNum = explode(' ', $row->truck_type_fun->name);
                 $today_gallon_count = $today_gallon_count + (int)$expNum[0];
             }
-            dd($today_gallon_count);
             $comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
@@ -86,7 +85,7 @@ class HomeController extends Controller
             })->where('order_type',"Dc quota")->count();
             $hydrants = Hydrants::with('vehicles')->get();
             $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->get();
-            dd($today->toArray());
+            // dd($today->toArray());
 
         }
         else
@@ -140,7 +139,7 @@ class HomeController extends Controller
             $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->where('user_id',auth()->user()->id)->get();
 
         }
-        // dd($today->toArray());
+        dd($today->toArray());
         $result[] = ['Clicks','Viewers'];
         foreach ($hydrants as $key => $value) {
             $result[++$key] = [$value->name, (int)count($value->orders)];
