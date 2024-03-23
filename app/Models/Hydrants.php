@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+
 
 class Hydrants extends Model
 {
@@ -34,6 +36,6 @@ class Hydrants extends Model
 
     public function todayorders()
     {
-        return $this->hasMany(Orders::class,'hydrant_id','id')->whereDay('created_at', '=', date('d'));
+        return $this->hasMany(Orders::class,'hydrant_id','id')->where('created_at', '>=', Carbon::today());
     }
 }
