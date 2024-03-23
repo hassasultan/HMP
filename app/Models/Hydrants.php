@@ -36,6 +36,6 @@ class Hydrants extends Model
 
     public function todayorders()
     {
-        return $this->hasMany(Orders::class,'hydrant_id','id')->where('created_at', '>=', Carbon::today());
+        return $this->hasMany(Orders::class,'hydrant_id','id')->where('created_at', '>=', Carbon::today())->count();
     }
 }
