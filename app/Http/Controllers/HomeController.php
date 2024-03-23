@@ -36,7 +36,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd(auth()->user()->role);
         $driver = 0;
         $today_gallon_count = 0;
         $unreg = 0;
@@ -58,6 +57,7 @@ class HomeController extends Controller
             $today_order = Orders::where('created_at', '>=', Carbon::today())->count();
             $today_gallon = Orders::with('truck_type_fun')->where('created_at', '>=', Carbon::today())->get();
             $customer_count = Customer::count();
+            dd($customer_count);
             foreach($today_gallon as $row)
             {
                 $expNum = explode(' ', $row->truck_type_fun->name);
