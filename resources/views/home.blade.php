@@ -16,7 +16,7 @@
 
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-{{--<script type="text/javascript">
+<script type="text/javascript">
 setInterval(function () {
     var role = "{{ auth()->user()->role }}";
     var url = "";
@@ -64,7 +64,7 @@ setInterval(function () {
 
         });
 
-}, 30000);
+}, 90000);
 </script>
 <script type="text/javascript">
 setInterval(function () {
@@ -127,9 +127,9 @@ setInterval(function () {
 
     });
 
-}, 3000);
+}, 90000);
 
-  </script>--}}
+  </script>
   @if (auth()->user()->role == 1)
   <header class="page-header page-header-left-inline-breadcrumb">
     <h2 class="font-weight-bold text-6">Home</h2>
