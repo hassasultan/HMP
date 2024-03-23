@@ -57,7 +57,7 @@ class HomeController extends Controller
             $today_order = Orders::where('created_at', '>=', Carbon::today())->count();
             $today_gallon = Orders::with('truck_type_fun')->where('created_at', '>=', Carbon::today())->get();
             $customer_count = Customer::count();
-            dd($customer_count);
+            // dd($customer_count);
             foreach($today_gallon as $row)
             {
                 $expNum = explode(' ', $row->truck_type_fun->name);
@@ -86,7 +86,7 @@ class HomeController extends Controller
             })->where('order_type',"Dc quota")->count();
             $hydrants = Hydrants::with('vehicles')->get();
             $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->get();
-            // dd($today->toArray());
+            dd($today->toArray());
 
         }
         else
