@@ -149,7 +149,7 @@ class HomeController extends Controller
         foreach ($today as $key => $value) {
             // if((int)count($value->todayorders) != 0)
             // {
-                $result_today[++$key] = [$value->name, (int)count($value->todayorders)];
+                $result_today[++$key] = [$value->name, $value->todayorders()->count()];
             // }
         }
 
