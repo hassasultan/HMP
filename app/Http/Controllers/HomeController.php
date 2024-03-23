@@ -144,7 +144,6 @@ class HomeController extends Controller
         foreach ($hydrants as $key => $value) {
             $result[++$key] = [$value->name, $value->orders()->count()];
         }
-        dd($result);
 
         $result_today[] = ['Clicks','Viewers'];
         foreach ($today as $key => $value) {
