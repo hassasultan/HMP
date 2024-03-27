@@ -79,7 +79,7 @@
                                         Focal Person: {{ $driver->hydrant->person }}
                                     </div>
                                     <div class="col-md-6" style="border-left:1px solid #000;">
-                                        Contact#: {{ $driver->hydrant->contact }}
+                                        {{-- Contact#: {{ $driver->hydrant->contact }} --}}
                                     </div>
                                 </div>
                             </td>
