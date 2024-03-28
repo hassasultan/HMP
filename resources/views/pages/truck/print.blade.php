@@ -49,13 +49,13 @@
     <div id="app">
         <div class="container p-4 bg-white w-100 text-center">
             <h2>KW&SC</h2>
-            <p class="border-bottom">VEHICLE REGISTRATION FORM 2022</p>
+            <p class="border-bottom">VEHICLE REGISTRATION FORM</p>
             <div class="table">
                 <table class="table table-bordered">
                     <thead class="table-dark">
                         <!--<tr class="p-0">-->
                         <th class="w-100 pl-0 pr-0 mr-0">
-                            Owner's Details
+                            Hydrant's Details
                         </th>
                         <!--</tr>-->
                     </thead>
@@ -78,9 +78,9 @@
                                     <div class="col-md-6" style="border-right:1px solid #000;">
                                         Focal Person: {{ $driver->hydrant->person }}
                                     </div>
-                                    <div class="col-md-6" style="border-left:1px solid #000;">
-                                        {{-- Contact#: {{ $driver->hydrant->contact }} --}}
-                                    </div>
+                                    {{-- <div class="col-md-6" style="border-left:1px solid #000;">
+                                        Contact#: {{ $driver->hydrant->contact }}
+                                    </div> --}}
                                 </div>
                             </td>
                         </tr>
@@ -184,6 +184,18 @@
                                     </div>
                                     <div class="col-md-6" style="border-left:1px solid #000;">
                                         Capacity: {{ $driver->truckCap->name }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-start">
+                                    <div class="col-md-6" style="border-right:1px solid #000;">
+                                        Owner Name: {{ $driver->name }}
+                                    </div>
+                                    <div class="col-md-6" style="border-left:1px solid #000;">
+                                        Owner CNIC: {{ $driver->owner_cnic }}
                                     </div>
                                 </div>
                             </td>
