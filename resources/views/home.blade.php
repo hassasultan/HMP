@@ -67,67 +67,67 @@ setInterval(function () {
 }, 90000);
 </script>
 <script type="text/javascript">
-setInterval(function () {
-    var role = "{{ auth()->user()->role }}";
-    var url = "";
-    if(role == 1)
-    {
-        url = "{{ route('home') }}";
-    }
-    else
-    {
-        url = "{{ route('hydrant.home') }}";
-    }
-    console.log(url);
-    $.ajax({
-        url: url,
-        type: "Get",
-        data: {
-            status:"api",
-        },
-    }).done(function(data) {
-        console.log(data);
-        $("#cont").html(data['contractor']);
-        $("#third").html(data['third']);
-        $("#cont-driver").html(data['contractor_driver']);
-        $("#third-driver").html(data['third_driver']);
+// setInterval(function () {
+//     var role = "{{ auth()->user()->role }}";
+//     var url = "";
+//     if(role == 1)
+//     {
+//         url = "{{ route('home') }}";
+//     }
+//     else
+//     {
+//         url = "{{ route('hydrant.home') }}";
+//     }
+//     console.log(url);
+//     $.ajax({
+//         url: url,
+//         type: "Get",
+//         data: {
+//             status:"api",
+//         },
+//     }).done(function(data) {
+//         console.log(data);
+//         $("#cont").html(data['contractor']);
+//         $("#third").html(data['third']);
+//         $("#cont-driver").html(data['contractor_driver']);
+//         $("#third-driver").html(data['third_driver']);
 
-        $("#today-comm").html(data['today_comm']);
-        $("#today-gps").html(data['today_gps']);
-        $("#today-order").html(data['today_order']);
-        $("#total-gallon").html(data['today_gallon_count']);
-        var html = "";
-        $.each(data['hydrants'],function(index,value){
-            if(value['vehicles'].length > 0)
-            {
-                html += "<div class='col-8' style='color:"+value['color']+"'><i class='fas fa-check-square me-2'></i>"+value['name']+"</div>";
-                html += "<div class='col-4 text-end' style='color:"+value['color']+"'>"+value['vehicles'].length+"</div>";
-                $("#total-tanker").html(html);
-            }
-        });
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart2);
-        let result2 = data['newresult'];
-        function drawChart2() {
+//         $("#today-comm").html(data['today_comm']);
+//         $("#today-gps").html(data['today_gps']);
+//         $("#today-order").html(data['today_order']);
+//         $("#total-gallon").html(data['today_gallon_count']);
+//         var html = "";
+//         $.each(data['hydrants'],function(index,value){
+//             if(value['vehicles'].length > 0)
+//             {
+//                 html += "<div class='col-8' style='color:"+value['color']+"'><i class='fas fa-check-square me-2'></i>"+value['name']+"</div>";
+//                 html += "<div class='col-4 text-end' style='color:"+value['color']+"'>"+value['vehicles'].length+"</div>";
+//                 $("#total-tanker").html(html);
+//             }
+//         });
+//         google.charts.load("current", {packages:["corechart"]});
+//         google.charts.setOnLoadCallback(drawChart2);
+//         let result2 = data['newresult'];
+//         function drawChart2() {
 
-            var data = google.visualization.arrayToDataTable(result2);
+//             var data = google.visualization.arrayToDataTable(result2);
 
-            var options = {
-            title: '',
-            is3D: true,
-            };
+//             var options = {
+//             title: '',
+//             is3D: true,
+//             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
-            chart.draw(data, options);
-        }
-    })
-    .fail(function(error) {
-        console.log(error);
-        errorModal(error);
+//             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+//             chart.draw(data, options);
+//         }
+//     })
+//     .fail(function(error) {
+//         console.log(error);
+//         errorModal(error);
 
-    });
+//     });
 
-}, 90000);
+// }, 90000);
 
   </script>
   @if (auth()->user()->role == 1)
