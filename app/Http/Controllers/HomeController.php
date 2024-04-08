@@ -141,22 +141,22 @@ class HomeController extends Controller
         }
         // dd($today->toArray());
         $result[] = ['Clicks','Viewers'];
-        foreach ($hydrants as $key => $value) {
-            $result[++$key] = [$value->name, $value->orders()->count()];
-        }
+        // foreach ($hydrants as $key => $value) {
+        //     $result[++$key] = [$value->name, $value->orders()->count()];
+        // }
 
         $result_today[] = ['Clicks','Viewers'];
-        foreach ($today as $key => $value) {
-            // if((int)count($value->todayorders) != 0)
-            // {
-                $result_today[++$key] = [$value->name, $value->todayorders()->count()];
-            // }
-        }
+        // foreach ($today as $key => $value) {
+        //     // if((int)count($value->todayorders) != 0)
+        //     // {
+        //         $result_today[++$key] = [$value->name, $value->todayorders()->count()];
+        //     // }
+        // }
 
         $result2[] = ['Clicks','Viewers'];
-        foreach ($hydrants as $key => $value) {
-            $result2[++$key] = [$value->name, $value->vehicles()->count()];
-        }
+        // foreach ($hydrants as $key => $value) {
+        //     $result2[++$key] = [$value->name, $value->vehicles()->count()];
+        // }
         if($request->has('status') && $request->status == "api")
         {
             $data['result'] = $result;
