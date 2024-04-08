@@ -74,14 +74,14 @@ class HomeController extends Controller
             $today_comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
-            })->whereDay('created_at', '=', date('d'))->count();
+            })->where('created_at', '>=', Carbon::today())->count();
             $today_gps = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
-            })->whereDay('created_at', '=', date('d'))->count();
+            })->where('created_at', '>=', Carbon::today())->count();
             $today_dc = Orders::with('billing')->whereHas('billing',function($query)
             {
-                $query->whereDay('created_at', '=', date('d'));
+                $query->where('created_at', '>=', Carbon::today());
             })->where('order_type',"Dc quota")->count();
             $hydrants = Hydrants::with('vehicles')->get();
             $today = Hydrants::with('vehicles','todayorders','todayorders.customer')->get();
@@ -124,14 +124,14 @@ class HomeController extends Controller
             $today_comm = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->where('standard',"Commercial");
-            })->where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->count();
+            })->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
             $today_gps = Orders::with('customer')->whereHas('customer',function($query)
             {
                 $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
-            })->where('hydrant_id',auth()->user()->hydrant_id)->whereDay('created_at', '=', date('d'))->count();
+            })->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
             $today_dc = Orders::with('billing')->whereHas('billing',function($query)
             {
-                $query->whereDay('created_at', '=', date('d'));
+                $query->where('created_at', '>=', Carbon::today());
             })->where('order_type',"Dc quota")->where('hydrant_id',auth()->user()->hydrant_id)->count();
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
