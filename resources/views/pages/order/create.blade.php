@@ -30,13 +30,13 @@
                             </div>
                             <div class="form-group col-12">
                                 <label>Customers</label>
-                                <select name="customer_id[]" class="select2-multiple form-control fs-14  h-50px" required
-                                    multiple>
-                                    @foreach ($customer as $col)
+                                <select name="customer_id[]" class=" form-control fs-14  h-50px"
+                                    id="get-customer" required multiple>
+                                    {{-- @foreach ($customer as $col)
                                         <option value="{{ $col->id }}">{{ $col->name }} - {{ $col->address }}
-                                            {{ $col->street }} phone: {{ $col->contact_num }}</option>
-                                        {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
-                                    @endforeach
+                                            {{ $col->street }} phone: {{ $col->contact_num }}</option> --}}
+                                    {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
+                                    {{-- @endforeach --}}
                                 </select>
                             </div>
                             @if (auth()->user()->role == 1)
@@ -100,5 +100,40 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            console.log("check");
+            $('#get-customer').select2({
+                placeholder: 'Search for a customer',
+                ajax: {
+                    url: '{{ route('customers.search') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        console.log("check");
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 2,
+                templateResult: formatCustomer,
+                templateSelection: formatCustomerSelection
+            });
+
+            function formatCustomer(customer) {
+                if (customer.loading) {
+                    return customer.text;
+                }
+                var markup = customer.text;
+                return markup;
+            }
+
+            function formatCustomerSelection(customer) {
+                return customer.text || customer.id;
+            }
+        });
+    </script>
 
 @endsection

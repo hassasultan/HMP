@@ -127,6 +127,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/customer-management', CustomerController::class);
     Route::get('generate/customer/report/{id}', [App\Http\Controllers\CustomerController::class, 'generate_report'])->name('generate.customer.report');
 
+    Route::get('/customers/search', [CustomerController::class, 'search'])->name('customers.search');
+    
     Route::get('change/driver/status', [App\Http\Controllers\HomeController::class, 'changeDriverStatus'])->name('change.driver.status');
     Route::get('change/tanker/status', [App\Http\Controllers\HomeController::class, 'changeVehicleStatus'])->name('change.tanker.status');
     Route::get('change/customer/status', [App\Http\Controllers\CustomerController::class, 'changeStatus'])->name('change.customer.status');
