@@ -284,9 +284,11 @@ class OrderController extends Controller
             });
         }
         if ($request->has('order_num') && $request->order_num != '') {
-            $billing = $billing->whereHas('order', function ($query) use ($request) {
-                $query->where('Order_Number', $request->order_num);
-            });
+            $get_order = Orders::where('Order_Number',$request->order_num)->first();
+            $billing = $billing->where('order_id',$get_order->id);
+            // $billing = $billing->whereHas('order', function ($query) use ($request) {
+            //     $query->where('Order_Number', $request->order_num);
+            // });
         }
         if ($request->has('status') && $request->status != '') {
             $billing = $billing->where('status', $request->status);
