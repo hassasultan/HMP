@@ -22,13 +22,13 @@ class ReportsController extends Controller
     //
     public function report()
     {
-        $truck = Truck::all();
-        $capacity = Truck_type::get();
+        // $truck = Truck::all();
+        // $capacity = Truck_type::get();
         $hydrants = Hydrants::get();
-        $order = Orders::with('truck_type_fun')->get();
-        $billing = Billings::get();
-        $customers = Customer::get();
-        return view('pages.reports.index', compact('truck', 'capacity', 'hydrants', 'order', 'billing', 'customers'));
+        // $order = Orders::with('truck_type_fun')->get();
+        // $billing = Billings::get();
+        // $customers = Customer::get();
+        return view('pages.reports.index', compact('hydrants'));
     }
     public function generate_report(Request $request)
     {
