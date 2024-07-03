@@ -295,9 +295,12 @@ class OrderController extends Controller
         }
         if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
-            $billing = $billing->whereHas('order.customer', function ($q) use ($phone) {
-                $q->where('contact_num', $phone);
-            });
+            $cust = Customer::where('contact_num',$phone)->first();
+            $cust_order = Orders::where('customer_id',$cust->id)->pluck('id');
+            $billing = $billing->whereIn('order_id',$cust_order);
+            // $billing = $billing->whereHas('order.customer', function ($q) use ($phone) {
+            //     $q->where('contact_num', $phone);
+            // });
         }
         if ($request->has('per_page')) {
             $page = $request->per_page;
