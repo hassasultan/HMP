@@ -290,6 +290,11 @@ class OrderController extends Controller
                 $billing = $billing->where('order_id',$get_order->id);
 
             }
+            else
+            {
+                $billing = $billing->where('order_id',0);
+
+            }
             // $billing = $billing->whereHas('order', function ($query) use ($request) {
             //     $query->where('Order_Number', $request->order_num);
             // });
