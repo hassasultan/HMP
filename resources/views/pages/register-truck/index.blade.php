@@ -42,8 +42,12 @@
                                     <img src="{{ asset('storage/'.$row->image) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                                 </div> --}}
                                                     <div class="d-flex flex-column justify-content-center">
+                                                        @if ($row->truck != null)
                                                         <h6 class="mb-0 text-sm">{{ $row->truck->name }}</h6>
                                                         <p class="text-xs text-secondary mb-0">{{ $row->truck->truck_num }}
+                                                        @else
+                                                            No Truck Exist
+                                                        @endif
                                                         </p>
                                                     </div>
                                                 </div>
