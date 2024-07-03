@@ -285,7 +285,11 @@ class OrderController extends Controller
         }
         if ($request->has('order_num') && $request->order_num != '') {
             $get_order = Orders::where('Order_Number',$request->order_num)->first();
-            $billing = $billing->where('order_id',$get_order->id);
+            if($get_order != null)
+            {
+                $billing = $billing->where('order_id',$get_order->id);
+
+            }
             // $billing = $billing->whereHas('order', function ($query) use ($request) {
             //     $query->where('Order_Number', $request->order_num);
             // });
