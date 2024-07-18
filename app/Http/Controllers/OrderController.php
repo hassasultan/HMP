@@ -269,7 +269,7 @@ class OrderController extends Controller
                 });
             }
         }
-        dd($billing->take(10)->get()->toArray());
+        // dd($billing->take(10)->get()->toArray());
         if ($request->has('vehicle_type') && $request->vehicle_type != '') {
             $billing = $billing->whereHas('order', function ($query) use ($request) {
                 $query->where('truck_type', $request->vehicle_type);
