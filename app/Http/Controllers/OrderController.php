@@ -255,6 +255,7 @@ class OrderController extends Controller
         $vehicle_type = Truck_type::all();
         $billing = Billings::with('order', 'order.customer');
         if (auth()->user()->role != 1) {
+            dd(auth()->user()->hydrant_id);
             $billing = $billing->whereHas('order', function ($query) {
                 $query->where('hydrant_id', auth()->user()->hydrant_id);
             });
