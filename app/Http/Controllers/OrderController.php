@@ -35,15 +35,15 @@ class OrderController extends Controller
         $order = Orders::with('truck_type_fun', 'hydrant', 'customer', 'billing');
         if (auth()->user()->role != 1) {
             $order = $order->where('hydrant_id', auth()->user()->hydrant_id);
-            if (auth()->user()->type == "commercial") {
-                $order = $order->whereHas('customer', function ($q) {
-                    $q->where('standard', 'Commercial');
-                });
-            } else {
-                $order = $order->whereHas('customer', function ($q) {
-                    $q->where('standard', '!=', 'Commercial');
-                });
-            }
+            // if (auth()->user()->type == "commercial") {
+            //     $order = $order->whereHas('customer', function ($q) {
+            //         $q->where('standard', 'Commercial');
+            //     });
+            // } else {
+            //     $order = $order->whereHas('customer', function ($q) {
+            //         $q->where('standard', '!=', 'Commercial');
+            //     });
+            // }
         }
 
         if ($request->has('vehicle_type') && $request->vehicle_type != '') {
