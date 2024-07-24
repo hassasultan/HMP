@@ -280,8 +280,12 @@ class OrderController extends Controller
                 });
                 // $order = $billing->whereIn('customer_id', $customer);
             } else {
-                $billing = $billing->whereHas('order.customer', function ($q) {
-                    $q->where('standard', '!=', 'Commercial');
+                // $billing = $billing->whereHas('order.customer', function ($q) {
+                //     $q->where('standard', '!=', 'Commercial');
+                // });
+                $customer = Customer::where('standard','!=', 'Commercial')->pluck('id');
+                $billing = $billing->whereHas('order',function ($q) use ($customer) {
+                    $q->whereIn('customer_id', $customer);
                 });
             }
         }
