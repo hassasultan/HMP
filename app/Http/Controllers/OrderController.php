@@ -288,7 +288,7 @@ class OrderController extends Controller
                 //     $q->whereIn('customer_id', $customer);
                 // });
                 $billing = $billing->whereHas('order',function ($q) {
-                    $q->whereIn('order_type','!=','Commercial');
+                    $q->where('order_type','!=','Commercial');
                 });
             }
         }
