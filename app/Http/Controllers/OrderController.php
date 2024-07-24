@@ -271,9 +271,14 @@ class OrderController extends Controller
                 $query->where('hydrant_id', auth()->user()->hydrant_id);
             });
             if (auth()->user()->type == "commercial") {
-                $billing = $billing->whereHas('order.customer', function ($q) {
-                    $q->where('standard', 'Commercial');
+                // $billing = $billing->whereHas('order.customer', function ($q) {
+                //     $q->where('standard', 'Commercial');
+                // });
+                $customer = Customer::where('standard', 'Commercial')->pluck('id');
+                $billing = $billing->whereHas('order',function ($q) use ($customer) {
+                    $q->whereIn('customer_id', $customer);
                 });
+                // $order = $billing->whereIn('customer_id', $customer);
             } else {
                 $billing = $billing->whereHas('order.customer', function ($q) {
                     $q->where('standard', '!=', 'Commercial');
