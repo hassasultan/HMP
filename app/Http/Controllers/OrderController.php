@@ -27,7 +27,7 @@ use App\Models\TruckTracking;
 class OrderController extends Controller
 {
     //
-    public  function index(Request $request)
+    public function index(Request $request)
     {
         # code...
         $page = 20;
@@ -35,15 +35,22 @@ class OrderController extends Controller
         $order = Orders::with('truck_type_fun', 'hydrant', 'customer', 'billing');
         if (auth()->user()->role != 1) {
             $order = $order->where('hydrant_id', auth()->user()->hydrant_id);
-            // if (auth()->user()->type == "commercial") {
-            //     $order = $order->whereHas('customer', function ($q) {
-            //         $q->where('standard', 'Commercial');
-            //     });
-            // } else {
-            //     $order = $order->whereHas('customer', function ($q) {
-            //         $q->where('standard', '!=', 'Commercial');
-            //     });
-            // }
+            if (auth()->user()->type == "commercial") {
+                // $order = $order->whereHas('customer', function ($q) {
+                //     $q->where('standard', 'Commercial');
+                // });
+                $order = $order->whereHas('customer');
+                $customer = Customer::where('standard', 'Commercial')->pluck('id');
+                $order = $order->whereIn('customer_id', $customer);
+
+            } else {
+                // $order = $order->whereHas('customer', function ($q) {
+                //     $q->where('standard', '!=', 'Commercial');
+                // });
+                $order = $order->whereHas('customer');
+                $customer = Customer::where('standard','!=', 'Commercial')->pluck('id');
+                $order = $order->whereIn('customer_id', $customer);
+            }
         }
 
         if ($request->has('vehicle_type') && $request->vehicle_type != '') {
@@ -58,7 +65,7 @@ class OrderController extends Controller
             $order = $order->where('order_type', $request->order_type);
         }
         if ($request->has('order_num') && $request->order_num != '') {
-            $order = $order->where('Order_Number',  'like', '%' . $request->order_num . '%');
+            $order = $order->where('Order_Number', 'like', '%' . $request->order_num . '%');
         }
         if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
@@ -81,7 +88,7 @@ class OrderController extends Controller
     {
         return "UNDER CONSTRUCTION";
     }
-    public  function create()
+    public function create()
     {
         # code...
         $truck_type = Truck_type::all();
@@ -100,7 +107,7 @@ class OrderController extends Controller
         return view('pages.order.create', compact('truck_type', 'customer', 'hydrants'));
     }
 
-    public  function store(Request $request)
+    public function store(Request $request)
     {
         # code...
         // dd($request->all());
@@ -141,7 +148,7 @@ class OrderController extends Controller
                 }
                 $new_order->customer_id = $cust->id;
 
-                if ((int)$request->distance_kms < 11) {
+                if ((int) $request->distance_kms < 11) {
                     $new_order->distance_kms = 0;
                 } else {
                     $new_order->distance_kms = $request->distance_kms;
@@ -179,7 +186,8 @@ class OrderController extends Controller
                         CURLOPT_HTTPHEADER => array(
                             'Accept: application/json'
                         ),
-                    ));
+                    )
+                    );
 
                     $response = curl_exec($curl);
 
@@ -248,7 +256,7 @@ class OrderController extends Controller
 
     //billing
 
-    public  function billingindex(Request $request)
+    public function billingindex(Request $request)
     {
         # code...
         $page = 20;
@@ -286,15 +294,12 @@ class OrderController extends Controller
             });
         }
         if ($request->has('order_num') && $request->order_num != '') {
-            $get_order = Orders::where('Order_Number',$request->order_num)->first();
-            if($get_order != null)
-            {
-                $billing = $billing->where('order_id',$get_order->id);
+            $get_order = Orders::where('Order_Number', $request->order_num)->first();
+            if ($get_order != null) {
+                $billing = $billing->where('order_id', $get_order->id);
 
-            }
-            else
-            {
-                $billing = $billing->where('order_id',0);
+            } else {
+                $billing = $billing->where('order_id', 0);
 
             }
             // $billing = $billing->whereHas('order', function ($query) use ($request) {
@@ -306,9 +311,9 @@ class OrderController extends Controller
         }
         if ($request->has('customer_phone') && $request->customer_phone != '') {
             $phone = $request->customer_phone;
-            $cust = Customer::where('contact_num',$phone)->first();
-            $cust_order = Orders::where('customer_id',$cust->id)->pluck('id');
-            $billing = $billing->whereIn('order_id',$cust_order);
+            $cust = Customer::where('contact_num', $phone)->first();
+            $cust_order = Orders::where('customer_id', $cust->id)->pluck('id');
+            $billing = $billing->whereIn('order_id', $cust_order);
             // $billing = $billing->whereHas('order.customer', function ($q) use ($phone) {
             //     $q->where('contact_num', $phone);
             // });
@@ -322,7 +327,7 @@ class OrderController extends Controller
     public function truck_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where(function ($query) {
+            $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where(function ($query) {
                 // Check if hydrant_id is equal to the authenticated user's hydrant_id
                 $query->where('hydrant_id', auth()->user()->hydrant->id);
 
@@ -331,12 +336,12 @@ class OrderController extends Controller
                     $subquery->where('hydrant_id', '!=', auth()->user()->hydrant->id)
                         ->where('owned_by', 0);
                 });
-            })->where(function ($query) use($request) {
+            })->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->name . '%');
                 $query->orWhere('truck_num', 'like', '%' . $request->name . '%');
             })->take(8)->get();
         } else {
-            $truck = Truck::with('hydrant','truckCap','drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
+            $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
         }
         return $truck;
 
@@ -352,7 +357,7 @@ class OrderController extends Controller
         }
         return $driver;
     }
-    public  function billingcreate($id)
+    public function billingcreate($id)
     {
         # code...
         $vehicle_type = Truck_type::all();
@@ -362,7 +367,7 @@ class OrderController extends Controller
             $order = Orders::doesntHave('billing')->where('id', $id)->get();
         }
         if (auth()->user()->role != 1) {
-            $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->get();
+            $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by', 0)->get();
         } else {
             $truck = Truck::all();
         }
@@ -376,7 +381,7 @@ class OrderController extends Controller
         // dd($order->toArray());
         return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type'));
     }
-    public  function billingedit($id)
+    public function billingedit($id)
     {
         # code...
         $bill = Billings::with('order')->find($id);
@@ -387,7 +392,7 @@ class OrderController extends Controller
             $order = Orders::doesntHave('billing')->get();
         }
         if (auth()->user()->role != 1) {
-            $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by',0)->get();
+            $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by', 0)->get();
         } else {
             $truck = Truck::all();
         }
@@ -402,7 +407,7 @@ class OrderController extends Controller
         return view('pages.billing.edit', compact('bill', 'order', 'truck', 'driver'));
     }
 
-    public  function billingstore(Request $request)
+    public function billingstore(Request $request)
     {
         # code...
         // dd($request->all());
@@ -443,12 +448,11 @@ class OrderController extends Controller
         $order->save();
         $data['status'] = 2;
         $billing = Billings::create($data);
-        $regTruck = RegTrucks::where('truck_id',$truckId)->first();
-        if (!empty($regTruck)) 
-        {
+        $regTruck = RegTrucks::where('truck_id', $truckId)->first();
+        if (!empty($regTruck)) {
             TruckTracking::create([
-                'reg_truck_id'  => $regTruck->id,
-                'billing_id'    => $billing->id,
+                'reg_truck_id' => $regTruck->id,
+                'billing_id' => $billing->id,
             ]);
         }
         $truck = Truck::find($billing->truck_id);
@@ -466,9 +470,10 @@ class OrderController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->km_amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
                 CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json'
-                ),
-            ));
+                        'Accept: application/json'
+                    ),
+            )
+            );
 
             $response = curl_exec($curl);
 
@@ -480,7 +485,7 @@ class OrderController extends Controller
             return redirect()->route('billing.details', $billing->id);
         }
     }
-    public  function billingupdate(Request $request, $id)
+    public function billingupdate(Request $request, $id)
     {
         # code...
         $data = $request->except(['_token']);
@@ -518,9 +523,8 @@ class OrderController extends Controller
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
-                $truck_tracking = TruckTracking::where('billing_id',$billing->id)->first();
-                if ($truck_tracking != NULL) 
-                {
+                $truck_tracking = TruckTracking::where('billing_id', $billing->id)->first();
+                if ($truck_tracking != NULL) {
                     $truck_tracking->delete();
                 }
             } elseif ($request->status == 3) {
@@ -549,9 +553,8 @@ class OrderController extends Controller
                 $vehicle_no = $billing->truck->truck_num;
                 $driver_name = $billing->driver->name;
                 $driver_phone = $billing->driver->phone;
-                $truck_tracking = TruckTracking::where('billing_id',$billing->id)->first();
-                if ($truck_tracking != NULL) 
-                {
+                $truck_tracking = TruckTracking::where('billing_id', $billing->id)->first();
+                if ($truck_tracking != NULL) {
                     $truck_tracking->delete();
                 }
             }
@@ -567,9 +570,10 @@ class OrderController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
                 CURLOPT_HTTPHEADER => array(
-                    'Accept: application/json'
-                ),
-            ));
+                        'Accept: application/json'
+                    ),
+            )
+            );
 
             $response = curl_exec($curl);
 
@@ -671,9 +675,10 @@ class OrderController extends Controller
                     CURLOPT_CUSTOMREQUEST => 'POST',
                     CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
                     CURLOPT_HTTPHEADER => array(
-                        'Accept: application/json'
-                    ),
-                ));
+                            'Accept: application/json'
+                        ),
+                )
+                );
 
                 $response = curl_exec($curl);
 
@@ -710,7 +715,7 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
-    public  function billingReciept($id)
+    public function billingReciept($id)
     {
         # code...
         $billing = Billings::with('order', 'order.customer', 'truck', 'driver', 'truck.hydrant')->find($id);
@@ -722,21 +727,21 @@ class OrderController extends Controller
     {
         try {
             $valid = $this->validate($request, [
-                'order_id'          => 'required|string',
-                'consumer_name'          => 'required|string',
+                'order_id' => 'required|string',
+                'consumer_name' => 'required|string',
                 // 'consumer_number'          => 'required|string',
                 // 'consumer_address'          => 'required|string',
-                'hydrant'          => 'required|string',
-                'gallon'          => 'required|string',
+                'hydrant' => 'required|string',
+                'gallon' => 'required|string',
                 // 'delivery_charges'          => 'required|string',
-                'tanker_amount'          => 'required|string',
+                'tanker_amount' => 'required|string',
                 // 'km'          => 'required|string',
                 // 'source'          => 'required|string',
                 // 'vehicle_no'          => 'required|string',
                 // 'driver_name'          => 'required|string',
                 // 'driver_phone'          => 'required|string',
                 // 'comment'          => 'required|string',
-                'status'          => 'required|string',
+                'status' => 'required|string',
 
             ]);
             DB::beginTransaction();
