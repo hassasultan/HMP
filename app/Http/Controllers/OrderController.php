@@ -48,9 +48,9 @@ class OrderController extends Controller
                 // $order = $order->whereHas('customer', function ($q) {
                 //     $q->where('standard', '!=', 'Commercial');
                 // });
-                $order = $order->whereHas('customer');
-                $customer = Customer::where('standard','!=', 'Commercial')->pluck('id');
-                $order = $order->whereIn('customer_id', $customer);
+                // $order = $order->whereHas('customer');
+                // $customer = Customer::where('standard','!=', 'Commercial')->pluck('id');
+                // $order = $order->whereIn('customer_id', $customer);
                 // $order = $order->orwhere('order_type','!=', 'Commercial');
 
             }
