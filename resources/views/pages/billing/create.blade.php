@@ -105,11 +105,11 @@
                                 @if ($order[0]->order_type == 'Commercial' || $order[0]->order_type == 'Dc quota')
                                     <div class="form-group col-12">
                                         <label>Area</label>
-                                        <select name="area_id" class="select2-multiple form-control fs-14  h-50px">
+                                        <select name="area_id" id="area-id" class="select2-multiple form-control fs-14  h-50px">
                                             <option selected disabled>-- Select Option --</option>
                                             @if ($order != null)
                                                 @foreach ($area as $col)
-                                                    <option value="{{ $col->id }}">{{ $col->name }} -
+                                                    <option value="{{ $col->id }}" data-price="{{ $col->extra_km }}">{{ $col->name }} -
                                                         {{ $col->block }} - {{ $col->sector }}</option>
                                                     {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                                 @endforeach
@@ -150,6 +150,15 @@
         $("#truck-type").change(function(){
             var price = $(this).attr('data-price');
             $("#tanker-amount").val(price);
+        });
+        $('#area-id').change(function() {
+            var selectedOption = $(this).find('option:selected');
+            var dataPrice = selectedOption.data('price');
+            console.log('Selected Price:', dataPrice);
+
+            // You can also use this value in other parts of your code
+            // Example: Update an input field with the selected price
+            // $('#price-input').val(dataPrice);
         });
         $("#checkbox").change(function() {
             if (this.checked == true) {
