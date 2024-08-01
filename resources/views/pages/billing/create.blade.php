@@ -101,7 +101,7 @@
                                     @endif
                                 </select>
                             </div>
-                            @if (count($order == 1))
+                            @if (count($order) == 1)
                                 @if ($order[0]->order_type == 'Commercial' || $order[0]->order_type == 'Dc quota')
                                     <div class="form-group col-12">
                                         <label>Area</label>
