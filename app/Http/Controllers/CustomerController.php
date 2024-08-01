@@ -23,7 +23,7 @@ class CustomerController extends Controller
             $customer = $customer->get();
             return $customer;
         }
-        $customer = $customer->paginate(20);
+        $customer = $customer->paginate(10);
         return view('pages.customer.index', compact('customer'));
     }
     public function search(Request $request)
