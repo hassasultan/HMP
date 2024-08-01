@@ -6,7 +6,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RegTrucksController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AreaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,6 +84,10 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
             Route::post('store/truck', [App\Http\Controllers\HomeController::class, 'truckStore'])->name('truck.store');
             Route::get('edit/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckEdit'])->name('truck.edit');
             Route::post('update/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckUpdate'])->name('truck.update');
+
+
+            //Areas
+            Route::resource('areas', AreaController::class);
         });
         Route::get('get/role/to/assign/{id}', [App\Http\Controllers\UserController::class, 'get_role_assign'])->name('get.assign.role.users');
         Route::post('assign/role/{id}', [App\Http\Controllers\UserController::class, 'role_assign'])->name('assign.role.users');
