@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\MyDataExport;
 use App\Models\Billings;
+use App\Models\Area;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\Truck_type;
@@ -459,8 +460,9 @@ class OrderController extends Controller
         } else {
             $driver = Driver::all();
         }
+        $area = Area::all();
         // dd($order->toArray());
-        return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type'));
+        return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type','area'));
     }
     public function billingedit($id)
     {

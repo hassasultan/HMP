@@ -13,11 +13,16 @@ class Billings extends Model
         'order_id',
         'truck_id',
         'driver_id',
+        'area_id',
         'amount',
         'km_amount',
         'status',
         'cancle_reason'
     ];
+    public function area()
+    {
+        return $this->belongsTo(Area::class,'area_id');
+    }
     public function order()
     {
         return $this->belongsTo(Orders::class,'order_id');
