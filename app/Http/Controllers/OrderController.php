@@ -306,7 +306,7 @@ class OrderController extends Controller
                     $truck_type->hydrant_id = $request->hydrant_id;
                 }
                 $truck_type->Order_Number = $id;
-                $truck_type->customer_id = $row;
+                $truck_type->customer_id = $cust->id;
                 $truck_type->save();
             }
         }
