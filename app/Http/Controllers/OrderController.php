@@ -313,6 +313,9 @@ class OrderController extends Controller
         if ($request->has('ots')) {
             return redirect()->route('billing.create', $new_order->id);
         }
+        if ($request->has('new_cutomer')) {
+            return redirect()->route('billing.create', $new_order->id);
+        }
         if (auth()->user()->role != 1) {
             return redirect()->back();
         } else {
