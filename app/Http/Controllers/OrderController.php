@@ -314,7 +314,7 @@ class OrderController extends Controller
             return redirect()->route('billing.create', $new_order->id);
         }
         if ($request->has('new_cutomer')) {
-            return redirect()->route('billing.create', $new_order->id);
+            return redirect()->route('billing.create', $truck_type->id);
         }
         if (auth()->user()->role != 1) {
             return redirect()->back();
