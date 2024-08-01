@@ -136,7 +136,7 @@ class OrderController extends Controller
         else 
         {
             if ($request->has('new_cutomer') && $request->new_cutomer == "1") {
-                $cust = Customer::where('customer_num', $request->customer_num)->first();
+                $cust = Customer::where('contact_num', $request->customer_num)->first();
                 if (empty($cust)) {
                     $cust = new Customer();
                     $cust->name = $request->name;
