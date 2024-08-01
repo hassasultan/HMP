@@ -224,7 +224,7 @@ class OrderController extends Controller
         {
             if($request->has('customer_id'))
             {
-        dd($request->all());
+        // dd($request->all());
 
                 foreach ($request->customer_id as $row) {
                     $letter = explode(' ', $request->order_type);
