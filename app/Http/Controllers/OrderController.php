@@ -114,7 +114,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         # code...
-        dd($request->all());
         if ($request->has('ots')) {
             $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
@@ -146,7 +145,7 @@ class OrderController extends Controller
                 }
 
             } else {
-                $cust = Customer::find($request->customer_id);
+                $cust = Customer::get($request->customer_id);
             }
         }
         if ($request->has('ots')) {
@@ -224,6 +223,8 @@ class OrderController extends Controller
         {
             if($request->has('customer_id'))
             {
+        dd($request->all());
+
                 foreach ($request->customer_id as $row) {
                     $letter = explode(' ', $request->order_type);
                     $NEW_ORDER = Orders::latest()->first();
