@@ -51,7 +51,7 @@ class OrderController extends Controller
                 // $order = $order->whereHas('customer');
                 // $customer = Customer::where('standard','!=', 'Commercial')->pluck('id');
                 // $order = $order->whereIn('customer_id', $customer);
-                $order = $order->where('order_type','!=', 'Commercial');
+                $order = $order->where('order_type', '!=', 'Commercial');
 
             }
         }
@@ -113,7 +113,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         # code...
-        // dd($request->all());
+        dd($request->all());
         if ($request->has('ots')) {
             $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
@@ -132,8 +132,21 @@ class OrderController extends Controller
                 }
                 $cust->save();
             }
-        } else {
-            $cust = Customer::find($request->customer_id);
+        } 
+        else 
+        {
+            if ($request->has('new_cutomer') && $request->new_cutomer == "1") {
+                $cust = Customer::where('contact_num', $request->contact_num)->first();
+                if (empty($cust)) {
+                    $cust = new Customer();
+                    $cust->name = $request->name;
+                    $cust->contact_num = $request->contact_num;
+                    $cust->save();
+                }
+
+            } else {
+                $cust = Customer::find($request->customer_id);
+            }
         }
         if ($request->has('ots')) {
             $ord_check = Orders::where('Order_Number', $request->Order_Number)->count();
@@ -176,20 +189,22 @@ class OrderController extends Controller
                     $driver_phone = "none";
 
                     $curl = curl_init();
-                    curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $new_order->Order_Number . '/update',
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
-                        CURLOPT_HTTPHEADER => array(
-                            'Accept: application/json'
-                        ),
-                    )
+                    curl_setopt_array(
+                        $curl,
+                        array(
+                            CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $new_order->Order_Number . '/update',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
+                            CURLOPT_HTTPHEADER => array(
+                                    'Accept: application/json'
+                                ),
+                        )
                     );
 
                     $response = curl_exec($curl);
@@ -203,8 +218,56 @@ class OrderController extends Controller
             } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
             }
-        } else {
-            foreach ($request->customer_id as $row) {
+        } 
+        else 
+        {
+            if($request->has('customer_id'))
+            {
+                foreach ($request->customer_id as $row) {
+                    $letter = explode(' ', $request->order_type);
+                    $NEW_ORDER = Orders::latest()->first();
+                    $now = Carbon::now();
+                    $formatted_date = $now->format("YmdHis") . round($now->format("u") / 1000);
+                    if (empty($NEW_ORDER)) {
+                        $expNum[1] = 0;
+                    } else {
+                        $expNum = explode('-', $NEW_ORDER->Order_Number);
+                    }
+                    if (isset($expNum[1])) {
+                        if (isset($letter[1])) {
+                            $id = strtoupper($letter[1]) . '-' . $formatted_date;
+                        } else {
+                            $id = strtoupper($letter[0]) . '-' . $formatted_date;
+                        }
+                    } else {
+                        if (isset($letter[1])) {
+                            $id = strtoupper($letter[1]) . '-' . $formatted_date;
+                        } else {
+                            $id = strtoupper($letter[0]) . '-' . $formatted_date;
+                        }
+                    }
+                    // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
+    
+                    // dd($id);
+                    $request['Order_Number'] = $id;
+    
+                    //output: INV-000001
+                    $data = $request->all();
+                    $data['customer_id'] = $row;
+                    $truck_type = Orders::create($data);
+                    // dd($truck_type);
+                    if (auth()->user()->role != 1) {
+                        $truck_type->hydrant_id = auth()->user()->hydrant->id;
+                    } else {
+                        $truck_type->hydrant_id = $request->hydrant_id;
+                    }
+                    $truck_type->Order_Number = $id;
+                    $truck_type->customer_id = $row;
+                    $truck_type->save();
+                }
+            }
+            else
+            {
                 $letter = explode(' ', $request->order_type);
                 $NEW_ORDER = Orders::latest()->first();
                 $now = Carbon::now();
@@ -234,7 +297,7 @@ class OrderController extends Controller
 
                 //output: INV-000001
                 $data = $request->all();
-                $data['customer_id'] = $row;
+                $data['customer_id'] = $cust->id;
                 $truck_type = Orders::create($data);
                 // dd($truck_type);
                 if (auth()->user()->role != 1) {
@@ -275,7 +338,7 @@ class OrderController extends Controller
                 //     $q->where('standard', 'Commercial');
                 // });
                 $customer = Customer::where('standard', 'Commercial')->pluck('id');
-                $billing = $billing->whereHas('order',function ($q) use ($customer) {
+                $billing = $billing->whereHas('order', function ($q) use ($customer) {
                     $q->whereIn('customer_id', $customer);
                 });
                 // $order = $billing->whereIn('customer_id', $customer);
@@ -287,8 +350,8 @@ class OrderController extends Controller
                 // $billing = $billing->whereHas('order',function ($q) use ($customer) {
                 //     $q->whereIn('customer_id', $customer);
                 // });
-                $billing = $billing->whereHas('order',function ($q) {
-                    $q->where('order_type','!=','Commercial');
+                $billing = $billing->whereHas('order', function ($q) {
+                    $q->where('order_type', '!=', 'Commercial');
                 });
             }
         }
@@ -474,20 +537,22 @@ class OrderController extends Controller
         $driver = Driver::find($billing->driver_id);
         if ($order->delivery_charges != NULL || $order->distance_kms != NULL) {
             $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->km_amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
-                CURLOPT_HTTPHEADER => array(
+            curl_setopt_array(
+                $curl,
+                array(
+                    CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $order->Order_Number . '/update',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array('status' => 2, 'state' => 'dispatched', 'amount' => $billing->km_amount, 'vehicle_no' => $truck->truck_num, 'driver_phone' => $driver->phone, 'note' => '', 'driver_name' => $driver->name),
+                    CURLOPT_HTTPHEADER => array(
                         'Accept: application/json'
                     ),
-            )
+                )
             );
 
             $response = curl_exec($curl);
@@ -574,20 +639,22 @@ class OrderController extends Controller
                 }
             }
             $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $billing->order->Order_Number . '/update',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
-                CURLOPT_HTTPHEADER => array(
+            curl_setopt_array(
+                $curl,
+                array(
+                    CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $billing->order->Order_Number . '/update',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
+                    CURLOPT_HTTPHEADER => array(
                         'Accept: application/json'
                     ),
-            )
+                )
             );
 
             $response = curl_exec($curl);
@@ -679,20 +746,22 @@ class OrderController extends Controller
                     $driver_phone = $billing->driver->phone;
                 }
                 $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $billing->order->Order_Number . '/update',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
-                    CURLOPT_HTTPHEADER => array(
+                curl_setopt_array(
+                    $curl,
+                    array(
+                        CURLOPT_URL => 'https://kwsb.crdc.biz/api/v1/order/' . $billing->order->Order_Number . '/update',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array('status' => $status, 'state' => $state, 'amount' => $amount, 'vehicle_no' => $vehicle_no, 'driver_phone' => $driver_phone, 'note' => $note, 'driver_name' => $driver_name),
+                        CURLOPT_HTTPHEADER => array(
                             'Accept: application/json'
                         ),
-                )
+                    )
                 );
 
                 $response = curl_exec($curl);

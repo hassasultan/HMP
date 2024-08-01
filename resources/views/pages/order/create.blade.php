@@ -29,6 +29,35 @@
                                 </select>
                             </div>
                             <div class="form-group col-12">
+                                <label>Order Type</label>
+                                <select name="order_type" class="select2-multiple form-control fs-14  h-50px" required id="order-type">
+                                    @if (auth()->user()->role == 2)
+                                        <option value="Online (GPS)">Online (GPS)</option>
+                                        @if (auth()->user()->type == 'commercial')
+                                            <option value="Commercial">Commercial</option>
+                                        @else
+                                            <option value="Gps(billing)">Gps ( billing )</option>
+                                            <option value="Gps(careoff)">Gps ( care off )</option>
+                                            {{-- <option value="GRATIS">GRATIS</option> --}}
+                                            <option value="Pak rangers">Pak rangers</option>
+                                            <option value="P.A.F korangi creek">P.A.F korangi creek</option>
+                                            <option value="Dc quota">Dc quota</option>
+                                            <option value="Govt. vehicle">Govt. vehicle</option>
+                                        @endif
+                                    @else
+                                        <option value="Online (GPS)">Online (GPS)</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Gps(billing)">Gps ( billing )</option>
+                                        <option value="Gps(careoff)">Gps ( care off )</option>
+                                        {{-- <option value="GRATIS">GRATIS</option> --}}
+                                        <option value="Pak rangers">Pak rangers</option>
+                                        <option value="P.A.F korangi creek">P.A.F korangi creek</option>
+                                        <option value="Dc quota">Dc quota</option>
+                                        <option value="Govt. vehicle">Govt. vehicle</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
                                 <label>Customers</label>
                                 <select name="customer_id[]" class=" form-control fs-14  h-50px"
                                     id="get-customer" required multiple>
@@ -38,6 +67,22 @@
                                     {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                     {{-- @endforeach --}}
                                 </select>
+                                <label>New Customer</label>
+                                <input type="checkbox" name="new_cutomer" value="1" id="new-customer" disabled/>
+                            </div>
+                            <div class="d-none" id="cust-div">
+                                <div class="form-group col-12">
+                                    <label>Customer Name</label>
+                                    <input type="tel" class="form-control border-bottom"
+                                        placeholder="Enter Customer Name..." name="name"
+                                        value="{{ old('name') }}" />
+                                </div>
+                                <div class="form-group col-12">
+                                    <label>Customer Phone</label>
+                                    <input type="tel" class="form-control border-bottom"
+                                        placeholder="Enter Customer  Phone Number..." name="contact_num"
+                                        value="{{ old('contact_num') }}" />
+                                </div>
                             </div>
                             @if (auth()->user()->role == 1)
                                 <div class="form-group col-12">
@@ -50,35 +95,7 @@
                                     </select>
                                 </div>
                             @endif
-                            <div class="form-group col-12">
-                                <label>Order Type</label>
-                                <select name="order_type" class="select2-multiple form-control fs-14  h-50px" required>
-                                    @if (auth()->user()->role == 2)
-                                        @if (auth()->user()->type == 'commercial')
-                                            <option value="Commercial">Commercial</option>
-                                        @else
-                                            <option value="Online (GPS)">Online (GPS)</option>
-                                            <option value="Gps(billing)">Gps ( billing )</option>
-                                            <option value="Gps(careoff)">Gps ( care off )</option>
-                                            {{-- <option value="GRATIS">GRATIS</option> --}}
-                                            <option value="Pak rangers">Pak rangers</option>
-                                            <option value="P.A.F korangi creek">P.A.F korangi creek</option>
-                                            <option value="Dc quota">Dc quota</option>
-                                            <option value="Govt. vehicle">Govt. vehicle</option>
-                                        @endif
-                                    @else
-                                        <option value="Commercial">Commercial</option>
-                                        <option value="Online (GPS)">Online (GPS)</option>
-                                        <option value="Gps(billing)">Gps ( billing )</option>
-                                        <option value="Gps(careoff)">Gps ( care off )</option>
-                                        {{-- <option value="GRATIS">GRATIS</option> --}}
-                                        <option value="Pak rangers">Pak rangers</option>
-                                        <option value="P.A.F korangi creek">P.A.F korangi creek</option>
-                                        <option value="Dc quota">Dc quota</option>
-                                        <option value="Govt. vehicle">Govt. vehicle</option>
-                                    @endif
-                                </select>
-                            </div>
+
                             <div class="form-group col-12">
                                 <label>Customer Alternate Phone</label>
                                 <input type="tel" class="form-control border-bottom"
@@ -133,6 +150,33 @@
             function formatCustomerSelection(customer) {
                 return customer.text || customer.id;
             }
+
+            $("#order-type").change(function(){
+                var value  = $(this).val();
+                if(value == "Commercial" || value == "Dc quota")
+                {
+                    $("#new-customer").attr('disabled',false);
+                }
+                else
+                {
+                    $("#new-customer").attr('disabled',true);
+                }
+            });
+
+            $("#new-customer").change(function() {
+                if ($(this).is(':checked')) {
+                    $("#get-customer").attr('disabled', true);
+                    $("#cust-div").removeClass('d-none');
+                    $("#cust-div input").attr('required', 'required');
+                    $("#get-customer").removeAttr('required');
+                } else {
+                    $("#get-customer").attr('disabled', false);
+                    $("#cust-div").addClass('d-none');
+                    $("#cust-div input").removeAttr('required');
+                    $("#get-customer").attr('required', 'required');
+                }
+            });
+
         });
     </script>
 
