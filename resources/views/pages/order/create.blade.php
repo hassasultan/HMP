@@ -80,8 +80,8 @@
                                 <div class="form-group col-12">
                                     <label>Customer Phone</label>
                                     <input type="tel" class="form-control border-bottom"
-                                        placeholder="Enter Customer  Phone Number..." name="contact_num"
-                                        value="{{ old('contact_num') }}" />
+                                        placeholder="Enter Customer  Phone Number..." name="customer_num"
+                                        value="{{ old('customer_num') }}" />
                                 </div>
                             </div>
                             @if (auth()->user()->role == 1)

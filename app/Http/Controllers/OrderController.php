@@ -113,7 +113,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         # code...
-        // dd($request->all());
+        dd($request->all());
         if ($request->has('ots')) {
             $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
@@ -136,11 +136,11 @@ class OrderController extends Controller
         else 
         {
             if ($request->has('new_cutomer') && $request->new_cutomer == "1") {
-                $cust = Customer::where('contact_num', $request->contact_num)->first();
+                $cust = Customer::where('customer_num', $request->customer_num)->first();
                 if (empty($cust)) {
                     $cust = new Customer();
                     $cust->name = $request->name;
-                    $cust->contact_num = $request->contact_num;
+                    $cust->contact_num = $request->customer_num;
                     $cust->save();
                 }
 
