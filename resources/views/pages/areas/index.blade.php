@@ -24,6 +24,8 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hydrant</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Block</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sector</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total KM</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Extra KM</th>
                   <th class="text-secondary opacity-7"></th>
@@ -42,6 +44,12 @@
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $area->name }}</p>
+                            </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $area->block }}</p>
+                            </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $area->sector }}</p>
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $area->total_km }}</p>
