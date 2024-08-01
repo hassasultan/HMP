@@ -128,7 +128,7 @@
                             <div class="form-group col-12">
                                 <label>Extra Km Price</label>
                                 <input type="number" class="form-control border-bottom" placeholder="Enter KM Price..."
-                                    name="km_amount" value="{{ $order[0]->delivery_charges }}" required />
+                                    name="km_amount" value="{{ $order[0]->delivery_charges }}" id="km-amount" required />
 
                             </div>
                             <div class="text-center">
@@ -148,17 +148,22 @@
             $("#truck-type").trigger('change');
         });
         $("#truck-type").change(function(){
-            var price = $(this).attr('data-price');
+            var selectedOption = $(this).find('option:selected');
+            var price = selectedOption.data('price');
             $("#tanker-amount").val(price);
         });
         $('#area-id').change(function() {
             var selectedOption = $(this).find('option:selected');
-            var dataPrice = selectedOption.data('price');
-            console.log('Selected Price:', dataPrice);
+            var km = selectedOption.data('price');
+            console.log('Selected km:', km);
+            var truckTypeSelectedOption = $("#truck-type").find('option:selected');
+            var price = truckTypeSelectedOption.data('price');
+            var kmPrice = km * price;
+
 
             // You can also use this value in other parts of your code
             // Example: Update an input field with the selected price
-            // $('#price-input').val(dataPrice);
+            $('#km-amount').val(kmPrice);
         });
         $("#checkbox").change(function() {
             if (this.checked == true) {
