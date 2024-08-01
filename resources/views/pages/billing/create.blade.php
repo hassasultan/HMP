@@ -89,12 +89,12 @@
                             {{-- {{ dd($order) }} --}}
                             <div class="form-group col-12">
                                 <label>Gallon</label>
-                                <select name="turck_type" class="select2-multiple form-control fs-14  h-50px" required>
+                                <select name="turck_type" class="select2-multiple form-control fs-14  h-50px" id="truck-type" required>
                                     <option selected disabled>-- Select Option --</option>
                                     @if ($order != null)
                                         @foreach ($vehicle_type as $col)
                                             <option value="{{ $col->id }}"
-                                                @if ($order[0]->truck_type == $col->id) selected @endif>{{ $col->name }}
+                                                @if ($order[0]->truck_type == $col->id) selected @endif data-price = "{{ $col->price }}">{{ $col->name }}
                                             </option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                         @endforeach
@@ -121,7 +121,7 @@
                             <div class="form-group col-12">
                                 <label>Tanker Amount</label>
                                 <input type="number" class="form-control border-bottom"
-                                    placeholder="Enter Tanker Amount..." name="amount"
+                                    placeholder="Enter Tanker Amount..." name="amount" id="tanker-amount"
                                     value="{{ $order[0]->tanker_charges }}" required />
 
                             </div>
@@ -144,6 +144,13 @@
     </div>
 
     <script>
+        $(document).get('ready',function(){
+            $("#truck-type").trigger('change');
+        });
+        $("#truck-type").change(function(){
+            var price = $(this).attr('data-price');
+            $("#tanker-amount").val(price);
+        });
         $("#checkbox").change(function() {
             if (this.checked == true) {
                 $("#new-driver-div").removeClass('d-none');
