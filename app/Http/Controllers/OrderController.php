@@ -144,9 +144,10 @@ class OrderController extends Controller
                     $cust->save();
                 }
 
-            } else {
-                $cust = Customer::get($request->customer_id);
-            }
+            } 
+            // else {
+            //     $cust = Customer::get($request->customer_id);
+            // }
         }
         if ($request->has('ots')) {
             $ord_check = Orders::where('Order_Number', $request->Order_Number)->count();
