@@ -26,6 +26,16 @@
 
                     </div>
                     <div class="form-group col-12">
+                      <label>Price</label>
+                      <input type="number" class="form-control border-bottom" placeholder="Enter Truck Name..." name="price" value="{{ old('price',$truck_type->price) }}" required/>
+
+                  </div>
+                  <div class="form-group col-12">
+                      <label>Per KM Price</label>
+                      <input type="number" class="form-control border-bottom" placeholder="Enter Truck Name..." name="km_price" value="{{ old('km_price',$truck_type->km_price) }}" required/>
+
+                  </div>
+                    <div class="form-group col-12">
                         <label>Description</label>
                         <textarea class="form-control border-bottom" placeholder="Enter Description Here..." name="description" required>{{ $truck_type->description }}</textarea>
                     </div>

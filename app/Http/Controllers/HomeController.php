@@ -372,6 +372,8 @@ class HomeController extends Controller
         $truck_type = Truck_type::find($id);
         $truck_type->name = $request->name;
         $truck_type->description = $request->description;
+        $truck_type->price = $request->price;
+        $truck_type->km_price = $request->km_price;
         $truck_type->save();
         return redirect()->route('truck_type.list')->with('success', 'Record Updated successfully.');
     }

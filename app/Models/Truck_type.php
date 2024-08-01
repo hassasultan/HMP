@@ -12,5 +12,7 @@ class Truck_type extends Model
     protected $fillable = [
         'name',
         'description',
+        'price',
+        'km_price',
     ];
 }
