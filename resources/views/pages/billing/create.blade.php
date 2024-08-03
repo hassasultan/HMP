@@ -89,12 +89,15 @@
                             {{-- {{ dd($order) }} --}}
                             <div class="form-group col-12">
                                 <label>Gallon</label>
-                                <select name="turck_type" class="select2-multiple form-control fs-14  h-50px" id="truck-type" required>
+                                <select name="turck_type" class="select2-multiple form-control fs-14  h-50px"
+                                    id="truck-type" required>
                                     <option selected disabled>-- Select Option --</option>
                                     @if ($order != null)
                                         @foreach ($vehicle_type as $col)
                                             <option value="{{ $col->id }}"
-                                                @if ($order[0]->truck_type == $col->id) selected @endif data-price = "{{ $col->km_price }}" data-tanker="{{ $col->price }}">{{ $col->name }}
+                                                @if ($order[0]->truck_type == $col->id) selected @endif
+                                                data-price = "{{ $col->km_price }}" data-tanker="{{ $col->price }}">
+                                                {{ $col->name }}
                                             </option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                         @endforeach
@@ -105,11 +108,13 @@
                                 @if ($order[0]->order_type == 'Commercial' || $order[0]->order_type == 'Dc quota')
                                     <div class="form-group col-12">
                                         <label>Area</label>
-                                        <select name="area_id" id="area-id" class="select2-multiple form-control fs-14  h-50px">
+                                        <select name="area_id" id="area-id"
+                                            class="select2-multiple form-control fs-14  h-50px">
                                             <option selected disabled>-- Select Option --</option>
                                             @if ($order != null)
                                                 @foreach ($area as $col)
-                                                    <option value="{{ $col->id }}" data-price="{{ $col->extra_km }}">{{ $col->name }} -
+                                                    <option value="{{ $col->id }}" data-price="{{ $col->extra_km }}">
+                                                        {{ $col->name }} -
                                                         {{ $col->block }} - {{ $col->sector }}</option>
                                                     {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                                 @endforeach
@@ -118,19 +123,53 @@
                                     </div>
                                 @endif
                             @endif
-                            <div class="form-group col-12">
-                                <label>Tanker Amount</label>
-                                <input type="number" class="form-control border-bottom"
-                                    placeholder="Enter Tanker Amount..." name="amount" id="tanker-amount"
-                                    value="{{ $order[0]->tanker_charges }}" required />
+                            @if (count($order) == 1)
+                                @if ($order[0]->order_type == 'Commercial')
+                                    <div class="form-group col-12">
+                                        <label>Tanker Amount</label>
+                                        <input type="number" class="form-control border-bottom"
+                                            placeholder="Enter Tanker Amount..." name="amount" id="tanker-amount"
+                                            value="{{ $order[0]->tanker_charges }}" required />
 
-                            </div>
-                            <div class="form-group col-12">
-                                <label>Extra Km Price</label>
-                                <input type="number" class="form-control border-bottom" placeholder="Enter KM Price..."
-                                    name="km_amount" value="{{ $order[0]->delivery_charges }}" id="km-amount" required />
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Extra Km Price</label>
+                                        <input type="number" class="form-control border-bottom"
+                                            placeholder="Enter KM Price..." name="km_amount"
+                                            value="{{ $order[0]->delivery_charges }}" id="km-amount" required />
 
-                            </div>
+                                    </div>
+                                @else
+                                    <div class="form-group col-12">
+                                        <label>Tanker Amount</label>
+                                        <input type="number" class="form-control border-bottom"
+                                            placeholder="Enter Tanker Amount..." name="amount"
+                                            value="{{ $order[0]->tanker_charges }}" required />
+
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Extra Km Price</label>
+                                        <input type="number" class="form-control border-bottom"
+                                            placeholder="Enter KM Price..." name="km_amount"
+                                            value="{{ $order[0]->delivery_charges }}" required />
+
+                                    </div>
+                                @endif
+                            @else
+                                <div class="form-group col-12">
+                                    <label>Tanker Amount</label>
+                                    <input type="number" class="form-control border-bottom"
+                                        placeholder="Enter Tanker Amount..." name="amount"
+                                        value="{{ $order[0]->tanker_charges }}" required />
+
+                                </div>
+                                <div class="form-group col-12">
+                                    <label>Extra Km Price</label>
+                                    <input type="number" class="form-control border-bottom" placeholder="Enter KM Price..."
+                                        name="km_amount" value="{{ $order[0]->delivery_charges }}" required />
+
+                                </div>
+                            @endif
                             <div class="text-center">
                                 <button type="submit"
                                     class="btn btn-lg bg-gradient-primary btn-lg w-20 mt-4 mb-0">Create</button>
@@ -146,15 +185,15 @@
     <script>
         $(document).ready(function() {
             // $("#truck-type").trigger('change');
-            
+
             // $("#truck-type").change(function(){
-                var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
-                var priceTanker = truckTypeTankerSelectedOption.data('tanker');
-                console.log(priceTanker);
-                $("#tanker-amount").val(priceTanker);
+            var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
+            var priceTanker = truckTypeTankerSelectedOption.data('tanker');
+            console.log(priceTanker);
+            $("#tanker-amount").val(priceTanker);
             // });
 
-            $("#truck-type").change(function(){
+            $("#truck-type").change(function() {
                 var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
                 var priceTanker = truckTypeTankerSelectedOption.data('tanker');
                 console.log(priceTanker);
@@ -163,7 +202,7 @@
             });
 
         });
-        
+
         $('#area-id').change(function() {
             var selectedOption = $(this).find('option:selected');
             var km = selectedOption.data('price');
