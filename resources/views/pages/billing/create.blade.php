@@ -144,7 +144,7 @@
     </div>
 
     <script>
-        $(document).get('ready',function(){
+        $(document).ready(function() {
             // $("#truck-type").trigger('change');
             
             // $("#truck-type").change(function(){
