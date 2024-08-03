@@ -94,7 +94,7 @@
                                     @if ($order != null)
                                         @foreach ($vehicle_type as $col)
                                             <option value="{{ $col->id }}"
-                                                @if ($order[0]->truck_type == $col->id) selected @endif data-price = "{{ $col->km_price }}" data-tanker="{{ $col->km_price }}">{{ $col->name }}
+                                                @if ($order[0]->truck_type == $col->id) selected @endif data-price = "{{ $col->km_price }}" data-tanker="{{ $col->price }}">{{ $col->name }}
                                             </option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                         @endforeach
@@ -146,9 +146,10 @@
     <script>
         $(document).get('ready',function(){
             $("#truck-type").trigger('change');
-            var truckTypeSelectedOption = $("#truck-type").find('option:selected');
-            var price = truckTypeSelectedOption.data('tanker');
-            $("#tanker-amount").val(price);
+            var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
+            var priceTanker = truckTypeTankerSelectedOption.data('tanker');
+            console.log(priceTanker);
+            $("#tanker-amount").val(priceTanker);
 
 
         });
