@@ -115,8 +115,12 @@
                     </div>
                     <div class="col-6">
                         <p class="font-weight-bold" style="line-height: 1.02 !important;">
-                            {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
-                            {{ $billing->order->customer->location }}</p>
+                            @if ($billing->order->order_type != 'Dc quota' && $billing->order->order_type != 'Commercial')
+                                {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
+                                {{ $billing->order->customer->location }}</p>
+                            @else
+                            {{ $billing->area->name}}
+                            @endif
                     </div>
 
                     <div class="col-6">
