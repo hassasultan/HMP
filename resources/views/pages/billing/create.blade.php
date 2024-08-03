@@ -154,8 +154,15 @@
                 $("#tanker-amount").val(priceTanker);
             // });
 
+            $("#truck-type").change(function(){
+                var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
+                var priceTanker = truckTypeTankerSelectedOption.data('tanker');
+                console.log(priceTanker);
+                $("#tanker-amount").val(priceTanker);
+            });
 
         });
+        
         $('#area-id').change(function() {
             var selectedOption = $(this).find('option:selected');
             var km = selectedOption.data('price');
