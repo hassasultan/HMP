@@ -495,7 +495,6 @@ class OrderController extends Controller
     public function billingstore(Request $request)
     {
         # code...
-        dd($request->all());
         $data = $request->all();
         $order = Orders::with('truck_type_fun')->find($request->order_id);
         if ($request->has('new_tanker')) {
@@ -532,6 +531,7 @@ class OrderController extends Controller
         $order->truck_type = $request->turck_type;
         $order->save();
         $data['status'] = 2;
+        dd($data);
         $billing = Billings::create($data);
         $regTruck = RegTrucks::where('truck_id', $truckId)->first();
         if (!empty($regTruck)) {
