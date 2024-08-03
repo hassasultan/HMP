@@ -159,6 +159,7 @@
                 var priceTanker = truckTypeTankerSelectedOption.data('tanker');
                 console.log(priceTanker);
                 $("#tanker-amount").val(priceTanker);
+                $("#area-id").trigger('change');
             });
 
         });
