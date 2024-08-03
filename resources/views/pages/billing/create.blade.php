@@ -145,14 +145,14 @@
 
     <script>
         $(document).get('ready',function(){
-            $("#truck-type").trigger('change');
+            // $("#truck-type").trigger('change');
             
-            $("#truck-type").change(function(){
+            // $("#truck-type").change(function(){
                 var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
                 var priceTanker = truckTypeTankerSelectedOption.data('tanker');
                 console.log(priceTanker);
                 $("#tanker-amount").val(priceTanker);
-            });
+            // });
 
 
         });
