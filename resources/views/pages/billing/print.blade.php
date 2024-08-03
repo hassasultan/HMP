@@ -222,7 +222,7 @@
                     </div>
                     <div class="col-12  text-center pt-4">
                         <p style="line-height: 1.2 !important">if any Complaint/Query Contact Service Care on Phone
-                            99245138 - 99245140. www.kwsb.gos.pk</p>
+                            99245138 - 99245140. www.kwsc.gos.pk</p>
                     </div>
                 </div>
             </div>
