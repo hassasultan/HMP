@@ -167,7 +167,7 @@
         $('#area-id').change(function() {
             var selectedOption = $(this).find('option:selected');
             var km = selectedOption.data('price');
-            console.log('Selected km:', km);
+            // console.log('Selected km:', km);
             var truckTypeSelectedOption = $("#truck-type").find('option:selected');
             var price = truckTypeSelectedOption.data('price');
             var kmPrice = km * price;
