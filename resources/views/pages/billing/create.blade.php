@@ -146,17 +146,15 @@
     <script>
         $(document).get('ready',function(){
             $("#truck-type").trigger('change');
-            var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
-            var priceTanker = truckTypeTankerSelectedOption.data('tanker');
-            console.log(priceTanker);
-            $("#tanker-amount").val(priceTanker);
+            
+            $("#truck-type").change(function(){
+                var truckTypeTankerSelectedOption = $("#truck-type").find('option:selected');
+                var priceTanker = truckTypeTankerSelectedOption.data('tanker');
+                console.log(priceTanker);
+                $("#tanker-amount").val(priceTanker);
+            });
 
 
-        });
-        $("#truck-type").change(function(){
-            var selectedOption = $(this).find('option:selected');
-            var price = selectedOption.data('price');
-            $("#tanker-amount").val(price);
         });
         $('#area-id').change(function() {
             var selectedOption = $(this).find('option:selected');
