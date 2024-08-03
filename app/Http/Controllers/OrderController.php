@@ -495,7 +495,7 @@ class OrderController extends Controller
     public function billingstore(Request $request)
     {
         # code...
-        // dd($request->all());
+        dd($request->all());
         $data = $request->all();
         $order = Orders::with('truck_type_fun')->find($request->order_id);
         if ($request->has('new_tanker')) {
