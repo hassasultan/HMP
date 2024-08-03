@@ -94,7 +94,7 @@
                                     @if ($order != null)
                                         @foreach ($vehicle_type as $col)
                                             <option value="{{ $col->id }}"
-                                                @if ($order[0]->truck_type == $col->id) selected @endif data-price = "{{ $col->price }}">{{ $col->name }}
+                                                @if ($order[0]->truck_type == $col->id) selected @endif data-price = "{{ $col->km_price }}">{{ $col->name }}
                                             </option>
                                             {{-- <option value="{{ $col->number }}">{{ $col->name }}</option> --}}
                                         @endforeach
