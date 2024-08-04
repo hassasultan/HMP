@@ -105,11 +105,11 @@
                                 </select>
                             </div>
                             @if (count($order) == 1)
-                                @if ($order[0]->order_type == 'Commercial' || $order[0]->order_type == 'Dc quota')
+                                @if ($order[0]->order_type == 'Commercial')
                                     <div class="form-group col-12">
                                         <label>Area</label>
                                         <select name="area_id" id="area-id"
-                                            class="select2-multiple form-control fs-14  h-50px">
+                                            class="select2-multiple form-control fs-14  h-50px" required>
                                             <option selected disabled>-- Select Option --</option>
                                             @if ($order != null)
                                                 @foreach ($area as $col)
