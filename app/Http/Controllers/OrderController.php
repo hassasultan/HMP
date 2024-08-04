@@ -531,7 +531,7 @@ class OrderController extends Controller
         $order->truck_type = $request->turck_type;
         $order->save();
         $data['status'] = 2;
-        // dd($data);
+        dd($data);
         $billing = Billings::create($data);
         $regTruck = RegTrucks::where('truck_id', $truckId)->first();
         if (!empty($regTruck)) {
