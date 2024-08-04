@@ -225,7 +225,6 @@ class OrderController extends Controller
         {
             if($request->has('customer_id'))
             {
-                dd($request->all());
 
                 foreach ($request->customer_id as $row) {
                     $letter = explode(' ', $request->order_type);
@@ -252,7 +251,7 @@ class OrderController extends Controller
                     }
                     // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
     
-                    // dd($id);
+                    dd($id);
                     $request['Order_Number'] = $id;
     
                     //output: INV-000001
