@@ -153,7 +153,7 @@
 
             $("#order-type").change(function(){
                 var value  = $(this).val();
-                if(value == "Commercial" || value == "Dc quota")
+                if(value == "Commercial")
                 {
                     $("#new-customer").attr('disabled',false);
                 }
