@@ -251,7 +251,7 @@ class OrderController extends Controller
                     }
                     // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
     
-                    dd($id);
+                    // dd($id);
                     $request['Order_Number'] = $id;
     
                     //output: INV-000001
@@ -316,7 +316,7 @@ class OrderController extends Controller
         if ($request->has('ots')) {
             return redirect()->route('billing.create', $new_order->id);
         }
-        if ($request->has('new_cutomer')) {
+        if ($request->order_type == "Commercial" || $request->order_type == "Dc quota") {
             return redirect()->route('billing.create', $truck_type->id);
         }
         if (auth()->user()->role != 1) {
