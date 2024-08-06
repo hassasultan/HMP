@@ -447,8 +447,11 @@ class OrderController extends Controller
         $vehicle_type = Truck_type::all();
         if (auth()->user()->role != 1) {
             $order = Orders::doesntHave('billing')->where('hydrant_id', auth()->user()->hydrant->id)->where('id', $id)->get();
+            $area = Area::where('hydrant_id', auth()->user()->hydrant->id)->get();
         } else {
             $order = Orders::doesntHave('billing')->where('id', $id)->get();
+            $area = Area::all();
+
         }
         if (auth()->user()->role != 1) {
             $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by', 0)->get();
@@ -462,7 +465,6 @@ class OrderController extends Controller
         } else {
             $driver = Driver::all();
         }
-        $area = Area::all();
         // dd($order->toArray());
         return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type','area'));
     }
