@@ -435,7 +435,7 @@ class OrderController extends Controller
             {
                 $data = $billing->OrderBy('id', 'DESC')->get();
                 // dd($data->toArray());
-                return Excel::download(new BillExport($data), 'my-data.xlsx');
+                return Excel::download(new BillExport($data), 'Billing-data.xlsx');
             }
             else
             {
