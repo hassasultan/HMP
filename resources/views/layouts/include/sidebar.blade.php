@@ -20,7 +20,12 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white @if (Route::is('home') || Route::is('hydrant.home')) active  bg-gradient-primary @endif"
-                    href=" {{ route('home') }}">
+                    @if (auth()->user()->role == 1)
+                    href=" {{ route('home') }}"
+                    @else
+                    href=" {{ route('hydrant.home') }}"
+                    @endif
+                    >
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
