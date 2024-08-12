@@ -80,6 +80,8 @@ class OrderController extends Controller
                 $q->where('contact_num', $phone);
             });
         }
+
+        dd($order->OrderBy('id', 'DESC')->whereHas('billing')->get()->toArray());
         if ($request->has('report')) {
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             dd($data->toArray());
