@@ -4,10 +4,14 @@
     <div class="sidenav-header mb-3">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" {{ route('home') }}" target="_blank">
-            <img src="{{ asset('assets/img/unnamed.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">HMP</span>
-            <p class="text-white">Hydrant Management Portal</p>
+        @if (auth()->user()->role == 1)
+            <a class="navbar-brand m-0" href=" {{ route('home') }}" target="_blank">
+            @else
+                <a class="navbar-brand m-0" href=" {{ route('hydrant.home') }}" target="_blank">
+        @endif
+        <img src="{{ asset('assets/img/unnamed.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold text-white">HMP</span>
+        <p class="text-white">Hydrant Management Portal</p>
         </a>
 
     </div>
@@ -25,60 +29,60 @@
             </li>
             @if (auth()->user()->role == 1)
                 {{-- @role('Admin') --}}
-                    <li class="nav-item">
-                        <a class="nav-link text-white @if (Route::is('user-management.index')) active bg-gradient-primary @endif"
-                            href="{{ route('user-management.index') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">User Management</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white @if (Route::is('roles.index')) active bg-gradient-primary @endif"
-                            href="{{ route('roles.index') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Roles Management</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white @if (Route::is('permissions.index')) active bg-gradient-primary @endif"
-                            href="{{ route('permissions.index') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Permissions Management</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white @if (Route::is('register-truck.index')) active bg-gradient-primary @endif"
-                            href="{{ route('register-truck.index') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Register Trucks For Trcking</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white @if (Route::is('track.truck.list')) active bg-gradient-primary @endif"
-                            href="{{ route('track.truck.list') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Tracking Truck</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white @if (Route::is('areas.index')) active bg-gradient-primary @endif"
-                            href="{{ route('areas.index') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Areas</span>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('user-management.index')) active bg-gradient-primary @endif"
+                        href="{{ route('user-management.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">User Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('roles.index')) active bg-gradient-primary @endif"
+                        href="{{ route('roles.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Roles Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('permissions.index')) active bg-gradient-primary @endif"
+                        href="{{ route('permissions.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Permissions Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('register-truck.index')) active bg-gradient-primary @endif"
+                        href="{{ route('register-truck.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Register Trucks For Trcking</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('track.truck.list')) active bg-gradient-primary @endif"
+                        href="{{ route('track.truck.list') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Tracking Truck</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white @if (Route::is('areas.index')) active bg-gradient-primary @endif"
+                        href="{{ route('areas.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Areas</span>
+                    </a>
+                </li>
                 {{-- @endrole --}}
                 <li class="nav-item">
                     <a class="nav-link text-white @if (Route::is('truck_type.list')) active  bg-gradient-primary @endif"
