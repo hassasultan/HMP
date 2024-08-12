@@ -84,7 +84,7 @@ class OrderController extends Controller
         if ($request->has('hydrant_id') && $request->hydrant_id != '') {
             $order = $order->where('hydrant_id',$request->hydrant_id);
         }
-        // dd($order->OrderBy('id', 'DESC')->whereHas('billing')->get()->toArray());
+        dd($order->OrderBy('id', 'DESC')->get()->toArray());
         if ($request->has('report')) {
 
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
