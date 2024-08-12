@@ -144,6 +144,7 @@ class OrderController extends Controller
                     $cust = new Customer();
                     $cust->name = $request->name;
                     $cust->contact_num = $request->customer_num;
+                    $cust->user_id = auth()->user()->id;
                     $cust->save();
                 }
 
