@@ -81,7 +81,7 @@ class OrderController extends Controller
             });
         }
 
-        dd($order->OrderBy('id', 'DESC')->whereHas('billing')->get()->toArray());
+        // dd($order->OrderBy('id', 'DESC')->whereHas('billing')->get()->toArray());
         if ($request->has('report')) {
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             dd($data->toArray());
