@@ -41,11 +41,11 @@ class OrderController extends Controller
                 // $order = $order->whereHas('customer', function ($q) {
                 //     $q->where('standard', 'Commercial');
                 // });
-                $order = $order->whereHas('customer');
-                $customer = Customer::where('standard', 'Commercial')->pluck('id');
-                $order = $order->whereIn('customer_id', $customer);
+                // $order = $order->whereHas('customer');
+                // $customer = Customer::where('standard', 'Commercial')->pluck('id');
+                // $order = $order->whereIn('customer_id', $customer);
                 // dd($order->paginate('10')->toArray());
-                // $order = $order->where('order_type', 'Commercial');
+                $order = $order->where('order_type', 'Commercial');
                 // dd(auth()->user()->id);
                 // $order = $order->orwhere('order_type', 'Commercial');
 
@@ -67,7 +67,7 @@ class OrderController extends Controller
         if ($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '') {
             $order = $order->whereBetween('created_at', [$request->from_date.' 00:00:00', $request->to_date.' 00:00:00']);
         }
-        dd($order->OrderBy('id', 'DESC')->get()->toArray());
+        // dd($order->OrderBy('id', 'DESC')->get()->toArray());
 
         if ($request->has('order_type') && $request->order_type != '') {
             $order = $order->where('order_type', $request->order_type);
@@ -84,7 +84,7 @@ class OrderController extends Controller
         if ($request->has('hydrant_id') && $request->hydrant_id != '') {
             $order = $order->where('hydrant_id',$request->hydrant_id);
         }
-        dd($order->OrderBy('id', 'DESC')->get()->toArray());
+        // dd($order->OrderBy('id', 'DESC')->get()->toArray());
         if ($request->has('report')) {
 
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
