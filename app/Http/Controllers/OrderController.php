@@ -80,9 +80,12 @@ class OrderController extends Controller
                 $q->where('contact_num', $phone);
             });
         }
-
+        if ($request->has('hydrant_id') && $request->hydrant_id != '') {
+            $order = $order->where('hydrant_id',$request->hydrant_id);
+        }
         // dd($order->OrderBy('id', 'DESC')->whereHas('billing')->get()->toArray());
         if ($request->has('report')) {
+
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
             dd($data->toArray());
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
@@ -91,8 +94,9 @@ class OrderController extends Controller
             $page = $request->per_page;
         }
         $order = $order->OrderBy('id', 'DESC')->paginate($page);
+        $hydrant = Hydrants::all();
         // dd($order->toArray());
-        return view('pages.order.index', compact('order', 'vehicle_type'));
+        return view('pages.order.index', compact('order', 'vehicle_type','hydrant'));
     }
     public function reports()
     {

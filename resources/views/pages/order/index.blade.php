@@ -116,6 +116,18 @@
                                         @endif
                                     </select>
                                 </div>
+                                @if (auth()->user()->role == 1)
+                                    <div class="form-group col-3 p-3 mt-4">
+                                        <label>Hydrants</label>
+
+                                        <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px">
+                                            @foreach ($hydrant as $row)
+                                                <option value="{{ $row->id }}" @if (request()->get('hydrant_id') == $row->id) selected @endif>{{ $row->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="form-group col-3 p-3 mt-4">
                                     <label>Per Page Enteries</label>
 
