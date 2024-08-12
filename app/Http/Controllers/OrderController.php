@@ -65,7 +65,7 @@ class OrderController extends Controller
             $order = $order->where('truck_type', $request->vehicle_type);
         }
         if ($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '') {
-            $order = $order->whereBetween('created_at', [$request->from_date.'00:00:00', $request->to_date.'00:00:00']);
+            $order = $order->whereBetween('created_at', [$request->from_date.' 00:00:00', $request->to_date.' 00:00:00']);
         }
         // dd($order->OrderBy('id', 'DESC')->get()->toArray());
 
