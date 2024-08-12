@@ -133,11 +133,6 @@
                                 <div class="form-group col-3 p-3 mt-4">
                                     <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
                                 </div>
-                                <div class="form-group col-3 p-3 mt-4">
-                                    <input type="hidden" name="report" value="1" />
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3"
-                                            aria-hidden="true"></i> File</button>
-                                </div>
                             </div>
                             </form>
                         </div>
@@ -256,11 +251,6 @@
                             </div>
                             <div class="form-group col-3 p-3 mt-4">
                                 <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
-                            </div>
-                            <div class="form-group col-3 p-3 mt-4">
-                                <input type="hidden" name="report" value="1" />
-                                <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3"
-                                        aria-hidden="true"></i> File</button>
                             </div>
                         </div>
                         <input type="hidden" name="report" value="1" />
