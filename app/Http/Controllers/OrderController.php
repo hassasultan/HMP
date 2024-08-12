@@ -42,7 +42,7 @@ class OrderController extends Controller
                 // });
                 $order = $order->whereHas('customer');
                 $customer = Customer::where('standard', 'Commercial')->pluck('id');
-                dd($customer);
+                dd($customer->toArray());
                 $order = $order->whereIn('customer_id', $customer);
                 // $order = $order->orwhere('order_type', 'Commercial');
                 dd($order->get()->toArray());
