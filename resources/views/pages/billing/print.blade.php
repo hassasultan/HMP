@@ -119,7 +119,11 @@
                                 {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
                                 {{ $billing->order->customer->location }}</p>
                             @else
-                            {{ $billing->area->name}}
+                            @if (count($billing->area) > 0)
+                                    {{ $billing->area->name}}
+                                @else
+                                    Not Define
+                                @endif
                             @endif
                     </div>
 
@@ -291,7 +295,11 @@
                                 {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
                                 {{ $billing->order->customer->location }}
                             @else
-                            {{ $billing->area->name}}
+                            @if (count($billing->area) > 0)
+                                    {{ $billing->area->name}}
+                                @else
+                                    Not Define
+                                @endif
                             @endif
                         </p>
                     </div>
@@ -458,7 +466,11 @@
                                 {{ $billing->order->customer->address }} {{ $billing->order->customer->street }}
                                 {{ $billing->order->customer->location }}
                             @else
-                            {{ $billing->area->name}}
+                                @if (count($billing->area) > 0)
+                                    {{ $billing->area->name}}
+                                @else
+                                    Not Define
+                                @endif
                             @endif
                         </p>
                     </div>
