@@ -248,7 +248,20 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="form-group col-3 p-3 mt-4">
+                            @if (auth()->user()->role == 1)
+                                    <div class="form-group col-3 p-3">
+                                        <label>Hydrants</label>
+
+                                        <select name="hydrant_id" class="select2-multiple form-control fs-14  h-50px">
+                                            <option selected disabled>-- Select Hydrant --</option>
+                                            @foreach ($hydrant as $row)
+                                                <option value="{{ $row->id }}" @if (request()->get('hydrant_id') == $row->id) selected @endif>{{ $row->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                            <div class="form-group col-3 p-3">
                                 <label>Per Page Enteries</label>
 
                                 <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
