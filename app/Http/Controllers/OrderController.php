@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\MyDataExport;
+use App\Exports\BillExport;
 use App\Models\Billings;
 use App\Models\Area;
 use Illuminate\Http\Request;
@@ -413,11 +414,41 @@ class OrderController extends Controller
             //     $q->where('contact_num', $phone);
             // });
         }
+        if ($request->has('hydrant_id') && $request->hydrant_id != '') {
+            $hydrant = $request->hydrant_id;
+            $billing = $billing->whereHas('order', function ($query) use ($hydrant) {
+                $query->where('hydrant_id', $hydrant);
+            });
+        }
+        if ($request->has('report')) {
+            if(auth()->user()->role == 1)
+            {
+                if (!$request->has('hydrant_id') || $request->hydrant_id == '') {
+                    return redirect()->back()->withError("Hydrant, From Date, To Date & Order Type must be required...");
+                }
+        
+            }
+            if (!$request->has('order_type') || $request->order_type == '') {
+                return redirect()->back()->withError("Hydrant, From Date, To Date & Order Type must be required...");
+            }
+            if($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '')
+            {
+                $data = $billing->OrderBy('id', 'DESC')->get();
+                // dd($data->toArray());
+                return Excel::download(new BillExport($data), 'my-data.xlsx');
+            }
+            else
+            {
+                return redirect()->back()->withError("Hydrant, From Date, To Date & Order Type must be required...");
+            }
+        }
         if ($request->has('per_page')) {
             $page = $request->per_page;
         }
         $billing = $billing->OrderBy('id', 'DESC')->paginate($page);
-        return view('pages.billing.index', compact('billing', 'vehicle_type'));
+        $hydrant = Hydrants::all();
+
+        return view('pages.billing.index', compact('billing', 'vehicle_type','hydrant'));
     }
     public function truck_selection_list(Request $request)
     {

@@ -81,7 +81,7 @@
                                                     @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>Gps ( care off )
                                                 </option>
                                                 {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
-                                                    GRATIS</option> --}}
+                                                        GRATIS</option> --}}
                                                 <option value="Pak rangers"
                                                     @if (request()->get('order_type') == 'Pak rangers') selected @endif>Pak rangers</option>
                                                 <option value="P.A.F korangi creek"
@@ -104,7 +104,7 @@
                                                 @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>Gps ( care off )
                                             </option>
                                             {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
-                                                GRATIS</option> --}}
+                                                    GRATIS</option> --}}
                                             <option value="Pak rangers" @if (request()->get('order_type') == 'Pak rangers') selected @endif>
                                                 Pak rangers</option>
                                             <option value="P.A.F korangi creek"
@@ -134,16 +134,13 @@
                                     <label>Status</label>
                                     <select name="status" class="select2-multiple form-control fs-14  h-50px">
                                         <option value="" selected disabled> -- Select Status -- </option>
-                                        <option @if (request()->get('status') == 1) selected @endif
-                                            value='1' >
+                                        <option @if (request()->get('status') == 1) selected @endif value='1'>
                                             Completed</option>
-                                        <option @if (request()->get('status') == 2) selected @endif
-                                            value='2' >
+                                        <option @if (request()->get('status') == 2) selected @endif value='2'>
                                             Dispatch</option>
-                                        <option @if (request()->get('status') == 0 && request()->get('status') != null) selected @endif value='0' >
+                                        <option @if (request()->get('status') == 0 && request()->get('status') != null) selected @endif value='0'>
                                             Pending</option>
-                                        <option @if (request()->get('status') == 3) selected @endif
-                                            value='3'>
+                                        <option @if (request()->get('status') == 3) selected @endif value='3'>
                                             Cancelled</option>
                                     </select>
                                 </div>
@@ -153,6 +150,142 @@
                             </div>
                             </form>
                         </div>
+                    </div>
+                    <div class="col-md-6 p-2">
+                        @if (auth()->user()->role == 1)
+                            <form role="form" method="get" action="{{ route('billing.list') }}"
+                                enctype="multipart/form-data">
+                            @else
+                                <form role="form" method="get" action="{{ route('hydrant.billing.list') }}"
+                                    enctype="multipart/form-data">
+                        @endif
+
+                        <div class="row d-none">
+                            <div class="form-group col-3 p-3">
+                                <label>From Date</label>
+                                <input type="date" class="form-control border-bottom"
+                                    placeholder="Enter Customer Title..." name="from_date"
+                                    value="{{ request()->get('from_date') }}" />
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>To Date</label>
+                                <input type="date" class="form-control border-bottom"
+                                    placeholder="Enter Customer Title..." name="to_date"
+                                    value="{{ request()->get('to_date') }}" />
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>ORDER NUMBER</label>
+                                <input type="text" class="form-control border-bottom"
+                                    placeholder="Enter ORDER NUMBER..." name="order_num"
+                                    value="{{ request()->get('order_num') }}" />
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>Customer Phone</label>
+                                <input type="number" class="form-control border-bottom"
+                                    placeholder="Enter Customer Phone..." name="customer_phone"
+                                    value="{{ request()->get('customer_phone') }}" />
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>Vehicle Types</label>
+                                <select name="vehicle_type" class="select2-multiple form-control border-bottom">
+                                    <option disabled selected value="">-- Select Vehicle Type --</option>
+                                    @foreach ($vehicle_type as $row)
+                                        <option value="{{ $row->id }}"
+                                            @if (request()->get('vehicle_type') == $row->id) selected @endif>{{ $row->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>Order Type</label>
+                                <select name="order_type" class="select2-multiple form-control fs-14  h-50px">
+                                    <option disabled selected value="">-- Select Order Type --</option>
+
+                                    @if (auth()->user()->role == 2)
+                                        @if (auth()->user()->type == 'commercial')
+                                            <option value="Commercial" @if (request()->get('order_type') == 'Commercial') selected @endif>
+                                                Commercial</option>
+                                        @else
+                                            <option value="Online (GPS)"
+                                                @if (request()->get('order_type') == 'Online (GPS)') selected @endif>Online (GPS)</option>
+                                            <option value="Gps(billing)"
+                                                @if (request()->get('order_type') == 'Gps(billing)') selected @endif>Gps ( billing )
+                                            </option>
+                                            <option value="Gps(careoff)"
+                                                @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>Gps ( care off )
+                                            </option>
+                                            {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
+                                                        GRATIS</option> --}}
+                                            <option value="Pak rangers"
+                                                @if (request()->get('order_type') == 'Pak rangers') selected @endif>Pak rangers</option>
+                                            <option value="P.A.F korangi creek"
+                                                @if (request()->get('order_type') == 'P.A.F korangi creek') selected @endif>P.A.F korangi creek
+                                            </option>
+                                            <option value="Dc quota" @if (request()->get('order_type') == 'Dc quota') selected @endif>
+                                                Dc quota</option>
+                                            <option value="Govt. vehicle"
+                                                @if (request()->get('order_type') == 'Govt. vehicle') selected @endif>Govt. vehicle
+                                            </option>
+                                        @endif
+                                    @else
+                                        <option value="Commercial" @if (request()->get('order_type') == 'Commercial') selected @endif>
+                                            Commercial</option>
+                                        <option value="Online (GPS)" @if (request()->get('order_type') == 'Online (GPS)') selected @endif>
+                                            Online (GPS)</option>
+                                        <option value="Gps(billing)" @if (request()->get('order_type') == 'Gps(billing)') selected @endif>
+                                            Gps ( billing )</option>
+                                        <option value="Gps(careoff)" @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>
+                                            Gps ( care off )
+                                        </option>
+                                        {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>
+                                                    GRATIS</option> --}}
+                                        <option value="Pak rangers" @if (request()->get('order_type') == 'Pak rangers') selected @endif>
+                                            Pak rangers</option>
+                                        <option value="P.A.F korangi creek"
+                                            @if (request()->get('order_type') == 'P.A.F korangi creek') selected @endif>P.A.F korangi creek
+                                        </option>
+                                        <option value="Dc quota" @if (request()->get('order_type') == 'Dc quota') selected @endif>Dc
+                                            quota</option>
+                                        <option value="Govt. vehicle" @if (request()->get('order_type') == 'Govt. vehicle') selected @endif>
+                                            Govt. vehicle</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>Per Page Enteries</label>
+                                <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
+                                    <option value="20" @if (request()->get('per_page') == '20') selected @endif>20
+                                    </option>
+                                    <option value="50" @if (request()->get('per_page') == '50') selected @endif>50
+                                    </option>
+                                    <option value="100" @if (request()->get('per_page') == '100') selected @endif>100
+                                    </option>
+                                    <option value="200" @if (request()->get('per_page') == '200') selected @endif>200
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3 p-3">
+                                <label>Status</label>
+                                <select name="status" class="select2-multiple form-control fs-14  h-50px">
+                                    <option value="" selected disabled> -- Select Status -- </option>
+                                    <option @if (request()->get('status') == 1) selected @endif value='1'>
+                                        Completed</option>
+                                    <option @if (request()->get('status') == 2) selected @endif value='2'>
+                                        Dispatch</option>
+                                    <option @if (request()->get('status') == 0 && request()->get('status') != null) selected @endif value='0'>
+                                        Pending</option>
+                                    <option @if (request()->get('status') == 3) selected @endif value='3'>
+                                        Cancelled</option>
+                                </select>
+                            </div>
+                            {{-- <div class="form-group col-3 p-3 mt-4">
+                                        <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
+                                    </div> --}}
+                        </div>
+                        <input type="hidden" name="report" value="1" />
+                        <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3"
+                                aria-hidden="true"></i> File</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
@@ -169,40 +302,43 @@
                                     <option value='3'>Cancelled</option>
                                 </select>
                             </div>
-                        <table class="table table-striped table-bordered align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+                            <table class="table table-striped table-bordered align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#
+                                        </th>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Vehicle </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Driver</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Hydrants</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Customer Details</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Customer Standard</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Status</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        amount</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (count($billing) > 0)
-
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Order
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Vehicle </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Driver</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Hydrants</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Customer Details</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Customer Standard</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Status</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            amount</th>
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (count($billing) > 0)
                                         @foreach ($billing as $key => $row)
                                             <tr>
                                                 <td>
@@ -307,13 +443,12 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-
-                                @else
-                                    No Record Find...
-                                @endif
-                            </tbody>
-                        </table>
-                    </form>
+                                    @else
+                                        No Record Find...
+                                    @endif
+                                </tbody>
+                            </table>
+                        </form>
 
                     </div>
                     <div class="d-flex justify-content-center">
@@ -350,7 +485,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="bulk-reasonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="bulk-reasonModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -368,7 +504,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" id="bulk-reason-submit" data-id="">Submit</button>
+                    <button type="button" class="btn btn-success" id="bulk-reason-submit"
+                        data-id="">Submit</button>
                 </div>
             </div>
         </div>
@@ -396,9 +533,7 @@
                 });
                 myModal.show();
 
-            }
-            else
-            {
+            } else {
                 var myModal = new bootstrap.Modal(document.getElementById('alert-Modal'), {
                     keyboard: false
                 });
@@ -409,11 +544,11 @@
         $("#bulk-reason-submit").click(function() {
             $("#canc-reason").val($("#bulk-note").val());
             var myModal = new bootstrap.Modal(document.getElementById('alert-Modal'), {
-                    keyboard: false
-                });
-                myModal.show();
+                keyboard: false
+            });
+            myModal.show();
         });
-        $("#submit-alert").click(function(){
+        $("#submit-alert").click(function() {
             $("#form-bulk-status").submit();
         });
         $("#reason-submit").click(function() {
