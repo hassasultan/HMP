@@ -544,6 +544,11 @@ class OrderController extends Controller
         # code...
         $data = $request->all();
         $order = Orders::with('truck_type_fun')->find($request->order_id);
+        $billing_count = Billings::where('order_id',$order->id)->count();
+        if($billing_count > 0)
+        {
+            return redirect()->back()->withError("Your Order has already Reciept...");
+        }
         if ($request->has('new_tanker')) {
             $check = Truck::where('truck_num', $request->reg_num)->first();
             if (empty($check)) {
