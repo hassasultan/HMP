@@ -87,7 +87,7 @@ class BillExport implements FromCollection, WithHeadings, WithMapping
             $row->driver->phone,
             $row->order->hydrant->name,
             $row->amount,
-            $row->truck_type_fun->name, // Access related data using Eloquent relationships
+            $row->order->truck_type_fun->name, // Access related data using Eloquent relationships
             $status,
             $row->cancle_reason,
             $row->created_at,
