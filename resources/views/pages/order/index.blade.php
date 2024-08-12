@@ -20,111 +20,147 @@
                     <div class="col-md-12">
                         <div class="p-3">
                             @if (auth()->user()->role == 1)
-                                <form role="form" method="get" action="{{ route('order.list') }}" enctype="multipart/form-data">
-                            @else
-                                <form role="form" method="get" action="{{ route('hydrant.order.list') }}" enctype="multipart/form-data">
+                                <form role="form" method="get" action="{{ route('order.list') }}"
+                                    enctype="multipart/form-data">
+                                @else
+                                    <form role="form" method="get" action="{{ route('hydrant.order.list') }}"
+                                        enctype="multipart/form-data">
                             @endif
 
-                                <div class="row">
-                                    <div class="form-group col-3 p-3">
-                                        <label>From Date</label>
-                                        <input type="date" class="form-control border-bottom"
-                                            placeholder="Enter Customer Title..." name="from_date"
-                                            value="{{ request()->get('from_date') }}"  />
-                                    </div>
-                                    <div class="form-group col-3 p-3">
-                                        <label>To Date</label>
-                                        <input type="date" class="form-control border-bottom"
-                                            placeholder="Enter Customer Title..." name="to_date" value="{{ request()->get('to_date') }}"
-                                             />
-                                    </div>
-                                    <div class="form-group col-3 p-3">
-                                        <label>ORDER NUMBER</label>
-                                        <input type="text" class="form-control border-bottom"
-                                            placeholder="Enter ORDER NUMBER..." name="order_num" value="{{ request()->get('order_num') }}"
-                                             />
-                                    </div>
-                                    <div class="form-group col-3 p-3">
-                                        <label>Customer Phone</label>
-                                        <input type="number" class="form-control border-bottom"
-                                            placeholder="Enter Customer Phone..." name="customer_phone" value="{{ request()->get('customer_phone') }}"
-                                             />
-                                    </div>
-                                    <div class="form-group col-3 p-3">
-                                        <label>Vehicle Types</label>
-                                        <select name="vehicle_type"
-                                            class="select2-multiple form-control border-bottom">
-                                            <option disabled selected value="">-- Select Vehicle Type --</option>
-                                            @foreach ($vehicle_type as $row)
-                                                <option value="{{ $row->id }}" @if(request()->get('vehicle_type') == $row->id) selected @endif>{{ $row->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-3 p-3">
-                                        <label>Order Type</label>
-                                        <select name="order_type" class="select2-multiple form-control fs-14  h-50px">
-                                            <option disabled selected value="">-- Select Order Type --</option>
+                            <div class="row">
+                                <div class="form-group col-3 p-3">
+                                    <label>From Date</label>
+                                    <input type="date" class="form-control border-bottom"
+                                        placeholder="Enter Customer Title..." name="from_date"
+                                        value="{{ request()->get('from_date') }}" />
+                                </div>
+                                <div class="form-group col-3 p-3">
+                                    <label>To Date</label>
+                                    <input type="date" class="form-control border-bottom"
+                                        placeholder="Enter Customer Title..." name="to_date"
+                                        value="{{ request()->get('to_date') }}" />
+                                </div>
+                                <div class="form-group col-3 p-3">
+                                    <label>ORDER NUMBER</label>
+                                    <input type="text" class="form-control border-bottom"
+                                        placeholder="Enter ORDER NUMBER..." name="order_num"
+                                        value="{{ request()->get('order_num') }}" />
+                                </div>
+                                <div class="form-group col-3 p-3">
+                                    <label>Customer Phone</label>
+                                    <input type="number" class="form-control border-bottom"
+                                        placeholder="Enter Customer Phone..." name="customer_phone"
+                                        value="{{ request()->get('customer_phone') }}" />
+                                </div>
+                                <div class="form-group col-3 p-3">
+                                    <label>Vehicle Types</label>
+                                    <select name="vehicle_type" class="select2-multiple form-control border-bottom">
+                                        <option disabled selected value="">-- Select Vehicle Type --</option>
+                                        @foreach ($vehicle_type as $row)
+                                            <option value="{{ $row->id }}"
+                                                @if (request()->get('vehicle_type') == $row->id) selected @endif>{{ $row->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-3 p-3">
+                                    <label>Order Type</label>
+                                    <select name="order_type" class="select2-multiple form-control fs-14  h-50px">
+                                        <option disabled selected value="">-- Select Order Type --</option>
 
-                                            @if (auth()->user()->role == 2)
-                                                @if (auth()->user()->type == 'commercial')
-                                                    <option value="Commercial" @if(request()->get('order_type') == "Commercial") selected @endif>Commercial</option>
-                                                @else
-                                                    <option value="Online (GPS)" @if(request()->get('order_type') == "Online (GPS)") selected @endif>Online (GPS)</option>
-                                                    <option value="Gps(billing)" @if(request()->get('order_type') == "Gps ( billing )") selected @endif>Gps ( billing )</option>
-                                                    <option value="Gps(careoff)" @if(request()->get('order_type') == "Gps ( care off )") selected @endif>Gps ( care off )</option>
-                                                    {{-- <option value="GRATIS" @if(request()->get('order_type') == "GRATIS") selected @endif>GRATIS</option> --}}
-                                                    <option value="Pak rangers" @if(request()->get('order_type') == "Pak rangers") selected @endif>Pak rangers</option>
-                                                    <option value="P.A.F korangi creek" @if(request()->get('order_type') == "P.A.F korangi creek") selected @endif>P.A.F korangi creek</option>
-                                                    <option value="Dc quota" @if(request()->get('order_type') == "Dc quota") selected @endif>Dc quota</option>
-                                                    <option value="Govt. vehicle" @if(request()->get('order_type') == "Govt. vehicle") selected @endif>Govt. vehicle</option>
-                                                @endif
+                                        @if (auth()->user()->role == 2)
+                                            @if (auth()->user()->type == 'commercial')
+                                                <option value="Commercial"
+                                                    @if (request()->get('order_type') == 'Commercial') selected @endif>Commercial</option>
                                             @else
-                                                <option value="Commercial" @if(request()->get('order_type') == "Commercial") selected @endif>Commercial</option>
-                                                <option value="Online (GPS)" @if(request()->get('order_type') == "Online (GPS)") selected @endif>Online (GPS)</option>
-                                                <option value="Gps(billing)" @if(request()->get('order_type') == "Gps(billing)") selected @endif>Gps ( billing )</option>
-                                                <option value="Gps(careoff)" @if(request()->get('order_type') == "Gps(careoff)") selected @endif>Gps ( care off )</option>
-                                                {{-- <option value="GRATIS" @if(request()->get('order_type') == "GRATIS") selected @endif>GRATIS</option> --}}
-                                                <option value="Pak rangers" @if(request()->get('order_type') == "Pak rangers") selected @endif>Pak rangers</option>
-                                                <option value="P.A.F korangi creek" @if(request()->get('order_type') == "P.A.F korangi creek") selected @endif>P.A.F korangi creek</option>
-                                                <option value="Dc quota" @if(request()->get('order_type') == "Dc quota") selected @endif>Dc quota</option>
-                                                <option value="Govt. vehicle" @if(request()->get('order_type') == "Govt. vehicle") selected @endif>Govt. vehicle</option>
+                                                <option value="Online (GPS)"
+                                                    @if (request()->get('order_type') == 'Online (GPS)') selected @endif>Online (GPS)</option>
+                                                <option value="Gps(billing)"
+                                                    @if (request()->get('order_type') == 'Gps ( billing )') selected @endif>Gps ( billing )
+                                                </option>
+                                                <option value="Gps(careoff)"
+                                                    @if (request()->get('order_type') == 'Gps ( care off )') selected @endif>Gps ( care off )
+                                                </option>
+                                                {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>GRATIS</option> --}}
+                                                <option value="Pak rangers"
+                                                    @if (request()->get('order_type') == 'Pak rangers') selected @endif>Pak rangers</option>
+                                                <option value="P.A.F korangi creek"
+                                                    @if (request()->get('order_type') == 'P.A.F korangi creek') selected @endif>P.A.F korangi creek
+                                                </option>
+                                                <option value="Dc quota" @if (request()->get('order_type') == 'Dc quota') selected @endif>
+                                                    Dc quota</option>
+                                                <option value="Govt. vehicle"
+                                                    @if (request()->get('order_type') == 'Govt. vehicle') selected @endif>Govt. vehicle
+                                                </option>
                                             @endif
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-3 p-3 mt-4">
+                                        @else
+                                            <option value="Commercial" @if (request()->get('order_type') == 'Commercial') selected @endif>
+                                                Commercial</option>
+                                            <option value="Online (GPS)"
+                                                @if (request()->get('order_type') == 'Online (GPS)') selected @endif>Online (GPS)</option>
+                                            <option value="Gps(billing)"
+                                                @if (request()->get('order_type') == 'Gps(billing)') selected @endif>Gps ( billing )</option>
+                                            <option value="Gps(careoff)"
+                                                @if (request()->get('order_type') == 'Gps(careoff)') selected @endif>Gps ( care off )
+                                            </option>
+                                            {{-- <option value="GRATIS" @if (request()->get('order_type') == 'GRATIS') selected @endif>GRATIS</option> --}}
+                                            <option value="Pak rangers" @if (request()->get('order_type') == 'Pak rangers') selected @endif>
+                                                Pak rangers</option>
+                                            <option value="P.A.F korangi creek"
+                                                @if (request()->get('order_type') == 'P.A.F korangi creek') selected @endif>P.A.F korangi creek
+                                            </option>
+                                            <option value="Dc quota" @if (request()->get('order_type') == 'Dc quota') selected @endif>Dc
+                                                quota</option>
+                                            <option value="Govt. vehicle"
+                                                @if (request()->get('order_type') == 'Govt. vehicle') selected @endif>Govt. vehicle</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="form-group col-3 p-3 mt-4">
                                     <label>Per Page Enteries</label>
 
-                                        <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
-                                            <option value="20" @if(request()->get('per_page') == "20") selected @endif>20</option>
-                                            <option value="50" @if(request()->get('per_page') == "50") selected @endif>50</option>
-                                            <option value="100" @if(request()->get('per_page') == "100") selected @endif>100</option>
-                                            <option value="200" @if(request()->get('per_page') == "200") selected @endif>200</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-3 p-3 mt-4">
-                                        <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
-                                    </div>
+                                    <select name="per_page" class="select2-multiple form-control fs-14  h-50px">
+                                        <option value="20" @if (request()->get('per_page') == '20') selected @endif>20
+                                        </option>
+                                        <option value="50" @if (request()->get('per_page') == '50') selected @endif>50
+                                        </option>
+                                        <option value="100" @if (request()->get('per_page') == '100') selected @endif>100
+                                        </option>
+                                        <option value="200" @if (request()->get('per_page') == '200') selected @endif>200
+                                        </option>
+                                    </select>
                                 </div>
+                                <div class="form-group col-3 p-3 mt-4">
+                                    <button type="submit" class="btn bg-gradient-primary btn-lg ">Search</button>
+                                </div>
+                                <div class="form-group col-3 p-3 mt-4">
+                                    <input type="hidden" name="report" value="1" />
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3"
+                                            aria-hidden="true"></i> File</button>
+                                </div>
+                            </div>
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6 p-2">
+                    {{-- <div class="col-md-6 p-2">
                         @if (auth()->user()->role == 1)
-                                <form role="form" method="get" action="{{ route('order.list') }}" enctype="multipart/form-data">
+                            <form role="form" method="get" action="{{ route('order.list') }}"
+                                enctype="multipart/form-data">
                             @else
-                                <form role="form" method="get" action="{{ route('hydrant.order.list') }}" enctype="multipart/form-data">
-                            @endif
-                            <input type="hidden" name="report" value="1"/>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3"
-                                    aria-hidden="true"></i> File</button>
+                                <form role="form" method="get" action="{{ route('hydrant.order.list') }}"
+                                    enctype="multipart/form-data">
+                        @endif
+                        <input type="hidden" name="report" value="1" />
+                        <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o me-2 fs-3"
+                                aria-hidden="true"></i> File</button>
                         </form>
-                    </div>
+                    </div> --}}
                     {{-- <button id="export-excel" onclick="converExcel()" class="btn btn-primary">Export to Excel</button> --}}
 
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class=" p-0">
-                        <table  class="table table-striped table-bordered align-items-center mb-0 display nowrap">
+                        <table class="table table-striped table-bordered align-items-center mb-0 display nowrap">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order
@@ -165,7 +201,8 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">{{ $row->customer->name }}</p>
-                                                <p class="text-xs text-secondary mb-0">{{ $row->customer->contact_num }}</p>
+                                                <p class="text-xs text-secondary mb-0">{{ $row->customer->contact_num }}
+                                                </p>
                                                 <p class="text-xs text-secondary mb-0">{{ $row->customer->address }}</p>
                                             </td>
                                             <td>
