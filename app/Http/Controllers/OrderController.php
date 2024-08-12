@@ -87,7 +87,7 @@ class OrderController extends Controller
         if ($request->has('report')) {
 
             $data = $order->OrderBy('id', 'DESC')->whereHas('billing')->get();
-            dd($data->toArray());
+            // dd($data->toArray());
             return Excel::download(new MyDataExport($data), 'my-data.xlsx');
         }
         if ($request->has('per_page')) {
