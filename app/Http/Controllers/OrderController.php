@@ -60,7 +60,7 @@ class OrderController extends Controller
 
             }
         }
-        dd($request->from_date.'00:00:00', $request->to_date.'00:00:00');
+        // dd($request->from_date.'00:00:00', $request->to_date.'00:00:00');
         if ($request->has('vehicle_type') && $request->vehicle_type != '') {
             $order = $order->where('truck_type', $request->vehicle_type);
         }
