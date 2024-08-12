@@ -111,28 +111,36 @@ class HomeController extends Controller
             //     $expNum = explode(' ', $row->truck_type_fun->name);
             //     $today_gallon_count = $today_gallon_count + (int)$expNum[0];
             // }
-            $comm = Orders::with('customer')->whereHas('customer',function($query)
-            {
-                $query->where('standard',"Commercial");
-            })->where('hydrant_id',auth()->user()->hydrant_id)->count();
-            $gps = Orders::with('customer')->whereHas('customer',function($query)
-            {
-                $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
-            })->where('hydrant_id',auth()->user()->hydrant_id)->count();
-            $dc = Orders::with('billing')->where('order_type',"Dc quota")->count();
+            $comm = Orders::where('order_type',"Commercial")->where('hydrant_id',auth()->user()->hydrant_id)->count();
+            $gps = Orders::whereIn('order_type',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"])->where('hydrant_id',auth()->user()->hydrant_id)->count();
+            // $comm = Orders::with('customer')->whereHas('customer',function($query)
+            // {
+            //     $query->where('standard',"Commercial");
+            // })->where('hydrant_id',auth()->user()->hydrant_id)->count();
+            // $gps = Orders::with('customer')->whereHas('customer',function($query)
+            // {
+            //     $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
+            // })->where('hydrant_id',auth()->user()->hydrant_id)->count();
+            $dc = Orders::with('billing')->where('order_type',"Dc quota")->where('hydrant_id',auth()->user()->hydrant_id)->count();
 
-            $today_comm = Orders::with('customer')->whereHas('customer',function($query)
-            {
-                $query->where('standard',"Commercial");
-            })->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
-            $today_gps = Orders::with('customer')->whereHas('customer',function($query)
-            {
-                $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
-            })->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
+            $today_comm = Orders::where('order_type',"Commercial")->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
+            // $today_comm = Orders::with('customer')->whereHas('customer',function($query)
+            // {
+            //     $query->where('standard',"Commercial");
+            // })->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
+            $today_gps = Orders::whereIn('order_type',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"])->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
+            // $today_gps = Orders::with('customer')->whereHas('customer',function($query)
+            // {
+            //     $query->whereIn('standard',["GPS","Online (GPS)","Gps ( billing )","Gps ( care off )"]);
+            // })->where('hydrant_id',auth()->user()->hydrant_id)->where('created_at', '>=', Carbon::today())->count();
             $today_dc = Orders::with('billing')->whereHas('billing',function($query)
             {
                 $query->where('created_at', '>=', Carbon::today());
             })->where('order_type',"Dc quota")->where('hydrant_id',auth()->user()->hydrant_id)->count();
+            // $today_dc = Orders::with('billing')->whereHas('billing',function($query)
+            // {
+            //     $query->where('created_at', '>=', Carbon::today());
+            // })->where('order_type',"Dc quota")->where('hydrant_id',auth()->user()->hydrant_id)->count();
             $hydCount = Hydrants::where('user_id',auth()->user()->id)->count();
             $hydrants = Hydrants::where('user_id',auth()->user()->id)->with('vehicles')->get();
             // $today = Orders::where('hydrant_id',auth()->user()->hydrant->id)->whereDay('created_at', now()->day)->get();
