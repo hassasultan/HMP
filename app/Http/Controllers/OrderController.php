@@ -381,7 +381,7 @@ class OrderController extends Controller
         }
         if ($request->has('from_date') && $request->from_date != '' && $request->has('to_date') && $request->to_date != '') {
             $billing = $billing->whereHas('order', function ($q) use ($request) {
-                $q->whereBetween('created_at', [$request->from_date.' 00:00:00', $request->to_date.' 00:00:00']);
+                $q->whereBetween('created_at', [$request->from_date.' 00:00:00', $request->to_date.' 23:59:59']);
             });
             // $billing = $billing->whereBetween('created_at', [$request->from_date.' 00:00:00', $request->to_date.' 00:00:00']);
         }
