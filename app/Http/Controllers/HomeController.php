@@ -52,7 +52,7 @@ class HomeController extends Controller
         $endOfDay = $today->endOfDay(); // End of the current day
 
         
-        $results = Hydrant::select('name as HYDRANT')
+        $results = Hydrants::select('name as HYDRANT')
     ->join('orders', 'orders.hydrant_id', '=', 'hydrants.id')
     ->join('billings', 'billings.order_id', '=', 'orders.id')
     ->whereBetween('orders.created_at', [$startOfDay, $endOfDay])
