@@ -36,6 +36,17 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $hydrants = Hydrants::with(['orders', 'todayorders']);
+        if(auth()->user()->role != 1)
+        {
+            $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
+        }
+        $hydrants = $hydrants->get();
+        // dd($hydrants->toArray());
+        return view('home',compact('hydrants'));
+    }
+    public function onld_index(Request $request)
+    {
         $driver = 0;
         $today_gallon_count = 0;
         $unreg = 0;
