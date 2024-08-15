@@ -47,6 +47,24 @@ class HomeController extends Controller
             return sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generate a random hex color
         });
         // dd($backgroundColors);
+        $today = Carbon::today(); // Current date without time
+        $startOfDay = $today->startOfDay(); // Start of the current day
+        $endOfDay = $today->endOfDay(); // End of the current day
+
+        $results = Hydrants::select('name as HYDRANT')
+            ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%commercial%' THEN 1 END) as commercial")
+            ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%ONLINE%' THEN 1 END) as GPS_ONLINE")
+            ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%DC%' THEN 1 END) as DC")
+            ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%BILLING%' THEN 1 END) as GPS_BILLING")
+            ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%CARE%' THEN 1 END) as GPS_CARE_OFF")
+            ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%RANGER%' THEN 1 END) as PAK_RANGER")
+            ->selectRaw("COUNT(*) as total_orders")
+            ->join('orders', 'orders.hydrant_id', '=', 'hydrants.id')
+            ->join('billings', 'billings.order_id', '=', 'orders.id')
+            ->whereBetween('orders.created_at', [$startOfDay, $endOfDay])
+            ->groupBy('hydrants.name')
+            ->get();
+        dd($results);
         return view('home',compact('hydrants','backgroundColors'));
     }
     public function onld_index(Request $request)
