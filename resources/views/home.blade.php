@@ -201,7 +201,8 @@
                 }
             });
 
-            const doghnutChart = new Chart(document.getElementById("chartjs-doughnut"), {
+            const doghnutCTX = document.getElementById("chartjs-doughnut").getContext('3d')
+            const doghnutChart = new Chart(doghnutCTX, {
                 type: "doughnut",
                 data: {
                     labels: hydrantNames,
