@@ -241,7 +241,7 @@
                         }]
                     }
                 }
-                plugins: [ChartDataLabels] // Add the Data Labels plugin
+                // plugins: [ChartDataLabels] // Add the Data Labels plugin
             });
         </script>
     @endif
