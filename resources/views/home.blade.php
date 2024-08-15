@@ -220,7 +220,7 @@
                         data: ordersCounts,
                         fill: true,
                         backgroundColor: "transparent",
-                        borderColor: window.theme.primary,
+                        borderColor: "#6f42c1",
                         backgroundColor: backgroundColors
                     }]
                 },
