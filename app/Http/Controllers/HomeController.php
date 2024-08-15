@@ -47,10 +47,11 @@ class HomeController extends Controller
             return sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generate a random hex color
         });
         // dd($backgroundColors);
-        $today = Carbon::today(); // Current date without time
-        $startOfDay = $today->startOfDay(); // Start of the current day
-        $endOfDay = $today->endOfDay(); // End of the current day
-
+        // $today = Carbon::today(); // Current date without time
+        // $startOfDay = $today->startOfDay(); // Start of the current day
+        // $endOfDay = $today->endOfDay(); // End of the current day
+        $todayDate = date("Y-m-d");
+        // dd($todayDate);
         
         $results = Hydrants::select('name as HYDRANT')
             ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%commercial%' THEN 1 END) as commercial")
@@ -62,7 +63,9 @@ class HomeController extends Controller
             ->selectRaw("COUNT(*) as total_orders")
             ->join('orders', 'orders.hydrant_id', '=', 'hydrants.id')
             ->join('billings', 'billings.order_id', '=', 'orders.id')
-            ->where('orders.created_at', '>=', Carbon::today())
+            // ->where('orders.created_at', '>=', Carbon::today())
+            ->whereBetween('orders.created_at', [$todayDate.' 00:00:00', $todayDate.' 23:59:59'])
+            // ->where('orders.created_at', '>=', Carbon::today())
             ->groupBy('hydrants.name')
             ->get();
         // dd($results->toArray());
