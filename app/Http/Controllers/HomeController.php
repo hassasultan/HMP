@@ -65,8 +65,8 @@ class HomeController extends Controller
             ->where('orders.created_at', '>=', Carbon::today())
             ->groupBy('hydrants.name')
             ->get();
-        dd($results->toArray());
-        return view('home',compact('hydrants','backgroundColors'));
+        // dd($results->toArray());
+        return view('home',compact('hydrants','backgroundColors','results'));
     }
     public function old_index(Request $request)
     {
