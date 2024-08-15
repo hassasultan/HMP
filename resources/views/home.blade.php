@@ -121,7 +121,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Orders
+                       Today's Daily Orders Report
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
