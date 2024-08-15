@@ -121,7 +121,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                       Today's Daily Orders Report
+                        Today's Daily Orders Report
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
@@ -201,7 +201,12 @@
                     }]
                 },
                 options: {
-                    responsive: true
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false // This hides the legend
+                        }
+                    }
                 }
             });
         </script>
