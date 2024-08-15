@@ -162,7 +162,7 @@
                 </div>
             </div>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
         <script>
             // Revenue Chart
@@ -211,34 +211,36 @@
             //         }
             //     }
             // });
-            const segmentCtx = document.getElementById('segmentChart').getContext('2d');
+            const segmentCtx = document.getElementById('segmentChart');
             const segmentChart = new Chart(segmentCtx, {
-                type: 'pie',
+                type: 'line',
                 data: {
                     labels: hydrantNames,
                     datasets: [{
                         data: ordersCounts,
+                        fill: true,
+                        backgroundColor: "transparent",
+                        borderColor: window.theme.primary,
                         backgroundColor: backgroundColors
                     }]
                 },
                 options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false // Hides the legend
-                        },
-                        datalabels: {
-                            color: '#fff', // Color of the text
-                            formatter: (value, context) => {
-                                return value; // Shows the count inside the segments
-                            },
-                            font: {
-                                weight: 'bold',
-                                size: 16
+                    scales: {
+                        xAxes: [{
+                            reverse: true,
+                            gridLines: {
+                                color: "rgba(0,0,0,0.05)"
                             }
-                        }
+                        }],
+                        yAxes: [{
+                            borderDash: [5, 5],
+                            gridLines: {
+                                color: "rgba(0,0,0,0)",
+                                fontColor: "#fff"
+                            }
+                        }]
                     }
-                },
+                }
                 plugins: [ChartDataLabels] // Add the Data Labels plugin
             });
         </script>
