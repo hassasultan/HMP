@@ -62,7 +62,7 @@ class HomeController extends Controller
             ->selectRaw("COUNT(*) as total_orders")
             ->join('orders', 'orders.hydrant_id', '=', 'hydrants.id')
             ->join('billings', 'billings.order_id', '=', 'orders.id')
-            ->where('created_at', '>=', Carbon::today())
+            ->where('orders.created_at', '>=', Carbon::today())
             ->groupBy('hydrants.name')
             ->get();
         dd($results->toArray());
