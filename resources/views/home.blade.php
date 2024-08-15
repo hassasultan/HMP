@@ -237,7 +237,7 @@
             //         }
             //     }
             // });
-            const segmentCtx = document.getElementById('segmentChart');
+            const segmentCtx = document.getElementById('segmentChart').getContext('2d');
             const segmentChart = new Chart(segmentCtx, {
                 type: 'line',
                 data: {
