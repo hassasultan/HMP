@@ -86,6 +86,16 @@
                         Total Orders
                     </div>
                     <div class="card-body">
+                        <canvas id="chartjs-doughnut"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Total Orders
+                    </div>
+                    <div class="card-body">
                         <canvas id="segmentChart"></canvas>
                     </div>
                 </div>
@@ -191,6 +201,26 @@
                 }
             });
 
+            const doghnutChart = new Chart(document.getElementById("chartjs-doughnut"), {
+                type: "doughnut",
+                data: {
+                    labels: hydrantNames,
+                    datasets: [{
+                        data: ordersCounts,
+                        backgroundColor: [
+                            window.theme.primary,
+                            window.theme.success,
+                            window.theme.warning,
+                            "#dee2e6"
+                        ],
+                        borderColor: "transparent"
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 65,
+                }
+            });
             // Segment Chart (Pie)
             // const segmentCtx = document.getElementById('segmentChart').getContext('2d');
             // const segmentChart = new Chart(segmentCtx, {
