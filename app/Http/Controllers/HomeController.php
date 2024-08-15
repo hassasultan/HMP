@@ -46,7 +46,7 @@ class HomeController extends Controller
         $backgroundColors = $hydrants->map(function($hydrant) {
             return '#' . Str::random(6); // Generate a random hex color
         });
-        // dd($hydrants->toArray());
+        dd($backgroundColors);
         return view('home',compact('hydrants','backgroundColors'));
     }
     public function onld_index(Request $request)
