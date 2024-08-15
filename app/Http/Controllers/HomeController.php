@@ -14,6 +14,7 @@ use App\Models\Customer;
 use Illuminate\Support\Carbon;
 use QrCode;
 use Exception;
+use Illuminate\Support\Str;
 
 
 class HomeController extends Controller
@@ -42,8 +43,11 @@ class HomeController extends Controller
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
         }
         $hydrants = $hydrants->get();
+        $backgroundColors = $hydrants->map(function($hydrant) {
+            return '#' . Str::random(6); // Generate a random hex color
+        });
         // dd($hydrants->toArray());
-        return view('home',compact('hydrants'));
+        return view('home',compact('hydrants','backgroundColors'));
     }
     public function onld_index(Request $request)
     {

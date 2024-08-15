@@ -72,7 +72,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                Revenue Breakdown
+                Today's Orders 
             </div>
             <div class="card-body">
                 <canvas id="revenueChart"></canvas>
@@ -150,15 +150,17 @@
 <script>
     // Revenue Chart
     const hydrantNames = @json($hydrants->pluck('name'));
-    const ordersCounts = @json($hydrants->pluck('todayOrdersCount'));
+    const todayOrdersCounts = @json($hydrants->pluck('todayOrdersCount'));
+    const ordersCounts = @json($hydrants->pluck('ordersCount'));
+    const backgroundColors = @json($backgroundColors);
     const revenueCtx = document.getElementById('revenueChart').getContext('2d');
     const revenueChart = new Chart(revenueCtx, {
         type: 'bar',
         data: {
             labels: hydrantNames,
             datasets: [{
-                label: 'Orders Count',
-                data: ordersCounts,
+                label: 'Today Orders Count',
+                data: todayOrdersCounts,
                 backgroundColor: 'rgba(99, 102, 241, 0.7)',
             }]
         },
@@ -177,10 +179,10 @@
     const segmentChart = new Chart(segmentCtx, {
         type: 'pie',
         data: {
-            labels: ['Alpha', 'Beta', 'Gamma', 'Delta'],
+            labels: hydrantNames,
             datasets: [{
-                data: [40, 25, 20, 15],
-                backgroundColor: ['#3b82f6', '#f97316', '#ef4444', '#10b981']
+                data: ordersCounts,
+                backgroundColor: backgroundColors
             }]
         },
         options: {
