@@ -217,6 +217,7 @@
                 data: {
                     labels: hydrantNames,
                     datasets: [{
+                        labels: "Total Ordes",
                         data: ordersCounts,
                         fill: true,
                         backgroundColor: "transparent",
