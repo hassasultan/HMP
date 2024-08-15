@@ -201,7 +201,7 @@
                 }
             });
 
-            const doghnutCTX = document.getElementById("chartjs-doughnut").getContext('3d')
+            const doghnutCTX = document.getElementById("chartjs-doughnut").getContext('2d')
             const doghnutChart = new Chart(doghnutCTX, {
                 type: "doughnut",
                 data: {
