@@ -208,12 +208,7 @@
                     labels: hydrantNames,
                     datasets: [{
                         data: ordersCounts,
-                        backgroundColor: [
-                            window.theme.primary,
-                            window.theme.success,
-                            window.theme.warning,
-                            "#dee2e6"
-                        ],
+                        backgroundColor: backgroundColors,
                         borderColor: "transparent"
                     }]
                 },
