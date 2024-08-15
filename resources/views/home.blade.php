@@ -150,7 +150,7 @@
 <script>
     // Revenue Chart
     const hydrantNames = @json($hydrants->pluck('name'));
-    const ordersCounts = @json($hydrants->pluck('ordersCount'));
+    const ordersCounts = @json($hydrants->pluck('todayOrdersCount'));
     const revenueCtx = document.getElementById('revenueChart').getContext('2d');
     const revenueChart = new Chart(revenueCtx, {
         type: 'bar',
