@@ -64,7 +64,7 @@ class HomeController extends Controller
             ->whereBetween('orders.created_at', [$startOfDay, $endOfDay])
             ->groupBy('hydrants.name')
             ->get();
-        dd($results);
+        dd($results->toArray());
         return view('home',compact('hydrants','backgroundColors'));
     }
     public function onld_index(Request $request)
