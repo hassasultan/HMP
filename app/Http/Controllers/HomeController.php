@@ -43,10 +43,10 @@ class HomeController extends Controller
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
         }
         $hydrants = $hydrants->get();
-        $backgroundColors = $hydrants->map(function($hydrant) {
-            return '#' . Str::random(6); // Generate a random hex color
+        $backgroundColors = $hydrants->map(function() {
+            return sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generate a random hex color
         });
-        dd($backgroundColors);
+        // dd($backgroundColors);
         return view('home',compact('hydrants','backgroundColors'));
     }
     public function onld_index(Request $request)
