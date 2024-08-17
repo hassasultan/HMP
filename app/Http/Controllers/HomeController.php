@@ -49,7 +49,7 @@ class HomeController extends Controller
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
         }
         $hydrants = $hydrants->get();
-        dd($hydrants->toArray());
+        // dd($hydrants->toArray());
         $todayDate = date("Y-m-d");
         $results = Hydrants::select('name as HYDRANT')
             ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%commercial%' THEN 1 END) as commercial")
