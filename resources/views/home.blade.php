@@ -244,7 +244,7 @@
                 }
 
                 // Set the interval to send the request every 5 seconds (5000 milliseconds)
-                // setInterval(sendAjaxRequest, 20000);
+                setInterval(sendAjaxRequest, 20000);
             });
 
             const revenueCtx = document.getElementById('revenueChart').getContext('2d');
