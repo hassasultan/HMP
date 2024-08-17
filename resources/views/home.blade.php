@@ -240,6 +240,9 @@
                                 todayOrdersCounts =  hydrant.todayorders_count;
                                 ordersCounts =  hydrant.orders_count;
                             });
+                            console.log(hydrantNames);
+                            console.log(todayOrdersCounts);
+                            console.log(ordersCounts);
                             barChart();
                             $('#gallon-results').empty();
                             $('#results').empty();
