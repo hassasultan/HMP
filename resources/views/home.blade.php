@@ -224,6 +224,7 @@
 
             $(document).ready(function() {
                 // Function to send AJAX request
+                barChart();
                 function sendAjaxRequest() {
                     $.ajax({
                         url: '{{ route("home") }}', // Replace with your endpoint
@@ -233,6 +234,7 @@
                             // Your data here, if needed
                         },
                         success: function(response) {
+                            console.log(response);
                             $('#gallon-results').empty();
                             $('#results').empty();
                             response.gallon_results.forEach(function(item) {
@@ -277,27 +279,29 @@
                 // Set the interval to send the request every 5 seconds (5000 milliseconds)
                 setInterval(sendAjaxRequest, 20000);
             });
-
-            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-            const revenueChart = new Chart(revenueCtx, {
-                type: 'bar',
-                data: {
-                    labels: hydrantNames,
-                    datasets: [{
-                        label: 'Today Orders Count',
-                        data: todayOrdersCounts,
-                        backgroundColor: 'rgba(99, 102, 241, 0.7)',
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
+            function barChart()
+            {
+                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+                const revenueChart = new Chart(revenueCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: hydrantNames,
+                        datasets: [{
+                            label: 'Today Orders Count',
+                            data: todayOrdersCounts,
+                            backgroundColor: 'rgba(99, 102, 241, 0.7)',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
 
             // const doghnutCTX = document.getElementById("chartjs-doughnut").getContext('2d')
             // const doghnutChart = new Chart(doghnutCTX, {
