@@ -38,19 +38,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $hydrants = Hydrants::with(['orders', 'todayorders']);
+        $hydrants = Hydrants::with(['orders', 'todayorders'])->whereNotIn('id','!=',["15","14","13","12","11"]);
         if(auth()->user()->role != 1)
         {
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
         }
         $hydrants = $hydrants->get();
-        // dd($backgroundColors);
-        // $today = Carbon::today(); // Current date without time
-        // $startOfDay = $today->startOfDay(); // Start of the current day
-        // $endOfDay = $today->endOfDay(); // End of the current day
         $todayDate = date("Y-m-d");
-        // dd($todayDate);
-        
         $results = Hydrants::select('name as HYDRANT')
             ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%commercial%' THEN 1 END) as commercial")
             ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%ONLINE%' THEN 1 END) as GPS_ONLINE")
@@ -61,12 +55,9 @@ class HomeController extends Controller
             ->selectRaw("COUNT(*) as total_orders")
             ->join('orders', 'orders.hydrant_id', '=', 'hydrants.id')
             ->join('billings', 'billings.order_id', '=', 'orders.id')
-            // ->where('orders.created_at', '>=', Carbon::today())
             ->whereBetween('orders.created_at', [$todayDate.' 00:00:00', $todayDate.' 23:59:59'])
-            // ->where('orders.created_at', '>=', Carbon::today())
             ->groupBy('hydrants.name')
             ->get();
-
         $gallon_results = DB::table('billings as b')
             ->join('orders as o', 'o.id', '=', 'b.order_id')
             ->join('hydrants as h', 'h.id', '=', 'o.hydrant_id')
@@ -85,8 +76,6 @@ class HomeController extends Controller
             ->whereBetween('o.created_at', [$todayDate.' 00:00:00', $todayDate.' 23:59:59'])
             ->groupBy('h.name')
             ->get();
-        
-        // dd($gallon_results);
         return view('home',compact('hydrants','results','gallon_results'));
     }
     public function old_index(Request $request)
