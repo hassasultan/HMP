@@ -86,7 +86,7 @@ class HomeController extends Controller
             ->groupBy('h.name')
             ->get();
         
-        dd($gallon_results->toArray());
+        dd($gallon_results);
         return view('home',compact('hydrants','results'));
     }
     public function old_index(Request $request)
