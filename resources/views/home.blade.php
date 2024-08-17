@@ -294,6 +294,9 @@
             });
             function barChart()
             {
+                if (revenueChart) {
+                    revenueChart.destroy();
+                }
                 const revenueCtx = document.getElementById('revenueChart').getContext('2d');
                 const revenueChart = new Chart(revenueCtx, {
                     type: 'bar',
