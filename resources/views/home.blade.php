@@ -200,75 +200,22 @@
                 }
             });
 
-            const doghnutCTX = document.getElementById("chartjs-doughnut").getContext('2d')
-            const doghnutChart = new Chart(doghnutCTX, {
-                type: "doughnut",
-                data: {
-                    labels: hydrantNames,
-                    datasets: [{
-                        data: ordersCounts,
-                        backgroundColor: backgroundColors,
-                        borderColor: "transparent"
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 65,
-                }
-            });
-            // Segment Chart (Pie)
-            // const segmentCtx = document.getElementById('segmentChart').getContext('2d');
-            // const segmentChart = new Chart(segmentCtx, {
-            //     type: 'pie',
+            // const doghnutCTX = document.getElementById("chartjs-doughnut").getContext('2d')
+            // const doghnutChart = new Chart(doghnutCTX, {
+            //     type: "doughnut",
             //     data: {
             //         labels: hydrantNames,
             //         datasets: [{
             //             data: ordersCounts,
-            //             backgroundColor: backgroundColors
+            //             backgroundColor: backgroundColors,
+            //             borderColor: "transparent"
             //         }]
             //     },
             //     options: {
-            //         responsive: true,
-            //         plugins: {
-            //             legend: {
-            //                 display: false // This hides the legend
-            //             }
-            //         }
+            //         maintainAspectRatio: false,
+            //         cutoutPercentage: 65,
             //     }
             // });
-            const segmentCtx = document.getElementById('segmentChart').getContext('2d');
-            const segmentChart = new Chart(segmentCtx, {
-                type: 'line',
-                data: {
-                    labels: hydrantNames,
-                    datasets: [{
-                        labels: "Total Orders",
-                        data: ordersCounts,
-                        fill: true,
-                        backgroundColor: "transparent",
-                        borderColor: "#6f42c1",
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                options: {
-                    scales: {
-                        xAxes: [{
-                            reverse: true,
-                            gridLines: {
-                                color: "rgba(0,0,0,0.05)"
-                            }
-                        }],
-                        yAxes: [{
-                            borderDash: [5, 5],
-                            gridLines: {
-                                color: "rgba(0,0,0,0)",
-                                fontColor: "#fff"
-                            }
-                        }]
-                    }
-                }
-                // plugins: [ChartDataLabels] // Add the Data Labels plugin
-            });
         </script>
     @endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

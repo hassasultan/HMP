@@ -43,9 +43,6 @@ class HomeController extends Controller
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
         }
         $hydrants = $hydrants->get();
-        $backgroundColors = $hydrants->map(function() {
-            return sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generate a random hex color
-        });
         // dd($backgroundColors);
         // $today = Carbon::today(); // Current date without time
         // $startOfDay = $today->startOfDay(); // Start of the current day
@@ -69,7 +66,7 @@ class HomeController extends Controller
             ->groupBy('hydrants.name')
             ->get();
         // dd($results->toArray());
-        return view('home',compact('hydrants','backgroundColors','results'));
+        return view('home',compact('hydrants','results'));
     }
     public function old_index(Request $request)
     {
