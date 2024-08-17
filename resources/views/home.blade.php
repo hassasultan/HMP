@@ -134,7 +134,7 @@
                         Today's Daily Orders Report
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="daily-report">
                             <thead>
                                 <tr>
                                     <th>Hydrant</th>
@@ -147,7 +147,7 @@
                                     <th>Total Orders</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="results">
                                 @foreach ($results as $row)
                                     <tr>
                                         <td>{{ $row->HYDRANT }}</td>
@@ -190,7 +190,7 @@
                                     <th>Total Gallons</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="gallon-results">
                                 @foreach ($gallon_results as $data)
                                     <tr>
                                         <td>{{ $data->HYDRANT }}</td>
@@ -233,8 +233,33 @@
                             // Your data here, if needed
                         },
                         success: function(response) {
-                            // Handle the success response here
-                            console.log(response);
+                            $('#gallon-results').empty();
+                            $('#results').empty();
+                            response.gallon_results.forEach(function(item) {
+                                $('#gallon-results').append(
+                                    `<tr>
+                                        <td>${item.HYDRANT}</td>
+                                        <td>${item.commercial}</td>
+                                        <td>${item.GPS_ONLINE}</td>
+                                        <td>${item.DC}</td>
+                                        <td>${item.GPS_BILLING}</td>
+                                        <!-- Add more <td> for other fields if needed -->
+                                    </tr>`
+                                );
+                            });
+                            response.results.forEach(function(item) {
+                                $('#results').append(
+                                    `<tr>
+                                        <td>${item.HYDRANT}</td>
+                                        <td>${item.commercial}</td>
+                                        <td>${item.GPS_ONLINE}</td>
+                                        <td>${item.DC}</td>
+                                        <td>${item.GPS_BILLING}</td>
+                                        <!-- Add more <td> for other fields if needed -->
+                                    </tr>`
+                                );
+                            });
+
                         },
                         error: function(xhr, status, error) {
                             // Handle any errors here
