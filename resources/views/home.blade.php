@@ -221,7 +221,7 @@
             var hydrantNames = @json($hydrants->pluck('name'));
             var todayOrdersCounts = @json($hydrants->pluck('todayOrdersCount'));
             var ordersCounts = @json($hydrants->pluck('ordersCount'));
-
+            var revenueChart;
             $(document).ready(function() {
                 // Function to send AJAX request
                 barChart();
@@ -298,7 +298,7 @@
                     revenueChart.destroy();
                 }
                 const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-                const revenueChart = new Chart(revenueCtx, {
+                revenueChart = new Chart(revenueCtx, {
                     type: 'bar',
                     data: {
                         labels: hydrantNames,
