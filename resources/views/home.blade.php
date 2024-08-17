@@ -287,7 +287,7 @@
                 }
 
                 // Set the interval to send the request every 5 seconds (5000 milliseconds)
-                setInterval(sendAjaxRequest, 20000);
+                setInterval(sendAjaxRequest, 150000);
             });
 
             function barChart() {
