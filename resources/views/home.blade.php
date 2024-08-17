@@ -178,7 +178,6 @@
             const hydrantNames = @json($hydrants->pluck('name'));
             const todayOrdersCounts = @json($hydrants->pluck('todayOrdersCount'));
             const ordersCounts = @json($hydrants->pluck('ordersCount'));
-            const backgroundColors = @json($backgroundColors);
             const revenueCtx = document.getElementById('revenueChart').getContext('2d');
             const revenueChart = new Chart(revenueCtx, {
                 type: 'bar',
