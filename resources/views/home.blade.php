@@ -235,7 +235,6 @@
                             // Your data here, if needed
                         },
                         success: function(response) {
-                            console.log(response);
                             hydrantNames = response.hydrants.map(function(hydrant) {
                                 return hydrant.name;
                             });
@@ -245,9 +244,6 @@
                             ordersCounts = response.hydrants.map(function(hydrant) {
                                 return hydrant.orders_count;
                             });
-                            console.log(hydrantNames);
-                            console.log(todayOrdersCounts);
-                            console.log(ordersCounts);
                             barChart();
                             $('#gallon-results').empty();
                             $('#results').empty();
