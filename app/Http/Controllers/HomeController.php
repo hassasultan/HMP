@@ -78,7 +78,7 @@ class HomeController extends Controller
             ->get();
             if ($request->has('status') && $request->status === "api") {
                 return response()->json([
-                    'hydrants' => $hydrants,
+                    // 'hydrants' => $hydrants,
                     'results' => $results,
                     'gallon_results' => $gallon_results,
                 ]);
