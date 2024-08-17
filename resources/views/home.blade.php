@@ -243,6 +243,9 @@
                                         <td>${item.GPS_ONLINE}</td>
                                         <td>${item.DC}</td>
                                         <td>${item.GPS_BILLING}</td>
+                                        <td>${item.GPS_CARE_OFF}</td>
+                                        <td>${item.PAK_RANGER}</td>
+                                        <td>${item.total_gallons}</td>
                                         <!-- Add more <td> for other fields if needed -->
                                     </tr>`
                                 );
@@ -255,6 +258,9 @@
                                         <td>${item.GPS_ONLINE}</td>
                                         <td>${item.DC}</td>
                                         <td>${item.GPS_BILLING}</td>
+                                        <td>${item.GPS_CARE_OFF}</td>
+                                        <td>${item.PAK_RANGER}</td>
+                                        <td>${item.total_orders}</td>
                                         <!-- Add more <td> for other fields if needed -->
                                     </tr>`
                                 );
