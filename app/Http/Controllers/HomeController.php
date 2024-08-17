@@ -38,6 +38,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $data = array();
         $hydrants = Hydrants::with(['orders', 'todayorders'])->whereNotIn('id', ["15", "14", "13", "12", "11"]);
         if(auth()->user()->role != 1)
         {
@@ -76,6 +77,13 @@ class HomeController extends Controller
             ->whereBetween('o.created_at', [$todayDate.' 00:00:00', $todayDate.' 23:59:59'])
             ->groupBy('h.name')
             ->get();
+        if($request->has('status') && $request->status == "api")
+        {
+            $data["hydrants"] = $hydrants;
+            $data["results"] = $results;
+            $data["gallon_results"] = $gallon_results;
+            return $data;
+        }
         return view('home',compact('hydrants','results','gallon_results'));
     }
     public function old_index(Request $request)

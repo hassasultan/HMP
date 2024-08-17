@@ -218,9 +218,35 @@
 
         <script>
             // Revenue Chart
-            const hydrantNames = @json($hydrants->pluck('name'));
-            const todayOrdersCounts = @json($hydrants->pluck('todayOrdersCount'));
-            const ordersCounts = @json($hydrants->pluck('ordersCount'));
+            var hydrantNames = @json($hydrants->pluck('name'));
+            var todayOrdersCounts = @json($hydrants->pluck('todayOrdersCount'));
+            var ordersCounts = @json($hydrants->pluck('ordersCount'));
+
+            $(document).ready(function() {
+                // Function to send AJAX request
+                function sendAjaxRequest() {
+                    $.ajax({
+                        url: '{{ route("home") }}', // Replace with your endpoint
+                        type: 'GET',           // or 'POST'
+                        data: {
+                            status:"api",
+                            // Your data here, if needed
+                        },
+                        success: function(response) {
+                            // Handle the success response here
+                            console.log(response);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle any errors here
+                            console.error(error);
+                        }
+                    });
+                }
+
+                // Set the interval to send the request every 5 seconds (5000 milliseconds)
+                setInterval(sendAjaxRequest, 50000);
+            });
+
             const revenueCtx = document.getElementById('revenueChart').getContext('2d');
             const revenueChart = new Chart(revenueCtx, {
                 type: 'bar',
@@ -262,5 +288,5 @@
     @endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    
 @endsection
