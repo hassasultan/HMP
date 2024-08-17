@@ -235,6 +235,12 @@
                         },
                         success: function(response) {
                             console.log(response);
+                            response.hydrants.map(function(hydrant) {
+                                hydrantNames =  hydrant.name;
+                                todayOrdersCounts =  hydrant.todayorders_count;
+                                ordersCounts =  hydrant.orders_count;
+                            });
+                            barChart();
                             $('#gallon-results').empty();
                             $('#results').empty();
                             response.gallon_results.forEach(function(item) {
