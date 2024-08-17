@@ -235,10 +235,14 @@
                         },
                         success: function(response) {
                             console.log(response);
-                            response.hydrants.map(function(hydrant) {
-                                hydrantNames =  hydrant.name;
-                                todayOrdersCounts =  hydrant.todayorders_count;
-                                ordersCounts =  hydrant.orders_count;
+                            hydrantNames = response.hydrants.map(function(hydrant) {
+                                return hydrant.name;
+                            });
+                            todayOrdersCounts = response.hydrants.map(function(hydrant) {
+                                return hydrant.todayorders_count;
+                            });
+                            ordersCounts = response.hydrants.map(function(hydrant) {
+                                return hydrant.orders_count;
                             });
                             console.log(hydrantNames);
                             console.log(todayOrdersCounts);
