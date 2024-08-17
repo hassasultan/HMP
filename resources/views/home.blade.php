@@ -225,12 +225,13 @@
             $(document).ready(function() {
                 // Function to send AJAX request
                 barChart();
+
                 function sendAjaxRequest() {
                     $.ajax({
-                        url: '{{ route("home") }}', // Replace with your endpoint
-                        type: 'GET',           // or 'POST'
+                        url: '{{ route('home') }}', // Replace with your endpoint
+                        type: 'GET', // or 'POST'
                         data: {
-                            status:"api",
+                            status: "api",
                             // Your data here, if needed
                         },
                         success: function(response) {
@@ -292,9 +293,9 @@
                 // Set the interval to send the request every 5 seconds (5000 milliseconds)
                 setInterval(sendAjaxRequest, 20000);
             });
-            function barChart()
-            {
-                if (revenueChart) {
+
+            function barChart() {
+                if (typeof revenueChart !== 'undefined') {
                     revenueChart.destroy();
                 }
                 const revenueCtx = document.getElementById('revenueChart').getContext('2d');
@@ -339,5 +340,5 @@
     @endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
 @endsection
