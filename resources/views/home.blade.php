@@ -171,6 +171,49 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        Today's Daily Gallons Report
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Hydrant</th>
+                                    <th>Commercial</th>
+                                    <th>GPS Online</th>
+                                    <th>DC</th>
+                                    <th>GPS Billing</th>
+                                    <th>GPS Care Off</th>
+                                    <th>Pak Ranger</th>
+                                    <th>Total Gallons</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($gallon_results as $data)
+                                    <tr>
+                                        <td>{{ $data->HYDRANT }}</td>
+                                        <td>{{ $data->commercial }}</td>
+                                        <td>{{ $data->GPS_ONLINE }}</td>
+                                        <td>{{ $data->DC }}</td>
+                                        <td>{{ $data->GPS_BILLING }}</td>
+                                        <td>{{ $data->GPS_CARE_OFF }}</td>
+                                        <td>{{ $data->PAK_RANGER }}</td>
+                                        <td>{{ $data->total_gallons }}</td>
+                                    </tr>
+                                @endforeach
+                                <!-- Add table rows here -->
+                            </tbody>
+                        </table>
+                        <nav>
+                            <ul class="pagination justify-content-end">
+                                <!-- Pagination items -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script>
