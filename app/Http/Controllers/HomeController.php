@@ -38,7 +38,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $hydrants = Hydrants::with(['orders', 'todayorders'])->whereNotIn('id','!=',["15","14","13","12","11"]);
+        $hydrants = Hydrants::with(['orders', 'todayorders'])->whereNotIn('id', ["15", "14", "13", "12", "11"]);
         if(auth()->user()->role != 1)
         {
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
