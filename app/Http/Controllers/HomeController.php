@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 use QrCode;
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
@@ -65,7 +66,27 @@ class HomeController extends Controller
             // ->where('orders.created_at', '>=', Carbon::today())
             ->groupBy('hydrants.name')
             ->get();
-        // dd($results->toArray());
+
+        $gallon_results = DB::table('billings as b')
+            ->join('orders as o', 'o.id', '=', 'b.order_id')
+            ->join('hydrants as h', 'h.id', '=', 'o.hydrant_id')
+            ->join('trucks as t', 't.id', '=', 'b.truck_id')
+            ->join('truck_types as tt', 't.truck_type', '=', 'tt.id')
+            ->select(
+                'h.name as HYDRANT',
+                DB::raw("SUM(CASE WHEN o.order_type like '%commercial%' THEN tt.name ELSE 0 END) as commercial"),
+                DB::raw("SUM(CASE WHEN o.order_type like '%ONLINE%' THEN tt.name ELSE 0 END) as GPS_ONLINE"),
+                DB::raw("SUM(CASE WHEN o.order_type like '%DC%' THEN tt.name ELSE 0 END) as DC"),
+                DB::raw("SUM(CASE WHEN o.order_type like '%BILLING%' THEN tt.name ELSE 0 END) as GPS_BILLING"),
+                DB::raw("SUM(CASE WHEN o.order_type like '%CARE%' THEN tt.name ELSE 0 END) as GPS_CARE_OFF"),
+                DB::raw("SUM(CASE WHEN o.order_type like '%RANGER%' THEN tt.name ELSE 0 END) as PAK_RANGER"),
+                DB::raw("SUM(tt.name) as total_gallons")
+            )
+            ->whereBetween('o.created_at', [$todayDate.' 00:00:00', $todayDate.' 23:59:59'])
+            ->groupBy('h.name')
+            ->get();
+        
+        dd($gallon_results->toArray());
         return view('home',compact('hydrants','results'));
     }
     public function old_index(Request $request)
