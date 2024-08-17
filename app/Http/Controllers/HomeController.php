@@ -38,12 +38,18 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $hydrants = Hydrants::with(['orders', 'todayorders'])->whereNotIn('id', ["15", "14", "13", "12", "11"]);
+        $hydrants = Hydrants::withCount([
+            'orders',
+            'todayorders' => function ($query) {
+                $query->where('created_at', '>=', Carbon::today());
+            }
+        ])->whereNotIn('id', ["15", "14", "13", "12", "11"]);
         if(auth()->user()->role != 1)
         {
             $hydrants = $hydrants->where('id',auth()->user()->hydrant_id);
         }
         $hydrants = $hydrants->get();
+        dd($hydrants->toArray());
         $todayDate = date("Y-m-d");
         $results = Hydrants::select('name as HYDRANT')
             ->selectRaw("COUNT(CASE WHEN orders.order_type LIKE '%commercial%' THEN 1 END) as commercial")
