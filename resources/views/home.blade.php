@@ -69,7 +69,7 @@
 
         <div class="row mt-4">
             <!-- Revenue Breakdown Chart -->
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         Today's Orders
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <!-- Pie Chart -->
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         Total Orders
@@ -99,7 +99,7 @@
                         <canvas id="segmentChart"></canvas>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         {{-- <div class="row mt-4">
