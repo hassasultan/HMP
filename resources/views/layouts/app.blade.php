@@ -110,7 +110,7 @@
     }
 </style>
 
-<body>
+<body class="g-sidenav-show bg-gray-200">
     <div id="app">
         {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
