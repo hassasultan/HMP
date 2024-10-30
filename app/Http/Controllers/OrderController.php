@@ -144,8 +144,8 @@ class OrderController extends Controller
                 }
                 $cust->save();
             }
-        } 
-        else 
+        }
+        else
         {
             if ($request->has('new_cutomer') && $request->new_cutomer == "1") {
                 $cust = Customer::where('contact_num', $request->customer_num)->first();
@@ -157,7 +157,7 @@ class OrderController extends Controller
                     $cust->save();
                 }
 
-            } 
+            }
             // else {
             //     $cust = Customer::get($request->customer_id);
             // }
@@ -232,8 +232,8 @@ class OrderController extends Controller
             } else {
                 $new_order = Orders::where('Order_Number', $request->Order_Number)->first();
             }
-        } 
-        else 
+        }
+        else
         {
             if($request->has('customer_id'))
             {
@@ -262,10 +262,10 @@ class OrderController extends Controller
                         }
                     }
                     // $id = IdGenerator::generate(['table' => 'orders', 'field' => 'Order_Number', 'length' => 9, 'prefix' => strtoupper($letter[0]).'-']);
-    
+
                     // dd($id);
                     $request['Order_Number'] = $id;
-    
+
                     //output: INV-000001
                     $data = $request->all();
                     $data['customer_id'] = $row;
@@ -429,7 +429,7 @@ class OrderController extends Controller
                 if (!$request->has('hydrant_id') || $request->hydrant_id == '') {
                     return redirect()->back()->withError("Hydrant, From Date, To Date & Order Type must be required...");
                 }
-        
+
             }
             if (!$request->has('order_type') || $request->order_type == '') {
                 return redirect()->back()->withError("Hydrant, From Date, To Date & Order Type must be required...");
@@ -456,16 +456,18 @@ class OrderController extends Controller
     public function truck_selection_list(Request $request)
     {
         if (auth()->user()->role != 1) {
-            $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where(function ($query) {
-                // Check if hydrant_id is equal to the authenticated user's hydrant_id
-                $query->where('hydrant_id', auth()->user()->hydrant->id);
+            // $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where(function ($query) {
+            //     // Check if hydrant_id is equal to the authenticated user's hydrant_id
+            //     $query->where('hydrant_id', auth()->user()->hydrant->id);
 
-                // Or check if owned_by is equal to 0 when hydrant_id is not equal to auth()->user()->hydrant->id
-                $query->orWhere(function ($subquery) {
-                    $subquery->where('hydrant_id', '!=', auth()->user()->hydrant->id)
-                        ->where('owned_by', 0);
-                });
-            })->where(function ($query) use ($request) {
+            //     // Or check if owned_by is equal to 0 when hydrant_id is not equal to auth()->user()->hydrant->id
+            //     $query->orWhere(function ($subquery) {
+            //         $subquery->where('hydrant_id', '!=', auth()->user()->hydrant->id)
+            //             ->where('owned_by', 0);
+            //     });
+            // })
+            $truck = Truck::with('hydrant', 'truckCap', 'drivers')
+            ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->name . '%');
                 $query->orWhere('truck_num', 'like', '%' . $request->name . '%');
             })->take(8)->get();
@@ -498,11 +500,11 @@ class OrderController extends Controller
             $area = Area::all();
 
         }
-        if (auth()->user()->role != 1) {
-            $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by', 0)->get();
-        } else {
+        // if (auth()->user()->role != 1) {
+        //     $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by', 0)->get();
+        // } else {
             $truck = Truck::all();
-        }
+        // }
         if (auth()->user()->role != 1) {
             $driver = Driver::with('truck')->whereHas('truck', function ($query) {
                 $query->where('hydrant_id', auth()->user()->hydrant->id);
