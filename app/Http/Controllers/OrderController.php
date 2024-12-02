@@ -126,12 +126,12 @@ class OrderController extends Controller
     {
         # code...
         // dd($request->all());
+        $user = auth()->user();
         if($request->has('order_type') && $request->order_type == "Commercial Space Offline" && auth()->user()->role != 1)
         {
             if(auth()->user()->hydrant->commercial_limit_remaining < (int)$request->truck_type)
             {
                 $commercialLimitUpdatedAt = auth()->user()->hydrant->commercial_limit_updated_at;
-                $user = auth()->user();
                 if ($commercialLimitUpdatedAt && Carbon::parse($commercialLimitUpdatedAt)->month < now()->month) {
                     // Update the field to the current timestamp
                     $user->hydrant->update([
@@ -334,6 +334,13 @@ class OrderController extends Controller
                 $data = $request->all();
                 $data['customer_id'] = $cust->id;
                 $truck_type = Orders::create($data);
+                if($request->order_type == "Commercial Space Offline")
+                {
+                    $updated_commercial_limit = $user->hydrant->commercial_limit_remaining - (int)$request->truck_type;
+                    $user->hydrant->update([
+                        'commercial_limit_remaining' => $updated_commercial_limit
+                    ]);
+                }
                 // dd($truck_type);
                 if (auth()->user()->role != 1) {
                     $truck_type->hydrant_id = auth()->user()->hydrant->id;
