@@ -35,6 +35,7 @@
                                         <option value="Online (GPS)">Online (GPS)</option>
                                         @if (auth()->user()->type == 'commercial')
                                             <option value="Commercial">Commercial</option>
+                                            <option value="Commercial Space Offline">Commercial Space Offline</option>
                                         @else
                                             <option value="Gps(billing)">Gps ( billing )</option>
                                             <option value="Gps(careoff)">Gps ( care off )</option>
