@@ -35,7 +35,7 @@
                                         <option value="Online (GPS)">Online (GPS)</option>
                                         @if (auth()->user()->type == 'commercial')
                                             <option value="Commercial">Commercial</option>
-                                            <option value="Commercial Space Offline">Commercial Space Offline</option>
+                                            <option value="Commercial Offline">Commercial Offline</option>
                                         @else
                                             <option value="Gps(billing)">Gps ( billing )</option>
                                             <option value="Gps(careoff)">Gps ( care off )</option>
@@ -44,7 +44,7 @@
                                             <option value="P.A.F korangi creek">P.A.F korangi creek</option>
                                             <option value="Dc quota">Dc quota</option>
                                             <option value="Govt. vehicle">Govt. vehicle</option>
-                                            <option value="Commercial Space Offline">Commercial Space Offline</option>
+                                            <option value="Commercial Offline">Commercial Offline</option>
                                         @endif
                                     @else
                                         <option value="Online (GPS)">Online (GPS)</option>
