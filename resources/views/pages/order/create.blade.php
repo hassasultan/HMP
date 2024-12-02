@@ -43,6 +43,7 @@
                                             <option value="P.A.F korangi creek">P.A.F korangi creek</option>
                                             <option value="Dc quota">Dc quota</option>
                                             <option value="Govt. vehicle">Govt. vehicle</option>
+                                            <option value="Commercial Space Offline">Commercial Space Offline</option>
                                         @endif
                                     @else
                                         <option value="Online (GPS)">Online (GPS)</option>

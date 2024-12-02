@@ -20,6 +20,9 @@ class Hydrants extends Model
         'alternate',
         'ots_hydrant',
         'color',
+        'commercial_limit',
+        'commercial_limit_remaining',
+        'commercial_limit_updated_at',
     ];
     // public function truck_type_fun()
     // {

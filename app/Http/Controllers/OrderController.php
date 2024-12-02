@@ -126,6 +126,26 @@ class OrderController extends Controller
     {
         # code...
         // dd($request->all());
+        if($request->has('order_type') && $request->order_type == "Commercial Space Offline" && auth()->user()->role != 1)
+        {
+            if(auth()->user()->hydrant->commercial_limit_remaining < (int)$request->truck_type)
+            {
+                $commercialLimitUpdatedAt = auth()->user()->hydrant->commercial_limit_updated_at;
+                $user = auth()->user();
+                if ($commercialLimitUpdatedAt && Carbon::parse($commercialLimitUpdatedAt)->month < now()->month) {
+                    // Update the field to the current timestamp
+                    $user->hydrant->update([
+                        'commercial_limit_remaining' => 10000000,
+                        'commercial_limit_updated_at' => now(),
+                    ]);
+                }
+                else
+                {
+                    return redirect()->back()->withError("You have Exeed your monthly Commercial Limit...");
+                }
+
+            }
+        }
         if ($request->has('ots')) {
             $cust = Customer::where('contact_num', $request->contact_num)->first();
             if (empty($cust)) {
