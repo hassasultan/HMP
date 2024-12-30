@@ -164,6 +164,14 @@ class OrderController extends Controller
                 }
                 $cust->save();
             }
+            else
+            {
+                $cust->address = $request->address;
+                $cust->street = $request->street;
+                $cust->location = $request->location;
+                $cust->gps = $request->gps;
+                $cust->save();
+            }
         }
         else
         {
