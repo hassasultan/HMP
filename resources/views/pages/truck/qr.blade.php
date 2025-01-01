@@ -130,7 +130,9 @@
             <div class="main-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="path-to-your-logo.png" alt="Karachi Water & Sewerage Corporation Logo">
+                    <img src="{{ asset('assets/img/unnamed.png') }}"  alt="Karachi Water & Sewerage Corporation Logo">
+
+                    {{-- <img src="path-to-your-logo.png" alt="Karachi Water & Sewerage Corporation Logo"> --}}
                 </div>
 
                 <!-- Rectangle -->
