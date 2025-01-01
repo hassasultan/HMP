@@ -154,30 +154,22 @@
         }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
-        <div class="card-container">
-            <!-- Repeating border text -->
-            <div class="border-text">
-                <span>KW&SC HMC</span><span>KW&SC HMC</span><span>KW&SC HMC</span>
-                <span>KW&SC HMC</span><span>KW&SC HMC</span><span>KW&SC HMC</span>
-                <span>KW&SC HMC</span><span>KW&SC HMC</span><span>KW&SC HMC</span>
-            </div>
-
-            <!-- Main content -->
-            <div class="main-content">
-                <!-- Logo -->
-                <div class="logo">
-                    <img src="{{ asset('assets/img/unnamed.png') }}"  alt="Karachi Water & Sewerage Corporation Logo">
-
-                    {{-- <img src="path-to-your-logo.png" alt="Karachi Water & Sewerage Corporation Logo"> --}}
-                </div>
-
-                <!-- Rectangle -->
-                <div class="rectangle"></div>
-
-                <!-- Authorized Contractor Text -->
-                <div class="authorized-text">
-                    <p class="title">AUTHORIZED</p>
-                    <p class="subtitle">CONTRACTOR</p>
+        <div class="container mt-5">
+            <!-- Main container with double-border -->
+            <div class="double-border">
+                <span class="border-text">KW&SC | HMC</span> <!-- Text between lines -->
+                <div class="content">
+                    <!-- Add your content here -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="mb-3">Authorized Contractor</h4>
+                            <!-- Add any additional text or content here -->
+                        </div>
+                        <div>
+                            <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
+                        </div>
+                    </div>
+                    <!-- Add more content as needed -->
                 </div>
             </div>
         </div>
