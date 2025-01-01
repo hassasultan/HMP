@@ -45,8 +45,44 @@
             position: relative;
             max-width: 600px;
             margin: 20px auto;
-            padding: 20px;
-            border: 4px solid #0000FF;
+            background: #fff;
+            padding: 30px;
+        }
+
+        /* Double-line border with text */
+        .double-border {
+            position: relative;
+            border: 6px solid #0000FF;
+            padding: 15px;
+        }
+
+        .double-border::before,
+        .double-border::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid #0000FF;
+            z-index: 1;
+        }
+
+        .border-text {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .border-text span {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #0000FF;
         }
 
         /* Inner border with repeating text */
