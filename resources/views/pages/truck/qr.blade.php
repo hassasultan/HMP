@@ -232,7 +232,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="img">
-                                {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url) !!}
+                                {!! \QrCode::size(350)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
                             <div class="authorized-text">AUTHORIZED</div>
                             <div class="contractor-text">CONTRACTOR</div>
