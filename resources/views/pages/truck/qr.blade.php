@@ -162,6 +162,12 @@
             font-size: 48px;
             color: #000;
         }
+        .seal P
+        {
+            font-size:  41px;
+            color: #000;
+            text-decoration: underline;
+        }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
         <div class="card-container">
@@ -238,14 +244,13 @@
             <div class="content">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-6 p-4">
+                        <div class="col-md-8 p-4">
                             <div class="img">
                                 {!! \QrCode::size(300)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
                             <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
                             <div class="contractor-text">CONTRACTOR</div>
                         </div>
-                        <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <div class="img">
                                 <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
@@ -255,7 +260,8 @@
 
                             <!-- Authorized Text -->
 
-                            <div class="img">
+                            <div class="seal">
+                                <p>VALID TILL</p>
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
