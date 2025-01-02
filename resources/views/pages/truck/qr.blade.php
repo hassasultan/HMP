@@ -159,6 +159,7 @@
 
         .contractor-text {
             font-size: 48px;
+            color: #000;
         }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
