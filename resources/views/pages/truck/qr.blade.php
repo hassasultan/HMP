@@ -40,137 +40,221 @@
 
 <body>
     <style>
-        /* Outer border */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
         .card-container {
+            width: 800px;
+            height: 550px;
+            border: 3px solid #41419a;
+            /* Outer blue border */
+            margin: 0 auto;
             position: relative;
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 30px;
         }
 
-        /* Double-line border with text */
-        .double-border {
-            position: relative;
-            border: 6px solid #0000FF;
-            padding: 15px;
-        }
-
-        .double-border::before,
-        .double-border::after {
+        /* Inner double border */
+        .card-container::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 3px solid #0000FF;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 3px solid #41419a;
+            /* Inner blue border */
             z-index: 1;
         }
 
-        .border-text {
-            position: absolute;
-            top: -20px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .border-text span {
-            position: absolute;
-            font-size: 14px;
-            font-weight: bold;
-            color: #0000FF;
-        }
-
-        /* Inner border with repeating text */
+        /* Border text */
         .border-text {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            margin: -4px;
-            border: 2px solid #0000FF;
             display: flex;
-            flex-wrap: wrap;
+            /*justify-content: space-between;*/
             align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .border-text span {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
-            color: #0000FF;
-            margin: 0 10px;
-            text-transform: uppercase;
+            color: #212529;
         }
 
-        /* Main content */
-        .main-content {
-            position: relative;
-            z-index: 2;
-            background: #fff;
-            padding: 20px;
+        .left {}
+
+        .horizontal span {
+            padding: 0 5px;
         }
 
-        .main-content .logo {
-            text-align: center;
-            margin-bottom: 20px;
+        .horizontal {
+            margin-left: 27px;
         }
 
-        .main-content .logo img {
-            max-width: 120px;
-            height: auto;
-        }
-
-        .main-content .rectangle {
-            border: 2px solid #000;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-
-        .main-content .authorized-text {
-            text-align: center;
+        .vertical {
             margin-top: 20px;
         }
 
-        .main-content .authorized-text p {
-            margin: 0;
-            line-height: 1.2;
+        .vertical span {
+            padding: 5px 0;
         }
 
-        .main-content .authorized-text .title {
-            font-size: 24px;
+        .border-text.vertical {
+            position: absolute;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            top: 0;
+            bottom: 0;
+            left: -771px;
+        }
+
+        .border-text.vertical.right {
+            left: auto;
+            right: 0px;
+            transform: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 30px 15px;
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        .seal {
+            width: 80px;
+            margin-top: 10px;
+        }
+
+        .id-number {
+            font-size: 22px;
             font-weight: bold;
+            margin-top: 5px;
         }
 
-        .main-content .authorized-text .subtitle {
+        .authorized-text {
             font-size: 18px;
-            font-weight: normal;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .contractor-text {
+            font-size: 16px;
         }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
-        <div class="container mt-5">
-            <!-- Main container with double-border -->
-            <div class="double-border">
-                <span class="border-text">KW&SC | HMC</span> <!-- Text between lines -->
-                <div class="content">
-                    <!-- Add your content here -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h4 class="mb-3">Authorized Contractor</h4>
-                            <!-- Add any additional text or content here -->
+        <div class="card-container">
+            <!-- Horizontal Top Border Text -->
+            <div class="border-text horizontal">
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+            </div>
+
+            <!-- Vertical Left Border Text -->
+            <div class="border-text vertical left">
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+
+            </div>
+
+            <!-- Vertical Right Border Text -->
+            <div class="border-text vertical right">
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+
+            </div>
+
+            <!-- Horizontal Bottom Border Text -->
+            <div class="border-text horizontal" style="top: auto; bottom: 0;">
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+            </div>
+
+            <div class="content">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url) !!}
                         </div>
-                        <div>
-                            <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
+                        <div class="col-md-4">
+                            <div class="img">
+                                <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
+                            </div>
+                            <!-- ID Number -->
+                            <div class="id-number">JZ-9191</div>
+
+                            <!-- Authorized Text -->
+                            <div class="authorized-text">AUTHORIZED</div>
+                            <div class="contractor-text">CONTRACTOR</div>
+                            <div class="img">
+                                <img src="https://via.placeholder.com/80" alt="Seal" class="seal">
+                            </div>
                         </div>
                     </div>
-                    <!-- Add more content as needed -->
                 </div>
+                <!-- QR Code -->
+
+                <!-- Logo -->
+
+
+                <!-- Seal -->
             </div>
         </div>
         {{-- <div class="container p-4  w-100 text-center" id="getPrint" style="background: {{ $driver->hydrant->color }};">
@@ -232,7 +316,7 @@
             print_area.document.write('<html>');
             print_area.document.write(
                 '<link rel="dns-prefetch" href="//fonts.gstatic.com"><link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /><link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" /><link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" /><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"><link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.0.0') }}" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />'
-                );
+            );
             print_area.document.write('<body>');
             print_area.document.write(elem.innerHTML);
             print_area.document.write('</body></html>');
