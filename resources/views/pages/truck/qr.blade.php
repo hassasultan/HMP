@@ -236,24 +236,25 @@
             <div class="content">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-8 p-4">
+                        <div class="col-md-6 p-4">
                             <div class="img">
                                 {!! \QrCode::size(300)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
-                            <div class="authorized-text"><h6>AUTHORIZED <span>VALID TILL:</span></h6> </div>
+                            <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
                             <div class="contractor-text">CONTRACTOR</div>
                         </div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <div class="img">
                                 <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                             </div>
                             <!-- ID Number -->
-                            <div class="id-number">JZ-9191</div>
+                            <div class="id-number">{{ $driver->truck_num }}</div>
 
                             <!-- Authorized Text -->
 
                             <div class="img">
-                                <img src="https://via.placeholder.com/80" alt="Seal" class="seal">
+                                {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
                     </div>
