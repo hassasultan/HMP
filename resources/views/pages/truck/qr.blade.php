@@ -146,13 +146,13 @@
         }
 
         .authorized-text {
-            font-size: 18px;
+            font-size: 51px;
             font-weight: bold;
-            margin-top: 15px;
+            /* margin-top: 15px; */
         }
 
         .contractor-text {
-            font-size: 16px;
+            font-size: 51px;
         }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
@@ -230,7 +230,7 @@
             <div class="content">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-8 p-4">
                             <div class="img">
                                 {!! \QrCode::size(350)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
