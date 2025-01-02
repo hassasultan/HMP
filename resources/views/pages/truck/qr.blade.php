@@ -148,11 +148,12 @@
         .authorized-text {
             font-size: 51px;
             font-weight: bold;
+            color: #000;
             /* margin-top: 15px; */
         }
 
         .contractor-text {
-            font-size: 51px;
+            font-size: 48px;
         }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
