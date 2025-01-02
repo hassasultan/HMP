@@ -143,6 +143,7 @@
             font-size: 22px;
             font-weight: bold;
             margin-top: 5px;
+            color: #000;
         }
 
         .authorized-text h6{
