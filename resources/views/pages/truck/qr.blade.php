@@ -168,6 +168,11 @@
             color: #000;
             text-decoration: underline;
         }
+        h2
+        {
+            color: #000;
+            text-decoration: underline;
+        }
     </style>
     <div id="app" style="background: {{ $driver->hydrant->color }};">
         <div class="card-container">
@@ -243,6 +248,7 @@
 
             <div class="content">
                 <div class="col-md-12">
+                    <h2>Hydrant {{ $driver->hydrant->name }}</h2>
                     <div class="row">
                         <div class="col-md-8 p-4">
                             <div class="img">
