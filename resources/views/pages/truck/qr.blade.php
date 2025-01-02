@@ -231,7 +231,11 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-8">
-                            {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url) !!}
+                            <div class="img">
+                                {!! \QrCode::size(450)->backgroundColor(0,0,0,0)->generate($url) !!}
+                            </div>
+                            <div class="authorized-text">AUTHORIZED</div>
+                            <div class="contractor-text">CONTRACTOR</div>
                         </div>
                         <div class="col-md-4">
                             <div class="img">
@@ -241,8 +245,7 @@
                             <div class="id-number">JZ-9191</div>
 
                             <!-- Authorized Text -->
-                            <div class="authorized-text">AUTHORIZED</div>
-                            <div class="contractor-text">CONTRACTOR</div>
+
                             <div class="img">
                                 <img src="https://via.placeholder.com/80" alt="Seal" class="seal">
                             </div>
