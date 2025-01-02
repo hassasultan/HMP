@@ -257,6 +257,10 @@
                             </div>
                             <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
                             <div class="contractor-text">CONTRACTOR</div>
+                            <div class="seal">
+                                VALID TILL
+                                {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="img">
@@ -267,8 +271,7 @@
 
                             <!-- Authorized Text -->
 
-                            <div class="seal">
-                                VALID TILL
+                            <div class="img">
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
