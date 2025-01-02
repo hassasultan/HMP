@@ -145,11 +145,16 @@
             margin-top: 5px;
         }
 
-        .authorized-text {
+        .authorized-text h6{
             font-size: 51px;
             font-weight: bold;
             color: #000;
             /* margin-top: 15px; */
+        }
+        .authorized-text span
+        {
+            font-size: 41px;
+            color: #000;
         }
 
         .contractor-text {
@@ -235,7 +240,7 @@
                             <div class="img">
                                 {!! \QrCode::size(300)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
-                            <div class="authorized-text">AUTHORIZED</div>
+                            <div class="authorized-text"><h6>AUTHORIZED</h6> <span>VALID TILL:</span></div>
                             <div class="contractor-text">CONTRACTOR</div>
                         </div>
                         <div class="col-md-4">
