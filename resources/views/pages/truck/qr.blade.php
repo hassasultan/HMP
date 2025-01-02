@@ -162,14 +162,11 @@
             font-size: 48px;
             color: #000;
         }
-        .seal P
+        .seal
         {
             font-size:  15px;
             color: #000;
             text-decoration: underline;
-        }
-        .seal
-        {
             text-align: center !important;
         }
         h2
@@ -271,7 +268,7 @@
                             <!-- Authorized Text -->
 
                             <div class="seal">
-                                <p>VALID TILL</p>
+                                VALID TILL
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
