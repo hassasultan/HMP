@@ -251,12 +251,12 @@
             </div>
 
             <div class="content">
+                <h2>Hydrant {{ $driver->hydrant->name }}</h2>
                 <div class="col-md-12">
-                    <h2>Hydrant {{ $driver->hydrant->name }}</h2>
                     <div class="row">
                         <div class="col-md-8 p-4">
                             <div class="img">
-                                {!! \QrCode::size(300)->backgroundColor(0,0,0,0)->generate($url) !!}
+                                {!! \QrCode::size(350)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
                             <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
                             <div class="contractor-text">CONTRACTOR</div>
