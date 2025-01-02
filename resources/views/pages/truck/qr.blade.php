@@ -48,7 +48,7 @@
 
         .card-container {
             width: 800px;
-            height: 550px;
+            height: 600px;
             border: 3px solid #41419a;
             /* Outer blue border */
             margin: 0 auto;
@@ -164,9 +164,13 @@
         }
         .seal P
         {
-            font-size:  41px;
+            font-size:  15px;
             color: #000;
             text-decoration: underline;
+        }
+        .seal
+        {
+            text-align: center !important;
         }
         h2
         {
