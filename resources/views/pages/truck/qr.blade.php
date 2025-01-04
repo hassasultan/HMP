@@ -273,9 +273,9 @@
 
             <div class="content">
                 <h2>Hydrant {{ $driver->hydrant->name }}</h2>
-                <div class="col-md-12">
+                <div class="col-12">
                     <div class="row ps-4">
-                        <div class="col-md-7 p-4 text-start">
+                        <div class="col-7 p-4 text-start">
                             <div class="img">
                                 {!! \QrCode::size(350)->backgroundColor(0, 0, 0, 0)->generate($url) !!}
                             </div>
@@ -296,7 +296,7 @@
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <div class="img">
                                 <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                             </div>
