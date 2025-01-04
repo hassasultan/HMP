@@ -210,11 +210,19 @@
                 <span>HMC</span>
                 <span>KW&SC</span>
                 <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
 
             </div>
 
             <!-- Vertical Right Border Text -->
             <div class="border-text vertical right">
+                <span>KW&SC</span>
+                <span>HMC</span>
+                <span>KW&SC</span>
+                <span>HMC</span>
                 <span>KW&SC</span>
                 <span>HMC</span>
                 <span>KW&SC</span>
