@@ -146,36 +146,39 @@
             color: #000;
         }
 
-        .authorized-text h6{
+        .authorized-text h6 {
             font-size: 51px;
             font-weight: bold;
             color: #000;
-            /* margin-top: 15px; */
+            margin: 0px;
         }
-        .authorized-text h6 span
-        {
-            font-size:  41px;
+
+        .authorized-text h6 span {
+            font-size: 41px;
             font-weight: 100;
         }
 
-        .contractor-text p{
+        .contractor-text {
+            margin-top: -28px;
+        }
+
+        .contractor-text p {
             font-size: 48px;
             color: #000;
         }
-        .seal p
-        {
-            font-size:  15px;
+
+        .seal p {
+            font-size: 15px;
             color: #000;
             text-decoration: underline;
         }
-        .seal
-        {
+
+        .seal {
             text-align: left !important;
-            padding-left: 4.8rem;
 
         }
-        h2
-        {
+
+        h2 {
             color: #000;
             text-decoration: underline;
         }
@@ -271,17 +274,25 @@
             <div class="content">
                 <h2>Hydrant {{ $driver->hydrant->name }}</h2>
                 <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-8 p-4">
+                    <div class="row ps-4">
+                        <div class="col-md-7 p-4 text-start">
                             <div class="img">
-                                {!! \QrCode::size(350)->backgroundColor(0,0,0,0)->generate($url) !!}
+                                {!! \QrCode::size(350)->backgroundColor(0, 0, 0, 0)->generate($url) !!}
                             </div>
-                            <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
-                            <div class="contractor-text"><p>@if ($driver->owned_by != 1) SUB-CONTRACTOR @else CONTRACTOR @endif
-                            </p>
+                            <div class="authorized-text">
+                                <h6>AUTHORIZED</h6>
+                            </div>
+                            <div class="contractor-text">
+                                <p>
+                                    @if ($driver->owned_by != 1)
+                                        SUB-CONTRACTOR
+                                    @else
+                                        CONTRACTOR
+                                    @endif
+                                </p>
                             </div>
                             <div class="seal">
-                               <p> VALID TILL :</p>
+                                <p> VALID TILL :</p>
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
