@@ -216,8 +216,8 @@
                 <span>HMC</span>
                 <span>KW&SC</span>
                 <span>HMC</span>
-                <span>KW&SC</span>
-                {{-- <span>HMC</span> --}}
+                {{-- <span>KW&SC</span>
+                <span>HMC</span> --}}
 
             </div>
 
