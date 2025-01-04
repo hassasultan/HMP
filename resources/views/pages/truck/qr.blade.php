@@ -167,7 +167,8 @@
             font-size:  15px;
             color: #000;
             text-decoration: underline;
-            text-align: center !important;
+            text-align: left !important;
+            padding-left: 3.8rem;
         }
         h2
         {
@@ -256,7 +257,7 @@
                                 {!! \QrCode::size(350)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
                             <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
-                            <div class="contractor-text">CONTRACTOR
+                            <div class="contractor-text">@if ($driver->owned_by != 1) SUB-CONTRACTOR @else CONTRACTOR @endif
                             </div>
                             <div class="seal">
                                 VALID TILL
