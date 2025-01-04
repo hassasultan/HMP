@@ -217,10 +217,10 @@
                 <span>HMC</span>
                 <span>KW&SC</span>
                 <span>HMC</span>
-                <span>KW&SC</span>
+                {{-- <span>KW&SC</span>
                 <span>HMC</span>
                 <span>KW&SC</span>
-                <span>HMC</span>
+                <span>HMC</span> --}}
                 {{-- <span>KW&SC</span>
                 <span>HMC</span>
                 <span>KW&SC</span>
@@ -240,10 +240,10 @@
                 <span>HMC</span>
                 <span>KW&SC</span>
                 <span>HMC</span>
-                <span>KW&SC</span>
+                {{-- <span>KW&SC</span>
                 <span>HMC</span>
                 <span>KW&SC</span>
-                <span>HMC</span>
+                <span>HMC</span> --}}
                 {{-- <span>KW&SC</span>
                 <span>HMC</span>
                 <span>KW&SC</span>
