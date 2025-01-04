@@ -159,11 +159,11 @@
         }
 
         .contractor-text {
-            margin-top: -28px;
+            margin-top: -22px;
         }
 
         .contractor-text p {
-            font-size: 48px;
+            font-size: 2.2rem;
             color: #000;
         }
 
