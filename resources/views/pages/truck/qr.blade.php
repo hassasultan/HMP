@@ -48,7 +48,7 @@
 
         .card-container {
             width: 800px;
-            height: 650px;
+            height: 690px;
             border: 3px solid #41419a;
             /* Outer blue border */
             margin: 0 auto;
