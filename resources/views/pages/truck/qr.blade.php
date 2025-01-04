@@ -260,7 +260,7 @@
                             <div class="contractor-text">@if ($driver->owned_by != 1) SUB-CONTRACTOR @else CONTRACTOR @endif
                             </div>
                             <div class="seal">
-                                VALID TILL
+                                VALID TILL :
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
