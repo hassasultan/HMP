@@ -48,7 +48,7 @@
 
         .card-container {
             width: 800px;
-            height: 660px;
+            height: 550px;
             border: 3px solid #41419a;
             /* Outer blue border */
             margin: 0 auto;
@@ -147,7 +147,7 @@
         }
 
         .authorized-text h6 {
-            font-size: 51px;
+            font-size: 38px;
             font-weight: bold;
             color: #000;
             margin: 0px;
@@ -163,7 +163,7 @@
         }
 
         .contractor-text p {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: #000;
         }
 
@@ -275,9 +275,9 @@
                 <h2>Hydrant {{ $driver->hydrant->name }}</h2>
                 <div class="col-12">
                     <div class="row ps-4">
-                        <div class="col-7 p-4 text-start">
+                        <div class="col-6 p-4 text-start">
                             <div class="img">
-                                {!! \QrCode::size(350)->backgroundColor(0, 0, 0, 0)->generate($url) !!}
+                                {!! \QrCode::size(250)->backgroundColor(0, 0, 0, 0)->generate($url) !!}
                             </div>
                             <div class="authorized-text">
                                 <h6>AUTHORIZED</h6>
@@ -296,8 +296,8 @@
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="img">
+                        <div class="col-6">
+                            <div class="logo-img">
                                 <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
                             </div>
                             <!-- ID Number -->
