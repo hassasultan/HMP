@@ -168,7 +168,7 @@
             color: #000;
             text-decoration: underline;
             text-align: left !important;
-            padding-left: 3.8rem;
+            padding-left: 4.8rem;
         }
         h2
         {
