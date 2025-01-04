@@ -158,17 +158,21 @@
             font-weight: 100;
         }
 
-        .contractor-text {
+        .contractor-text p{
             font-size: 48px;
             color: #000;
         }
-        .seal
+        .seal p
         {
             font-size:  15px;
             color: #000;
             text-decoration: underline;
+        }
+        .seal
+        {
             text-align: left !important;
             padding-left: 4.8rem;
+
         }
         h2
         {
@@ -273,10 +277,11 @@
                                 {!! \QrCode::size(350)->backgroundColor(0,0,0,0)->generate($url) !!}
                             </div>
                             <div class="authorized-text"><h6>AUTHORIZED</h6> </div>
-                            <div class="contractor-text">@if ($driver->owned_by != 1) SUB-CONTRACTOR @else CONTRACTOR @endif
+                            <div class="contractor-text"><p>@if ($driver->owned_by != 1) SUB-CONTRACTOR @else CONTRACTOR @endif
+                            </p>
                             </div>
                             <div class="seal">
-                                VALID TILL :
+                               <p> VALID TILL :</p>
                                 {{-- <img src="https://via.placeholder.com/80" alt="Seal" class="seal"> --}}
                             </div>
                         </div>
