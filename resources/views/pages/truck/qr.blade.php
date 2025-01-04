@@ -134,10 +134,10 @@
             margin: 0 auto;
         }
 
-        .seal {
+        /* .seal {
             width: 80px;
             margin-top: 10px;
-        }
+        } */
 
         .id-number {
             font-size: 22px;
