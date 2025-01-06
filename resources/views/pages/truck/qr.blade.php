@@ -299,7 +299,7 @@
                         </div>
                         <div class="col-6">
                             <div class="logo-img">
-                                <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" alt="main_logo">
+                                <img src="{{ asset('assets/img/unnamed.png') }}" class="img-fluid" style="height: 250px !important;" alt="main_logo">
                             </div>
                             <!-- ID Number -->
                             <div class="id-number">{{ $driver->truck_num }}</div>
