@@ -275,7 +275,8 @@
                 <h2>Hydrant {{ $driver->hydrant->name }}</h2>
                 <div class="col-12">
                     <div class="row ps-4">
-                        <div class="col-6 p-4 text-start">
+                        <div class="col-2"></div>
+                        <div class="col-4 p-4 text-start">
                             <div class="img">
                                 {!! \QrCode::size(250)->backgroundColor(0, 0, 0, 0)->generate($url) !!}
                             </div>
