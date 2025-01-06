@@ -142,7 +142,7 @@
         .id-number {
             font-size: 22px;
             font-weight: bold;
-            margin-top: 5px;
+            margin-top: -25px;
             color: #000;
         }
 
