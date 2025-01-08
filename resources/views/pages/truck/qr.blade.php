@@ -163,7 +163,7 @@
         }
 
         .contractor-text p {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: #000;
         }
 
