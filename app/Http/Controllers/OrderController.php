@@ -741,6 +741,7 @@ class OrderController extends Controller
                     $truck_tracking->delete();
                 }
             }
+            dd('status: ' . $status. 'state : ' . $state. 'amount:' . $amount . 'vehicle_no :'.$vehicle_no. 'driver_phone :' . $driver_phone. 'note :'. $note. ' driver_name:'. $driver_name);
             $curl = curl_init();
             curl_setopt_array(
                 $curl,
