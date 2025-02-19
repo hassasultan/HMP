@@ -209,6 +209,51 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <h6>Vehicle Fitness Certificate</h6>
+                                    <img class="m-auto img-fluid"
+                                        src="{{ asset('public/storage/'.$driver->vehicle_fitness) }}" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <h6>Commercial License Certificate</h6>
+                                    <img class="m-auto img-fluid"
+                                        src="{{ asset('public/storage/'.$driver->commercial_license) }}" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <h6>Road Permit Document</h6>
+                                    <img class="m-auto img-fluid"
+                                        src="{{ asset('public/storage/'.$driver->road_permit) }}" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <h6>Running paper Image</h6>
+                                    <img class="m-auto img-fluid"
+                                        src="{{ asset('public/storage/'.$driver->doc_running_part) }}" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <h6>Cabin Picture</h6>
+                                    <img class="m-auto img-fluid"
+                                        src="{{ asset('public/storage/'.$driver->cabin_picture) }}" />
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
