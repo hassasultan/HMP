@@ -505,7 +505,7 @@ class OrderController extends Controller
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->name . '%');
                 $query->orWhere('truck_num', 'like', '%' . $request->name . '%');
-            })->take(8)->get();
+            })->where('status',1)->take(8)->get();
         } else {
             $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
         }
@@ -538,14 +538,14 @@ class OrderController extends Controller
         // if (auth()->user()->role != 1) {
         //     $truck = Truck::where('hydrant_id', auth()->user()->hydrant->id)->orwhere('owned_by', 0)->get();
         // } else {
-            $truck = Truck::all();
+            $truck = Truck::where('status',1)->get();
         // }
         if (auth()->user()->role != 1) {
             $driver = Driver::with('truck')->whereHas('truck', function ($query) {
                 $query->where('hydrant_id', auth()->user()->hydrant->id);
             })->get();
         } else {
-            $driver = Driver::all();
+            $driver = Driver::where('status',1)->get();
         }
         // dd($order->toArray());
         return view('pages.billing.create', compact('order', 'truck', 'driver', 'vehicle_type','area'));
