@@ -505,9 +505,9 @@ class OrderController extends Controller
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->name . '%');
                 $query->orWhere('truck_num', 'like', '%' . $request->name . '%');
-            })->where('black_list',1)->take(8)->get();
+            })->where('black_list',0)->take(8)->get();
         } else {
-            $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where('black_list',1)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
+            $truck = Truck::with('hydrant', 'truckCap', 'drivers')->where('black_list',0)->where('name', 'like', '%' . $request->name . '%')->orwhere('company_name', 'like', '%' . $request->name . '%')->orwhere('truck_num', 'like', '%' . $request->name . '%')->take(8)->get();
         }
         return $truck;
 
