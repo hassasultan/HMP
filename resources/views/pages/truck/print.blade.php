@@ -51,55 +51,41 @@
             <h2>KW&SC</h2>
             <p class="border-bottom">VEHICLE REGISTRATION FORM</p>
 
-            @php
-                $incompleteFields = [];
+                        @php
+                $incompleteVehicleFields = [];
 
-                // Check vehicle fields
-                if (empty($driver->truck_num) || $driver->truck_num === null) $incompleteFields[] = 'Vehicle Registration Number';
-                if (empty($driver->chassis_num) || $driver->chassis_num === null) $incompleteFields[] = 'Chassis Number';
-                if (empty($driver->engine_num) || $driver->engine_num === null) $incompleteFields[] = 'Engine Number';
-                if (empty($driver->company_name) || $driver->company_name === null) $incompleteFields[] = 'Make';
-                if (empty($driver->model) || $driver->model === null) $incompleteFields[] = 'Model';
-                if (empty($driver->cabin_color) || $driver->cabin_color === null) $incompleteFields[] = 'Cabin Color';
-                if (empty($driver->tanker_color) || $driver->tanker_color === null) $incompleteFields[] = 'Tanker Color';
-                if (empty($driver->name) || $driver->name === null) $incompleteFields[] = 'Owner Name';
-                if (empty($driver->owner_cnic) || $driver->owner_cnic === null) $incompleteFields[] = 'Owner CNIC';
+                // Check vehicle fields only
+                if (empty($driver->truck_num) || $driver->truck_num === null) $incompleteVehicleFields[] = 'Vehicle Registration Number';
+                if (empty($driver->chassis_num) || $driver->chassis_num === null) $incompleteVehicleFields[] = 'Chassis Number';
+                if (empty($driver->engine_num) || $driver->engine_num === null) $incompleteVehicleFields[] = 'Engine Number';
+                if (empty($driver->company_name) || $driver->company_name === null) $incompleteVehicleFields[] = 'Make';
+                if (empty($driver->model) || $driver->model === null) $incompleteVehicleFields[] = 'Model';
+                if (empty($driver->cabin_color) || $driver->cabin_color === null) $incompleteVehicleFields[] = 'Cabin Color';
+                if (empty($driver->tanker_color) || $driver->tanker_color === null) $incompleteVehicleFields[] = 'Tanker Color';
+                if (empty($driver->name) || $driver->name === null) $incompleteVehicleFields[] = 'Owner Name';
+                if (empty($driver->owner_cnic) || $driver->owner_cnic === null) $incompleteVehicleFields[] = 'Owner CNIC';
 
-                // Check image fields
-                if (empty($driver->paper_image) || $driver->paper_image === null) $incompleteFields[] = 'Registration Paper Image';
-                if (empty($driver->vehicle_image) || $driver->vehicle_image === null) $incompleteFields[] = 'Vehicle Image';
-                if (empty($driver->vehicle_fitness) || $driver->vehicle_fitness === null) $incompleteFields[] = 'Vehicle Fitness Certificate';
-                if (empty($driver->commercial_license) || $driver->commercial_license === null) $incompleteFields[] = 'Commercial License Certificate';
-                if (empty($driver->road_permit) || $driver->road_permit === null) $incompleteFields[] = 'Road Permit Document';
-                if (empty($driver->doc_running_part) || $driver->doc_running_part === null) $incompleteFields[] = 'Running Paper Image';
-                if (empty($driver->cabin_picture) || $driver->cabin_picture === null) $incompleteFields[] = 'Cabin Picture';
+                // Check vehicle image fields
+                if (empty($driver->paper_image) || $driver->paper_image === null) $incompleteVehicleFields[] = 'Registration Paper Image';
+                if (empty($driver->vehicle_image) || $driver->vehicle_image === null) $incompleteVehicleFields[] = 'Vehicle Image';
+                if (empty($driver->vehicle_fitness) || $driver->vehicle_fitness === null) $incompleteVehicleFields[] = 'Vehicle Fitness Certificate';
+                if (empty($driver->commercial_license) || $driver->commercial_license === null) $incompleteVehicleFields[] = 'Commercial License Certificate';
+                if (empty($driver->road_permit) || $driver->road_permit === null) $incompleteVehicleFields[] = 'Road Permit Document';
+                if (empty($driver->doc_running_part) || $driver->doc_running_part === null) $incompleteVehicleFields[] = 'Running Paper Image';
+                if (empty($driver->cabin_picture) || $driver->cabin_picture === null) $incompleteVehicleFields[] = 'Cabin Picture';
 
                 // Check hydrant fields
-                if (empty($driver->hydrant->name) || $driver->hydrant->name === null) $incompleteFields[] = 'Hydrant Name';
-                if (empty($driver->hydrant->contractor_name) || $driver->hydrant->contractor_name === null) $incompleteFields[] = 'Contractor Name';
-                if (empty($driver->hydrant->person) || $driver->hydrant->person === null) $incompleteFields[] = 'Focal Person';
-
-                // Check driver fields
-                if (empty($driver->drivers) || count($driver->drivers) === 0) {
-                    $incompleteFields[] = 'Driver Information';
-                } else {
-                    foreach ($driver->drivers as $driverInfo) {
-                        if (empty($driverInfo->name) || $driverInfo->name === null) $incompleteFields[] = 'Driver Name';
-                        if (empty($driverInfo->phone) || $driverInfo->phone === null) $incompleteFields[] = 'Driver Phone';
-                        if (empty($driverInfo->nic) || $driverInfo->nic === null) $incompleteFields[] = 'Driver NIC';
-                        if (empty($driverInfo->nic_image) || $driverInfo->nic_image === null) $incompleteFields[] = 'Driver NIC Image';
-                        if (empty($driverInfo->image) || $driverInfo->image === null) $incompleteFields[] = 'Driver Profile Image';
-                        if (empty($driverInfo->license_image) || $driverInfo->license_image === null) $incompleteFields[] = 'Driver License Image';
-                    }
-                }
+                if (empty($driver->hydrant->name) || $driver->hydrant->name === null) $incompleteVehicleFields[] = 'Hydrant Name';
+                if (empty($driver->hydrant->contractor_name) || $driver->hydrant->contractor_name === null) $incompleteVehicleFields[] = 'Contractor Name';
+                if (empty($driver->hydrant->person) || $driver->hydrant->person === null) $incompleteVehicleFields[] = 'Focal Person';
             @endphp
 
-            @if(count($incompleteFields) > 0)
+            @if(count($incompleteVehicleFields) > 0)
                 <div class="alert alert-warning d-flex align-items-center" role="alert">
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     <div>
-                        <strong>Warning:</strong> The registration of this vehicle or driver is incomplete.
-                        {{-- Missing fields: {{ implode(', ', $incompleteFields) }} --}}
+                        <strong>Warning:</strong> The vehicle registration is incomplete.
+                        {{-- Missing fields: {{ implode(', ', $incompleteVehicleFields) }} --}}
                     </div>
                 </div>
             @endif
@@ -320,6 +306,32 @@
                             </th>
                             <!--</tr>-->
                         </thead>
+
+                        @php
+                            $incompleteDriverFields = [];
+
+                            // Check driver fields for this specific driver
+                            if (empty($row->name) || $row->name === null) $incompleteDriverFields[] = 'Driver Name';
+                            if (empty($row->phone) || $row->phone === null) $incompleteDriverFields[] = 'Driver Phone';
+                            if (empty($row->nic) || $row->nic === null) $incompleteDriverFields[] = 'Driver NIC';
+                            if (empty($row->nic_image) || $row->nic_image === null) $incompleteDriverFields[] = 'Driver NIC Image';
+                            if (empty($row->image) || $row->image === null) $incompleteDriverFields[] = 'Driver Profile Image';
+                            if (empty($row->license_image) || $row->license_image === null) $incompleteDriverFields[] = 'Driver License Image';
+                        @endphp
+
+                        @if(count($incompleteDriverFields) > 0)
+                            <tr>
+                                <td>
+                                    <div class="alert alert-warning d-flex align-items-center mb-0" role="alert">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <div>
+                                            <strong>Warning:</strong> This driver's information is incomplete.
+                                            {{-- Missing fields: {{ implode(', ', $incompleteDriverFields) }} --}}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
                         <tbody>
                             <tr>
                                 <td>
