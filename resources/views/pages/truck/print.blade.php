@@ -82,7 +82,7 @@
 
             @if(count($incompleteVehicleFields) > 0)
                 <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <i class="fa fa-exclamation-triangle me-2"></i>
                     <div>
                         <strong>Warning:</strong> The vehicle registration is incomplete.
                         {{-- Missing fields: {{ implode(', ', $incompleteVehicleFields) }} --}}
@@ -323,7 +323,7 @@
                             <tr>
                                 <td>
                                     <div class="alert alert-warning d-flex align-items-center mb-0" role="alert">
-                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <i class="fa fa-exclamation-triangle me-2"></i>
                                         <div>
                                             <strong>Warning:</strong> This driver's information is incomplete.
                                             {{-- Missing fields: {{ implode(', ', $incompleteDriverFields) }} --}}
