@@ -99,7 +99,7 @@
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     <div>
                         <strong>Warning:</strong> The registration of this vehicle or driver is incomplete.
-                        Missing fields: {{ implode(', ', $incompleteFields) }}
+                        {{-- Missing fields: {{ implode(', ', $incompleteFields) }} --}}
                     </div>
                 </div>
             @endif
