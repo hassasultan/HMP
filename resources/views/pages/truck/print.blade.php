@@ -50,6 +50,60 @@
         <div class="container p-4 bg-white w-100 text-center">
             <h2>KW&SC</h2>
             <p class="border-bottom">VEHICLE REGISTRATION FORM</p>
+
+            @php
+                $incompleteFields = [];
+
+                // Check vehicle fields
+                if (empty($driver->truck_num) || $driver->truck_num === null) $incompleteFields[] = 'Vehicle Registration Number';
+                if (empty($driver->chassis_num) || $driver->chassis_num === null) $incompleteFields[] = 'Chassis Number';
+                if (empty($driver->engine_num) || $driver->engine_num === null) $incompleteFields[] = 'Engine Number';
+                if (empty($driver->company_name) || $driver->company_name === null) $incompleteFields[] = 'Make';
+                if (empty($driver->model) || $driver->model === null) $incompleteFields[] = 'Model';
+                if (empty($driver->cabin_color) || $driver->cabin_color === null) $incompleteFields[] = 'Cabin Color';
+                if (empty($driver->tanker_color) || $driver->tanker_color === null) $incompleteFields[] = 'Tanker Color';
+                if (empty($driver->name) || $driver->name === null) $incompleteFields[] = 'Owner Name';
+                if (empty($driver->owner_cnic) || $driver->owner_cnic === null) $incompleteFields[] = 'Owner CNIC';
+
+                // Check image fields
+                if (empty($driver->paper_image) || $driver->paper_image === null) $incompleteFields[] = 'Registration Paper Image';
+                if (empty($driver->vehicle_image) || $driver->vehicle_image === null) $incompleteFields[] = 'Vehicle Image';
+                if (empty($driver->vehicle_fitness) || $driver->vehicle_fitness === null) $incompleteFields[] = 'Vehicle Fitness Certificate';
+                if (empty($driver->commercial_license) || $driver->commercial_license === null) $incompleteFields[] = 'Commercial License Certificate';
+                if (empty($driver->road_permit) || $driver->road_permit === null) $incompleteFields[] = 'Road Permit Document';
+                if (empty($driver->doc_running_part) || $driver->doc_running_part === null) $incompleteFields[] = 'Running Paper Image';
+                if (empty($driver->cabin_picture) || $driver->cabin_picture === null) $incompleteFields[] = 'Cabin Picture';
+
+                // Check hydrant fields
+                if (empty($driver->hydrant->name) || $driver->hydrant->name === null) $incompleteFields[] = 'Hydrant Name';
+                if (empty($driver->hydrant->contractor_name) || $driver->hydrant->contractor_name === null) $incompleteFields[] = 'Contractor Name';
+                if (empty($driver->hydrant->person) || $driver->hydrant->person === null) $incompleteFields[] = 'Focal Person';
+
+                // Check driver fields
+                if (empty($driver->drivers) || count($driver->drivers) === 0) {
+                    $incompleteFields[] = 'Driver Information';
+                } else {
+                    foreach ($driver->drivers as $driverInfo) {
+                        if (empty($driverInfo->name) || $driverInfo->name === null) $incompleteFields[] = 'Driver Name';
+                        if (empty($driverInfo->phone) || $driverInfo->phone === null) $incompleteFields[] = 'Driver Phone';
+                        if (empty($driverInfo->nic) || $driverInfo->nic === null) $incompleteFields[] = 'Driver NIC';
+                        if (empty($driverInfo->nic_image) || $driverInfo->nic_image === null) $incompleteFields[] = 'Driver NIC Image';
+                        if (empty($driverInfo->image) || $driverInfo->image === null) $incompleteFields[] = 'Driver Profile Image';
+                        if (empty($driverInfo->license_image) || $driverInfo->license_image === null) $incompleteFields[] = 'Driver License Image';
+                    }
+                }
+            @endphp
+
+            @if(count($incompleteFields) > 0)
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <div>
+                        <strong>Warning:</strong> The registration of this vehicle or driver is incomplete.
+                        Missing fields: {{ implode(', ', $incompleteFields) }}
+                    </div>
+                </div>
+            @endif
+
             <div class="table">
                 <table class="table table-bordered">
                     <thead class="table-dark">
