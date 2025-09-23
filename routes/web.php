@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
             // Route::get('create/truck', [App\Http\Controllers\HomeController::class, 'TruckCreate'])->name('truck.create');
             // Route::post('store/truck', [App\Http\Controllers\HomeController::class, 'truckStore'])->name('truck.store');
             Route::get('qrcode/{id}', [App\Http\Controllers\HomeController::class, 'generateQR'])->name('generate.qr');
+            Route::get('qrcode-back/{id}', [App\Http\Controllers\HomeController::class, 'generateBackQR'])->name('generate.qr.back');
             // Route::get('edit/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckEdit'])->name('truck.edit');
             // Route::post('update/truck/{id}', [App\Http\Controllers\HomeController::class, 'TruckUpdate'])->name('truck.update');
 
