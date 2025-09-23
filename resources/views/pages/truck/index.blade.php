@@ -186,6 +186,9 @@
                                                 <a href="{{ route('generate.qr', $row->id) }}" target="_blank">
                                                     <span class="badge badge-sm bg-gradient-primary">Generate QrCode</span>
                                                 </a>
+                                                <a href="{{ route('generate.qr.back', $row->id) }}" target="_blank">
+                                                    <span class="badge badge-sm bg-gradient-primary">Generate Back QrCode</span>
+                                                </a>
                                             </td>
                                             <td>
                                                 <div class="form-group">
