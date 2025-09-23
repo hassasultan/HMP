@@ -88,9 +88,9 @@
 </head>
 <body>
     <div class="canvas">
-        <div class="badge"></div>
+        <div class="qr">{!! $qrSvg !!}</div>
+        {{-- <div class="badge"></div>
         <div class="content">
-            <div class="qr">{!! $qrSvg !!}</div>
             <div class="title">{{ $vehicleCodeLeft }} {{ $vehicleCodeRight ? ' - '.$vehicleCodeRight : '' }}</div>
             @if($gallonLabel)
                 <div class="line">{{ $gallonLabel }}</div>
@@ -109,7 +109,7 @@
             <text fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="120" font-weight="700">
                 <textPath startOffset="50%" text-anchor="middle" href="#bottomArc">{{ $bottomArcText }}</textPath>
             </text>
-        </svg>
+        </svg> --}}
     </div>
 </body>
 </html>
