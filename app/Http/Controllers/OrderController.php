@@ -252,6 +252,11 @@ class OrderController extends Controller
                     $response = curl_exec($curl);
 
                     curl_close($curl);
+                    \Log::channel('order_response')->info('Cancel OTS order API response', [
+                        'order_number' => $new_order->Order_Number,
+                        'response_raw' => $response,
+                        'response_json' => json_decode($response, true)
+                    ]);
                     $res = json_decode($response, true);
                     return redirect()->back();
                 }
@@ -661,6 +666,11 @@ class OrderController extends Controller
             $response = curl_exec($curl);
 
             curl_close($curl);
+            \Log::channel('order_response')->info('Dispatched update API response', [
+                'order_number' => $order->Order_Number,
+                'response_raw' => $response,
+                'response_json' => json_decode($response, true)
+            ]);
         }
         if (auth()->user()->role != 1) {
             return redirect()->route('billing.details', $billing->id);
@@ -764,6 +774,13 @@ class OrderController extends Controller
             $response = curl_exec($curl);
 
             curl_close($curl);
+            \Log::channel('order_response')->info('Change billing status API response', [
+                'order_number' => $billing->order->Order_Number,
+                'status' => $status,
+                'state' => $state,
+                'response_raw' => $response,
+                'response_json' => json_decode($response, true)
+            ]);
             $res = json_decode($response, true);
 
             if ($res['error'] == true) {
