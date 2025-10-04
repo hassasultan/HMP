@@ -26,8 +26,9 @@
         }
         .qr { width: 20in; height: 20in; display: flex; align-items: center; justify-content: center; }
         .qr svg { width: 100%; height: 100%; }
-        .reg { margin-top: 0.5in; font-size: 1.2in; font-weight: 700; color: #000; }
-        .hydrant { margin-top: 0.2in; font-size: 1in; font-weight: 600; color: #000; }
+        .info { margin-top: 0.5in; display: flex; align-items: center; justify-content: center; gap: 0.5in; }
+        .reg { font-size: 1.2in; font-weight: 700; color: #000; }
+        .hydrant { font-size: 1in; font-weight: 600; color: #000; }
     </style>
     <script>
         window.addEventListener('load', function(){
@@ -40,10 +41,12 @@
 <body>
     <div class="page">
         <div class="qr">{!! $qrSvg !!}</div>
-        <div class="reg">{{ $truckNum }}</div>
-        @if($hydrantName)
-            <div class="hydrant">{{ $hydrantName }}</div>
-        @endif
+        <div class="info">
+            <div class="reg">{{ $truckNum }}</div>
+            @if($hydrantName)
+                <div class="hydrant">{{ $hydrantName }}</div>
+            @endif
+        </div>
     </div>
 </body>
 </html>
